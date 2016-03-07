@@ -1,0 +1,1 @@
+﻿try { ace.settings.check('navbar', 'fixed') } catch (e) { }

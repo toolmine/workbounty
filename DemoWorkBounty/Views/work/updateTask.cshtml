@@ -1,0 +1,72 @@
+﻿@{
+    ViewBag.Title = "updateTask";
+    Layout = "~/Views/_LayoutPage1.cshtml";
+}
+
+<h2></h2>
+<div class="widget-box transparent" id="recent-box">
+    <div class="widget-header">
+        <div class="col-xs-10">
+            <h4 class="widget-title lighter smaller">Update task
+
+            </h4>
+        </div>
+        <div class="row">
+            <div class="col-xs-12">
+
+                <form class="form-horizontal" role="form">
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Description<span style="color:red;">*</span> </label>
+
+                        <div class="col-sm-9">
+                            <textarea rows="4" id="txtDescription" placeholder="Enter the description of your work item" class="col-xs-10 col-sm-5"></textarea>
+
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label no-padding-right" for="form-field-1">Upload  </label>
+                        <div class="col-sm-9">
+                            <input multiple="" type="file" id="id-input-file-3" />
+
+                        </div>
+                    </div>
+
+
+
+                    <div class="form-group">
+                        <label for="form-field-select-3" class="col-sm-3 control-label no-padding-right">Completion status<span style="color:red;">*</span></label>
+
+
+                        <div class="col-sm-9">
+                            <select class="col-xs-10 col-sm-5" id="form-field-select-3">
+                               
+                                <option value="pr">In Progress</option>
+                                <option value="pr">Completed</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label no-padding-right" for="form-field-1"></label>
+                        <div class="col-sm-9">
+                            <div class="clearfix">
+                                <button class="btn btn-info" type="button">
+                                    <i class="ace-icon fa fa-check bigger-110"></i>
+                                    Submit
+                                </button>
+
+                                <button class="btn" type="reset">
+                                    <i class="ace-icon fa fa-undo bigger-110"></i>
+                                    Reset
+                                </button>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

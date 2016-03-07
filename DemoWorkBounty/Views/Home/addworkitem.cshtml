@@ -1,0 +1,250 @@
+﻿@{
+    ViewBag.Title = "addworkitem";
+    Layout = "~/Views/_LayoutPage1.cshtml";
+}
+<head>
+    <title></title>
+    <script src="~/assets/js/datepicker.js"></script>
+</head>
+<h2></h2>
+<div class="col-xs-8">
+    <h4 class="widget-title lighter smaller">
+        <i class="ace-icon"></i> Add work item
+
+    </h4>
+</div>
+<div class="row">
+    <div class="col-xs-12">
+
+        <form class="form-horizontal" role="form">
+            <div class="form-group">
+                <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Title <span style="color:red;">*</span></label>
+
+                <div class="col-sm-9">
+                    <input type="text" id="form-field-1" placeholder="" class="col-xs-10 col-sm-5" />
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Summary<span style="color:red;">*</span> </label>
+
+                <div class="col-sm-9">
+                    <textarea rows="4" id="txtDescription" class="col-xs-10 col-sm-5"></textarea>
+
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Start date<span style="color:red;">*</span></label>
+
+                <div class="col-sm-9">
+                    <input type="date" id="form-field-1" placeholder="Start Date" class="col-xs-10 col-sm-5" />
+
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Expected completion date<span style="color:red;">*</span></label>
+                <div class="col-sm-9">
+
+                    <input type="date" id="form-field-1" placeholder="Expected completion date" class="col-xs-10 col-sm-5" />
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                <label for="form-field-select-3" class="col-sm-3 control-label no-padding-right">Published to</label>
+
+
+                <div class="col-sm-9">
+                    <select class="col-xs-10 col-sm-5" id="form-field-select-3">
+                        <option value="pu">Public </option>
+                        <option value="pr">Team 1</option>
+                        <option value="pr">Team 2</option>
+                    </select>
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                <label class="col-sm-3 control-label no-padding-right" for="form-field-1">Addition attachments  </label>
+                <div class="col-sm-9">
+                    <input multiple="" type="file" id="id-input-file-3" />
+
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Rewards<span style="color:red;">*</span></label>
+
+
+                <div class="col-sm-9">
+                    <div class="hidden-sm hidden-xs btn-group">
+
+                        <button type="button" class="btn btn-minier btn-purple bigger-110" data-toggle="modal" data-target="#myModal">Reward Options</button>
+
+
+
+                        <div class="container">
+                            @*<h2>Modal Example</h2>*@
+                            <!-- Trigger the modal with a button -->
+                            @*<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Modal</button>*@
+
+                            <!-- Modal -->
+                            <div class="modal" id="myModal" role="dialog">
+                                <div class="modal-dialog modal-lg">
+
+                                    <!-- Modal content-->
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                            <h4 class="modal-title">Reward Options</h4>
+                                        </div>
+                                        <div class="modal-body">
+                                            <table>
+                                                <tr>
+                                                    <td>
+                                                    <input name="form-field-radio" type="radio" class="" />
+                                                    <span class="lbl"><img src="~/img/VISA_Logo.png" width="70" height="50" /></span>
+                                                   
+                                                     <input name="form-field-radio" type="radio" class="ace" />
+                                                    <span class="lbl"><img src="~/img/McDonald's_Golden_Arches.svg.png" width="70" height="50" /></span>
+                                                    </td>
+                                              
+                                                     <td>
+                                                    <input name="form-field-radio" type="radio" class="" />
+                                                    <span class="lbl"><img src="~/img/VFsaWo_G.jpeg" width="70" height="50" /></span>
+                                                     </td>
+                                          
+                                                    <td>
+                                                    <input name="form-field-radio" type="radio" class="" />
+                                                    <span class="lbl"> <img src="~/img/Paypal_2014_logo.png" width="70" height="50" /></span>
+                                                    </td>
+                                               </tr>
+                                                <tr>
+                                                <td>
+                                                    <input name="form-field-radio" type="radio" class="" />
+                                                    <span class="lbl"><img src="~/img/americanexpress.jpg" width="70" height="50" /></span>
+                                                </td>
+                                                
+                                                <td>
+                                                    <input name="form-field-radio" type="radio" class="" />
+                                                    <span class="lbl"><img src="~/img/Western-Union-logo-old.jpg" width="70" height="50" /></span>
+                                                </td>
+
+                                                <td>
+                                                    <input name="form-field-radio" type="radio" class="" />
+                                                    <span class="lbl"><img src="~/img/bitcoin.jpg" width="70" height="50" /></span>
+                                                </td>
+                                           
+                                                <td>
+                                                    <input name="form-field-radio" type="radio" class="" />
+                                                    <span class="lbl"><img src="~/img/amazon-dgmag.png" width="70" height="50" /></span>
+                                                </td>
+                                         </tr>
+                                                <tr>
+                                                <td>
+                                                    <input name="form-field-radio" type="radio" class="" />
+                                                    <span class="lbl"><img src="~/img/2000px-Dominos_pizza_logo.svg.png" width="70" height="50" /></span>
+                                                </td>
+                                                </tr>
+                                                <tr>
+                                                   <td>
+                                                <label for="form-field-1"> Amount <span style="color:red;">*</span></label>
+                                                <label>
+                                                    <input type="text" id="form-field-1" placeholder="" />
+                                                </label>
+                                                  </td>
+                                                    <td>
+                                                        <button class="btn btn-info" type="button">
+                                                            <i class="ace-icon fa fa-check bigger-110"></i>
+                                                            Save
+                                                        </button>
+                                                    </td>
+                                                    <td>
+                                                <button class="btn" type="reset">
+                                                    <i class="ace-icon fa fa-undo bigger-110"></i>
+                                                    Reset
+                                                </button>
+                                                    </td>
+                                                    </tr>
+                                            </table>
+                                            @*</form>*@
+                                        </div>
+                                        @*<div class="modal-footer">
+                                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                            </div>*@
+                                    </div>
+                                </div>
+
+
+                            </div>
+
+
+
+
+                        </div>
+
+                    </div>
+                </div>
+
+
+            </div>
+
+
+
+
+
+
+
+
+
+
+
+            <div id="result"></div>
+
+
+            <div class="form-group">
+                <label class="col-sm-3 control-label no-padding-right" for="form-field-1"></label>
+                <div class="col-sm-9">
+                    <div class="clearfix">
+                        <button class="btn btn-info" type="button">
+                            <i class="ace-icon fa fa-check bigger-110"></i>
+                            Submit
+                        </button>
+
+                        <button class="btn btn-info" type="button">
+                            <i class="ace-icon fa fa-file bigger-110"></i>
+                            Save
+                        </button>
+                        <button class="btn" type="reset">
+                            <i class="ace-icon fa fa-undo bigger-110"></i>
+                            Reset
+                        </button>
+
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

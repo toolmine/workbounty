@@ -1,0 +1,107 @@
+﻿@model DemoWorkBounty.Models.Login
+@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/_LayoutPage2.cshtml";
+}
+<script src="~/assets/js/jquery.2.1.1.min.js"></script>
+<script src="~/assets/js/bootstrap-datepicker.min.js"></script>
+<script type="text/javascript" src="jquery-1.11.3-jquery.min.js"></script>
+<script type="text/javascript" src="validation.min.js"></script>
+<link rel="stylesheet" href="~/assets/css/datepicker.min.css">
+<link rel="stylesheet" href="~/assets/css/bootstrap.min.css">
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+        <div class="main-content">
+            <div class="row">
+                <div class="col-sm-10 col-sm-offset-1">
+                    <div class="login-container">
+                        <div class="center">
+                           
+                        </div>
+
+                        <div class="space-6"></div>
+
+                        <div class="position-relative">
+                            <div id="login-box" class="login-box visible widget-box no-border">
+                                <div class="widget-body">
+                                    <div class="widget-main">
+                                        <h4 class="header blue lighter bigger">
+                                            <i class="ace-icon fa fa-coffee green"></i>
+                                            Please Enter Your Information
+                                        </h4>
+
+                                        <div class="space-6"></div>
+
+                                        <form>
+                                            <fieldset>
+                                                <label class="block clearfix">
+                                                    <span class="block input-icon input-icon-right">
+
+                                                        @Html.TextBoxFor(a => a.EmailID, new { @class = "form-control", @placeholder = "E mail" })
+
+                                                    </span>
+                                                    @Html.ValidationMessageFor(a => a.EmailID)
+                                                </label>
+
+                                                <label class="block clearfix">
+                                                    <span class="block input-icon input-icon-right">
+                                                        @Html.PasswordFor(a => a.Password, new { @class = "form-control", @placeholder = "Password" })
+                                                    </span>
+                                                    @Html.ValidationMessageFor(a => a.Password)
+                                                </label>
+
+
+                                                <div class="space"></div>
+
+                                                <div class="clearfix">
+                                                    <label class="inline">
+                                                        <input type="checkbox" class="ace" />
+                                                        <span class="lbl"> Remember Me?</span>
+                                                    </label>
+
+                                                    <button type="submit" class="width-35 pull-right btn btn-sm btn-primary">
+                                                        <i class="ace-icon fa fa-key"></i>
+                                                        <span class="bigger-110">Login</span>
+                                                    </button>
+                                                </div>
+
+                                                <div class="space-4"></div>
+                                            </fieldset>
+                                        </form>
+
+                                       
+                                    </div><!-- /.widget-main -->
+
+                                    <div class="toolbar clearfix">
+                                        <div>
+                                            <a href="~/Home/ForgotPassword" class="forgot-password-link">
+                                                <i class="ace-icon fa fa-arrow-left"></i>
+                                                I forgot my password
+                                            </a>
+                                        </div>
+
+                                        <div>
+                                            @*@Html.ActionLink("I want to register", "Signup", new{@class="user-signup-link" })*@
+
+                                            <a href="~/Home/Signup" class="user-signup-link">
+                                                I want to register
+                                                <i class="ace-icon fa fa-arrow-right"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div><!-- /.widget-body -->
+                            </div><!-- /.login-box -->
+
+ 
+                        </div><!-- /.position-relative -->
+
+                        
+                    </div>
+                </div><!-- /.col -->
+            </div><!-- /.row -->
+        </div><!-- /.main-content -->
+
+ 
+}

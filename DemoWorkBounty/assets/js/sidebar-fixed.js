@@ -1,0 +1,1 @@
+﻿try { ace.settings.check('sidebar', 'fixed') } catch (e) { }
