@@ -18,9 +18,7 @@ namespace DemoWorkBounty.Controllers
             return View();
         }
 
-    
-
-        public ActionResult Epay()
+     public ActionResult Epay()
         {
             return View();
         }
