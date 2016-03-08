@@ -354,6 +354,7 @@
     <Content Include="img\cb06cfc39ac3d3c2774433694f47660e.png" />
     <Content Include="img\dog.png" />
     <Content Include="img\dominos-pizza-logo.png" />
+    <Content Include="img\GoogleWallet.png" />
     <Content Include="img\header-logo.png" />
     <Content Include="img\intro-bg.jpg" />
     <Content Include="img\ipad.png" />
@@ -362,9 +363,11 @@
     <Content Include="img\Paypal_2014_logo.png" />
     <Content Include="img\phones.png" />
     <Content Include="img\relieved-face.png" />
+    <Content Include="img\shoppersshop.jpg" />
     <Content Include="img\VFsaWo_G.jpeg" />
     <Content Include="img\VISA_Logo.png" />
     <Content Include="img\vu-43d6535-400x400-imaeefz3ncz5agex.jpeg" />
+    <Content Include="img\Wepay_Logo_.png" />
     <Content Include="img\Western-Union-logo-old.jpg" />
     <None Include="Scripts\jquery-1.8.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.8.2.js" />
