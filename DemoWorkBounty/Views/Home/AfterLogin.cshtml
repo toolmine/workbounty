@@ -1,7 +1,10 @@
-﻿@{
+﻿@model List<DemoWorkBounty.Models.OpenWorkItem>       
+@{
     ViewBag.Title = "Welcome to Workbounty";
     Layout = "~/Views/_LayoutPage1.cshtml";
 }
+
+<script src="~/assets/js/jquery_Openworkitems.js"></script>
 
 <h2></h2>
 <div class="col-md-6"></div>
@@ -92,11 +95,6 @@
                             </tr>
                     </table>
 
-
-
-
-
-
                 </div>
             </div>
         </div>
@@ -126,96 +124,14 @@
                             <th width="5%">End Date</th>
                             <th width="8%">Client</th>
                             <th width="5%">Rewards</th>
+                            <th width="5%">Amount</th>
                             <th width="5%">Status</th>
                             <th width="5%">Action</th>
                         </tr>
                     </thead>
 
-                    <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td> <a href="~/assigntome/airline" data-toggle="tooltip" title="Work Description">Airline Application</a> </td>
-                            <td>12-10-2015</td>
-                            <td class="hidden-480">10-01-2016</td>
-                            <td>dep@yahoo.com</td>
-                            <td>Paytm</td>
-                            <td> Pending</td>
-                            <td>
-                                <div class="hidden-sm hidden-xs btn-group">
-                                    <a href="~/work/updateTask" class="btn btn-minier btn-success">
-                                        Update
-                                    </a>
-                                </div>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>2</td>
-                            <td> <a href="~/assigntome/javaplugin" data-toggle="tooltip" title="Work Description">Java Plugin</a> </td>
-                            <td>12-1-2016</td>
-                            <td class="hidden-480">10-02-2016</td>
-                            <td>guru@yahoo.com</td>
-                            <td>Visa</td>
-                            <td> Complete</td>
-                            <td>
-                                <div class="hidden-sm hidden-xs btn-group">
-                                    <a href="~/work/updateTask" class="btn btn-minier btn-success">
-                                       Update
-                                    </a>
-                                </div>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>3</td>
-                            <td> <a href="~/assigntome/androidapplication" data-toggle="tooltip" title="Work Description">Android Application</a> </td>
-                            <td>2-1-2016</td>
-                            <td class="hidden-480">10-02-2016</td>
-                            <td>gujarat@yahoo.com</td>
-                            <td>Macdonald</td>
-                            <td> Pending</td>
-                            <td>
-                                <div class="hidden-sm hidden-xs btn-group">
-                                    <a href="~/work/updateTask" class="btn btn-minier btn-success">
-                                        Update
-                                    </a>
-                                </div>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>4</td>
-                            <td> <a href="~/assigntome/websitedevelopment" data-toggle="tooltip" title="Work Description">Website Development</a> </td>
-                            <td>2-1-2015</td>
-                            <td class="hidden-480">10-02-2015</td>
-                            <td>dharmesh@yahoo.com</td>
-                            <td>PayPal</td>
-                            <td> Complete</td>
-                            <td>
-                                <div class="hidden-sm hidden-xs btn-group">
-                                    <a href="~/work/updateTask" class="btn btn-minier btn-success">
-                                      Update
-                                    </a>
-                                </div>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>5</td>
-                            <td> <a href="~/assigntome/webapi" data-toggle="tooltip" title="Work Description">Web API</a> </td>
-                            <td>2-11-2015</td>
-                            <td class="hidden-480">10-12-2015</td>
-                            <td>milan@yahoo.com</td>
-                            <td>Google Pay</td>
-                            <td> complete</td>
-                            <td>
-                                <div class="hidden-sm hidden-xs btn-group">
-                                    
-                                        <a href="~/work/updateTask" class="btn btn-minier btn-success">Update</a>
-                                    
-                                </div>
-                            </td>
-                        </tr>
+                    <tbody id="myitem1">
+                        
                
                        
                          </table>
@@ -241,98 +157,48 @@
                 </h4>
             </div>
       
-        <div class="row">
-            <div class="col-md-1"></div>
-            <div class="col-md-8">
-                <table id="simple-table" class="table table-striped table-bordered table-hover">
-                    <thead>
-                        <tr>
-                  
-                            <th width="6%">Sr No</th>
-                            <th width="24%">Title</th>
-                            <th width="2%">Favorites</th>
-                            <th width="11%">Client</th>
-                            <th width="23%">Description</th>
-                            <th width="4%">Rewards</th>
-                            <th width="4%">Apply for workitem</th>
-                        </tr>
-                    </thead>
+            <div class="row">
+                <div class="col-md-1"></div>
+                <div class="col-md-8">
+                    <table id="OpenWorkitem" class="table table-striped table-bordered table-hover">
+                        <thead>
+                            <tr>
+                                <th width="5%">Sr No</th>
+                                <th width="21%">Title</th>
+                                <th width="5%">First Name</th>
+                                <th width="8%">Summary</th>
+                                <th width="5%">Rewards</th>
+                                <th width="5%">Amount</th>
+                                <th width="5%">Action</th>
+                            </tr>
+                        </thead>
+                         @foreach (var item in Model)
+                      {
+                          <tbody>
+                              <tr>
+                                  <td></td>
+                                  <td>@Html.DisplayFor(a=>item.Title)</td>
+                                  <td>@Html.DisplayFor(a => item.FirstName)</td>
+                                  <td>@Html.DisplayFor(a => item.Summary)</td>
+                                  <td>@Html.DisplayFor(a => item.ProposedReward)</td>
+                                  <td>@Html.DisplayFor(a => item.Amount)</td>
+                                  <td> @Html.ActionLink("Apply", "detailWorkitem", "work", new { ID = item.WorkItemID }, new { @class = "btn btn-minier btn-purple" }) </td>
+                           
+                                
+                              </tr>
 
-                    <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td> <a href="~/openwork/Irctc" data-toggle="tooltip" title="Work Description">IRCTC website</a> </td>
-                            <td><span class="label label-info arrowed-in">Bookmarks</span></td>
-                            <td>baroda@yahoo.com</td>
-                            <td class="hidden-480">UI Design with Database and competible with any device</td>
-                            <td>Paytm</td>
-                            <td>
-                                <input type="button" id="myButton1" class="btn btn-minier btn-purple" value="Apply" onclick="javascript:change(this);" /><br /><br />
-                                <input type="button" id="myButton1" class="btn btn-minier btn-success" value="Watch" />
-                            </td>
-                        </tr>
+                          </tbody>
+                          
+                      }
+                    </table>
 
-                        <tr>
-                            <td>2</td>
-                            <td> <a href="~/openwork/makemytrip" data-toggle="tooltip" title="Work Description">makemytrip Database</a> </td>
-                            <td><i class="fa fa-bookmark fa-2x"></i></td>
-                            <td>baroda@yahoo.com</td>
-                            <td class="hidden-480">Design a database with use of MongoDB and AngularJS</td>
-                            <td>Visa</td>
-                            <td>
-                                <input type="button" id="myButton1" class="btn btn-minier btn-purple" value="Apply" onclick="javascript:change(this);" /><br /><br />
-                                <input type="button" id="myButton1" class="btn btn-minier btn-success" value="Watch" />
-                            </td>
-                        </tr>
 
-                        <tr>
-                            <td>3</td>
-                            <td> <a href="~/openwork/Epay" data-toggle="tooltip" title="Work Description">Online Payment Portal</a> </td>
-                            <td><span class="label label-info arrowed-in">Bookmarks</span></td>
-                            <td>epay@gmail.com</td>
-                            <td class="hidden-480">UI Design with Secure Server and MD5 Security Algorithms </td>
-                            <td>VISA</td>
-                            <td>
-                                <input type="button" id="myButton1" class="btn btn-minier btn-purple" value="Apply" onclick="javascript:change(this);" /><br /><br />
-                                <input type="button" id="myButton1" class="btn btn-minier btn-success" value="Watch" />
-                            </td>
-                        </tr>
 
-                        <tr>
-                            <td>3</td>
-                            <td> <a href="~/openwork/message" data-toggle="tooltip" title="Work Description">Online Team Messaging app</a> </td>
-                            <td><span class="label label-info arrowed-in">Bookmarks</span></td>
-                            <td>onlinet@gmail.com</td>
-                            <td class="hidden-480">Messaging between various member of the team </td>
-                            <td>VISA</td>
-                            <td>
-                                <input type="button" id="myButton1" class="btn btn-minier btn-purple" value="Apply" onclick="javascript:change(this);" /><br /><br />
-                                <input type="button" id="myButton1" class="btn btn-minier btn-success" value="Watch" />
-                            </td>
-                        </tr>
 
-                        <tr>
-                            <td>3</td>
-                            <td> <a href="~/openwork/phpweb" data-toggle="tooltip" title="Work Description">Php website Development</a> </td>
-                            <td><span class="label label-info arrowed-in">Bookmarks</span></td>
-                            <td>epay@gmail.com</td>
-                            <td class="hidden-480">UI Design and coding for website in Php </td>
-                            <td>VISA</td>
-                            <td>
-                                <input type="button" id="myButton1" class="btn btn-minier btn-purple" value="Apply" onclick="javascript:change(this);" /><br /><br />
-                                <input type="button" id="myButton1" class="btn btn-minier btn-success" value="Watch" />
-                            </td>
-                        </tr>
-                </table>
-            
-            
-                
-            
-            
+                </div>
+
+
             </div>
-
-
-        </div>
 
         </div>
 

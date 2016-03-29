@@ -1,12 +1,10 @@
-﻿@{
-    ViewBag.Title = "rewards";
-    Layout = "~/Views/_LayoutPage1.cshtml";
-}
+﻿
 @{
     ViewBag.Title = "rewards";
     Layout = "~/Views/_LayoutPage1.cshtml";
 }
 
+<script src="~/assets/js/jquery-showreward.js"></script>
 <h2></h2>
 <div class="widget-box transparent" id="recent-box">
     <div class="widget-header">
@@ -29,31 +27,9 @@
                         </tr>
                     </thead>
 
-                    <tbody>
-                        <tr>
-                            <td><a href="#" data-toggle="tooltip" title="Description">Embedded System</a> </td>
-                            <td>Prerak</td>
-                            <td class="hidden-480">Paytm</td>
-                            <td>100$</td>
-                       </tr>
+                    <tbody id="RewardsList">
+                        </tbody>
 
-                       <tr>
-                             <td> <a href="#" data-toggle="tooltip" title="Description">Data Analysis Software</a> </td>
-                             <td>Jim</td>
-                             <td class="hidden-480">Visa</td>
-                             <td>100$</td>
-                      </tr>
-
-                        <tr>
-
-                            <td>
-                                <a href="#" data-toggle="tooltip" title="Description">GPS based system</a>
-                            </td>
-                            <td>Jim</td>
-                            <td class="hidden-480">Macdonald's</td>
-                            <td>100$</td>
-
-                        </tr>
                 </table>
             </div>
         </div>

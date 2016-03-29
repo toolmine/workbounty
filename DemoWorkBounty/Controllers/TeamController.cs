@@ -26,5 +26,10 @@ namespace DemoWorkBounty.Controllers
         {
             return View();
         }
+
+        public ActionResult addteam()
+        {
+            return View();
+        }
     }
 }

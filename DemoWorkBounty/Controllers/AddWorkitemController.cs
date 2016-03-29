@@ -1,0 +1,22 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Net;
+using System.Net.Http;
+using System.Web.Http;
+using DemoWorkBounty.Repository;
+namespace DemoWorkBounty.Controllers
+{
+    public class AddWorkitemController : ApiController
+    {
+        static AddWorkitemRepo repo = new AddWorkitemRepo();
+
+        public string AddWorkitem(Workitem item)
+        {
+            var response = repo.AddWorkitem(item);
+            return response;
+
+        }
+
+    }
+}

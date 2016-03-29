@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using DemoWorkBounty.Models;
+
 namespace DemoWorkBounty.Controllers
 {
     public class workController : Controller
@@ -12,6 +12,18 @@ namespace DemoWorkBounty.Controllers
         {
             return View();
         }
+
+        public ActionResult detailWorkitem()
+        {
+            return View();
+        }
+
+
+        public ActionResult addWorkitem()
+        {
+            return View();
+        }
+
           public ActionResult Index()
         {
             return View();
@@ -90,6 +102,8 @@ namespace DemoWorkBounty.Controllers
             return View();
 
         }
+
+       
 
     }
 }

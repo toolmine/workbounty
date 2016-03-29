@@ -1,4 +1,4 @@
-﻿@model DemoWorkBounty.Models.Login
+﻿@model DemoWorkBounty.UserInfo
 @{
     ViewBag.Title = "Login";
     Layout = "~/Views/_LayoutPage2.cshtml";
@@ -9,6 +9,9 @@
 <script type="text/javascript" src="validation.min.js"></script>
 <link rel="stylesheet" href="~/assets/css/datepicker.min.css">
 <link rel="stylesheet" href="~/assets/css/bootstrap.min.css">
+<script src="~/assets/js/jquery-login.js"></script>
+
+
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
@@ -39,15 +42,15 @@
                                                 <label class="block clearfix">
                                                     <span class="block input-icon input-icon-right">
 
-                                                        @Html.TextBoxFor(a => a.EmailID, new { @class = "form-control", @placeholder = "E mail" })
+                                                        @Html.TextBoxFor(a => a.Email, new {@id="Email", @class = "form-control", @placeholder = "E mail" })
 
                                                     </span>
-                                                    @Html.ValidationMessageFor(a => a.EmailID)
+                                                    @Html.ValidationMessageFor(a => a.Email)
                                                 </label>
 
                                                 <label class="block clearfix">
                                                     <span class="block input-icon input-icon-right">
-                                                        @Html.PasswordFor(a => a.Password, new { @class = "form-control", @placeholder = "Password" })
+                                                        @Html.PasswordFor(a => a.Password, new {@id="Password", @class = "form-control", @placeholder = "Password" })
                                                     </span>
                                                     @Html.ValidationMessageFor(a => a.Password)
                                                 </label>
@@ -61,7 +64,7 @@
                                                         <span class="lbl"> Remember Me?</span>
                                                     </label>
 
-                                                    <button type="submit" class="width-35 pull-right btn btn-sm btn-primary">
+                                                    <button type="submit" class="width-35 pull-right btn btn-sm btn-primary" onclick="LoginData(); return false;">
                                                         <i class="ace-icon fa fa-key"></i>
                                                         <span class="bigger-110">Login</span>
                                                     </button>
@@ -72,7 +75,7 @@
                                         </form>
 
                                        
-                                    </div><!-- /.widget-main -->
+                                    </div>
 
                                     <div class="toolbar clearfix">
                                         <div>
@@ -83,7 +86,7 @@
                                         </div>
 
                                         <div>
-                                            @*@Html.ActionLink("I want to register", "Signup", new{@class="user-signup-link" })*@
+                                    
 
                                             <a href="~/Home/Signup" class="user-signup-link">
                                                 I want to register
@@ -91,17 +94,17 @@
                                             </a>
                                         </div>
                                     </div>
-                                </div><!-- /.widget-body -->
-                            </div><!-- /.login-box -->
+                                </div>
+                            </div>
 
  
-                        </div><!-- /.position-relative -->
+                        </div>
 
                         
                     </div>
-                </div><!-- /.col -->
-            </div><!-- /.row -->
-        </div><!-- /.main-content -->
+                </div>
+            </div>
+        </div>
 
  
 }

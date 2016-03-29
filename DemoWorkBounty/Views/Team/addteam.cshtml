@@ -1,0 +1,46 @@
+﻿@{
+    ViewBag.Title = "addteam";
+    Layout = "~/Views/_LayoutPage1.cshtml";
+}
+<script src="~/assets/js/jquery_addTeam.js"></script>
+
+
+<h2>add team</h2>
+
+<body id="body">
+
+    <div class="form-group">
+        <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Team Name <span style="color:red;">*</span></label>
+
+        <div class="col-sm-9">
+            <input type="text" id="txtTeamName" placeholder="" class="col-xs-10 col-sm-5" />
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Add Member<span style="color:red;">*</span> </label>
+
+        <div class="col-sm-9">
+            <input type="text" id="itId" size="5" class="col-xs-10 col-sm-5" />&nbsp;
+            <input type="button" value="Search" onclick="show();" class="btn btn-minier btn-purple" /> &nbsp;
+         
+        </div>
+    </div>
+    
+
+    <div class="col-xs-4">
+
+        <div class=".col-xs-4.col-sm-2 no-padding-right">
+
+        <table id="simple-table" class="table table-striped table-bordered table-hover">
+           
+            <tbody id="items">
+             
+            </tbody>
+   
+        </table>
+    </div>
+</div>
+
+
+</body>

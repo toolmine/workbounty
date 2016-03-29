@@ -1,7 +1,8 @@
-﻿@model DemoWorkBounty.Models.Register
+﻿@model DemoWorkBounty.UserInfo
 @{
     ViewBag.Title = "Signup";
     Layout = "~/Views/_LayoutPage2.cshtml";
+ 
 }
 <script src="~/assets/js/jquery.2.1.1.min.js"></script>
 <script src="~/assets/js/bootstrap-datepicker.min.js"></script>
@@ -12,6 +13,8 @@
 <script src="~/assets/js/datepicker.js"></script>
 <script src="~/assets/js/jquery_mobile_custom_start.js"></script>
 <script src="~/assets/js/jq_script_src.js"></script>
+<script src="~/assets/js/jquery-usersignup.js"></script>
+
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
@@ -24,7 +27,13 @@
                     </div>
 
                     <div class="space-6"></div>
-
+                    @Html.AntiForgeryToken()
+                    @if (ViewBag.Message != null)
+                    {
+                        <div style="border:solid 1px green">
+                            @ViewBag.Message
+                        </div>
+                    }
                     <div class="position-relative">
                         <div id="signup-box" class="signup-box widget-box no-border">
                             <div class="widget-body">
@@ -36,6 +45,7 @@
 
                                     <div class="space-6"></div>
                                     <p> Enter your details to begin: </p>
+                                    
 
 
                                     <form id="form1">
@@ -44,64 +54,71 @@
                                             <label class="block clearfix">
                                                 <span class="block input-icon input-icon-right">
 
-                                                    @Html.TextBoxFor(a => a.EmailID, new { @class = "form-control", @placeholder = "E mail" })
+                                                    @Html.TextBoxFor(a => a.Email, new {@id="Email", @class = "form-control", @placeholder = "E mail" })
 
 
                                                 </span>
-                                                @Html.ValidationMessageFor(a => a.EmailID)
+                                              @Html.ValidationMessageFor(a=>a.Email)
                                             </label>
 
                                             <label class="block clearfix">
                                                 <span class="block input-icon input-icon-right">
 
-                                                    @Html.TextBoxFor(a => a.Phone, new { @class = "form-control", @placeholder = "Number" })
+                                                    @Html.TextBoxFor(a => a.PhoneNumber, new {@id="PhoneNumber", @class = "form-control", @placeholder = "Number" })
 
                                                 </span>
-                                                @Html.ValidationMessageFor(a => a.Phone)
+                                                @Html.ValidationMessageFor(a => a.PhoneNumber)
                                             </label>
 
                                             <label class="block clearfix">
                                                 <span class="block input-icon input-icon-right">
-                                                    @Html.TextBoxFor(a => a.Firstname, new { @class = "form-control", @placeholder = "First Name" })
+                                                    @Html.TextBoxFor(a => a.FirstName, new {@id="FirstName", @class = "form-control", @placeholder = "First Name" })
                                                 </span>
-                                                @Html.ValidationMessageFor(a => a.Firstname)
+                                                @Html.ValidationMessageFor(a => a.FirstName)
                                             </label>
 
                                             <label class="block clearfix">
                                                 <span class="block input-icon input-icon-right">
-                                                    @Html.TextBoxFor(a => a.Lastname, new { @class = "form-control", @placeholder = "Last Name" })
+                                                    @Html.TextBoxFor(a => a.LastName, new {@id="LastName", @class = "form-control", @placeholder = "Last Name" })
 
                                                 </span>
-                                                @Html.ValidationMessageFor(a => a.Lastname)
+                                                @Html.ValidationMessageFor(a => a.LastName)
                                             </label>
                                             <div class="block clearfix">
                                                 <div class="hero-unit">
-                                                    @Html.TextBoxFor(a => a.DateofBirth, new { @class = "form-control", @placeholder = "Date of Birth", @id = "DateSelect", @name = "DateofBirth" })
+                                                 
+                                                   @Html.TextBoxFor(a => a.DateOfBirth, new { @class = "form-control", @placeholder = "Date of Birth", @id = "DateSelect", @name = "DateofBirth", onclick = "DatePicker();return false;" })
 
                                                 </div>
                                             </div>
-
+                                            @Html.ValidationMessageFor(a => a.DateOfBirth)
                                             <label class="block clearfix">
                                                 <span class="block input-icon input-icon-right">
-                                                    @Html.PasswordFor(a => a.Password, new { @class = "form-control", @placeholder = "Password" })
+                                                    @Html.PasswordFor(a => a.Password, new {@id="Password", @class = "form-control", @placeholder = "Password" })
                                                 </span>
                                                 @Html.ValidationMessageFor(a => a.Password)
                                             </label>
+                                            <label class="block clearfix">
+                                                <span class="block input-icon input-icon-right">
+                                                    @Html.TextBoxFor(a => a.InterestedKeywords, new { @id = "InterestedKeywords", @class = "form-control", @placeholder = "Interested Keywords" })
 
+                                                </span>
+                                                @Html.ValidationMessageFor(a => a.InterestedKeywords)
+                                            </label>
 
                                             <div class="space-6"></div>
 
                                             <div class="clearfix">
 
                                                 <div>
-                                                    @*@Html.ActionLink("I want to register", "Signup", new{@class="user-signup-link" })*@
+                           
 
                                                     <a href="~/Home/Login" class="user-signup-link">
                                                         <i class="ace-icon fa fa-arrow-left"></i> Back To login
 
                                                     </a>
 
-                                                    <button type="submit" class="width-35 pull-right btn btn-sm btn-primary">
+                                                    <button type="submit" class="width-35 pull-right btn btn-sm btn-primary" id="btnSave" onclick="AddUserData(); return false;">
                                                         <i class="ace-icon fa fa-key"></i>
                                                         <span class="bigger-110">Signup</span>
                                                     </button>
@@ -113,10 +130,10 @@
                                     </form>
                                 </div>
 
-                            </div><!-- /.widget-body -->
+                            </div>
                         </div>
 
-                    </div><!-- /.position-relative -->
+                    </div>
 
 
                 </div>

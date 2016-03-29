@@ -1,7 +1,6 @@
-﻿$(document).ready(function () {
+﻿function DatePicker() {
 
     $('#DateSelect').datepicker({
         format: "dd/mm/yyyy"
     });
-
-});
+}

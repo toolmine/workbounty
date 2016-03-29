@@ -39,10 +39,16 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.5.0.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Data.Entity" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -108,18 +114,75 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="App_Start\MyHttpControllerHandler.cs" />
+    <Compile Include="App_Start\MyHttpControllerRouteHandler.cs" />
+    <Compile Include="Controllers\AddTeamMemberController.cs" />
+    <Compile Include="Controllers\AddWorkitemController.cs" />
     <Compile Include="Controllers\assigntomeController.cs" />
+    <Compile Include="Controllers\DemoShowController.cs" />
+    <Compile Include="Controllers\DisplayRewardController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\MyWorkitemController.cs" />
     <Compile Include="Controllers\OpenWorkController.cs" />
+    <Compile Include="Controllers\OpenWorkitemController.cs" />
+    <Compile Include="Controllers\ShowitemController.cs" />
     <Compile Include="Controllers\TeamController.cs" />
     <Compile Include="Controllers\workController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\Login.cs" />
-    <Compile Include="Models\Register.cs" />
-    <Compile Include="Models\viewWorkItem.cs" />
+    <Compile Include="Models\MyWorkitem.cs" />
+    <Compile Include="Models\Workitems.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repository\AddTeamMemberRepo.cs" />
+    <Compile Include="Repository\AddWorkitemRepo.cs" />
+    <Compile Include="Repository\DetailItemRepo.cs" />
+    <Compile Include="Repository\LoginRepo.cs" />
+    <Compile Include="Repository\ShowRewardRepo.cs" />
+    <Compile Include="Repository\WorkbountyRepo.cs" />
+    <Compile Include="sysdiagram.cs">
+      <DependentUpon>Wb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Team.cs">
+      <DependentUpon>Wb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UserInfo.cs">
+      <DependentUpon>Wb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Wb.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Wb.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Wb.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Wb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Wb.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Wb.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Workitem.cs">
+      <DependentUpon>Wb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="WorkItemAssignment.cs">
+      <DependentUpon>Wb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="WorkitemDistribution.cs">
+      <DependentUpon>Wb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="WorkitemHistory.cs">
+      <DependentUpon>Wb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="WorkitemRegistration.cs">
+      <DependentUpon>Wb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="WorkitemStatu.cs">
+      <DependentUpon>Wb.tt</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\FilterConfig.cs" />
@@ -237,8 +300,12 @@
     <Content Include="assets\js\fullcalendar.min.js" />
     <Content Include="assets\js\grid.locale-en.js" />
     <Content Include="assets\js\html5shiv.min.js" />
+    <Content Include="assets\js\jquery-login.js" />
+    <Content Include="assets\js\jquery-search.js" />
+    <Content Include="assets\js\jquery-showreward.js" />
     <Content Include="assets\js\jquery-ui.custom.min.js" />
     <Content Include="assets\js\jquery-ui.min.js" />
+    <Content Include="assets\js\jquery-usersignup.js" />
     <Content Include="assets\js\jquery.1.11.1.min.js" />
     <Content Include="assets\js\jquery.2.1.1.min.js" />
     <Content Include="assets\js\jquery.autosize.min.js" />
@@ -267,8 +334,11 @@
     <Content Include="assets\js\jquery.ui.touch-punch.min.js" />
     <Content Include="assets\js\jquery.validate.min.js" />
     <Content Include="assets\js\jquery1x.min.js" />
+    <Content Include="assets\js\jquery_addTeam.js" />
+    <Content Include="assets\js\jquery_logindata.js" />
     <Content Include="assets\js\jquery_mobile_custom_start.js" />
     <Content Include="assets\js\jquery_onclick_success.js" />
+    <Content Include="assets\js\jquery_Openworkitems.js" />
     <Content Include="assets\js\jq_script_src.js" />
     <Content Include="assets\js\main-fix.js" />
     <Content Include="assets\js\markdown.min.js" />
@@ -385,6 +455,7 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\jquery_UserSignup.js" />
     <Content Include="Scripts\knockout-2.2.0.debug.js" />
     <Content Include="Scripts\knockout-2.2.0.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
@@ -399,6 +470,26 @@
     </Content>
     <Content Include="Views\Web.config" />
     <Content Include="Scripts\jquery-2.2.1.min.map" />
+    <Content Include="Views\Team\addteam.cshtml" />
+    <Content Include="Views\work\addWorkitem.cshtml" />
+    <Content Include="Views\work\detailWorkitem.cshtml" />
+    <EntityDeploy Include="Wb.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>Wb.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Wb.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Wb.edmx</DependentUpon>
+      <LastGenOutput>Wb.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Wb.edmx.diagram">
+      <DependentUpon>Wb.edmx</DependentUpon>
+    </Content>
+    <Content Include="Wb.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Wb.edmx</DependentUpon>
+      <LastGenOutput>Wb.cs</LastGenOutput>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -589,10 +680,10 @@
     <Content Include="Views\Team\Search.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Team\popup.cshtml" />
+    <Content Include="Views\_LayoutPage5.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\_LayoutPage5.cshtml" />
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

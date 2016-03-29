@@ -3,16 +3,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using DemoWorkBounty.Models;
+using DemoWorkBounty.Repository;
 
 
 namespace DemoWorkBounty.Controllers
 {
     public class HomeController : Controller
     {
-        //
-        // GET: /Home/
 
+        WorkBountyDBEntities2 entity = new WorkBountyDBEntities2();
+        LoginRepo userRepo = new LoginRepo();
+        WorkbountyRepo wbRepo = new WorkbountyRepo();
         public ActionResult Index()
         {
             return View();
@@ -22,22 +23,28 @@ namespace DemoWorkBounty.Controllers
         {
             return View();
         }
+
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Login(Login u)
-        {
-            try
-            {
-                if (ModelState.IsValid)
+
+        public JsonResult Login(UserInfo id)
+        
+         {
+                try
                 {
-                    return RedirectToAction("AfterLogin");
+                    if (ModelState.IsValid)
+                    {
+                        var user = userRepo.UserLogin(id);
+                        Session["UserID"] = user.UserID;
+                        Session["Firstname"]=user.FirstName;
+                        return Json("Success");
+                    }
+                    else { return Json("false"); }
+
                 }
-               
+                catch (Exception)
+                { return Json("false"); }
             }
-            catch (Exception)
-            { }
-            return View();
-        }
+        
 
 
         public ActionResult Signup()
@@ -46,7 +53,7 @@ namespace DemoWorkBounty.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Signup(Register u)
+        public ActionResult Signup(UserInfo u)
         {
             try
             {
@@ -65,6 +72,16 @@ namespace DemoWorkBounty.Controllers
             { }
             return View(u);
         }
+       
+
+        public ActionResult AfterLogin()
+        {
+            int id = Convert.ToInt32(Session["UserID"]);
+
+            var item = wbRepo.getAllItem(id);
+            return View(item);
+        }
+
         public ActionResult ForgotPassword()
         {
             return View();
@@ -76,7 +93,7 @@ namespace DemoWorkBounty.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult DemoSignup(Register u)
+        public ActionResult DemoSignup(UserInfo u)
         {
             try
             {
@@ -98,10 +115,8 @@ namespace DemoWorkBounty.Controllers
             return View(u);
         }
 
-        public ActionResult AfterLogin()
-        {
-            return View();
-        }
+       
+
 
         public ActionResult mywork()
         {
@@ -163,5 +178,12 @@ namespace DemoWorkBounty.Controllers
             return View();
 
         }
+
+        public ActionResult workitemDetails()
+        {
+            return View();
+        }
+        
+
     }
 }
