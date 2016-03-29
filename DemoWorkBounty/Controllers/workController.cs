@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using DemoWorkBounty.Repository;
 
 namespace DemoWorkBounty.Controllers
 {
@@ -13,10 +14,16 @@ namespace DemoWorkBounty.Controllers
             return View();
         }
 
-        public ActionResult detailWorkitem()
+        public ActionResult detailWorkitem(int id)
         {
-            return View();
+            WorkBountyDBEntities2 entity = new WorkBountyDBEntities2();
+            DetailItemRepo repo = new DetailItemRepo();
+            var item = repo.GetAllitems(id);
+
+            return View(item);
         }
+
+
 
 
         public ActionResult addWorkitem()

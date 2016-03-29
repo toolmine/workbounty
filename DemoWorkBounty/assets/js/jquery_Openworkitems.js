@@ -27,9 +27,9 @@
 
 
   
-function add(item) {
+function add(id) {
 
-    var id = $(item).attr("id")
+    var id = $(id).attr("ID")
 
     var url = "/work/detailworkitem?id=" + encodeURIComponent(id);
     document.location.href = url;
