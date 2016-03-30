@@ -141,9 +141,6 @@
     <Compile Include="Repository\LoginRepo.cs" />
     <Compile Include="Repository\ShowRewardRepo.cs" />
     <Compile Include="Repository\WorkbountyRepo.cs" />
-    <Compile Include="sysdiagram.cs">
-      <DependentUpon>Wb.tt</DependentUpon>
-    </Compile>
     <Compile Include="Team.cs">
       <DependentUpon>Wb.tt</DependentUpon>
     </Compile>
@@ -471,7 +468,6 @@
     <Content Include="Views\Web.config" />
     <Content Include="Scripts\jquery-2.2.1.min.map" />
     <Content Include="Views\Team\addteam.cshtml" />
-    <Content Include="Views\work\addWorkitem.cshtml" />
     <Content Include="Views\work\detailWorkitem.cshtml" />
     <EntityDeploy Include="Wb.edmx">
       <Generator>EntityModelCodeGenerator</Generator>

@@ -35,7 +35,7 @@ namespace DemoWorkBounty.Controllers
                     {
                         var user = userRepo.UserLogin(id);
                         Session["UserID"] = user.UserID;
-                        Session["Firstname"]=user.FirstName;
+                        Session["FirstName"]=user.FirstName;
                         return Json("Success");
                     }
                     else { return Json("false"); }
@@ -144,7 +144,14 @@ namespace DemoWorkBounty.Controllers
         }
 
         public ActionResult addworkitem()
+        
         {
+            var id1 = 1;
+            var selected = (from tea in entity.Teams
+                            where tea.UserID == id1
+                            select tea);
+
+            ViewBag.TeamName1 = new SelectList(selected, "TeamID", "TeamName");
             return View();
         }
     

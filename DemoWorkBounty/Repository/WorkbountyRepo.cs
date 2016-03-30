@@ -56,8 +56,8 @@ namespace DemoWorkBounty.Repository
                 entity.UserInfoes.Add(item);
                 entity.SaveChanges();
                 return "Success";
-                System.Web.HttpContext.Current.Session["LogedUserID"] = item.UserID;
-                System.Web.HttpContext.Current.Session["LogedUserFirstName"] = item.FirstName.ToString();
+                //System.Web.HttpContext.Current.Session["LogedUserID"] = item.UserID;
+                //System.Web.HttpContext.Current.Session["LogedUserFirstName"] = item.FirstName.ToString();
                 }
                 
             }

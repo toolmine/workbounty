@@ -13,7 +13,9 @@ function add(item)
     var id=$(item).attr("id")
     var teamData = {
         "TeamName": $("#txtTeamName").val(),
-        "UserID": id
+        "UserID": id,
+        "IsActive": true,
+        "TeamUserInfoID": $("#Userid").val()
     };
 
 

@@ -24,6 +24,7 @@ namespace DemoWorkBounty
         public string TeamName { get; set; }
         public int UserID { get; set; }
         public bool IsActive { get; set; }
+        public Nullable<int> TeamUserInfoID { get; set; }
     
         public virtual Team Team1 { get; set; }
         public virtual Team Team2 { get; set; }

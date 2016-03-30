@@ -25,7 +25,6 @@ namespace DemoWorkBounty
             throw new UnintentionalCodeFirstException();
         }
     
-        public DbSet<sysdiagram> sysdiagrams { get; set; }
         public DbSet<Team> Teams { get; set; }
         public DbSet<UserInfo> UserInfoes { get; set; }
         public DbSet<Workitem> Workitems { get; set; }

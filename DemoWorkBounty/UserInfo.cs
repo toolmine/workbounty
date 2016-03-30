@@ -11,7 +11,6 @@ namespace DemoWorkBounty
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
     
     public partial class UserInfo
     {
@@ -27,15 +26,10 @@ namespace DemoWorkBounty
         }
     
         public int UserID { get; set; }
-        [Required(ErrorMessage = "Please provide full name", AllowEmptyStrings = false)]
         public string Email { get; set; }
-   
-    
         public string Password { get; set; }
-
         public string FirstName { get; set; }
         public string LastName { get; set; }
-
         public System.DateTime DateOfBirth { get; set; }
         public string PhoneNumber { get; set; }
         public bool IsActive { get; set; }
