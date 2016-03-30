@@ -31,5 +31,12 @@ namespace DemoWorkBounty.Controllers
         {
             return View();
         }
+
+        [HttpPost]
+        public JsonResult addteam(Team teamdata)
+        {
+            var responce = repo.AddTeamData(teamData);
+            return View();
+        }
     }
 }

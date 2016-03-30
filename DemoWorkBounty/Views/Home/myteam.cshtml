@@ -1,26 +1,31 @@
-﻿@{
+﻿@model List<DemoWorkBounty.Models.ViewMyTeam>
+@{
     ViewBag.Title = "myteam";
     Layout = "~/Views/_LayoutPage1.cshtml";
 }
 
 
 <div class="widget-box transparent" id="recent-box">
-    <div class="widget-header">
+   
+  
+     <div class="widget-header">
         <div class="col-xs-10">
             <h4 class="widget-title lighter smaller">
                Team |
                 @Html.ActionLink("Add Team", "addteam", "Team")
             </h4>
         </div>
-    
+  
         <div class="row">
-
-
+            
             <div class="col-xs-4">
-
-                <div class=".col-xs-4.col-sm-2 no-padding-right">@Html.Label("TEAM 1") |@Html.ActionLink("Add member", "addMember", "Team")</div>
-
+            
+                <div class=".col-xs-4.col-sm-2 no-padding-right">
+                
+          
                 <table id="simple-table" class="table table-striped table-bordered table-hover">
+                   
+
                     <thead>
                         <tr>
 
@@ -29,180 +34,25 @@
                             <th>Contact No</th>
                         </tr>
                     </thead>
-
+                    @foreach (var item in Model)
+                        {
                     <tbody>
-                        <tr>
-                            <td>
-                                <a>hiren</a>
-                            </td>
-                            <td>hiren@yahoo.com</td>
-                            <td>9227215123</td>
-                        </tr>
+                            <tr><td>@Html.DisplayFor(s=>item.FirstName)</td>
+                                <td>@Html.DisplayFor(s=>item.Email)</td>
+                                <td>@Html.DisplayFor(s=>item.PhoneNumber)</td>
                         
-                        <tr>
-                            <td>
-                                <a>Manthan</a>
-                            </td>
-                            <td>manthan@yahoo.com</td>
-                            <td>9898932323</td>
-                        </tr>
                         
-                        <tr>
-                            <td>
-                                <a>Akash</a>
-                            </td>
-                            <td>akash@yahoo.com</td>
-                            <td>9879548121</td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <a>Prince</a>
-                            </td>
-                            <td>princeh@yahoo.com</td>
-                            <td>9696961212</td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <a>Ganesh</a>
-                            </td>
-                            <td>ganesh@yahoo.com</td>
-                            <td>9797971212</td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <a>Kiran</a>
-                            </td>
-                            <td>kiran@yahoo.com</td>
-                            <td>9852581212</td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <a>Joy</a>
-                            </td>
-                            <td>joyh@yahoo.com</td>
-                            <td>5678981212</td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <a>Prerak</a>
-                            </td>
-                          <td>pahach@yahoo.com</td>
-                            <td>9898981212</td>           
-                        </tr>
-                        <tr>
-                            <td>
-                                <a>Jim</a>
-                            </td>
-                            <td>jim@yahoo.com</td>
-                            <td>8585981212</td>     
-                        </tr>
-                        <tr>
-                            <td>
-                                <a>Deep</a>
-                            </td>
-                            <td>deep@yahoo.com</td>
-                            <td>8585981212</td>    
-                        </tr>
+                            </tr>
                     </tbody>
+                    }
                 </table>
+            
             </div>
 
-            <div class="col-xs-4">
-                <div class=".col-xs-6.col-sm-2 no-padding-right">@Html.Label("TEAM 2") |@Html.ActionLink("Add member", "addMember", "Team")</div>
-                <table id="simple-table" class="table table-striped table-bordered table-hover">
-                    <thead>
-                        <tr>
-
-                            <th>Member</th>
-                            <th>Email</th>
-                            <th>Contact No</th>
-                        </tr>
-                    </thead>
-
-                    <tbody>
-                        <tr>
-                            <td>
-                                <a>tapan</a>
-                            </td>
-                            <td>tapan@yahoo.com</td>
-                            <td>9632581212</td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <a>roy</a>
-                            </td>
-                            <td>roy@yahoo.com</td>
-                            <td>9977971624</td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <a>rick</a>
-                            </td>
-                            <td>rick@yahoo.com</td>
-                            <td>9797881212</td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <a>fanny</a>
-                            </td>
-                            <td>fanny@yahoo.com</td>
-                            <td>7878881212</td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <a>gaurav</a>
-                            </td>
-                            <td>gaurav@yahoo.com</td>
-                            <td>9898981212</td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <a>jakir</a>
-                            </td>
-                            <td>jakir@yahoo.com</td>
-                            <td>9878987821</td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <a>Chris</a>
-                            </td>
-                            <td>chris@yahoo.com</td>
-                            <td>8866621212</td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <a>hussain</a>
-                            </td>
-                            <td>mhussian@yahoo.com</td>
-                            <td>8785251212</td>
-                        </tr>
-
-                        <tr>
-                            <td>
-                                <a>guru</a>
-                            </td>
-                            <td>gurum@yahoo.com</td>
-                            <td>8787881212</td>    
-                        </tr>
-                        <tr>
-                            <td>
-                                <a>abc</a>
-                            </td>
-                            <td>abc@yahoo.com</td>
-                            <td>7255981212</td>    
-                        </tr>
-                        <tr>
-                            <td>
-                                <a>xyz</a>
-                            </td>
-                            <td>jxyz@yahoo.com</td>
-                            <td>9878987812</td>    
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
+            
             
         </div>
+               
 
         <div class="row">
             <div class="col-xs-4"></div>
@@ -236,4 +86,5 @@
 
         </div>
     </div>
+    }
 </div>

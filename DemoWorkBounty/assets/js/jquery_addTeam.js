@@ -10,10 +10,15 @@ $(document).ready(function () {
 function add(item)
 {
         
-    var id=$(item).attr("id")
+  
+    //var data = {
+    // id:$(item).attr("id"),
+    //currentid: $("Userid").val()
+    //}
+
     var teamData = {
         "TeamName": $("#txtTeamName").val(),
-        "UserID": id,
+        "UserID": data,
         "IsActive": true,
         "TeamUserInfoID": $("#Userid").val()
     };
