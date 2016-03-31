@@ -22,12 +22,11 @@ namespace DemoWorkBounty.Controllers
 
         }
 
-
-
+       
         public string AddTeamData(Team teamData)
         {
-            var responce = repo.AddTeamData(teamData);
-            return responce;
+           var responce = repo.AddTeamData(teamData);
+         return responce;
         }
 
     }

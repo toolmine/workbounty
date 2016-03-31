@@ -8,9 +8,7 @@ namespace DemoWorkBounty.Controllers
 {
     public class TeamController : Controller
     {
-        //
-        // GET: /Team/
-
+      
         public ActionResult addMember()
         {
             return View();
@@ -31,5 +29,12 @@ namespace DemoWorkBounty.Controllers
         {
             return View();
         }
+
+        //[HttpPost]
+        //public JsonResult addteam(Team teamdata)
+        //{
+        //    var responce = repo.AddTeamData(teamData);
+        //    return View();
+        //}
     }
 }

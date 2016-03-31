@@ -29,12 +29,9 @@ namespace DemoWorkBounty.Repository
         {
             try
             {
-               
                         entity.WorkitemRegistrations.Add(item);
                         entity.SaveChanges();
                         return "Success";
-                
-                
             }
 
             catch (Exception)

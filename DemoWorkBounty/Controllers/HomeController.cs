@@ -25,8 +25,7 @@ namespace DemoWorkBounty.Controllers
         }
 
         [HttpPost]
-
-        public JsonResult Login(UserInfo id)
+         public JsonResult Login(UserInfo id)
         
          {
                 try
@@ -84,6 +83,13 @@ namespace DemoWorkBounty.Controllers
             return View(item);
         }
 
+        public ActionResult myteam()
+        {
+            MyTeamRepo teamrepo = new MyTeamRepo();
+            int id = Convert.ToInt32(Session["UserID"]);
+            var item = teamrepo.getAllItem(id);
+            return View(item);
+        }
         public ActionResult ForgotPassword()
         {
             return View();
@@ -130,10 +136,7 @@ namespace DemoWorkBounty.Controllers
             return View();
         }
 
-        public ActionResult myteam()
-        {
-            return View();
-        }
+       
 
         public ActionResult profile()
         {

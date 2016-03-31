@@ -133,12 +133,14 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\MyWorkitem.cs" />
+    <Compile Include="Models\ViewMyTeam.cs" />
     <Compile Include="Models\Workitems.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\AddTeamMemberRepo.cs" />
     <Compile Include="Repository\AddWorkitemRepo.cs" />
     <Compile Include="Repository\DetailItemRepo.cs" />
     <Compile Include="Repository\LoginRepo.cs" />
+    <Compile Include="Repository\MyTeamRepo.cs" />
     <Compile Include="Repository\ShowRewardRepo.cs" />
     <Compile Include="Repository\WorkbountyRepo.cs" />
     <Compile Include="Team.cs">
