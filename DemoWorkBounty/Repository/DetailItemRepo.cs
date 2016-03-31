@@ -24,5 +24,23 @@ namespace DemoWorkBounty.Repository
             return assignUserId;
         }
 
+
+
+        public string AddMemberData(Team memberData)
+        {
+            try
+            {
+
+                entity.Teams.Add(memberData);
+                entity.SaveChanges();
+                return "Success";
+            }
+            catch (Exception)
+            {
+                return "Error";
+
+            }
+        }
     }
+
 }

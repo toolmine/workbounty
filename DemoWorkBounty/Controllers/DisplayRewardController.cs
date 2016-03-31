@@ -9,6 +9,7 @@ namespace DemoWorkBounty.Controllers
 {
     public class DisplayRewardController : ApiController
     {
+        static DetailItemRepo repos = new DetailItemRepo();
         static ShowRewardRepo repo = new ShowRewardRepo();
 
         public List<WorkItemAssignment> GetAllRewards(int id)
@@ -19,6 +20,11 @@ namespace DemoWorkBounty.Controllers
             return responce;
         }
 
+        public string AddMemberData(Team memberData)
+        {
+            var responce = repos.AddMemberData(memberData);
+            return responce;
+        }
 
 
     }
