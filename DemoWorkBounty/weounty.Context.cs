@@ -13,10 +13,10 @@ namespace DemoWorkBounty
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class WorkBountyDBEntities2 : DbContext
+    public partial class WorkBountyDBEntities3 : DbContext
     {
-        public WorkBountyDBEntities2()
-            : base("name=WorkBountyDBEntities2")
+        public WorkBountyDBEntities3()
+            : base("name=WorkBountyDBEntities3")
         {
         }
     
@@ -29,9 +29,9 @@ namespace DemoWorkBounty
         public DbSet<UserInfo> UserInfoes { get; set; }
         public DbSet<Workitem> Workitems { get; set; }
         public DbSet<WorkItemAssignment> WorkItemAssignments { get; set; }
-        public DbSet<WorkitemStatu> WorkitemStatus { get; set; }
         public DbSet<WorkitemDistribution> WorkitemDistributions { get; set; }
-        public DbSet<WorkitemHistory> WorkitemHistories { get; set; }
         public DbSet<WorkitemRegistration> WorkitemRegistrations { get; set; }
+        public DbSet<WorkitemStatu> WorkitemStatus { get; set; }
+        public DbSet<WorkitemHistory> WorkitemHistories { get; set; }
     }
 }

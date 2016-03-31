@@ -11,7 +11,7 @@ namespace DemoWorkBounty.Controllers
     public class HomeController : Controller
     {
 
-        WorkBountyDBEntities2 entity = new WorkBountyDBEntities2();
+        WorkBountyDBEntities3 entity = new WorkBountyDBEntities3();
         LoginRepo userRepo = new LoginRepo();
         WorkbountyRepo wbRepo = new WorkbountyRepo();
         public ActionResult Index()

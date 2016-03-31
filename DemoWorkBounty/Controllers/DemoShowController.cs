@@ -13,7 +13,7 @@ namespace DemoWorkBounty.Controllers
 {
     public class DemoShowController : ApiController
     {
-        private WorkBountyDBEntities2 db = new WorkBountyDBEntities2();
+        private WorkBountyDBEntities3 db = new WorkBountyDBEntities3();
 
         // GET api/DemoShow
         public IEnumerable<UserInfo> GetUserInfoes()
