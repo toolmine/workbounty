@@ -18,8 +18,10 @@
         data: JSON.stringify(item),
         dataType: "json",
         success: function (response) {
-
-            alert(response);
+             if (response == "Success") {
+                var url = "/home/afterlogin/"
+                document.location.href = url;
+            }
 
         },
 
