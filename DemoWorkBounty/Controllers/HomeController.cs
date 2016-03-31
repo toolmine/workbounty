@@ -77,8 +77,10 @@ namespace DemoWorkBounty.Controllers
         public ActionResult AfterLogin()
         {
             int id = Convert.ToInt32(Session["UserID"]);
-
             var item = wbRepo.getAllItem(id);
+
+
+
             return View(item);
         }
 

@@ -24,7 +24,18 @@ namespace DemoWorkBounty.Controllers
             return responce;
         }
 
-
+        public string AddApply(WorkitemRegistration item)
+        {
+            try
+            {
+                var response = repos.Register(item);
+                return response;
+            }
+            catch (Exception)
+            {
+                return "error";
+            }
+        }
 
 
     }

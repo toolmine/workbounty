@@ -23,9 +23,7 @@ namespace DemoWorkBounty.Controllers
             return View(item);
         }
 
-
-
-
+       
         public ActionResult addWorkitem()
         {
             return View();

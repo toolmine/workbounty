@@ -19,6 +19,7 @@ namespace DemoWorkBounty
         public bool IsExclusive { get; set; }
         public bool IsFavourite { get; set; }
         public bool IsRegistered { get; set; }
+        public int WorkitemRegistrationID { get; set; }
     
         public virtual UserInfo UserInfo { get; set; }
         public virtual Workitem Workitem { get; set; }

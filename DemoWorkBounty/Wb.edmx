@@ -61,47 +61,35 @@
           <Property Name="IsRewarded" Type="bit" Nullable="false" />
           <Property Name="SubmissionDateTime" Type="datetime" Nullable="false" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'WorkBountyDB.dbo.WorkitemDistribution' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="WorkitemDistribution">
           <Key>
-            <PropertyRef Name="WorkitemID" />
-            <PropertyRef Name="TeamID" />
-            <PropertyRef Name="UserID" />
+            <PropertyRef Name="WorkitemDistributionID" />
           </Key>
           <Property Name="WorkitemID" Type="int" Nullable="false" />
           <Property Name="TeamID" Type="int" Nullable="false" />
           <Property Name="UserID" Type="int" Nullable="false" />
+          <Property Name="WorkitemDistributionID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'WorkBountyDB.dbo.WorkitemHistory' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="WorkitemHistory">
           <Key>
-            <PropertyRef Name="WorkitemID" />
-            <PropertyRef Name="WorkitemStatusID" />
-            <PropertyRef Name="UpdatedBy" />
-            <PropertyRef Name="UpdatedDateTIme" />
+            <PropertyRef Name="WorkitemHistoryID" />
           </Key>
           <Property Name="WorkitemID" Type="int" Nullable="false" />
           <Property Name="WorkitemStatusID" Type="int" Nullable="false" />
           <Property Name="UpdatedBy" Type="int" Nullable="false" />
           <Property Name="UpdatedDateTIme" Type="datetime" Nullable="false" />
+          <Property Name="WorkitemHistoryID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'WorkBountyDB.dbo.WorkitemRegistration' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="WorkitemRegistration">
           <Key>
-            <PropertyRef Name="WorkitemID" />
-            <PropertyRef Name="UserID" />
-            <PropertyRef Name="IsExclusive" />
-            <PropertyRef Name="IsFavourite" />
-            <PropertyRef Name="IsRegistered" />
+            <PropertyRef Name="WorkitemRegistrationID" />
           </Key>
           <Property Name="WorkitemID" Type="int" Nullable="false" />
           <Property Name="UserID" Type="int" Nullable="false" />
           <Property Name="IsExclusive" Type="bit" Nullable="false" />
           <Property Name="IsFavourite" Type="bit" Nullable="false" />
           <Property Name="IsRegistered" Type="bit" Nullable="false" />
+          <Property Name="WorkitemRegistrationID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
         </EntityType>
         <EntityType Name="WorkitemStatus">
           <Key>
@@ -319,31 +307,10 @@ warning 6002: The table/view 'WorkBountyDB.dbo.WorkitemRegistration' does not ha
           <EntitySet Name="UserInfo" EntityType="Self.UserInfo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Workitem" EntityType="Self.Workitem" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="WorkItemAssignment" EntityType="Self.WorkItemAssignment" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="WorkitemDistribution" EntityType="Self.WorkitemDistribution" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="WorkitemHistory" EntityType="Self.WorkitemHistory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="WorkitemRegistration" EntityType="Self.WorkitemRegistration" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="WorkitemStatus" EntityType="Self.WorkitemStatus" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="WorkitemDistribution" EntityType="Self.WorkitemDistribution" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-[WorkitemDistribution].[WorkitemID] AS [WorkitemID], 
-[WorkitemDistribution].[TeamID] AS [TeamID], 
-[WorkitemDistribution].[UserID] AS [UserID]
-FROM [dbo].[WorkitemDistribution] AS [WorkitemDistribution]</DefiningQuery>
-          </EntitySet>
-          <EntitySet Name="WorkitemHistory" EntityType="Self.WorkitemHistory" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-[WorkitemHistory].[WorkitemID] AS [WorkitemID], 
-[WorkitemHistory].[WorkitemStatusID] AS [WorkitemStatusID], 
-[WorkitemHistory].[UpdatedBy] AS [UpdatedBy], 
-[WorkitemHistory].[UpdatedDateTIme] AS [UpdatedDateTIme]
-FROM [dbo].[WorkitemHistory] AS [WorkitemHistory]</DefiningQuery>
-          </EntitySet>
-          <EntitySet Name="WorkitemRegistration" EntityType="Self.WorkitemRegistration" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-[WorkitemRegistration].[WorkitemID] AS [WorkitemID], 
-[WorkitemRegistration].[UserID] AS [UserID], 
-[WorkitemRegistration].[IsExclusive] AS [IsExclusive], 
-[WorkitemRegistration].[IsFavourite] AS [IsFavourite], 
-[WorkitemRegistration].[IsRegistered] AS [IsRegistered]
-FROM [dbo].[WorkitemRegistration] AS [WorkitemRegistration]</DefiningQuery>
-          </EntitySet>
           <AssociationSet Name="FK_Team_Team" Association="Self.FK_Team_Team">
             <End Role="Team" EntitySet="Team" />
             <End Role="Team1" EntitySet="Team" />
@@ -508,9 +475,7 @@ FROM [dbo].[WorkitemRegistration] AS [WorkitemRegistration]</DefiningQuery>
         </EntityType>
         <EntityType Name="WorkitemDistribution">
           <Key>
-            <PropertyRef Name="WorkitemID" />
-            <PropertyRef Name="TeamID" />
-            <PropertyRef Name="UserID" />
+            <PropertyRef Name="WorkitemDistributionID" />
           </Key>
           <Property Name="WorkitemID" Type="Int32" Nullable="false" />
           <Property Name="TeamID" Type="Int32" Nullable="false" />
@@ -518,13 +483,11 @@ FROM [dbo].[WorkitemRegistration] AS [WorkitemRegistration]</DefiningQuery>
           <NavigationProperty Name="Team" Relationship="Self.FK_WorkitemDistribution_Team" FromRole="WorkitemDistribution" ToRole="Team" />
           <NavigationProperty Name="UserInfo" Relationship="Self.FK_WorkitemDistribution_UserInfo" FromRole="WorkitemDistribution" ToRole="UserInfo" />
           <NavigationProperty Name="Workitem" Relationship="Self.FK_WorkitemDistribution_Workitem" FromRole="WorkitemDistribution" ToRole="Workitem" />
+          <Property Name="WorkitemDistributionID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
         </EntityType>
         <EntityType Name="WorkitemHistory">
           <Key>
-            <PropertyRef Name="WorkitemID" />
-            <PropertyRef Name="WorkitemStatusID" />
-            <PropertyRef Name="UpdatedBy" />
-            <PropertyRef Name="UpdatedDateTIme" />
+            <PropertyRef Name="WorkitemHistoryID" />
           </Key>
           <Property Name="WorkitemID" Type="Int32" Nullable="false" />
           <Property Name="WorkitemStatusID" Type="Int32" Nullable="false" />
@@ -533,14 +496,11 @@ FROM [dbo].[WorkitemRegistration] AS [WorkitemRegistration]</DefiningQuery>
           <NavigationProperty Name="UserInfo" Relationship="Self.FK_WorkitemHistory_UserInfo" FromRole="WorkitemHistory" ToRole="UserInfo" />
           <NavigationProperty Name="Workitem" Relationship="Self.FK_WorkitemHistory_Workitem" FromRole="WorkitemHistory" ToRole="Workitem" />
           <NavigationProperty Name="WorkitemStatu" Relationship="Self.FK_WorkitemHistory_WorkitemStatus" FromRole="WorkitemHistory" ToRole="WorkitemStatus" />
+          <Property Name="WorkitemHistoryID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
         </EntityType>
         <EntityType Name="WorkitemRegistration">
           <Key>
-            <PropertyRef Name="WorkitemID" />
-            <PropertyRef Name="UserID" />
-            <PropertyRef Name="IsExclusive" />
-            <PropertyRef Name="IsFavourite" />
-            <PropertyRef Name="IsRegistered" />
+            <PropertyRef Name="WorkitemRegistrationID" />
           </Key>
           <Property Name="WorkitemID" Type="Int32" Nullable="false" />
           <Property Name="UserID" Type="Int32" Nullable="false" />
@@ -549,6 +509,7 @@ FROM [dbo].[WorkitemRegistration] AS [WorkitemRegistration]</DefiningQuery>
           <Property Name="IsRegistered" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="UserInfo" Relationship="Self.FK_WorkitemRegistration_UserInfo" FromRole="WorkitemRegistration" ToRole="UserInfo" />
           <NavigationProperty Name="Workitem" Relationship="Self.FK_WorkitemRegistration_Workitem" FromRole="WorkitemRegistration" ToRole="Workitem" />
+          <Property Name="WorkitemRegistrationID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
         </EntityType>
         <Association Name="FK_Team_Team">
           <End Role="Team" Type="Self.Team" Multiplicity="1" />
@@ -909,6 +870,7 @@ FROM [dbo].[WorkitemRegistration] AS [WorkitemRegistration]</DefiningQuery>
           <EntitySetMapping Name="WorkitemDistributions">
             <EntityTypeMapping TypeName="WorkBountyDBModel.WorkitemDistribution">
               <MappingFragment StoreEntitySet="WorkitemDistribution">
+                <ScalarProperty Name="WorkitemDistributionID" ColumnName="WorkitemDistributionID" />
                 <ScalarProperty Name="WorkitemID" ColumnName="WorkitemID" />
                 <ScalarProperty Name="TeamID" ColumnName="TeamID" />
                 <ScalarProperty Name="UserID" ColumnName="UserID" />
@@ -918,6 +880,7 @@ FROM [dbo].[WorkitemRegistration] AS [WorkitemRegistration]</DefiningQuery>
           <EntitySetMapping Name="WorkitemHistories">
             <EntityTypeMapping TypeName="WorkBountyDBModel.WorkitemHistory">
               <MappingFragment StoreEntitySet="WorkitemHistory">
+                <ScalarProperty Name="WorkitemHistoryID" ColumnName="WorkitemHistoryID" />
                 <ScalarProperty Name="WorkitemID" ColumnName="WorkitemID" />
                 <ScalarProperty Name="WorkitemStatusID" ColumnName="WorkitemStatusID" />
                 <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
@@ -928,6 +891,7 @@ FROM [dbo].[WorkitemRegistration] AS [WorkitemRegistration]</DefiningQuery>
           <EntitySetMapping Name="WorkitemRegistrations">
             <EntityTypeMapping TypeName="WorkBountyDBModel.WorkitemRegistration">
               <MappingFragment StoreEntitySet="WorkitemRegistration">
+                <ScalarProperty Name="WorkitemRegistrationID" ColumnName="WorkitemRegistrationID" />
                 <ScalarProperty Name="WorkitemID" ColumnName="WorkitemID" />
                 <ScalarProperty Name="UserID" ColumnName="UserID" />
                 <ScalarProperty Name="IsExclusive" ColumnName="IsExclusive" />

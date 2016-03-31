@@ -18,6 +18,7 @@ namespace DemoWorkBounty
         public int WorkitemStatusID { get; set; }
         public int UpdatedBy { get; set; }
         public System.DateTime UpdatedDateTIme { get; set; }
+        public int WorkitemHistoryID { get; set; }
     
         public virtual UserInfo UserInfo { get; set; }
         public virtual Workitem Workitem { get; set; }

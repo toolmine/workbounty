@@ -64,6 +64,20 @@ namespace DemoWorkBounty.Repository
             return "Error";
             
         }
-       
+
+
+
+        public List<Workitem> ItemsIWantDone()
+        {
+            List<Workitem> item = new List<Workitem>();
+            int id = Convert.ToInt16(System.Web.HttpContext.Current.Session["UserID"]);
+            var data = entity.Workitems.Where(s => s.CreatedBy == id).Select(s => new Workitem { Title = s.Title, Summary = s.Summary, ProposedReward = s.ProposedReward, Amount = s.Amount,StartDate=s.StartDate, DueDate=s.DueDate  }).ToList();
+
+            return data;
+        }
+
+
+        
+
     }
 }

@@ -12,7 +12,7 @@ namespace DemoWorkBounty.Repository
         private WorkBountyDBEntities2 entity = new WorkBountyDBEntities2();
         public List<Workitem> GetAllitems(int id)
         {
-  
+
 
             var assignUserId = entity.Workitems.Where(a => a.WorkitemID.Equals(id)).ToList();
 
@@ -24,5 +24,23 @@ namespace DemoWorkBounty.Repository
             return assignUserId;
         }
 
+        [HttpPost]
+        public string  Register(WorkitemRegistration item)
+        {
+            try
+            {
+               
+                        entity.WorkitemRegistrations.Add(item);
+                        entity.SaveChanges();
+                        return "Success";
+                
+                
+            }
+
+            catch (Exception)
+            {
+                return "Error";
+            }
+        }
     }
 }
