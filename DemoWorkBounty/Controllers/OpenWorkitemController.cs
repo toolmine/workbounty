@@ -10,7 +10,7 @@ namespace DemoWorkBounty.Controllers
     public class OpenWorkitemController : ApiController
     {
         static DetailItemRepo repos = new DetailItemRepo();
-        private WorkBountyDBEntities4 entity = new WorkBountyDBEntities4();
+        private WorkBountyDBEntities5 entity = new WorkBountyDBEntities5();
         public List<Workitem> GetAllWorkitems()
         {
             return entity.Workitems.ToList();

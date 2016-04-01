@@ -133,6 +133,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\MyWorkitem.cs" />
+    <Compile Include="Models\MyWorkitemAssignment.cs" />
     <Compile Include="Models\ViewMyTeam.cs" />
     <Compile Include="Models\Workitems.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -144,43 +145,43 @@
     <Compile Include="Repository\ShowRewardRepo.cs" />
     <Compile Include="Repository\WorkbountyRepo.cs" />
     <Compile Include="Team.cs">
-      <DependentUpon>weounty.tt</DependentUpon>
+      <DependentUpon>workbounty.tt</DependentUpon>
     </Compile>
     <Compile Include="UserInfo.cs">
-      <DependentUpon>weounty.tt</DependentUpon>
+      <DependentUpon>workbounty.tt</DependentUpon>
     </Compile>
-    <Compile Include="weounty.Context.cs">
+    <Compile Include="workbounty.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>weounty.Context.tt</DependentUpon>
+      <DependentUpon>workbounty.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="weounty.cs">
+    <Compile Include="workbounty.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>weounty.tt</DependentUpon>
+      <DependentUpon>workbounty.tt</DependentUpon>
     </Compile>
-    <Compile Include="weounty.Designer.cs">
+    <Compile Include="workbounty.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>weounty.edmx</DependentUpon>
+      <DependentUpon>workbounty.edmx</DependentUpon>
     </Compile>
     <Compile Include="Workitem.cs">
-      <DependentUpon>weounty.tt</DependentUpon>
+      <DependentUpon>workbounty.tt</DependentUpon>
     </Compile>
     <Compile Include="WorkItemAssignment.cs">
-      <DependentUpon>weounty.tt</DependentUpon>
+      <DependentUpon>workbounty.tt</DependentUpon>
     </Compile>
     <Compile Include="WorkitemDistribution.cs">
-      <DependentUpon>weounty.tt</DependentUpon>
+      <DependentUpon>workbounty.tt</DependentUpon>
     </Compile>
     <Compile Include="WorkitemHistory.cs">
-      <DependentUpon>weounty.tt</DependentUpon>
+      <DependentUpon>workbounty.tt</DependentUpon>
     </Compile>
     <Compile Include="WorkitemRegistration.cs">
-      <DependentUpon>weounty.tt</DependentUpon>
+      <DependentUpon>workbounty.tt</DependentUpon>
     </Compile>
     <Compile Include="WorkitemStatu.cs">
-      <DependentUpon>weounty.tt</DependentUpon>
+      <DependentUpon>workbounty.tt</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -471,22 +472,22 @@
     <Content Include="Scripts\jquery-2.2.1.min.map" />
     <Content Include="Views\Team\addteam.cshtml" />
     <Content Include="Views\work\detailWorkitem.cshtml" />
-    <EntityDeploy Include="weounty.edmx">
+    <EntityDeploy Include="workbounty.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>weounty.Designer.cs</LastGenOutput>
+      <LastGenOutput>workbounty.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <Content Include="weounty.Context.tt">
+    <Content Include="workbounty.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>weounty.edmx</DependentUpon>
-      <LastGenOutput>weounty.Context.cs</LastGenOutput>
+      <DependentUpon>workbounty.edmx</DependentUpon>
+      <LastGenOutput>workbounty.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="weounty.edmx.diagram">
-      <DependentUpon>weounty.edmx</DependentUpon>
+    <Content Include="workbounty.edmx.diagram">
+      <DependentUpon>workbounty.edmx</DependentUpon>
     </Content>
-    <Content Include="weounty.tt">
+    <Content Include="workbounty.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>weounty.edmx</DependentUpon>
-      <LastGenOutput>weounty.cs</LastGenOutput>
+      <DependentUpon>workbounty.edmx</DependentUpon>
+      <LastGenOutput>workbounty.cs</LastGenOutput>
     </Content>
   </ItemGroup>
   <ItemGroup>

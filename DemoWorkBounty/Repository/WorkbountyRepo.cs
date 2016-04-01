@@ -10,7 +10,7 @@ namespace DemoWorkBounty.Repository
 {
     public class WorkbountyRepo : ApiController
     {
-        private WorkBountyDBEntities4 entity = new WorkBountyDBEntities4();
+        private WorkBountyDBEntities5 entity = new WorkBountyDBEntities5();
         
         public List<OpenWorkItem> getAllItem(int id)
         {
@@ -27,7 +27,18 @@ namespace DemoWorkBounty.Repository
             }
 
         }
-        
+
+        public List<MyWorkitemAssignment> GetMyWorkitem(int id)
+        {
+            List<WorkitemRegistration> item = new List<WorkitemRegistration>();
+            int currentId = id;
+            var name = entity.WorkitemRegistrations.Where(w => w.UserID == currentId).Select(s => s.Workitem.UserInfo.FirstName).FirstOrDefault();
+            var data = entity.WorkitemRegistrations.Where(s => s.UserID == currentId).Select(s => new MyWorkitemAssignment { Title = s.Workitem.Title,StartDate=s.Workitem.StartDate,EndDate=s.Workitem.DueDate,FirstName=name, ProposedReward = s.Workitem.ProposedReward, Amount = s.Workitem.Amount }).ToList();
+
+            return data;
+        }
+
+
         public List<OpenWorkItem> GetAllWorkitems()
         {
             List<Workitem> item=new List<Workitem>();

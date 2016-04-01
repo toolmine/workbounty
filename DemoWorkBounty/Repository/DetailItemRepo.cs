@@ -9,7 +9,7 @@ namespace DemoWorkBounty.Repository
 {
     public class DetailItemRepo : ApiController
     {
-        private WorkBountyDBEntities4 entity = new WorkBountyDBEntities4();
+        private WorkBountyDBEntities5 entity = new WorkBountyDBEntities5();
         public List<Workitem> GetAllitems(int id)
         {
 
@@ -39,5 +39,21 @@ namespace DemoWorkBounty.Repository
                 return "Error";
             }
         }
+
+        public string AddMemberData(Team memberData)
+        {
+            try
+            {
+                entity.Teams.Add(memberData);
+                entity.SaveChanges();
+                return "Success";
+            }
+            catch(Exception)
+            {
+                return "Error";
+            }
+        }
+
+
     }
 }

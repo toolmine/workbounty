@@ -9,14 +9,14 @@ namespace DemoWorkBounty.Repository
 {
     public class AddTeamMemberRepo : ApiController
     {
-        private WorkBountyDBEntities4 entity = new WorkBountyDBEntities4();
+        private WorkBountyDBEntities5 entity = new WorkBountyDBEntities5();
         
         public List<UserInfo> GetItemById(string id)
         {
             try
             { 
-                 var item = entity.UserInfoes.Where(s => s.LastName.StartsWith(id)
-                               || s.FirstName.StartsWith(id)).ToList();
+                 var item = entity.UserInfoes.Where(s => s.LastName.ToLower().StartsWith(id)
+                               || s.FirstName.ToLower().StartsWith(id)).ToList();
 
                   if (item == null)
                       {

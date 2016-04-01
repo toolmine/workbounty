@@ -102,15 +102,29 @@
                             <th width="8%">Client</th>
                             <th width="5%">Rewards</th>
                             <th width="5%">Amount</th>
-                            <th width="5%">Status</th>
+                            @*<th width="5%">Status</th>*@
                             <th width="5%">Action</th>
                         </tr>
                     </thead>
 
-                    <tbody id="myitem1">
-                        
-               
-                       
+                    <tbody>
+                        </tbody>
+               @foreach (DemoWorkBounty.Models.MyWorkitemAssignment myWorkitem in ViewBag.myWorkitem)
+               {
+                <tr>
+                    <td>@(ViewBag.myWorkitem.IndexOf(myWorkitem) + 1)</td>
+                    <td>@Html.DisplayFor(a => myWorkitem.Title)</td>
+                    <td>@Html.DisplayFor(a => myWorkitem.StartDate)</td>
+                    <td>@Html.DisplayFor(a => myWorkitem.EndDate)</td>
+                    <td>@Html.DisplayFor(a => myWorkitem.CreatedBy)</td>
+                    <td>@Html.DisplayFor(a => myWorkitem.ProposedReward)</td>
+                    <td>@Html.DisplayFor(a => myWorkitem.Amount)</td>
+                    <td>@Html.ActionLink("Update", "detailWorkitem", "work", new { id = myWorkitem.WorkItemID }, new { @class = "btn btn-minier btn-purple" }) </td>
+
+
+                </tr>
+
+               }
                          </table>
            
             

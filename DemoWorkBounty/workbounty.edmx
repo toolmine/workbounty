@@ -716,7 +716,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="WorkBountyDBEntities4" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="WorkBountyDBEntities5" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Teams" EntityType="Self.Team" />
           <EntitySet Name="UserInfoes" EntityType="Self.UserInfo" />
           <EntitySet Name="Workitems" EntityType="Self.Workitem" />
@@ -799,7 +799,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="WorkBountyDBModelStoreContainer" CdmEntityContainer="WorkBountyDBEntities4">
+        <EntityContainerMapping StorageEntityContainer="WorkBountyDBModelStoreContainer" CdmEntityContainer="WorkBountyDBEntities5">
           <EntitySetMapping Name="Teams">
             <EntityTypeMapping TypeName="WorkBountyDBModel.Team">
               <MappingFragment StoreEntitySet="Team">
