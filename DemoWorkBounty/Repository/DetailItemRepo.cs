@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using DemoWorkBounty.Models;
 
 namespace DemoWorkBounty.Repository
 {
@@ -54,6 +55,14 @@ namespace DemoWorkBounty.Repository
             }
         }
 
+
+        public List<UpdateWorkitem> ShowMyWorkitems(int id)
+        {
+            var currentID = id;
+              var displayData = entity.WorkitemRegistrations.Where(s => s.WorkitemID == currentID).Select(s => new UpdateWorkitem { Title = s.Workitem.Title, Summary = s.Workitem.Summary }).ToList();
+
+            return displayData;
+        }
 
     }
 }

@@ -33,7 +33,7 @@ namespace DemoWorkBounty.Repository
             List<WorkitemRegistration> item = new List<WorkitemRegistration>();
             int currentId = id;
             var name = entity.WorkitemRegistrations.Where(w => w.UserID == currentId).Select(s => s.Workitem.UserInfo.FirstName).FirstOrDefault();
-            var data = entity.WorkitemRegistrations.Where(s => s.UserID == currentId).Select(s => new MyWorkitemAssignment { Title = s.Workitem.Title,StartDate=s.Workitem.StartDate,EndDate=s.Workitem.DueDate,FirstName=name, ProposedReward = s.Workitem.ProposedReward, Amount = s.Workitem.Amount }).ToList();
+            var data = entity.WorkitemRegistrations.Where(s => s.UserID == currentId).Select(s => new MyWorkitemAssignment {WorkItemID=s.WorkitemID, Title = s.Workitem.Title,StartDate=s.Workitem.StartDate,EndDate=s.Workitem.DueDate,FirstName=name, ProposedReward = s.Workitem.ProposedReward, Amount = s.Workitem.Amount }).ToList();
 
             return data;
         }

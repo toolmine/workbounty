@@ -134,6 +134,7 @@
     </Compile>
     <Compile Include="Models\MyWorkitem.cs" />
     <Compile Include="Models\MyWorkitemAssignment.cs" />
+    <Compile Include="Models\UpdateWorkitem.cs" />
     <Compile Include="Models\ViewMyTeam.cs" />
     <Compile Include="Models\Workitems.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -489,6 +490,7 @@
       <DependentUpon>workbounty.edmx</DependentUpon>
       <LastGenOutput>workbounty.cs</LastGenOutput>
     </Content>
+    <Content Include="Views\work\AddDocument.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

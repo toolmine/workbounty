@@ -9,6 +9,8 @@ namespace DemoWorkBounty.Controllers
 {
     public class workController : Controller
     {
+        WorkBountyDBEntities5 entity = new WorkBountyDBEntities5();
+        DetailItemRepo repo = new DetailItemRepo();
         public ActionResult updateTask()
         {
             return View();
@@ -16,8 +18,8 @@ namespace DemoWorkBounty.Controllers
 
         public ActionResult detailWorkitem(int id)
         {
-            WorkBountyDBEntities5 entity = new WorkBountyDBEntities5();
-            DetailItemRepo repo = new DetailItemRepo();
+           
+         
             var item = repo.GetAllitems(id);
 
             return View(item);
@@ -34,80 +36,11 @@ namespace DemoWorkBounty.Controllers
             return View();
          }
 
-        public ActionResult tourist()
+        public ActionResult AddDocument(int id)
           {
-              return View();
+              var data = repo.ShowMyWorkitems(id);
+              return View(data);
           }
-
-        public ActionResult gPlugin()
-        {
-            return View();
-        }
-
-        public ActionResult AppletServ()
-        {
-            return View();
-        }
-
-
-        public ActionResult BusinessPortal()
-        {
-            return View();
-        }
-
-        public ActionResult Payroll()
-        {
-            return View();
-        }
-
-        public ActionResult webpage()
-        {
-            return View();
-        }
-
-        public ActionResult machine()
-        {
-            return View();
-        }
-
-        public ActionResult bet()
-        {
-            return View();
-        }
-
-        public ActionResult Transection()
-        {
-            return View();
-        }
-
-        public ActionResult javaApp()
-        {
-            return View();
-        
-        }
-
-        public ActionResult embeddedsystem()
-        {
-            return View();
-
-        }
-        public ActionResult desktopaccount()
-        {
-            return View();
-
-        }
-        public ActionResult ios()
-        {
-            return View();
-
-        }
-
-        public ActionResult databasedevelopment()
-        {
-            return View();
-
-        }
-
        
 
     }
