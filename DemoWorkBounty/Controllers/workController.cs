@@ -16,7 +16,7 @@ namespace DemoWorkBounty.Controllers
 
         public ActionResult detailWorkitem(int id)
         {
-            WorkBountyDBEntities3 entity = new WorkBountyDBEntities3();
+            WorkBountyDBEntities4 entity = new WorkBountyDBEntities4();
             DetailItemRepo repo = new DetailItemRepo();
             var item = repo.GetAllitems(id);
 

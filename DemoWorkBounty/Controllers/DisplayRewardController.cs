@@ -20,11 +20,11 @@ namespace DemoWorkBounty.Controllers
             return responce;
         }
 
-        public string AddMemberData(Team memberData)
-        {
-            var responce = repos.AddMemberData(memberData);
-            return responce;
-        }
+        //public string AddMemberData(Team memberData)
+        //{
+        //    var responce = repos.AddMemberData(memberData);
+        //    return responce;
+        //}
 
 
     }

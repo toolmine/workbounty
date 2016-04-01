@@ -9,7 +9,7 @@ namespace DemoWorkBounty.Repository
 {
     public class DetailItemRepo : ApiController
     {
-        private WorkBountyDBEntities3 entity = new WorkBountyDBEntities3();
+        private WorkBountyDBEntities4 entity = new WorkBountyDBEntities4();
         public List<Workitem> GetAllitems(int id)
         {
 

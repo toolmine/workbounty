@@ -10,7 +10,7 @@ namespace DemoWorkBounty.Controllers
 {
     public class AddTeamMemberController : ApiController
     {
-        private WorkBountyDBEntities3 entity = new WorkBountyDBEntities3();
+        private WorkBountyDBEntities4 entity = new WorkBountyDBEntities4();
         static AddTeamMemberRepo repo = new AddTeamMemberRepo();
 
      

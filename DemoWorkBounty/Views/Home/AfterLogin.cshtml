@@ -149,12 +149,12 @@
                                 <th width="5%">Action</th>
                             </tr>
                         </thead>
-                         @foreach (var item in Model)
+                         @foreach (DemoWorkBounty.Models.OpenWorkItem item in ViewBag.item)
                       {
                           <tbody>
                               <tr>
-                                  <td>@(Model.IndexOf(item)+1)</td>
-                                  <td>@Html.DisplayFor(a=>item.Title)</td>
+                                  <td>@(ViewBag.item.IndexOf(item) + 1)</td>
+                                  <td>@Html.DisplayFor(a=> item.Title)</td>
                                   <td>@Html.DisplayFor(a => item.FirstName)</td>
                                   <td>@Html.DisplayFor(a => item.Summary)</td>
                                   <td>@Html.DisplayFor(a => item.ProposedReward)</td>

@@ -11,7 +11,7 @@ namespace DemoWorkBounty.Controllers
     public class HomeController : Controller
     {
 
-        WorkBountyDBEntities3 entity = new WorkBountyDBEntities3();
+        WorkBountyDBEntities4 entity = new WorkBountyDBEntities4();
         LoginRepo userRepo = new LoginRepo();
         WorkbountyRepo wbRepo = new WorkbountyRepo();
         public ActionResult Index()
@@ -78,9 +78,9 @@ namespace DemoWorkBounty.Controllers
             int id = Convert.ToInt32(Session["UserID"]);
             var item = wbRepo.getAllItem(id);
 
+            ViewBag.item = item;
 
-
-            return View(item);
+            return View();
         }
 
         public ActionResult myteam()
