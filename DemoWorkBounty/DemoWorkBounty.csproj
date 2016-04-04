@@ -491,9 +491,11 @@
       <LastGenOutput>workbounty.cs</LastGenOutput>
     </Content>
     <Content Include="Views\work\AddDocument.cshtml" />
+    <Content Include="Views\work\ViewDocument.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="FileUpload\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
