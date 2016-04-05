@@ -9,6 +9,6 @@ namespace DemoWorkBounty.Models
     {
         public string Title { get; set; }
         public string Summary { get; set; }
-       
+        public int WorkItemID { get; set; }
     }
 }

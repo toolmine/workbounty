@@ -4,14 +4,13 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using DemoWorkBounty.Repository;
-using DemoWorkBounty.Models;
 
 
 namespace DemoWorkBounty.Controllers
 {
     public class HomeController : Controller
     {
-        SeeRewardRepo repo = new SeeRewardRepo();
+
         WorkBountyDBEntities5 entity = new WorkBountyDBEntities5();
         LoginRepo userRepo = new LoginRepo();
         WorkbountyRepo wbRepo = new WorkbountyRepo();
@@ -26,24 +25,25 @@ namespace DemoWorkBounty.Controllers
         }
 
         [HttpPost]
-        public JsonResult Login(UserInfo id)
-        {
-            try
-            {
-                if (ModelState.IsValid)
+         public JsonResult Login(UserInfo id)
+        
+         {
+                try
                 {
-                    var user = userRepo.UserLogin(id);
-                    Session["UserID"] = user.UserID;
-                    Session["FirstName"] = user.FirstName;
-                    return Json("Success");
+                    if (ModelState.IsValid)
+                    {
+                        var user = userRepo.UserLogin(id);
+                        Session["UserID"] = user.UserID;
+                        Session["FirstName"]=user.FirstName;
+                        return Json("Success");
+                    }
+                    else { return Json("false"); }
+
                 }
-                else { return Json("false"); }
-
+                catch (Exception)
+                { return Json("false"); }
             }
-            catch (Exception)
-            { return Json("false"); }
-        }
-
+        
 
 
         public ActionResult Signup()
@@ -65,20 +65,25 @@ namespace DemoWorkBounty.Controllers
                     ModelState.Clear();
                     return RedirectToAction("AfterLogin");
                 }
-
+               
             }
             catch (Exception)
             { }
             return View(u);
         }
-
+       
 
         public ActionResult AfterLogin()
         {
             int id = Convert.ToInt32(Session["UserID"]);
             var item = wbRepo.getAllItem(id);
-
             ViewBag.item = item;
+
+            var iwd = wbRepo.ItemsIWantDone();
+            ViewBag.iwd = iwd;
+
+            var myWorkitem = wbRepo.GetMyWorkitem(id);
+            ViewBag.myWorkitem = myWorkitem;
 
             return View();
         }
@@ -105,7 +110,7 @@ namespace DemoWorkBounty.Controllers
         {
             try
             {
-
+                
                 //if (!ModelState.IsValid)
                 //{
                 //    ViewBag.Message = "Error";
@@ -115,7 +120,7 @@ namespace DemoWorkBounty.Controllers
                 //    ViewBag.Message = "Success";
 
                 //}
-
+              
 
             }
             catch (Exception)
@@ -123,7 +128,7 @@ namespace DemoWorkBounty.Controllers
             return View(u);
         }
 
-
+       
 
 
         public ActionResult mywork()
@@ -136,7 +141,7 @@ namespace DemoWorkBounty.Controllers
             return View();
         }
 
-
+       
 
         public ActionResult profile()
         {
@@ -148,18 +153,10 @@ namespace DemoWorkBounty.Controllers
             return View();
         }
 
-        [HttpPost]
-        public JsonResult rewards(int id)
-        {
-            SeeRewardRepo repo = new SeeRewardRepo();
-            var Data = repo.GetAllRewards(id);
-            return Json(Data, JsonRequestBehavior.AllowGet);
-        }
-
-
         public ActionResult addworkitem()
+        
         {
-            var id1 = 1;
+            var id1 = Convert.ToInt32(Session["UserID"]);;
             var selected = (from tea in entity.Teams
                             where tea.UserID == id1
                             select tea);
@@ -167,7 +164,7 @@ namespace DemoWorkBounty.Controllers
             ViewBag.TeamName1 = new SelectList(selected, "TeamID", "TeamName");
             return View();
         }
-
+    
 
         public ActionResult Demo()
         {
@@ -180,7 +177,7 @@ namespace DemoWorkBounty.Controllers
             return View();
 
         }
-
+        
         public ActionResult payment()
         {
             return View();
@@ -203,23 +200,30 @@ namespace DemoWorkBounty.Controllers
         {
             return View();
         }
-        public ActionResult Search()
+
+
+        public ActionResult ItemsIWantDone(int id)
         {
+            
+           
+            
+            var items = wbRepo.GetAllitemsDone(id);
+            ViewBag.items = items;
+            
+            var apply = wbRepo.Applied(id);
+            ViewBag.apply = apply;
+
             return View();
         }
-        [HttpPost]
-        public JsonResult Search(string id)
-        {
-            SearchMyDataRepo repo = new SearchMyDataRepo();
-            var searchData = repo.GetItemById(id.ToString());
-            List<MyWorkitem> wi = new List<MyWorkitem>();
-            foreach (var data in searchData)
-            {
-                MyWorkitem mwi = new MyWorkitem() { Title = data.Title, StartDate=data.StartDate, DueDate = data.DueDate, ProposedReward = data.ProposedReward, Amount = data.Amount };
-                wi.Add(mwi);
-            }
-            return Json(wi, JsonRequestBehavior.AllowGet);
-        }
 
+       
+        
+        //[HttpPost]
+        //public ActionResult ItemsIWantDone(int id)
+        //{
+            
+        //}
+   
+    
     }
 }

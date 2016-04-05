@@ -17,5 +17,12 @@ namespace DemoWorkBounty.Controllers
             return repo.GetMyWorkitems();
         }
 
+         
+        public string Workitemdistribution(WorkitemDistribution Data)
+        {
+            var responce = repo.WorkitemDistribution(Data);
+            return responce;
+        }
     }
+
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -16,6 +17,7 @@ namespace DemoWorkBounty.Repository
             {
                 if (ModelState.IsValid)
                 {
+                    var fileName = Path.GetFileName(item.DocumentFilePath);
                     entity.Workitems.Add(item);
                     entity.SaveChanges();
                     return "Data Successfully saved";

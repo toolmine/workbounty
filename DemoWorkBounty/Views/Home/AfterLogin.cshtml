@@ -59,22 +59,23 @@
                             </tr>
                         </thead>
 
-                       @*@foreach (var item in Model)
+                       @foreach (DemoWorkBounty.Models.MyWorkitem item in ViewBag.iwd)
                       {
                         <tbody>
                             <tr>
-                                <td></td>
-                                <td>@Html.DisplayFor(a=>item.Title)</td>
-                                <td>@Html.DisplayFor(a => item.Summary)</td>
-                                <td>@Html.DisplayFor(a => item.Summary)</td>
+                                <td>@(ViewBag.iwd.IndexOf(item) + 1)</td>
+                                @*<td>@Html.DisplayFor(a=>item.Title)</td>*@
+                                <td>@Html.ActionLink(item.Title, "ItemsIWantDone", "Home", new { id = item.WorkitemID }, null) </td>
+                                <td>@Html.DisplayFor(a => item.StartDate)</td>
+                                <td>@Html.DisplayFor(a => item.EndDate)</td>
+                                <td>@Html.DisplayFor(a => item.FirstName)</td>
                                 <td>@Html.DisplayFor(a => item.ProposedReward)</td>
-                                <td>@Html.DisplayFor(a => item.Amount)</td>
-                                <td>@Html.ActionLink("Apply", "detailWorkitem", "work", new { id = item.WorkItemID}, new { @class = "btn btn-minier btn-purple" }) </td>
-
-
+                                <td>@Html.DisplayFor(a => item.Status)</td>
+                                <td></td>
                             </tr>
-
-                        </tbody>*@
+                        </tbody>
+                       }
+                      
                     </table>
 
                 </div>
@@ -121,7 +122,7 @@
                     <td>@Html.DisplayFor(a => myWorkitem.Title)</td>
                     <td>@Html.DisplayFor(a => myWorkitem.StartDate)</td>
                     <td>@Html.DisplayFor(a => myWorkitem.EndDate)</td>
-                    <td>@Html.DisplayFor(a => myWorkitem.CreatedBy)</td>
+                    <td>@Html.DisplayFor(a => myWorkitem.FirstName)</td>
                     <td>@Html.DisplayFor(a => myWorkitem.ProposedReward)</td>
                     <td>@Html.DisplayFor(a => myWorkitem.Amount)</td>
                     <td>@Html.ActionLink("Update", "AddDocument", "work", new { id = myWorkitem.WorkItemID }, new { @class = "btn btn-minier btn-purple" }) </td>
@@ -168,17 +169,17 @@
                                 <th width="5%">Action</th>
                             </tr>
                         </thead>
-                         @foreach (DemoWorkBounty.Models.OpenWorkItem item in ViewBag.item)
+                         @foreach (DemoWorkBounty.Models.OpenWorkItem i in ViewBag.item)
                       {
                           <tbody>
                               <tr>
-                                  <td>@(ViewBag.item.IndexOf(item) + 1)</td>
-                                  <td>@Html.DisplayFor(a=> item.Title)</td>
-                                  <td>@Html.DisplayFor(a => item.FirstName)</td>
-                                  <td>@Html.DisplayFor(a => item.Summary)</td>
-                                  <td>@Html.DisplayFor(a => item.ProposedReward)</td>
-                                  <td>@Html.DisplayFor(a => item.Amount)</td>
-                                  <td>@Html.ActionLink("Apply", "detailWorkitem", "work", new { id = item.WorkItemID}, new { @class = "btn btn-minier btn-purple" }) </td>
+                                  <td>@(ViewBag.item.IndexOf(i) + 1)</td>
+                                  <td>@Html.DisplayFor(a=> i.Title)</td>
+                                  <td>@Html.DisplayFor(a => i.FirstName)</td>
+                                  <td>@Html.DisplayFor(a => i.Summary)</td>
+                                  <td>@Html.DisplayFor(a => i.ProposedReward)</td>
+                                  <td>@Html.DisplayFor(a => i.Amount)</td>
+                                  <td>@Html.ActionLink("Apply", "detailWorkitem", "work", new { id = i.WorkItemID}, new { @class = "btn btn-minier btn-purple" }) </td>
        
                                 
                               </tr>

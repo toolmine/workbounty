@@ -16,5 +16,11 @@ namespace DemoWorkBounty.Models
         public string Amount { get; set; }
         public int WorkItemID { get; set; }
         public int UserID { get; set; }
+        public int PublishedTo { get; set; }
     }
 }
+
+
+
+
+ 
