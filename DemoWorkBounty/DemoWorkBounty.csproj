@@ -135,6 +135,7 @@
     <Compile Include="Models\MyWorkitem.cs" />
     <Compile Include="Models\MyWorkitemAssignment.cs" />
     <Compile Include="Models\UpdateWorkitem.cs" />
+    <Compile Include="Models\ViewDocuments.cs" />
     <Compile Include="Models\ViewMyTeam.cs" />
     <Compile Include="Models\Workitems.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -492,10 +493,10 @@
     </Content>
     <Content Include="Views\work\AddDocument.cshtml" />
     <Content Include="Views\work\ViewDocument.cshtml" />
+    <Content Include="Views\Home\ItemsIWantDone.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="FileUpload\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

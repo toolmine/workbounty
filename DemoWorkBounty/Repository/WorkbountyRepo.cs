@@ -122,5 +122,21 @@ namespace DemoWorkBounty.Repository
             }
             return "Error";
         }
+
+        public List<ViewDocuments> ShowDocument(int id)
+        {
+            List<MyWorkitemAssignment> item = new List<MyWorkitemAssignment>();
+            var data = entity.WorkItemAssignments.Where(s => s.WorkItemID == id).Select(s => new ViewDocuments {UserID=s.UserID, Title = s.Workitem.Title, Summary = s.Workitem.Summary, FirstName = s.UserInfo.FirstName, SubmissionDateTime = s.SubmissionDateTime, SubmissionPath = s.SubmissionPath }).ToList();
+            return data;
+        }
+
+        public List<ViewDocuments> ShowExclusiveDocument(int id)
+        {
+            List<MyWorkitemAssignment> item = new List<MyWorkitemAssignment>();
+            var data = entity.WorkItemAssignments.Where(s => s.WorkItemID == id).Select(s => new ViewDocuments { Title = s.Workitem.Title, Summary = s.Workitem.Summary, FirstName = s.UserInfo.FirstName, SubmissionDateTime = s.SubmissionDateTime, SubmissionPath = s.SubmissionPath }).ToList();
+            return data;
+        }
+
+
     }
 }

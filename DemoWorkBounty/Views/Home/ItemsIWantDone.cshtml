@@ -11,9 +11,12 @@
         <input type="hidden" id="Teamid" value="@i.PublishedTo">
         <div class="widget-box transparent" id="recent-box">
             <div class="widget-header">
-                <h4 class="widget-title lighter smaller">
-                    @Html.DisplayFor(a => i.Title)
-                </h4>
+                <div class="col-sm-6">
+                    <h4 class="widget-title lighter smaller">
+                        @Html.DisplayFor(a => i.Title)
+                    </h4>
+                </div>
+              @Html.ActionLink("View Assignment", "ViewDocument", "work", new { id = @i.WorkitemID }, new { @class = "btn btn-minier btn-success" })
             </div>
             <div>
             </div>
@@ -71,6 +74,7 @@
     </table>
 </div>
 <script type="text/javascript">
+   
     function add(id) {
         var Data = {
             "UserID": id,
@@ -85,7 +89,7 @@
             dataType: "json",
             success: function (response) {
                 alert("Workitem Alloted ")
-                window.location.href="/Home/Afterlogin/";
+                window.location.href = "/Home/Afterlogin/";
             },
 
             error: function (x, e) {
