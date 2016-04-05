@@ -27,11 +27,12 @@
 
 
   
-function add(id) {
+    function add(id) {
 
-    var id = $(id).attr("ID")
+        var id = $(id).attr("ID")
 
-    var url = "/work/detailworkitem?id=" + encodeURIComponent(id);
-    document.location.href = url;
+        var url = "/work/detailworkitem?id=" + encodeURIComponent(id);
+        document.location.href = url;
 
-}
+    }
+})

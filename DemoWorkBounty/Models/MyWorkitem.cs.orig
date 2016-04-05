@@ -23,9 +23,12 @@ namespace DemoWorkBounty.Models
         public string Amount { get; set; }
         public bool PublishedTo { get; set; }
 
+<<<<<<< Updated upstream
+=======
         
 
 
+>>>>>>> Stashed changes
     }
 }
 

@@ -11,7 +11,7 @@ namespace DemoWorkBounty.Controllers
     public class HomeController : Controller
     {
 
-        WorkBountyDBEntities4 entity = new WorkBountyDBEntities4();
+        WorkBountyDBEntities5 entity = new WorkBountyDBEntities5();
         LoginRepo userRepo = new LoginRepo();
         WorkbountyRepo wbRepo = new WorkbountyRepo();
         public ActionResult Index()
@@ -77,8 +77,13 @@ namespace DemoWorkBounty.Controllers
         {
             int id = Convert.ToInt32(Session["UserID"]);
             var item = wbRepo.getAllItem(id);
-
             ViewBag.item = item;
+
+            var iwd = wbRepo.ItemsIWantDone();
+            ViewBag.iwd = iwd;
+
+            var myWorkitem = wbRepo.GetMyWorkitem(id);
+            ViewBag.myWorkitem = myWorkitem;
 
             return View();
         }
@@ -151,7 +156,7 @@ namespace DemoWorkBounty.Controllers
         public ActionResult addworkitem()
         
         {
-            var id1 = 1;
+            var id1 = Convert.ToInt32(Session["UserID"]);;
             var selected = (from tea in entity.Teams
                             where tea.UserID == id1
                             select tea);
@@ -195,7 +200,30 @@ namespace DemoWorkBounty.Controllers
         {
             return View();
         }
-        
 
+
+        public ActionResult ItemsIWantDone(int id)
+        {
+            
+           
+            
+            var items = wbRepo.GetAllitemsDone(id);
+            ViewBag.items = items;
+            
+            var apply = wbRepo.Applied(id);
+            ViewBag.apply = apply;
+
+            return View();
+        }
+
+       
+        
+        //[HttpPost]
+        //public ActionResult ItemsIWantDone(int id)
+        //{
+            
+        //}
+   
+    
     }
 }

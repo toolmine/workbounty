@@ -17,7 +17,6 @@ namespace DemoWorkBounty.Repository
             try
             {
                 int currentUserid = id;
-
                 var data = entity.Workitems.Where(s => s.CreatedBy != currentUserid).Select(s => new OpenWorkItem { WorkItemID = s.WorkitemID, FirstName = s.UserInfo.FirstName, Title = s.Title, Summary = s.Summary, ProposedReward = s.ProposedReward, Amount = s.Amount }).ToList();
                 return data;
             }
@@ -25,7 +24,6 @@ namespace DemoWorkBounty.Repository
             {
                 return null;
             }
-
         }
 
         public List<MyWorkitemAssignment> GetMyWorkitem(int id)
