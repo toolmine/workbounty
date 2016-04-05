@@ -14,10 +14,10 @@ namespace DemoWorkBounty.Controllers
         static WorkbountyRepo repo = new WorkbountyRepo();
         static DetailItemRepo repos = new DetailItemRepo();
 
-        public List<OpenWorkItem> GetAllWorkitems()
-        {
-            return repo.GetAllWorkitems();
-        }
+        //public List<OpenWorkItem> GetAllWorkitems()
+        //{
+        //    return repo.GetAllWorkitems();
+        //}
 
 
         public string AddUserData(UserInfo item)

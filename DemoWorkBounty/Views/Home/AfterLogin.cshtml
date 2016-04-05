@@ -36,7 +36,12 @@
                     <a href="~/work/index">Items I Want Done</a> | @Html.ActionLink("Add workitem", "addworkitem", "Home")
                 </h4>
             </div>
-            
+        
+          <div>
+              <h4>
+                     <a href="~/Views/Home/Search.cshtml"></a>  @Html.ActionLink("Search", "Search", "Home")
+              </h4>
+          </div>
             <div class="row">
                 <div class="col-md-5"></div>
                 <div class="col-md-8">
@@ -109,7 +114,7 @@
 
                     <tbody>
                         </tbody>
-               @foreach (DemoWorkBounty.Models.MyWorkitemAssignment myWorkitem in ViewBag.myWorkitem)
+               @*@foreach (DemoWorkBounty.Models.MyWorkitemAssignment myWorkitem in ViewBag.myWorkitem)
                {
                 <tr>
                     <td>@(ViewBag.myWorkitem.IndexOf(myWorkitem) + 1)</td>
@@ -124,7 +129,7 @@
 
                 </tr>
 
-               }
+               }*@
                          </table>
            
             

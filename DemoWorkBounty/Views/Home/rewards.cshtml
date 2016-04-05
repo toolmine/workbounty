@@ -1,10 +1,26 @@
-﻿
-@{
+﻿@model List<DemoWorkBounty.Models.OpenWorkItem>
+       @{
     ViewBag.Title = "rewards";
     Layout = "~/Views/_LayoutPage1.cshtml";
 }
 
-<script src="~/assets/js/jquery-showreward.js"></script>
+@*<script src="~/assets/js/jquery-showreward.js"></script>*@
+<script type="text/javascript">
+$(document).ready(function () {
+    $.getJSON("/Home/rewards",
+         function (Data) {
+             $("#OpenWorkitem").append('<tr><th>Sr no</th><th>Title</th><th>First name</th><th>Summary</th><th>Reward</th><th>Amount</th><th>Action</th></tr>');
+             var arrlength = Data.length;
+             for (var i = 0; i < arrlength; i++)
+             {
+                 $("#OpenWorkitem").append('<tr><td>' + i + '</td><td>' + Data[i].Title + '</td><td>' + Data[i].FirstName + '</td><td>' + Data[i].Summary + '</td><td>' + Data[i].ProposedReward + '</td><td>' + Data[i].Amount + '</td><td><input type="button" id=' + Data[i].WorkitemID + ' value="Apply" onclick="add(this); return false;" class="btn btn-minier btn-purple" /></td></tr>');
+
+              }
+
+         });
+});
+    </script>
+
 <h2></h2>
 <div class="widget-box transparent" id="recent-box">
     <div class="widget-header">
@@ -26,10 +42,18 @@
                             <th>Amount</th>
                         </tr>
                     </thead>
-
+                    @foreach (var item in Model)
+                    { 
                     <tbody id="RewardsList">
-                        </tbody>
+                        <tr>
+                            <td>@Html.DisplayFor(a => item.Title)  </td>
+                            <td>@Html.DisplayFor(a => item.FirstName)  </td>
+                            <td>@Html.DisplayFor(a => item.ProposedReward)  </td>
+                            <td>@Html.DisplayFor(a => item.Amount)  </td>
 
+                        </tr>
+                        </tbody>
+                    }
                 </table>
             </div>
         </div>

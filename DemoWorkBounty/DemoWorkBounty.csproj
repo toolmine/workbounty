@@ -39,6 +39,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AutoMapper">
+      <HintPath>..\packages\AutoMapper.4.2.1\lib\net45\AutoMapper.dll</HintPath>
+    </Reference>
     <Reference Include="EntityFramework">
       <HintPath>..\packages\EntityFramework.5.0.0\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
@@ -143,6 +146,8 @@
     <Compile Include="Repository\DetailItemRepo.cs" />
     <Compile Include="Repository\LoginRepo.cs" />
     <Compile Include="Repository\MyTeamRepo.cs" />
+    <Compile Include="Repository\SearchMyDataRepo.cs" />
+    <Compile Include="Repository\SeeRewardRepo.cs" />
     <Compile Include="Repository\ShowRewardRepo.cs" />
     <Compile Include="Repository\WorkbountyRepo.cs" />
     <Compile Include="Team.cs">
@@ -491,6 +496,7 @@
       <LastGenOutput>workbounty.cs</LastGenOutput>
     </Content>
     <Content Include="Views\work\AddDocument.cshtml" />
+    <Content Include="Views\Home\Search.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

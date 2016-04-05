@@ -39,14 +39,14 @@ namespace DemoWorkBounty.Repository
         }
 
 
-        public List<OpenWorkItem> GetAllWorkitems()
-        {
-            List<Workitem> item=new List<Workitem>();
-            int id = Convert.ToInt16(System.Web.HttpContext.Current.Session["UserID"]);
-            var data = entity.Workitems.Where(s=>s.CreatedBy!=id).Select(s => new OpenWorkItem { WorkItemID = s.WorkitemID, FirstName = s.UserInfo.FirstName, Title = s.Title, Summary = s.Summary, ProposedReward = s.ProposedReward, Amount = s.Amount }).ToList();
+        //public List<OpenWorkItem> GetAllWorkitems()
+        //{
+        //    List<Workitem> item=new List<Workitem>();
+        //    int id = Convert.ToInt16(System.Web.HttpContext.Current.Session["UserID"]);
+        //    var data = entity.Workitems.Where(s=>s.CreatedBy!=id).Select(s => new OpenWorkItem { WorkItemID = s.WorkitemID, FirstName = s.UserInfo.FirstName, Title = s.Title, Summary = s.Summary, ProposedReward = s.ProposedReward, Amount = s.Amount }).ToList();
 
-          return data;
-        }
+        //  return data;
+        //}
 
         public List<MyWorkitem> GetMyWorkitems()
         {
