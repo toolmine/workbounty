@@ -16,6 +16,7 @@ namespace DemoWorkBounty.Models
         public int UserID { get; set; }
         public System.DateTime StartDate { get; set; }
         public System.DateTime EndDate { get; set; }
+        public DateTime DueDate { get; set; }
         public string FirstName { get; set; }
         public string Title { get; set; }
         public string Status { get; set; }
