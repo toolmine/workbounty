@@ -1,4 +1,4 @@
-﻿@model List<DemoWorkBounty.Models.UpdateWorkitem>
+﻿@model DemoWorkBounty.Models.UpdateWorkitem
 @{
     ViewBag.Title = "Add Document";
     Layout = "~/Views/_LayoutPage1.cshtml";
@@ -39,16 +39,14 @@
 <h2>Add Document</h2>
 <div class="row">
     <div class="col-xs-12">
-        @foreach (var item in Model)
-        {
-
+     
             <form class="form-horizontal" role="form" data-toggle="validator" name="Workitemform" id="Workitemform" method="post" enctype="multipart/form-data">
-                <input type="hidden" id="Workid" name="Workid" value="@item.WorkItemID" />
+                <input type="hidden" id="Workid" name="Workid" value="@Model.WorkItemID" />
                 <div class="form-group">
                     <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Title </label>
 
                     <div class="col-sm-9">
-                        <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> @Html.DisplayFor(s => item.Title) </label>
+                        <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> @Html.DisplayFor(s =>Model.Title) </label>
 
                     </div>
                 </div>
@@ -56,7 +54,7 @@
                     <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Title</label>
 
                     <div class="col-sm-9">
-                        <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> @Html.DisplayFor(s => item.Summary)</label>
+                        <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> @Html.DisplayFor(s => Model.Summary)</label>
 
                     </div>
                 </div>
@@ -81,6 +79,6 @@
                 </div>
 
             </form>
-        }
+        
     </div>
 </div>

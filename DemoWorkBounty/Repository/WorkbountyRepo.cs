@@ -39,13 +39,6 @@ namespace DemoWorkBounty.Repository
         }
 
 
-        public List<OpenWorkItem> GetAllWorkitems()
-        {
-            List<Workitem> item = new List<Workitem>();
-            int id = Convert.ToInt16(System.Web.HttpContext.Current.Session["UserID"]);
-            var data = entity.Workitems.Where(s => s.CreatedBy != id).Select(s => new OpenWorkItem { WorkItemID = s.WorkitemID, FirstName = s.UserInfo.FirstName, Title = s.Title, Summary = s.Summary, ProposedReward = s.ProposedReward, Amount = s.Amount }).ToList();
-            return data;
-        }
 
         public List<MyWorkitem> GetMyWorkitems()
         {
@@ -69,10 +62,10 @@ namespace DemoWorkBounty.Repository
             return "Error";
         }
 
-        public List<MyWorkitem> ItemsIWantDone()
+        public List<MyWorkitem> ItemsIWantDone(int id)
         {
             List<Workitem> item = new List<Workitem>();
-            int id = Convert.ToInt16(System.Web.HttpContext.Current.Session["UserID"]);
+            
             var data2 = from u in entity.Workitems.Where(s => s.CreatedBy == id)
                         join b in entity.WorkitemDistributions
                         on u.WorkitemID equals b.WorkitemID
@@ -97,6 +90,23 @@ namespace DemoWorkBounty.Repository
             List<WorkitemRegistration> item = new List<WorkitemRegistration>();
             var data = entity.Workitems.Where(s => s.WorkitemID == id).ToList();
             return data;
+        }
+
+        public string ApplyReward(AddReward id)
+        {
+          try
+          {
+              WorkItemAssignment item = entity.WorkItemAssignments.Where(s => s.WorkItemID == id.WorkItemID && s.UserID == id.UserID).First();
+              item.IsRewarded = true;
+              entity.SaveChanges();
+              return "Success";
+             
+          }
+          catch(Exception)
+          {
+              return "Error";
+          }
+         
         }
 
 
@@ -126,7 +136,7 @@ namespace DemoWorkBounty.Repository
         public List<ViewDocuments> ShowDocument(int id)
         {
             List<MyWorkitemAssignment> item = new List<MyWorkitemAssignment>();
-            var data = entity.WorkItemAssignments.Where(s => s.WorkItemID == id).Select(s => new ViewDocuments {UserID=s.UserID, Title = s.Workitem.Title, Summary = s.Workitem.Summary, FirstName = s.UserInfo.FirstName, SubmissionDateTime = s.SubmissionDateTime, SubmissionPath = s.SubmissionPath }).ToList();
+            var data = entity.WorkItemAssignments.Where(s => s.WorkItemID == id).Select(s => new ViewDocuments {WorkItemID=s.WorkItemID,UserID=s.UserID, Title = s.Workitem.Title, Summary = s.Workitem.Summary, FirstName = s.UserInfo.FirstName, SubmissionDateTime = s.SubmissionDateTime, SubmissionPath = s.SubmissionPath }).ToList();
             return data;
         }
 
@@ -136,7 +146,6 @@ namespace DemoWorkBounty.Repository
             var data = entity.WorkItemAssignments.Where(s => s.WorkItemID == id).Select(s => new ViewDocuments { Title = s.Workitem.Title, Summary = s.Workitem.Summary, FirstName = s.UserInfo.FirstName, SubmissionDateTime = s.SubmissionDateTime, SubmissionPath = s.SubmissionPath }).ToList();
             return data;
         }
-
 
     }
 }

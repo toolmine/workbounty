@@ -1,4 +1,4 @@
-﻿
+﻿@model List<DemoWorkBounty.Models.GetReward>
 @{
     ViewBag.Title = "rewards";
     Layout = "~/Views/_LayoutPage1.cshtml";
@@ -27,8 +27,19 @@
                         </tr>
                     </thead>
 
-                    <tbody id="RewardsList">
+                    @foreach (var item in Model)
+                    {
+                        <tbody>
+                            <tr>
+                            
+                                <td>@Html.DisplayFor(a=>item.Title)</td>
+                                <td>@Html.DisplayFor(a => item.FirstName)</td>
+                                <td>@Html.DisplayFor(a => item.ProposedReward)</td>
+                                <td>@Html.DisplayFor(a => item.Amount)</td>
+                                <td></td>
+                            </tr>
                         </tbody>
+                    }
 
                 </table>
             </div>

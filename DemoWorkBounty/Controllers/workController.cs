@@ -46,7 +46,7 @@ namespace DemoWorkBounty.Controllers
             return View(data);
         }
         [HttpPost]
-        public JsonResult AddDocument(FormCollection data, HttpPostedFileBase myFile)
+        public ActionResult AddDocument(FormCollection data, HttpPostedFileBase myFile)
         {
             try
             {
@@ -67,15 +67,15 @@ namespace DemoWorkBounty.Controllers
                         assignData.UserID = Convert.ToInt32(Session["UserID"]);
                         assignData.IsRewarded = false;
                         assignData.SubmissionDateTime = DateTime.Now;
-                        assignData.SubmissionPath = fileName;
+                        assignData.SubmissionPath = path;
                     var putAssignData = repo.UpdateWorkitems(assignData);
-                    return Json("Success");
+                    return View();
                 }
 
             }
             catch (Exception)
             {
-                return Json("Error");
+                return View();
             }
        
         }
@@ -85,10 +85,7 @@ namespace DemoWorkBounty.Controllers
         public ActionResult ViewDocument(int id)
         {
             var dataForOpen = wbrepo.ShowDocument(id);
-            
-
             ViewBag.dataForOpen = dataForOpen;
-       
             return View();
         }
 
@@ -102,6 +99,21 @@ namespace DemoWorkBounty.Controllers
             
 
             return File(files, System.Net.Mime.MediaTypeNames.Application.Octet, fileName);
+        }
+
+
+        [HttpPost]
+        public JsonResult PayReward(AddReward id)
+        {
+            var data = wbrepo.ApplyReward(id);
+            if(data!=null)
+            { 
+            return Json("Success");
+            }
+            else
+            {
+                return Json("Error");
+            }
         }
     }
 }

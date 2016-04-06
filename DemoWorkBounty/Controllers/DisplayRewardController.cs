@@ -12,13 +12,13 @@ namespace DemoWorkBounty.Controllers
         static DetailItemRepo repos = new DetailItemRepo();
         static ShowRewardRepo repo = new ShowRewardRepo();
 
-        public List<WorkItemAssignment> GetAllRewards(int id)
-        {
+        //public List<WorkItemAssignment> GetAllRewards(int id)
+        //{
 
-            var responce = repo.GetAllRewards(id);
+        //    var responce = repo.GetAllRewards(id);
 
-            return responce;
-        }
+        //    return responce;
+        //}
 
         //public string AddMemberData(Team memberData)
         //{

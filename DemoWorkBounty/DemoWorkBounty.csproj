@@ -132,6 +132,8 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\AddReward.cs" />
+    <Compile Include="Models\GetReward.cs" />
     <Compile Include="Models\MyWorkitem.cs" />
     <Compile Include="Models\MyWorkitemAssignment.cs" />
     <Compile Include="Models\UpdateWorkitem.cs" />

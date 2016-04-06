@@ -1,66 +1,101 @@
-﻿@model List<DemoWorkBounty.Models.ViewDocuments>  
+﻿@model List<DemoWorkBounty.WorkItemAssignment>
 @{
     ViewBag.Title = "ViewDocument";
     Layout = "~/Views/_LayoutPage1.cshtml";
 }
+<script type="text/javascript">
+    function ApplyReward(item) {
+        var id = {
+            "UserID": $(item).attr("id"),
+            "WorkitemID": $("#Workid").val(),
+         
+        };
+
+        $.ajax({
+            url: "/work/PayReward/",
+            type: "POST",
+            contentType: "application/json;charset=utf-8",
+            data: JSON.stringify(id),
+            dataType: "json",
+            success: function (response) {
+                if(response=="Success")
+                {
+                    alert("Success");
+                }
+            },
+
+            error: function (x, e) {
+                alert("Error");
+
+
+            }
+        });
+
+    }
+</script>
 
 <h2>ViewDocument</h2>
 <div class="col-sm-10">
+ 
     <div class="widget-box transparent" id="recent-box">
+      
         <div class="widget-header">
+
+           
+
             <h4 class="widget-title lighter smaller">
-             //Title
+                @*@Html.DisplayFor(s =>i.Workitem.Title)*@
             </h4>
 
+          
         </div>
 
         <div>
-            //Description
+            @*@Html.DisplayFor(s => i.Summary)*@
         </div>
 
         <div>
 
         </div>
-        @*<div class="row">*@
-        <div class="widget-header">
-            <h4 class="widget-title lighter smaller">
-                Details
-            </h4>
+        <div class="row">
+            <div class="widget-header">
+                <h4 class="widget-title lighter smaller">
+                    Details
+                </h4>
 
+            </div>
+            <div>
+                <h3>Work</h3>
+                <table id="simple-table" class="table table-striped table-bordered table-hover">
+                    <thead>
+                        <tr>
+
+                            <th width="10%">Sr No</th>
+                            <th width="10%">Name</th>
+                            <th width="10%">Update Time</th>
+                            <th width="10%">View File</th>
+                            <th width="10%">Reward</th>
+
+                        </tr>
+                    </thead>
+@foreach (DemoWorkBounty.Models.ViewDocuments i in ViewBag.dataForOpen)
+{
+    
+                    <tbody>
+                        <input type="hidden" id="Workid" value="@i.WorkItemID" />
+                        <tr>
+                            <td>@(ViewBag.dataForOpen.IndexOf(i) + 1)</td>
+                            <td>@Html.DisplayFor(a => i.FirstName)</td>
+                            <td>@Html.DisplayFor(a => i.SubmissionDateTime)</td>
+                          
+                            <td>@Html.ActionLink("Download", "Download", "work", new { id = i.UserID }, new { @class = "btn btn-minier btn-purple" }) </td>
+                           <td><input type="button" id="@i.UserID" class="btn btn-minier btn-purple" value="Assign Reward" onclick="ApplyReward(this);" /></td>
+                        </tr>
+                    </tbody>
+}
+                </table>
+            </div>
         </div>
-        <div>
-            <h3>Work</h3>
-            <table id="simple-table" class="table table-striped table-bordered table-hover">
-                <thead>
-                    <tr>
-
-                        <th width="10%">Sr No</th>
-                        <th width="10%">Name</th>
-                        <th width="10%">Update Time</th>
-                        <th width="10%">View File</th>
-                      
-
-                    </tr>
-                </thead>
-                @foreach(DemoWorkBounty.Models.ViewDocuments i in ViewBag.dataforOpen)
-                { 
-                <tbody>
-                    <tr>
-                        <td>@(ViewBag.dataforOpen.IndexOf(i) + 1)</td>
-                        <td>@Html.DisplayFor(a => i.FirstName)</td>
-                        <td>@Html.DisplayFor(a => i.SubmissionDateTime)</td>
-                    
-                        <td>@Html.ActionLink("Download", "Download", "work", new { id = i.UserID }, new { @class = "btn btn-minier btn-purple" }) </td>
-
-                    </tr>
-                </tbody>
-            }
-            </table>
-        </div>
-
-
-     
-
-
     </div>
+
 </div>

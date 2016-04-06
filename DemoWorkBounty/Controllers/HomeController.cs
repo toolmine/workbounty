@@ -10,7 +10,7 @@ namespace DemoWorkBounty.Controllers
 {
     public class HomeController : Controller
     {
-
+        ShowRewardRepo showRepo = new ShowRewardRepo();
         WorkBountyDBEntities5 entity = new WorkBountyDBEntities5();
         LoginRepo userRepo = new LoginRepo();
         WorkbountyRepo wbRepo = new WorkbountyRepo();
@@ -79,7 +79,7 @@ namespace DemoWorkBounty.Controllers
             var item = wbRepo.getAllItem(id);
             ViewBag.item = item;
 
-            var iwd = wbRepo.ItemsIWantDone();
+            var iwd = wbRepo.ItemsIWantDone(id);
             ViewBag.iwd = iwd;
 
             var myWorkitem = wbRepo.GetMyWorkitem(id);
@@ -150,7 +150,9 @@ namespace DemoWorkBounty.Controllers
 
         public ActionResult rewards()
         {
-            return View();
+            int id = Convert.ToInt32(Session["UserID"]);
+          var data = showRepo.GetAllRewards(id);
+          return View(data);
         }
 
         public ActionResult addworkitem()
