@@ -163,7 +163,7 @@ namespace DemoWorkBounty.Controllers
                             where tea.UserID == id1
                             select tea);
 
-            ViewBag.TeamName1 = new SelectList(selected, "TeamID", "TeamName");
+            ViewBag.TeamName1 = new SelectList(selected, "TeamUserInfoID", "TeamName");
             return View();
         }
     

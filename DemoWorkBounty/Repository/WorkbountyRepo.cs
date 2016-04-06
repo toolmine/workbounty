@@ -17,15 +17,31 @@ namespace DemoWorkBounty.Repository
             try
             {
                 int currentUserid = id;
+                var teamid = entity.Teams.Where(s => s.UserID == currentUserid).Select(s => s.TeamUserInfoID);
+                var data = entity.Workitems.Where(s => s.CreatedBy != currentUserid).Select(s => new OpenWorkItem { WorkItemID = s.WorkitemID, FirstName = s.UserInfo.FirstName, PublishedTo = s.PublishedTo, Title = s.Title, Summary = s.Summary, ProposedReward = s.ProposedReward, Amount = s.Amount }).ToList();
+                List<OpenWorkItem> workitemlist = new List<OpenWorkItem>();
 
-                var data = entity.Workitems.Where(s => s.CreatedBy != currentUserid).Select(s => new OpenWorkItem { WorkItemID = s.WorkitemID, FirstName = s.UserInfo.FirstName, Title = s.Title, Summary = s.Summary, ProposedReward = s.ProposedReward, Amount = s.Amount }).ToList();
-                return data;
+                var registereditems = entity.WorkitemRegistrations.Where(s => s.UserID == id).Select(s => new OpenWorkItem { WorkItemID = s.WorkitemID }).ToList();
+                foreach (var item in data)
+                {
+                    foreach (var items in teamid)
+                    {
+                        if (item.PublishedTo == items)
+                        {
+
+                            workitemlist.Add(entity.Workitems.Where(s => s.WorkitemID == item.WorkItemID).Select(s => new OpenWorkItem { WorkItemID = s.WorkitemID, FirstName = s.UserInfo.FirstName, Title = s.Title, Summary = s.Summary, ProposedReward = s.ProposedReward, Amount = s.Amount }).FirstOrDefault());
+
+                        }
+                    }
+                }
+
+                workitemlist.RemoveAll(x => registereditems.Any(y => y.WorkItemID == x.WorkItemID));
+                    return workitemlist;
             }
             catch (Exception)
             {
                 return null;
             }
-
         }
 
         public List<MyWorkitemAssignment> GetMyWorkitem(int id)
@@ -33,7 +49,7 @@ namespace DemoWorkBounty.Repository
             List<WorkitemRegistration> item = new List<WorkitemRegistration>();
             int currentId = id;
             var name = entity.WorkitemRegistrations.Where(w => w.UserID == currentId).Select(s => s.Workitem.UserInfo.FirstName).FirstOrDefault();
-            var data = entity.WorkitemRegistrations.Where(s => s.UserID == currentId).Select(s => new MyWorkitemAssignment {WorkItemID=s.WorkitemID, Title = s.Workitem.Title,StartDate=s.Workitem.StartDate,EndDate=s.Workitem.DueDate,FirstName=name, ProposedReward = s.Workitem.ProposedReward, Amount = s.Workitem.Amount }).ToList();
+            var data = entity.WorkitemRegistrations.Where(s => s.UserID == currentId).Select(s => new MyWorkitemAssignment { WorkItemID = s.WorkitemID, Title = s.Workitem.Title, StartDate = s.Workitem.StartDate, EndDate = s.Workitem.DueDate, FirstName = name, ProposedReward = s.Workitem.ProposedReward, Amount = s.Workitem.Amount }).ToList();
 
             return data;
         }
@@ -72,9 +88,9 @@ namespace DemoWorkBounty.Repository
                         into userArticles
                         from ua in userArticles.DefaultIfEmpty()
                         select new MyWorkitem { WorkitemID = u.WorkitemID, Title = u.Title, FirstName = ua.UserInfo.FirstName, ProposedReward = u.ProposedReward, StartDate = u.StartDate, EndDate = u.DueDate };
-            
-            
-            return data2.ToList(); 
+
+
+            return data2.ToList();
         }
 
         public List<WorkitemRegistration> Applied(int id)

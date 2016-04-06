@@ -144,6 +144,8 @@
     <Compile Include="Repository\AddTeamMemberRepo.cs" />
     <Compile Include="Repository\AddWorkitemRepo.cs" />
     <Compile Include="Repository\DetailItemRepo.cs" />
+    <Compile Include="Repository\DetailWorkitemRepo.cs" />
+    <Compile Include="Repository\DetailWorkitemRepos.cs" />
     <Compile Include="Repository\LoginRepo.cs" />
     <Compile Include="Repository\MyTeamRepo.cs" />
     <Compile Include="Repository\ShowRewardRepo.cs" />
