@@ -20,6 +20,10 @@
                 var url = "/home/afterlogin/"
                 document.location.href = url;
             }
+            else
+            {
+                alert("Please check Email And Password")
+            }
         },
 
         error: function (x, e) {

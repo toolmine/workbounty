@@ -57,12 +57,23 @@ namespace DemoWorkBounty.Repository
         }
 
 
-        public UpdateWorkitem ShowMyWorkitems(int id)
+        public List<UpdateWorkitem> ShowMyWorkitems(int id)
         {
             var currentID = id;
-              var displayData = entity.WorkitemRegistrations.Where(s => s.WorkitemID == currentID).Select(s => new UpdateWorkitem { Title = s.Workitem.Title, Summary = s.Workitem.Summary,WorkItemID=s.WorkitemID }).FirstOrDefault();
 
-            return displayData;
+            var getDataforAssignWorkitem = entity.WorkItemAssignments.Where(s => s.WorkItemID == id).Select(s=>s.SubmissionPath).FirstOrDefault();
+
+            if (getDataforAssignWorkitem == null)
+            {
+                var displayData = entity.WorkitemRegistrations.Where(s => s.WorkitemID == currentID).Select(s => new UpdateWorkitem { Title = s.Workitem.Title, Summary = s.Workitem.Summary, WorkItemID = s.WorkitemID }).ToList();
+
+                return displayData;
+            }
+            else
+            {
+                return null;
+            }
+
         }
 
         public string UpdateWorkitems(WorkItemAssignment data)

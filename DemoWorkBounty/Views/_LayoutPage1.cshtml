@@ -26,7 +26,24 @@
     <script src="~/assets/js/ace-elements.min.js"></script>
     <script src="~/assets/js/ace.min.js"></script>
     <script src="~/assets/js/jquery_onclick_success.js">  </script>
+    <script type="text/javascript">
+  
+        function SearchResult() {
 
+            var id = $("#SearchItem").val();
+            if(id==null)
+            {
+                alert("Please enter Workitem Name");
+            }
+            else
+                {
+                var url = "/home/SearchWorkitem?id=" + encodeURIComponent(id);
+            document.location.href = url;
+            }
+        };
+  
+
+    </script>
 
 </head>
 <body class="no-skin">
@@ -50,8 +67,8 @@
             <div class="nav-search" id="nav-search">
                 <form class="form-search">
                     <span class="input-icon">
-                        <input type="text" placeholder="Search for workitems" class="nav-search-input" id="nav-search-input" autocomplete="off"/>
-                     <i class="ace-icon fa fa-search nav-search-icon"></i>
+                        <input type="text" placeholder="Search for workitems" class="nav-search-input" id="SearchItem" autocomplete="off"/>
+           <i class="ace-icon fa fa-search nav-search-icon" onclick="SearchResult();"></i>
                     </span>
                 </form>
             </div>
@@ -63,9 +80,8 @@
                         <a data-toggle="dropdown" href="#" class="dropdown-toggle">
                             <span class="user-info">
                                 Welcome,
-                            </span>
-                            <span class="user-info">
-                                Guest
+                               @Session["FirstName"].ToString()
+                               
                             </span>
                         </a>
 
@@ -215,7 +231,7 @@
                 </div>
              
 
-                <div>
+                <div>   
                     @RenderBody()
                 </div>
 

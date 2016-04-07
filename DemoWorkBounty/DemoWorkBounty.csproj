@@ -309,9 +309,9 @@
     <Content Include="assets\js\jquery-login.js" />
     <Content Include="assets\js\jquery-search.js" />
     <Content Include="assets\js\jquery-showreward.js" />
+    <Content Include="assets\js\jquery-signup.js" />
     <Content Include="assets\js\jquery-ui.custom.min.js" />
     <Content Include="assets\js\jquery-ui.min.js" />
-    <Content Include="assets\js\jquery-usersignup.js" />
     <Content Include="assets\js\jquery.1.11.1.min.js" />
     <Content Include="assets\js\jquery.2.1.1.min.js" />
     <Content Include="assets\js\jquery.autosize.min.js" />
@@ -498,6 +498,7 @@
     <Content Include="Views\work\AddDocument.cshtml" />
     <Content Include="Views\work\ViewDocument.cshtml" />
     <Content Include="Views\Home\ItemsIWantDone.cshtml" />
+    <Content Include="Views\Home\SearchWorkitem.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

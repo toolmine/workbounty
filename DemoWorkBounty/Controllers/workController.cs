@@ -43,7 +43,16 @@ namespace DemoWorkBounty.Controllers
         {
 
             var data = repo.ShowMyWorkitems(id);
-            return View(data);
+            if (data != null)
+            {
+                ViewBag.dataForOpen = data;
+            }
+            else
+            {
+                ViewBag.displayMessage = data;
+            }
+
+            return View();
         }
         [HttpPost]
         public ActionResult AddDocument(FormCollection data, HttpPostedFileBase myFile)
@@ -85,7 +94,14 @@ namespace DemoWorkBounty.Controllers
         public ActionResult ViewDocument(int id)
         {
             var dataForOpen = wbrepo.ShowDocument(id);
+            if(dataForOpen!=null)
+            { 
             ViewBag.dataForOpen = dataForOpen;
+            }
+            else
+            {
+                ViewBag.displayMessage = dataForOpen;
+            }
             return View();
         }
 

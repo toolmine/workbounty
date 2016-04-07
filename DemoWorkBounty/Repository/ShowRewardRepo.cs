@@ -36,6 +36,22 @@ namespace DemoWorkBounty.Repository
                 
        }
 
+
+        public List<Workitem> GetItemById(string id)
+        {
+
+            try
+            {
+
+                var data = entity.Workitems.Where(s => s.Title.StartsWith(id)).ToList();
+                return data;
+            }
+            catch (Exception)
+            {
+                throw new HttpResponseException(HttpStatusCode.NotFound);
+            }
+        }
+
       
     }
 }

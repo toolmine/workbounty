@@ -4,17 +4,7 @@
     Layout = "~/Views/_LayoutPage2.cshtml";
  
 }
-<script src="~/assets/js/jquery.2.1.1.min.js"></script>
-<script src="~/assets/js/bootstrap-datepicker.min.js"></script>
-<script type="text/javascript" src="jquery-1.11.3-jquery.min.js"></script>
-<script type="text/javascript" src="validation.min.js"></script>
-<link rel="stylesheet" href="~/assets/css/datepicker.min.css">
-<link rel="stylesheet" href="~/assets/css/bootstrap.min.css">
-<script src="~/assets/js/datepicker.js"></script>
-<script src="~/assets/js/jquery_mobile_custom_start.js"></script>
-<script src="~/assets/js/jq_script_src.js"></script>
-<script src="~/assets/js/jquery-usersignup.js"></script>
-
+<script src="~/assets/js/jquery-signup.js"></script>
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
@@ -87,7 +77,7 @@
                                             <div class="block clearfix">
                                                 <div class="hero-unit">
                                                  
-                                                   @Html.TextBoxFor(a => a.DateOfBirth, new { @class = "form-control", @placeholder = "Date of Birth", @id = "DateSelect", @name = "DateofBirth", onclick = "DatePicker();return false;" })
+                                                   @Html.TextBoxFor(a => a.DateOfBirth, new { @class = "form-control hasDatepicker", @placeholder = "Date of Birth", @id = "DateSelect", @name = "DateofBirth", onclick = "DatePicker();return false;" })
 
                                                 </div>
                                             </div>

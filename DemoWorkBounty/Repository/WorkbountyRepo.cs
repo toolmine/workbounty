@@ -1,4 +1,4 @@
-﻿using DemoWorkBounty.Models;
+﻿   using DemoWorkBounty.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -70,19 +70,29 @@ namespace DemoWorkBounty.Repository
             return data;
         }
 
-        public string AddUserData(UserInfo item)
+        public UserInfo AddUserData(UserInfo item)
         {
-            if (ModelState.IsValid)
+            try
             {
-                var v = entity.UserInfoes.Where(a => a.Email.Equals(item.Email)).FirstOrDefault();
-                if (v == null)
+                
+                    var v = entity.UserInfoes.Where(a => a.Email.Equals(item.Email)).FirstOrDefault();
+                    if (v == null)
+                    {
+                        entity.UserInfoes.Add(item);
+                        entity.SaveChanges();
+                        return item;
+                    }
+                   
+                
+               else
                 {
-                    entity.UserInfoes.Add(item);
-                    entity.SaveChanges();
-                    return "Success";
+                    return null;
                 }
             }
-            return "Error";
+            catch(Exception)
+            {
+                return null;
+            }
         }
 
         public List<MyWorkitem> ItemsIWantDone(int id)
@@ -103,10 +113,34 @@ namespace DemoWorkBounty.Repository
         public List<WorkitemRegistration> Applied(int id)
         {
             List<WorkitemRegistration> item = new List<WorkitemRegistration>();
-            var data = entity.WorkitemRegistrations.Where(s => s.WorkitemID == id && s.IsExclusive == true).ToList();
-            return data;
-        }
+            var getDataforAssignWorkitem = entity.WorkitemDistributions.Where(s => s.WorkitemID == id).FirstOrDefault();
 
+            if (getDataforAssignWorkitem == null)
+            {
+                var data = entity.WorkitemRegistrations.Where(s => s.WorkitemID == id && s.IsExclusive == true).ToList();
+                return data;
+            }
+            else
+            {
+                return null;
+            }
+           
+        }
+        public List<ViewDocuments> ShowDocument(int id)
+        {
+            List<MyWorkitemAssignment> item = new List<MyWorkitemAssignment>();
+            var getDataForIsRewarded = entity.WorkItemAssignments.Where(s => s.WorkItemID == id).Select(s => s.IsRewarded == true).FirstOrDefault();
+            if (getDataForIsRewarded == null)
+            {
+                var data = entity.WorkItemAssignments.Where(s => s.WorkItemID == id).Select(s => new ViewDocuments { WorkItemID = s.WorkItemID, UserID = s.UserID, Title = s.Workitem.Title, Summary = s.Workitem.Summary, FirstName = s.UserInfo.FirstName, SubmissionDateTime = s.SubmissionDateTime, SubmissionPath = s.SubmissionPath }).ToList();
+                return data;
+            }
+            else
+            {
+
+                return null;
+            }
+        }
 
         public List<Workitem> GetAllitemsDone(int id)
         {
@@ -156,12 +190,8 @@ namespace DemoWorkBounty.Repository
             return "Error";
         }
 
-        public List<ViewDocuments> ShowDocument(int id)
-        {
-            List<MyWorkitemAssignment> item = new List<MyWorkitemAssignment>();
-            var data = entity.WorkItemAssignments.Where(s => s.WorkItemID == id).Select(s => new ViewDocuments { WorkItemID = s.WorkItemID, UserID = s.UserID, Title = s.Workitem.Title, Summary = s.Workitem.Summary, FirstName = s.UserInfo.FirstName, SubmissionDateTime = s.SubmissionDateTime, SubmissionPath = s.SubmissionPath }).ToList();
-            return data;
-        }
+      
+       
 
         public List<ViewDocuments> ShowExclusiveDocument(int id)
         {

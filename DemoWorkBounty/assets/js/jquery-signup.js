@@ -12,15 +12,18 @@
     };
 
     $.ajax({
-        url: "/api/Showitem/",
+        url: "/Home/Signup/",
         type: "POST",
         contentType: "application/json;charset=utf-8",
         data: JSON.stringify(item),
         dataType: "json",
         success: function (response) {
-             if (response == "Success") {
+            if (response == "Success") {
                 var url = "/home/afterlogin/"
                 document.location.href = url;
+            }
+            else {
+                alert("Signup Fail");
             }
 
         },

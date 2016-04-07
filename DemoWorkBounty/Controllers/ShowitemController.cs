@@ -20,18 +20,18 @@ namespace DemoWorkBounty.Controllers
         //}
 
 
-        public string AddUserData(UserInfo item)
-        {
-            try
-            { 
-            var response = repo.AddUserData(item);
-            return response;
-                }
-            catch(Exception)
-            {
-                return "error";
-            }
-        }
+        //public string AddUserData(UserInfo item)
+        //{
+        //    try
+        //    { 
+        //    var response = repo.AddUserData(item);
+        //    return response;
+        //        }
+        //    catch(Exception)
+        //    {
+        //        return "error";
+        //    }
+        //}
 
        
        
