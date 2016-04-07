@@ -16,7 +16,6 @@ namespace DemoWorkBounty
     {
         public Team()
         {
-            this.Workitems = new HashSet<Workitem>();
             this.WorkitemDistributions = new HashSet<WorkitemDistribution>();
         }
     
@@ -29,7 +28,6 @@ namespace DemoWorkBounty
         public virtual Team Team1 { get; set; }
         public virtual Team Team2 { get; set; }
         public virtual UserInfo UserInfo { get; set; }
-        public virtual ICollection<Workitem> Workitems { get; set; }
         public virtual ICollection<WorkitemDistribution> WorkitemDistributions { get; set; }
     }
 }

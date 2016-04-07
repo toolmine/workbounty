@@ -39,7 +39,6 @@ namespace DemoWorkBounty
         public string Remarks { get; set; }
         public bool IsOpenForGroup { get; set; }
     
-        public virtual Team Team { get; set; }
         public virtual UserInfo UserInfo { get; set; }
         public virtual UserInfo UserInfo1 { get; set; }
         public virtual Workitem Workitem1 { get; set; }

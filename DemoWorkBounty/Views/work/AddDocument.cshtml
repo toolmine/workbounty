@@ -5,7 +5,7 @@
 }
 <script type="text/javascript">
     function uploadData() {
-     
+
 
         var d = new Date();
         var item = {
@@ -13,10 +13,10 @@
             "UserID": $("#Userid").val(),
             "SubmissionPath": $("#myFile").serialize(),
             "IsRewarded": false,
-            "SubmissionDateTime":d.toDateString()
+            "SubmissionDateTime": d.toDateString()
         };
 
-    
+
         $.ajax({
             type: "POST",
             url: "/work/adddocument/",
@@ -37,48 +37,74 @@
 </script>
 
 <h2>Add Document</h2>
-<div class="row">
+@*<div class="row">
     <div class="col-xs-12">
-     
-            <form class="form-horizontal" role="form" data-toggle="validator" name="Workitemform" id="Workitemform" method="post" enctype="multipart/form-data">
-                <input type="hidden" id="Workid" name="Workid" value="@Model.WorkItemID" />
-                <div class="form-group">
-                    <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Title </label>
 
-                    <div class="col-sm-9">
-                        <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> @Html.DisplayFor(s =>Model.Title) </label>
-
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Title</label>
-
-                    <div class="col-sm-9">
-                        <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> @Html.DisplayFor(s => Model.Summary)</label>
-
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label class="col-sm-3 control-label no-padding-right" for="form-field-1">Attach Documents </label>
-                    <div class="col-sm-9">
-                        <input type="file" id="myFile" name="myFile" />
-
-                    </div>
-                </div>
+        <form class="form-horizontal" role="form" data-toggle="validator" name="Workitemform" id="Workitemform" method="post" enctype="multipart/form-data">
+            <input type="hidden" id="Workid" name="Workid" value="@Model.WorkItemID" />
+            <div class="form-group">
+                <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Title </label>
 
                 <div class="col-sm-9">
-                    <div class="clearfix">
-                        <button class="btn btn-info" type="submit">
-                            <i class="ace-icon fa fa-check bigger-110"></i>
-                            Submit
-                        </button>
+                    <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> @Html.DisplayFor(s => Model.Title) </label>
 
-
-                    </div>
                 </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label no-padding-right" for="form-field-1">  Summary</label>
 
-            </form>
-        
+                <div class="col-sm-9">
+                    <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> @Html.DisplayFor(s => Model.Summary)</label>
+
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-3 control-label no-padding-right" for="form-field-1">Attach Documents </label>
+                <div class="col-sm-9">
+                    <input type="file" id="myFile" name="myFile" />
+
+                </div>
+            </div>
+
+            <div class="col-sm-9">
+                <div class="clearfix">
+                    <button class="btn btn-info" type="submit">
+                        <i class="ace-icon fa fa-check bigger-110"></i>
+                        Submit
+                    </button>
+                </div>
+            </div>
+
+        </form>
+
     </div>
+</div>*@
+
+
+<div>
+    <table class="table table-striped">
+        <tr class="info spaceUnder">
+            <td>Title </td>
+            <td>@Html.DisplayFor(s => Model.Title) </td>
+        </tr>
+        <tr class="sucess">
+            <td>Summary</td>
+            <td>@Html.DisplayFor(s => Model.Summary) </td>
+
+        </tr>
+        <tr class="active">
+            <td>Attach Documents </td>
+            <td><input type="file" id="myFile" name="myFile" /></td>
+        </tr>
+        <tr>
+            <td>
+                <button class="btn btn-info" type="submit">
+                    <i class="ace-icon fa fa-check bigger-110"></i>
+                    Submit
+                </button>
+            </td>
+        </tr>
+    </table>
+
 </div>

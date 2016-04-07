@@ -24,19 +24,26 @@ namespace DemoWorkBounty.Repository
                 var registereditems = entity.WorkitemRegistrations.Where(s => s.UserID == id).Select(s => new OpenWorkItem { WorkItemID = s.WorkitemID }).ToList();
                 foreach (var item in data)
                 {
-                    foreach (var items in teamid)
+                    if (item.PublishedTo == 0)
                     {
-                        if (item.PublishedTo == items)
+                        workitemlist.Add(entity.Workitems.Where(s => s.WorkitemID == item.WorkItemID).Select(s => new OpenWorkItem { WorkItemID = s.WorkitemID, FirstName = s.UserInfo.FirstName, Title = s.Title, Summary = s.Summary, ProposedReward = s.ProposedReward, Amount = s.Amount }).FirstOrDefault());
+                    }
+                    else
+                    {
+                        foreach (var items in teamid)
                         {
+                            if (item.PublishedTo == items)
+                            {
 
-                            workitemlist.Add(entity.Workitems.Where(s => s.WorkitemID == item.WorkItemID).Select(s => new OpenWorkItem { WorkItemID = s.WorkitemID, FirstName = s.UserInfo.FirstName, Title = s.Title, Summary = s.Summary, ProposedReward = s.ProposedReward, Amount = s.Amount }).FirstOrDefault());
+                                workitemlist.Add(entity.Workitems.Where(s => s.WorkitemID == item.WorkItemID).Select(s => new OpenWorkItem { WorkItemID = s.WorkitemID, FirstName = s.UserInfo.FirstName, Title = s.Title, Summary = s.Summary, ProposedReward = s.ProposedReward, Amount = s.Amount }).FirstOrDefault());
 
+                            }
                         }
                     }
                 }
 
                 workitemlist.RemoveAll(x => registereditems.Any(y => y.WorkItemID == x.WorkItemID));
-                    return workitemlist;
+                return workitemlist;
             }
             catch (Exception)
             {
@@ -81,7 +88,7 @@ namespace DemoWorkBounty.Repository
         public List<MyWorkitem> ItemsIWantDone(int id)
         {
             List<Workitem> item = new List<Workitem>();
-            
+
             var data2 = from u in entity.Workitems.Where(s => s.CreatedBy == id)
                         join b in entity.WorkitemDistributions
                         on u.WorkitemID equals b.WorkitemID
@@ -110,19 +117,19 @@ namespace DemoWorkBounty.Repository
 
         public string ApplyReward(AddReward id)
         {
-          try
-          {
-              WorkItemAssignment item = entity.WorkItemAssignments.Where(s => s.WorkItemID == id.WorkItemID && s.UserID == id.UserID).First();
-              item.IsRewarded = true;
-              entity.SaveChanges();
-              return "Success";
-             
-          }
-          catch(Exception)
-          {
-              return "Error";
-          }
-         
+            try
+            {
+                WorkItemAssignment item = entity.WorkItemAssignments.Where(s => s.WorkItemID == id.WorkItemID && s.UserID == id.UserID).First();
+                item.IsRewarded = true;
+                entity.SaveChanges();
+                return "Success";
+
+            }
+            catch (Exception)
+            {
+                return "Error";
+            }
+
         }
 
 
@@ -152,7 +159,7 @@ namespace DemoWorkBounty.Repository
         public List<ViewDocuments> ShowDocument(int id)
         {
             List<MyWorkitemAssignment> item = new List<MyWorkitemAssignment>();
-            var data = entity.WorkItemAssignments.Where(s => s.WorkItemID == id).Select(s => new ViewDocuments {WorkItemID=s.WorkItemID,UserID=s.UserID, Title = s.Workitem.Title, Summary = s.Workitem.Summary, FirstName = s.UserInfo.FirstName, SubmissionDateTime = s.SubmissionDateTime, SubmissionPath = s.SubmissionPath }).ToList();
+            var data = entity.WorkItemAssignments.Where(s => s.WorkItemID == id).Select(s => new ViewDocuments { WorkItemID = s.WorkItemID, UserID = s.UserID, Title = s.Workitem.Title, Summary = s.Workitem.Summary, FirstName = s.UserInfo.FirstName, SubmissionDateTime = s.SubmissionDateTime, SubmissionPath = s.SubmissionPath }).ToList();
             return data;
         }
 

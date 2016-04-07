@@ -158,12 +158,25 @@ namespace DemoWorkBounty.Controllers
         public ActionResult addworkitem()
         
         {
-            var id1 = Convert.ToInt32(Session["UserID"]);;
-            var selected = (from tea in entity.Teams
-                            where tea.UserID == id1
-                            select tea);
-
+            var id1 = Convert.ToInt32(Session["UserID"]);
+            List<Team> selected = new List<Team>();
+            selected.Add(entity.Teams.Where(s => s.TeamID == 1).FirstOrDefault());
+            foreach (var item in entity.Teams)
+            {
+                if (item.UserID == id1)
+                {
+                    selected.Add(entity.Teams.Where(s=>s.TeamID==item.TeamID).FirstOrDefault());
+                }
+            }
+            
+            //selected = (from tea in entity.Teams
+            //                where tea.UserID == id1
+            //                select tea).ToList();
+            
+            
+            //selected. (0, new SelectListItem() { Value = "0", Text = "All" });
             ViewBag.TeamName1 = new SelectList(selected, "TeamUserInfoID", "TeamName");
+
             return View();
         }
     

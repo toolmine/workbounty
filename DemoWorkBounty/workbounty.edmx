@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="WorkBountyDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="WorkBountyDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Team">
           <Key>
             <PropertyRef Name="TeamID" />
@@ -131,18 +131,6 @@
             </Principal>
             <Dependent Role="UserInfo1">
               <PropertyRef Name="UserID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Workitem_Team">
-          <End Role="Team" Type="Self.Team" Multiplicity="1" />
-          <End Role="Workitem" Type="Self.Workitem" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Team">
-              <PropertyRef Name="TeamID" />
-            </Principal>
-            <Dependent Role="Workitem">
-              <PropertyRef Name="PublishedTo" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -323,10 +311,6 @@
             <End Role="UserInfo" EntitySet="UserInfo" />
             <End Role="UserInfo1" EntitySet="UserInfo" />
           </AssociationSet>
-          <AssociationSet Name="FK_Workitem_Team" Association="Self.FK_Workitem_Team">
-            <End Role="Team" EntitySet="Team" />
-            <End Role="Workitem" EntitySet="Workitem" />
-          </AssociationSet>
           <AssociationSet Name="FK_Workitem_UserInfo1" Association="Self.FK_Workitem_UserInfo1">
             <End Role="UserInfo" EntitySet="UserInfo" />
             <End Role="Workitem" EntitySet="Workitem" />
@@ -380,8 +364,7 @@
             <End Role="WorkitemRegistration" EntitySet="WorkitemRegistration" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="WorkBountyDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -397,7 +380,6 @@
           <NavigationProperty Name="Team1" Relationship="Self.FK_Team_Team" FromRole="Team" ToRole="Team1" />
           <NavigationProperty Name="Team2" Relationship="Self.FK_Team_Team" FromRole="Team1" ToRole="Team" />
           <NavigationProperty Name="UserInfo" Relationship="Self.FK_Team_UserInfo" FromRole="Team" ToRole="UserInfo" />
-          <NavigationProperty Name="Workitems" Relationship="Self.FK_Workitem_Team" FromRole="Team" ToRole="Workitem" />
           <NavigationProperty Name="WorkitemDistributions" Relationship="Self.FK_WorkitemDistribution_Team" FromRole="Team" ToRole="WorkitemDistribution" />
         </EntityType>
         <EntityType Name="UserInfo">
@@ -443,7 +425,6 @@
           <Property Name="Status" Type="Boolean" Nullable="false" />
           <Property Name="Remarks" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="IsOpenForGroup" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="Team" Relationship="Self.FK_Workitem_Team" FromRole="Workitem" ToRole="Team" />
           <NavigationProperty Name="UserInfo" Relationship="Self.FK_Workitem_UserInfo1" FromRole="Workitem" ToRole="UserInfo" />
           <NavigationProperty Name="UserInfo1" Relationship="Self.FK_Workitem_UserInfo2" FromRole="Workitem" ToRole="UserInfo" />
           <NavigationProperty Name="Workitem1" Relationship="Self.FK_Workitem_Workitem" FromRole="Workitem" ToRole="Workitem1" />
@@ -533,18 +514,6 @@
             </Principal>
             <Dependent Role="Team">
               <PropertyRef Name="UserID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Workitem_Team">
-          <End Role="Team" Type="Self.Team" Multiplicity="1" />
-          <End Role="Workitem" Type="Self.Workitem" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Team">
-              <PropertyRef Name="TeamID" />
-            </Principal>
-            <Dependent Role="Workitem">
-              <PropertyRef Name="PublishedTo" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -732,10 +701,6 @@
           <AssociationSet Name="FK_Team_UserInfo" Association="Self.FK_Team_UserInfo">
             <End Role="UserInfo" EntitySet="UserInfoes" />
             <End Role="Team" EntitySet="Teams" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Workitem_Team" Association="Self.FK_Workitem_Team">
-            <End Role="Team" EntitySet="Teams" />
-            <End Role="Workitem" EntitySet="Workitems" />
           </AssociationSet>
           <AssociationSet Name="FK_WorkitemDistribution_Team" Association="Self.FK_WorkitemDistribution_Team">
             <End Role="Team" EntitySet="Teams" />

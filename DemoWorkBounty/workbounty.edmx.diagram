@@ -15,7 +15,6 @@
         <EntityTypeShape EntityType="WorkBountyDBModel.WorkitemStatu" Width="1.5" PointX="5.25" PointY="1.75" IsExpanded="true" />
         <AssociationConnector Association="WorkBountyDBModel.FK_Team_Team" ManuallyRouted="false" />
         <AssociationConnector Association="WorkBountyDBModel.FK_Team_UserInfo" ManuallyRouted="false" />
-        <AssociationConnector Association="WorkBountyDBModel.FK_Workitem_Team" ManuallyRouted="false" />
         <AssociationConnector Association="WorkBountyDBModel.FK_WorkitemDistribution_Team" ManuallyRouted="false" />
         <AssociationConnector Association="WorkBountyDBModel.FK_UserInfo_UserInfo" ManuallyRouted="false" />
         <AssociationConnector Association="WorkBountyDBModel.FK_Workitem_UserInfo1" ManuallyRouted="false" />
