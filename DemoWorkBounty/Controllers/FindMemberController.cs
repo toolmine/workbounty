@@ -4,12 +4,12 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
-using Workbounty.Models;
-using Workbounty.Repository;
+using DemoWorkBounty.Models;
+using DemoWorkBounty.Repository;
 using DemoWorkBounty;
 
 
-namespace Workbounty.Controllers
+namespace DemoWorkBounty.Controllers
 {
     public class FindMemberController : ApiController
     {

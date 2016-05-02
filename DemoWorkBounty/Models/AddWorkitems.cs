@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
-namespace Workbounty.Models
+namespace DemoWorkBounty.Models
 {
     public class AddWorkitems
     {

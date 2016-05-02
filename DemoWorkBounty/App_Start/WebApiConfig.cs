@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web.Http;
 using System.Web.Http.Tracing;
 
-namespace Workbounty
+namespace DemoWorkBounty
 {
     public static class WebApiConfig
     {

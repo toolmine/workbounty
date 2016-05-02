@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using Workbounty.Repository;
-using Workbounty.Models;
+using DemoWorkBounty.Repository;
+using DemoWorkBounty.Models;
 using DemoWorkBounty;
 
 
-namespace Workbounty.Controllers
+namespace DemoWorkBounty.Controllers
 {
     public class TeamController : Controller
     {

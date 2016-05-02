@@ -4,11 +4,11 @@ using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using Workbounty.Models;
-using Workbounty.Repository;
+using DemoWorkBounty.Models;
+using DemoWorkBounty.Repository;
 using DemoWorkBounty;
 
-namespace Workbounty.Controllers
+namespace DemoWorkBounty.Controllers
 {
     public class WorkitemController : Controller
     {

@@ -4,10 +4,10 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
-using Workbounty.Models;
+using DemoWorkBounty.Models;
 using System.IO;
 using DemoWorkBounty;
-namespace Workbounty.Repository
+namespace DemoWorkBounty.Repository
 
 {
     public class WorkitemRepository : ApiController
