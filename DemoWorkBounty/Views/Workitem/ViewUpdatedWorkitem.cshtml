@@ -1,0 +1,86 @@
+﻿@model List<Workbounty.WorkItemAssignment>
+@{
+    ViewBag.Title = "View assignment";
+    Layout = "~/Views/_DashboardLayout.cshtml";
+}
+
+<script src="~/assets/js/jquery-ViewUpdatedWorkitem.js"></script>
+<ul class="breadcrumb">
+    <li>
+        <i class="ace-icon fa fa-home home-icon"></i>
+        <a href="~/home/dashboard" data_toggle="tooltip" , title="Dashboard">Dashboard</a>
+    </li>
+    <li>
+        <a href="javascript:history.back() " data_toggle="tooltip" , title="Workitems which you have added">Items i want done</a>
+    </li>
+    <li class="active">View updated workitem</li>
+</ul>
+<h2>View document</h2>
+<div class="row">
+    <h4 class="widget-title lighter smaller">
+        Details
+    </h4>
+
+    <div class="alert alert-block alert-success" id="labelSuccessMessage">
+        <button type="button" class="close" data-dismiss="alert">
+            <i class="ace-icon fa fa-times"></i>
+        </button>
+        <p>
+            <strong>
+                <i class="ace-icon fa fa-check"></i>
+                Success!
+            </strong>
+            Reward assigned.
+        </p>
+    </div>
+
+
+    @if (ViewBag.displayMessage != null)
+    {
+        <div class="col-sm-10">
+            <p class="ui-icon-alert alert-success">
+                You have already send a reward for this workitem
+            </p>
+        </div>
+    }
+
+
+    <div>
+         
+        <table id="simple-table" class="table table-striped table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th width="10%">Sr No</th>
+                    <th width="10%">Name</th>
+                    <th width="10%">Update Time</th>
+                    <th width="10%">View File</th>
+                    <th width="10%">Feedback</th>
+                    <th width="10%">Reward</th>
+                </tr>
+            </thead>
+            @if (ViewBag.dataofOpenDocument != null)
+            {
+                foreach (Workbounty.Models.WorkitemDocuments i in ViewBag.dataofOpenDocument)
+                {
+            <tbody>
+                <tr>
+                    <td>@(ViewBag.dataofOpenDocument.IndexOf(i) + 1)</td>
+                    <td>@Html.DisplayFor(a => i.FirstName)</td>
+                    <td>@Html.DisplayFor(a => i.SubmissionDateTime) <input type="hidden" id="Workid" value="@i.WorkItemID" /></td>
+                    <td>@Html.ActionLink("Download", "Download", "workitem", new { currentUserID = i.UserID }, new { @class = "btn btn-minier btn-purple", data_toggle = "tooltip", title = "Download documents" }) </td>
+                    <td>
+                        <select id="feedback">
+                            <option value="good">Good</option>
+                            <option value="average">Average</option>
+                            <option value="poor">Poor</option>
+                        </select>
+                    </td>
+                    <td><input type="button" id="@i.UserID" class="btn btn-minier btn-purple" value="Assign Reward" onclick="ApplyReward(this);" data-toggle="tooltip" title="Apply reward to this user" /></td>
+                </tr>
+            </tbody>
+                }
+            }
+        </table>
+    </div>
+
+</div>

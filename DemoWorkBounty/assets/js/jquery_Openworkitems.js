@@ -6,7 +6,7 @@
         contentType: "application/json;charset=utf-8",
         dataType: "json",
         success: function (Data) {
-            alert(Data);
+        
             $("#OpenWorkitem").append('<tr><th>Sr no</th><th>Title</th><th>First name</th><th>Summary</th><th>Reward</th><th>Amount</th><th>Action</th></tr>');
             var arrlength = Data.length;
             for (var i = 0; i < arrlength; i++) {

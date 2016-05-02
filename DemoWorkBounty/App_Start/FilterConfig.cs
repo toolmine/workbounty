@@ -1,8 +1,7 @@
-﻿
-using System.Web;
+﻿using System.Web;
 using System.Web.Mvc;
 
-namespace DemoWorkBounty
+namespace Workbounty
 {
     public class FilterConfig
     {

@@ -1,37 +1,108 @@
-﻿function AddUserData() {
+﻿$(document).ready(function ()
+{
+    $("#alertMessage").hide();
+    $("#btnSubmit").click(function (e) {
+        e.preventDefault();
+        var dateofBirth = $("#DateSelect").val();
+        var dateofBirthDateObject = new Date(dateofBirth);
 
-    var item = {
-        "FirstName": $("#FirstName").val(),
-        "LastName": $("#LastName").val(),
-        "DateofBirth": $("#DateSelect").val().toLocaleString().substring(0, 10),
-        "Email": $("#Email").val(),
-        "PhoneNumber": $("#PhoneNumber").val(),
-        "Password": $("#Password").val(),
-        "InterestedKeywords": $("#InterestedKeywords").val(),
-        "isActive": true
-    };
-
-    $.ajax({
-        url: "/Home/Signup/",
-        type: "POST",
-        contentType: "application/json;charset=utf-8",
-        data: JSON.stringify(item),
-        dataType: "json",
-        success: function (response) {
-            if (response == "Success") {
-                var url = "/home/afterlogin/"
-                document.location.href = url;
+        var userSignupData =
+            {
+                "FirstName": $("#FirstName").val(),
+                "LastName": $("#LastName").val(),
+                "DateofBirth": dateofBirthDateObject,
+                "Email": $("#Email").val(),
+                "PhoneNumber": $("#PhoneNumber").val(),
+                "Password": $("#Password").val(),
+                "InterestedKeywords": $("#InterestedKeywords").val(),
+                "isActive": true
             }
-            else {
-                alert("Signup Fail");
-            }
-
-        },
-
-        error: function (x, e) {
-            alert("Error");
-
-
+        
+        if ($("#Password").val() != $("#ConfirmPassword").val()) {
+            $("#ConfirmPasswordError").text("Both fields do not match");
         }
-    });
-}
+        else
+
+        if ($("#Email").val() == "") {
+            $("#EmailError").text("Email is Required");
+        }
+        else  if ($("#PhoneNumber").val() == "") {
+            $("#PhoneNumberError").text("Phone Number is Required");
+        }
+
+       else if ($("#FirstName").val() == "") {
+            $("#FirstNameError").text("First Name is Required");
+        }
+
+        else if ($("#LastName").val() == "") {
+            $("#LastNameError").text("Last Name is Required");
+        }
+        else if (dateofBirth == "") {
+            $("#DateofBirthError").text("Date Of Birth is Required");
+        }
+  
+        else if ($("#Password").val() == "")
+        {
+            $("#PasswordError").text("Password is Required");
+        }
+        else if($("#InterestedKeywords").val() == "") 
+        {
+                $("#InterestedKeywordsError").text("Interested Keyword is Required");
+         }
+   
+        else {
+
+            $.ajax({
+                url: "/Home/Signup/",
+                type: "POST",
+                contentType: "application/json;charset=utf-8",
+                data: JSON.stringify(userSignupData),
+                dataType: "json",
+                success: function (getResponseOfSignupData) {
+                    if (getResponseOfSignupData == "Success") {
+                        var url = "/home/dashboard/"
+                        document.location.href = url;
+                    }
+                    else {
+                        $("#alertMessage").show();
+                    }
+
+                },
+
+                error: function (x, e) {
+                    $("#alertMessage").show();
+                }
+            });
+        }
+    })
+
+});
+
+
+
+
+    function isNumberKey(evt) {
+        var charCode = (evt.which) ? evt.which : event.keyCode;
+        if (charCode != 43 && charCode > 31
+          && (charCode < 48 || charCode > 57))
+            return false;
+
+        return true;
+    }
+
+    function isTextKey(evt) {
+        var charCode = (evt.which) ? evt.which : event.keyCode;
+        if (charCode > 31 && charCode < 65
+          && (charCode < 97 || charCode > 122))
+            return false;
+
+        return true;
+    }
+
+    function noDataKey(evt) {
+        var charcode = (evt.which) ? evt.which : event.keyCode;
+        if (charcode > 0 && charcode < 127)
+            return false;
+
+        return true;
+    }

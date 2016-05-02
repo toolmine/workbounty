@@ -1,0 +1,79 @@
+﻿@model List<Workbounty.Workitem>
+       @{
+    ViewBag.Title = "ApplyWorkitem";
+    Layout = "~/Views/_DashboardLayout.cshtml";
+}
+
+<script src="~/assets/js/jquery-ApplyWorkitem.js"></script>
+<ul class="breadcrumb">
+    <li>
+        <i class="ace-icon fa fa-home home-icon"></i>
+        <a href="~/home/dashboard">Dashboard</a>
+    </li>
+    <li>
+        <a href="~/Home/Viewitemsinterestedin">Items I Am Interested In</a>
+    </li>
+    <li class="active">Apply for Workitems</li>
+</ul>
+<hr />
+<div class="col-sm-10">
+    @foreach (var item in Model)
+    {
+        <input type="hidden" id="Workid" value="@item.WorkitemID" />
+        <div class="widget-box transparent" id="recent-box">
+            <div class="widget-header">
+                <h4 class="widget-title lighter smaller">
+                    @Html.DisplayFor(a => item.Title)
+                </h4>
+            </div>
+            <div>
+            </div>
+            <div class="widget-header">
+                <h4 class="widget-title lighter smaller">
+                    Details
+                </h4>
+                <div>
+                    @Html.DisplayFor(a => item.Summary)
+                </div>
+            </div>
+            <div style="padding-top: 20px">
+            </div>
+            <div>
+
+                <p class="ui-icon-alert alert-success" id="labelSuccessMessage">Successfully Applied!</p>
+                <input type="hidden" id="Userid" value="@Session["UserID"]" />
+                <table id="simple-table" class="table table-striped table-bordered table-hover">
+                    <thead>
+                        <tr>
+
+                            <th width="10%">Start Date</th>
+                            <th width="10%">Due Date</th>
+                            <th width="10%">Rewards</th>
+                            <th width="10%">Amount</th>
+                            <th width="10%">Option</th>
+                            <th width="10%">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>@Html.DisplayFor(a => item.StartDate)</td>
+                            <td>@Html.DisplayFor(a => item.DueDate)</td>
+                            <td>@Html.DisplayFor(a => item.ProposedReward)</td>
+                            <td>@Html.DisplayFor(a => item.Amount)</td>
+                            <td>
+                                <select id="open">
+                                    <option value="false">Open</option>
+                                    <option value="true">Exclusive</option>
+
+                                </select>
+                            </td>
+                            <td><input type="submit" value="Submit" onclick="register()" class="btn btn-minier btn-purple" data-toggle="tooltip" title="Apply for current workitem" /></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    }
+</div>
+
+

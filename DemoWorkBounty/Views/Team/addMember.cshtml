@@ -1,29 +1,84 @@
-﻿@{
-    ViewBag.Title = "addMember";
-    Layout = "~/Views/_LayoutPage1.cshtml";
+﻿@model List<Workbounty.Models.TeamInformation>
+@{
+    ViewBag.Title = "TeamDetail";
+    Layout = "~/Views/_DashboardLayout.cshtml";
 }
+<script src="~/assets/js/getTeamDetail.js"></script>
 <div class="widget-box transparent" id="recent-box">
     <div class="widget-header">
-        <div class="col-xs-10">
-            <h4 class="widget-title lighter smaller">
-             FIND MEMBER 
-             
-            </h4>
-        </div>
-        <div class="row">
-            <div class="col-xs-8">
-                <div id="custom-search-input">
-                    <div class="input-group col-md-8">
-                       <input type="text" class="form-control input-lg" placeholder="Search Member...." />
-                        <span class="input-group-btn">
-                            <button class="btn btn-info btn-lg" type="button">
-                                <i class="glyphicon glyphicon-search"></i>
-                            </button>
-                        </span>
+
+        <div class="col-sm-10">
+            <div class="widget-box transparent">
+                <div class="widget-header">
+                    <div class="col-xs-8">
+                        <h4 class="widget-title lighter smaller">
+                            Add Member
+                        </h4>
                     </div>
+                    <div class="row">
+                        <div class="col-md-1"></div>
+                        <div class="col-sm-9">
+
+                            @foreach (var item in Model)
+                            {
+                                foreach (var user in item.TeamUserList)
+                                {
+                                    <input type="hidden" id="teamID" value="@user.TeamUserInfoID" />
+                                    <input type="hidden" id="teamName" value="@user.TeamName" />
+
+                                }
+                            }
+                     
+                            <input type="hidden" id="Searchid" value="@Session["UserID"]" />
+                            <input type="text" id="itId" size="5" class="col-xs-10 col-sm-5" />
+                            <input type="button" value="Search" onclick="show();" class="btn btn-minier btn-purple layoutcss" />
+                        </div>
+                        <div class=".col-xs-4.col-sm-2 no-padding-right">
+                            <div class="col-xs-4">
+                                <p class="alert alert-warning" id="memberAlreadyExist">Member Already exist</p>
+                                <p class="alert alert-warning" id="noDateFoundMessage"> No member name found!</p>
+                                <table id="simple-table" class="table table-striped table-bordered table-hover">
+                                    <tbody id="items"></tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
             </div>
-       </div>
+        </div>
+
+        <div class="col-xs-10">
+            <h4 class="widget-title lighter smaller"></h4>
+
+            @foreach (var item in Model)
+            {
+                <table id="simple-table1" class="table table-striped table-bordered table-hover">
+                    <tbody>
+                        <tr>
+                            <th>Member</th>
+                            <th>Email</th>
+                            <th>Contact No</th>
+                            <th>Action</th>
+                        </tr>
+                        @foreach (var user in item.TeamUserList)
+                        {
+                            <tr>
+                                <td>@Html.DisplayFor(s => user.FirstName)</td>
+                                <td>@Html.DisplayFor(s => user.Email)</td>
+                                <td>@Html.DisplayFor(s => user.PhoneNumber)</td>
+                                <td><input type="button" id="@user.UserID" value="Delete Member" data-teamuserid="@user.TeamUserInfoID" onclick="removeMember(this);" class="btn btn-minier btn-purple"></td>
+                            </tr>
+                        }
+
+                    </tbody>
+
+                </table>
+            }
+        </div>
+
+        <div class="col-xs-10">
+
+        </div>
     </div>
 </div>
-

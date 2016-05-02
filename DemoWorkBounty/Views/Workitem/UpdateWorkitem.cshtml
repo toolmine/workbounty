@@ -1,0 +1,76 @@
+﻿@model List<Workbounty.Models.UpdateWorkitems>
+@{
+    ViewBag.Title = "Update workitem";
+    Layout = "~/Views/_DashboardLayout.cshtml";
+}
+<ul class="breadcrumb">
+    <li>
+        <i class="ace-icon fa fa-home home-icon"></i>
+        <a href="~/home/dashboard" data_toggle="tooltip" , title="Dashboard">Dashboard</a>
+    </li>
+    <li class="active" data_toggle="tooltip" , title="">Update Workitem</li>
+</ul>
+@if (ViewBag.displayMessage != null)
+{
+    <div class="alert alert-danger" id="alertMessage">
+        <button type="button" class="close" data-dismiss="alert">
+            <i class="ace-icon fa fa-times"></i>
+        </button>
+
+        <strong>
+            <i class="ace-icon fa fa-times"></i>
+            Failed!
+        </strong>
+        Due date is reached. Cannot upload document.
+        <br>
+      
+     </div>
+}
+else
+{
+<h2>Add Document</h2>
+<div class="row">
+    <div class="col-xs-12">
+           @foreach (Workbounty.Models.UpdateWorkitems i in ViewBag.dataForWorkitem)
+            {
+
+                <form class="form-horizontal" role="form" data-toggle="validator" name="Workitemform" id="Workitemform" method="post" enctype="multipart/form-data">
+                    <input type="hidden" id="Workid" name="Workid" value="@i.WorkItemID" />
+                    <div class="widget-header">
+                        <h4 class="smaller">
+                            Title: @Html.DisplayFor(s => i.Title)
+                        </h4>
+                    </div>
+                    <div class="widget-body">
+                        <div class="widget-main">
+                            <p class="muted">
+                                Summary: @Html.DisplayFor(s => i.Summary)
+                            </p>
+                            <hr>
+                            <p class="muted">
+                                <table><tr><td class="padding10px">Attach Documents: </td><td><input type="file" id="myFile" name="myFile" /></td></tr></table>                                 
+                            </p>
+                            <hr />
+                        </div>
+                    </div>
+                       <div class="widget-main">
+                        
+                            <div class="col-sm-9">
+                                
+                            </div>
+                            </div>
+                     
+                    <div class="col-sm-9">
+                        <div class="clearfix">
+                            <button class="btn btn-info" type="submit" data-toggle="tooltip" title="Upload a document">
+                                <i class="ace-icon fa fa-check bigger-110"></i>
+                                Submit
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            }
+        
+    </div>
+</div>
+}

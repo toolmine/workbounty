@@ -3,38 +3,76 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Workbounty.Repository;
+using Workbounty.Models;
+using DemoWorkBounty;
 
-namespace DemoWorkBounty.Controllers
+
+namespace Workbounty.Controllers
 {
     public class TeamController : Controller
     {
-      
-        public ActionResult addMember()
+        TeamRepository teamRepo = new TeamRepository();
+        WorkitemRepository workbountyRepo = new WorkitemRepository();
+        WorkBountyDBEntities6 entity = new WorkBountyDBEntities6();
+
+        public ActionResult AddTeam()
         {
             return View();
         }
 
-        public ActionResult Search()
+        [HttpPost]
+        public JsonResult AddTeam(Team teamData)
         {
-            return View();
+            if(ModelState.IsValid)
+            { 
+            var getTeamList = teamRepo.AddTeamData(teamData);
+            Session["TeamID"] = getTeamList;
+            return Json(getTeamList);
+            }
+            else
+            {
+                return null;
+            }
         }
 
-
-        public ActionResult popup()
+        public ActionResult AddMember(string TeamName)
         {
-            return View();
+            var getTeamDetail = teamRepo.GetTeamDetail(TeamName);
+            return View(getTeamDetail);
         }
 
-        public ActionResult addteam()
+        
+        [HttpPost]
+        public JsonResult AddMember(Team memberData)
         {
-            return View();
+            memberData.TeamUserInfoID =Convert.ToInt32(Session["TeamID"]);
+            var getMemberData = teamRepo.AddMemberData(memberData);
+            return Json(getMemberData);
+
         }
 
-        //[HttpPost]
-        //public JsonResult addteam(Team teamdata)
-        //{
-        //    var responce = repo.AddTeamData(teamData);
-        //    return View();
-        //}
+        [HttpPost]
+        public ActionResult UpdateMember(Team updateMemberData)
+        {
+            var getMemberDetails = teamRepo.UpdateMemberData(updateMemberData);
+            return View(getMemberDetails);
+        }
+
+      public JsonResult FindTeamMember(string id)
+        {
+            var getSearchMemberData = teamRepo.GetMemberResult(id);
+            return Json(getSearchMemberData);
+        }
+
+        [HttpPost]
+        public JsonResult UpdateNewMember(Team updateMemberData)
+      {
+          var getMemberResults = teamRepo.AddUpdateMemberData(updateMemberData);
+          return Json(getMemberResults);
+      }
+
+
+
     }
 }

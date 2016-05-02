@@ -19,7 +19,6 @@ namespace DemoWorkBounty
         public int UserID { get; set; }
         public int WorkitemDistributionID { get; set; }
     
-        public virtual Team Team { get; set; }
         public virtual UserInfo UserInfo { get; set; }
         public virtual Workitem Workitem { get; set; }
     }

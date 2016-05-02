@@ -1,0 +1,63 @@
+﻿@model List<Workbounty.Models.UserProfileInfo>
+@{
+    ViewBag.Title = "ViewUserData";
+    Layout = "~/Views/_DashboardLayout.cshtml";
+}
+@foreach (Workbounty.Models.UserProfileInfo item in ViewBag.getUserData)
+                        {
+<div class="col-xs-12 col-sm-9">
+
+    <h4 class="blue">
+        <span class="middle">Profile</span>
+    </h4>
+
+    <div class="profile-user-info">
+        <div class="profile-info-row">
+            <div class="profile-info-name"> First Name </div>
+
+            <div class="profile-info-value">
+                <span>@Html.DisplayFor(a => item.FirstName)</span>
+            </div>
+        </div>
+
+        <div class="profile-info-row">
+            <div class="profile-info-name"> Email </div>
+
+            <div class="profile-info-value">
+                <i class="fa fa-envelope light-orange bigger-110"></i>
+                <span>@Html.DisplayFor(a=>item.Email)</span>
+            
+            </div>
+        </div>
+
+        <div class="profile-info-row">
+            <div class="profile-info-name"> Contact Number </div>
+
+            <div class="profile-info-value">
+                <i class="fa fa-phone light-orange bigger-110"></i>
+                <span>@Html.DisplayFor(s=>item.PhoneNumber)</span>
+            </div>
+        </div>
+
+        <div class="profile-info-row">
+            <div class="profile-info-name"> Date of Birth </div>
+
+            <div class="profile-info-value">
+                <span>@Html.DisplayFor(s => item.DateOfBirth, "{0:dd/MM/yyyy}")</span>
+            </div>
+        </div>
+
+        <div class="profile-info-row">
+            <div class="profile-info-name"> Interest </div>
+
+            <div class="profile-info-value">
+                <span>@Html.DisplayFor(s=>item.InterestedKeywords)</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="hr hr-8 dotted"></div>
+
+    
+</div>
+}

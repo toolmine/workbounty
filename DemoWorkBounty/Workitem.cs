@@ -43,6 +43,8 @@ namespace DemoWorkBounty
         public virtual UserInfo UserInfo1 { get; set; }
         public virtual Workitem Workitem1 { get; set; }
         public virtual Workitem Workitem2 { get; set; }
+        public virtual Workitem Workitem11 { get; set; }
+        public virtual Workitem Workitem3 { get; set; }
         public virtual ICollection<WorkItemAssignment> WorkItemAssignments { get; set; }
         public virtual ICollection<WorkitemDistribution> WorkitemDistributions { get; set; }
         public virtual ICollection<WorkitemHistory> WorkitemHistories { get; set; }

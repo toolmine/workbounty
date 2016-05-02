@@ -1,0 +1,55 @@
+﻿@model List<Workbounty.Models.Rewards>
+       @{
+    ViewBag.Title = "My rewards";
+    Layout = "~/Views/_DashboardLayout.cshtml";
+}
+
+<ul class="breadcrumb">
+    <li>
+        <i class="ace-icon fa fa-home home-icon"></i>
+        <a href="~/home/dashboard" data_toggle="tooltip" , title="Dashboard">Dashboard</a>
+    </li>
+    <li class="active">My Rewards</li>
+</ul>
+
+<h2></h2>
+<div class="widget-box transparent" id="recent-box">
+    <div class="widget-header">
+        <div class="col-xs-8">
+            <h4 class="widget-title lighter smaller">
+                <i class="menu-icon fa fa-trophy"></i>
+                 My Rewards
+
+            </h4>
+        </div>
+        <div class="row">
+            <div class="col-xs-8">
+                <table id="simple-table" class="table table-striped table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th>Work</th>
+                            <th>Client Name</th>
+                            <th> Reward Item</th>
+                            <th>Amount</th>
+                        </tr>
+                    </thead>
+                    @foreach (var item in Model)
+                    {
+                        <tbody>
+                            <tr>
+
+                                <td>@Html.DisplayFor(a => item.Title)</td>
+                                <td>@Html.DisplayFor(a => item.FirstName)</td>
+                                <td>@Html.DisplayFor(a => item.ProposedReward)</td>
+                                <td>@Html.DisplayFor(a => item.Amount)</td>
+                               
+                            </tr>
+                        </tbody>
+                    }
+                </table>
+            </div>
+        </div>
+        
+    </div>
+</div>
+

@@ -1,10 +1,10 @@
-﻿@model DemoWorkBounty.UserInfo
+﻿@model Workbounty.UserInfo
 @{
     ViewBag.Title = "Signup";
-    Layout = "~/Views/_LayoutPage2.cshtml";
- 
+    Layout = "~/Views/_IndexLayout.cshtml";
 }
 <script src="~/assets/js/jquery-signup.js"></script>
+
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
@@ -15,15 +15,9 @@
                 <div class="login-container">
                     <div class="center">
                     </div>
-
                     <div class="space-6"></div>
                     @Html.AntiForgeryToken()
-                    @if (ViewBag.Message != null)
-                    {
-                        <div style="border:solid 1px green">
-                            @ViewBag.Message
-                        </div>
-                    }
+
                     <div class="position-relative">
                         <div id="signup-box" class="signup-box widget-box no-border">
                             <div class="widget-body">
@@ -32,111 +26,99 @@
                                         <i class="ace-icon fa fa-users blue"></i>
                                         New User Registration
                                     </h4>
+                                    <div class="space-6">
+                                        
 
-                                    <div class="space-6"></div>
+                                    </div>
                                     <p> Enter your details to begin: </p>
-                                    
 
 
                                     <form id="form1">
                                         <fieldset>
-
                                             <label class="block clearfix">
                                                 <span class="block input-icon input-icon-right">
 
-                                                    @Html.TextBoxFor(a => a.Email, new {@id="Email", @class = "form-control", @placeholder = "E mail" })
-
-
+                                                    @Html.TextBoxFor(a => a.Email, new { @id = "Email", @maxlength = "30", @class = "form-control", @placeholder = "E mail", @typeof = "email" })
+                                                    <span id="EmailError" class="text-danger"></span>
                                                 </span>
-                                              @Html.ValidationMessageFor(a=>a.Email)
+
                                             </label>
-
                                             <label class="block clearfix">
                                                 <span class="block input-icon input-icon-right">
-
-                                                    @Html.TextBoxFor(a => a.PhoneNumber, new {@id="PhoneNumber", @class = "form-control", @placeholder = "Number" })
-
+                                                    @Html.TextBoxFor(a => a.PhoneNumber, new { @id = "PhoneNumber", @maxlength = "15", @onkeypress = "return isNumberKey(event)", @class = "form-control", @placeholder = "Number" })
+                                                    <span id="PhoneNumberError" class="text-danger"></span>
                                                 </span>
-                                                @Html.ValidationMessageFor(a => a.PhoneNumber)
+
                                             </label>
-
                                             <label class="block clearfix">
                                                 <span class="block input-icon input-icon-right">
-                                                    @Html.TextBoxFor(a => a.FirstName, new {@id="FirstName", @class = "form-control", @placeholder = "First Name" })
+                                                    @Html.TextBoxFor(a => a.FirstName, new { @id = "FirstName", @maxlength = "30", @onkeypress = "return isTextKey(event)", @class = "form-control", @placeholder = "First Name" })
+                                                    <span id="FirstNameError" class="text-danger"></span>
                                                 </span>
-                                                @Html.ValidationMessageFor(a => a.FirstName)
+
                                             </label>
-
                                             <label class="block clearfix">
                                                 <span class="block input-icon input-icon-right">
-                                                    @Html.TextBoxFor(a => a.LastName, new {@id="LastName", @class = "form-control", @placeholder = "Last Name" })
-
+                                                    @Html.TextBoxFor(a => a.LastName, new { @id = "LastName", @maxlength = "30", @onkeypress = "return isTextKey(event)", @class = "form-control", @placeholder = "Last Name" })
+                                                    <span id="LastNameError" class="text-danger"></span>
                                                 </span>
-                                                @Html.ValidationMessageFor(a => a.LastName)
+
                                             </label>
                                             <div class="block clearfix">
                                                 <div class="hero-unit">
-                                                 
-                                                   @Html.TextBoxFor(a => a.DateOfBirth, new { @class = "form-control hasDatepicker", @placeholder = "Date of Birth", @id = "DateSelect", @name = "DateofBirth", onclick = "DatePicker();return false;" })
 
+                                                    @Html.TextBoxFor(a => a.DateOfBirth, new { @class = "form-control datepicker", @onkeypress = "return noDataKey(event)", @maxlength = "15", @placeholder = "Date of Birth", @id = "DateSelect", @name = "DateofBirth" })
+                                                    <span id="DateofBirthError" class="text-danger"></span>
                                                 </div>
                                             </div>
-                                            @Html.ValidationMessageFor(a => a.DateOfBirth)
-                                            <label class="block clearfix">
-                                                <span class="block input-icon input-icon-right">
-                                                    @Html.PasswordFor(a => a.Password, new {@id="Password", @class = "form-control", @placeholder = "Password" })
-                                                </span>
-                                                @Html.ValidationMessageFor(a => a.Password)
-                                            </label>
-                                            <label class="block clearfix">
-                                                <span class="block input-icon input-icon-right">
-                                                    @Html.TextBoxFor(a => a.InterestedKeywords, new { @id = "InterestedKeywords", @class = "form-control", @placeholder = "Interested Keywords" })
 
+                                            <label class="block clearfix" style="padding-top:5px;">
+                                                <span class="block input-icon input-icon-right">
+                                                    @Html.PasswordFor(a => a.Password, new { @id = "Password", @maxlength = "20", @class = "form-control", @placeholder = "Password" })
+                                                    <span id="PasswordError" class="text-danger"></span>
                                                 </span>
-                                                @Html.ValidationMessageFor(a => a.InterestedKeywords)
+
                                             </label>
 
+                                            <label class="block clearfix">
+                                                <span class="block input-icon input-icon-right">
+                                                    @Html.PasswordFor(a => a.Password, new { @id = "ConfirmPassword", @maxlength = "20", @class = "form-control", @placeholder = "Confirm Password" })
+                                                    <span id="ConfirmPasswordError" class="text-danger"></span>
+                                                </span>
+
+                                            </label>
+                                          
+                                              <label class="block clearfix">
+                                                <span class="block input-icon input-icon-right">
+                                                    @Html.TextBoxFor(a => a.InterestedKeywords, new { @id = "InterestedKeywords", @maxlength = "10", @class = "form-control", @placeholder = "Interested Keywords" })
+                                                    <span id="InterestedKeywordsError" class="text-danger"></span>
+                                                </span>
+
+                                            </label>
                                             <div class="space-6"></div>
-
                                             <div class="clearfix">
-
                                                 <div>
-                           
 
                                                     <a href="~/Home/Login" class="user-signup-link">
                                                         <i class="ace-icon fa fa-arrow-left"></i> Back To login
 
                                                     </a>
+                                                    <input id="btnSubmit" type="submit" class="btn btn-primary pull-right" value="Signup" />
 
-                                                    <button type="submit" class="width-35 pull-right btn btn-sm btn-primary" id="btnSave" onclick="AddUserData(); return false;">
-                                                        <i class="ace-icon fa fa-key"></i>
-                                                        <span class="bigger-110">Signup</span>
-                                                    </button>
                                                 </div>
-
 
                                             </div>
                                         </fieldset>
                                     </form>
                                 </div>
-
                             </div>
                         </div>
-
                     </div>
 
-
                 </div>
-            </div><!-- /.col -->
-        </div><!-- /.row -->
-    </div><!-- /.main-content -->
-    <!-- basic scripts -->
-    <!--[if !IE]> -->
-    <script src="assets/js/jquery.2.1.1.min.js"></script>
-   
+            </div>
+        </div>
+    </div>
 
-
-
-    
 }
 

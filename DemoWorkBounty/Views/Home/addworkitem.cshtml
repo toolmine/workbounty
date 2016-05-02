@@ -1,107 +1,112 @@
-﻿@model DemoWorkBounty.Workitem
+﻿@model Workbounty.Workitem
 @using System.Net
-@using System.Web
+@using System.Web     
 
 @{
-    ViewBag.Title = "addworkitem";
-    Layout = "~/Views/_LayoutPage1.cshtml";
+    ViewBag.Title = "Add workitem";
+    Layout = "~/Views/_DashboardLayout.cshtml";
 }
-
 <head>
     <title></title>
-    <script src="~/assets/js/datepicker.js"></script>
-
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+    <script src="~/assets/js/jquery-addworkitem.js"></script>
     <script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
     <script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
+  
+
 </head>
+
+<ul class="breadcrumb">
+    <li>
+        <i class="ace-icon fa fa-home home-icon"></i>
+        <a href="~/home/dashboard" data_toggle="tooltip" , title="Dashboard">Dashboard</a>
+    </li>
+    <li class="active">Add workitem</li>
+</ul>
+
 <h2></h2>
-
-
-
 <div class="col-xs-8">
     <h4 class="widget-title lighter smaller">
-        <i class="ace-icon"></i> Add work item
+        <i class="menu-icon fa fa-plus-circle"></i>
+        Add Workitem
 
     </h4>
+
 </div>
 <div class="row">
     <div class="col-xs-12">
+        <div class="alert alert-danger" id="alertMessage">
+            <button type="button" class="close" data-dismiss="alert">
+                <i class="ace-icon fa fa-times"></i>
+            </button>
 
+            <strong>
+                <i class="ace-icon fa fa-times"></i>
+                Failed!
+            </strong>
+                   Workitem could not saved.
+            <br>
+        </div>
         <form class="form-horizontal" role="form" data-toggle="validator" name="Workitemform">
             <div class="form-group">
-                <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Title <span style="color:red;">*</span></label>
-
+                <label class="col-sm-3 control-label no-padding-right required" for="form-field-1"> Title </label>
                 <div class="col-sm-9">
-                    <input type="text" id="Title" placeholder="" class="col-xs-10 col-sm-5" />
-                    @*@Html.ValidationMessageFor(model => model.Title)*@
+                    <input type="hidden" id="Userid" value="@Session["UserID"]" />
+                    <input type="text" id="Title" placeholder="" maxlength="50"  class="col-xs-10 col-sm-5" required="required" />
+                    <span id="TitleError" class="text-danger"></span>
                 </div>
             </div>
 
             <div class="form-group">
-                <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Summary<span style="color:red;">*</span> </label>
-
+                <label class="col-sm-3 control-label no-padding-right required" for="form-field-1"> Summary </label>
                 <div class="col-sm-9">
                     <textarea rows="4" id="Summary" class="col-xs-10 col-sm-5"></textarea>
-                    @*@Html.ValidationMessageFor(model => model.Summary)*@
+                    <span id="SummaryError" class="text-danger"></span>
                 </div>
             </div>
-
 
             <div class="form-group">
-                <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Start date<span style="color:red;">*</span></label>
-
+                <label class="col-sm-3 control-label no-padding-right required" for=" form-field-1"> Start date </label>
                 <div class="col-sm-9">
-                    <input type="date" id="StartDate" placeholder="Start Date" class="col-xs-10 col-sm-5" />
-                    @*@Html.ValidationMessageFor(model => model.StartDate)*@
+                    @Html.TextBoxFor(a => a.StartDate, new { @class = "col-xs-10 col-sm-5 datepickers", @maxlength = "25", onkeypress = "return noDataKey(event)", @id = "StartDate", @placeholder = "Start Date" })
+                    <span id="StartdateError" class="text-danger"></span>
                 </div>
             </div>
+
             <div class="form-group">
-                <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Expected completion date<span style="color:red;">*</span></label>
+                <label class="col-sm-3 control-label no-padding-right required" for=" form-field-1"> Due date </label>
                 <div class="col-sm-9">
-
-
-                    <input type="date" id="DueDate" placeholder="Expected completion date" class="col-xs-10 col-sm-5" />
-                    @*@Html.ValidationMessageFor(model => model.DueDate)*@
+                    @Html.TextBoxFor(a => a.DueDate, new { @class = "col-xs-10 col-sm-5 datepickers", @maxlength = "25", onkeypress = "return noDataKey(event)", @id = "DueDate", @placeholder = "End of completion Date" })
+                    <span id="StartdateError" class="text-danger"></span>
                 </div>
             </div>
-
 
             <div class="form-group">
                 <label for="form-field-select-3" class="col-sm-3 control-label no-padding-right">Published to</label>
 
-
                 <div class="col-sm-9">
-                    @Html.DropDownList("TeamName1")
+                    @Html.DropDownList("TeamList")
                 </div>
             </div>
-
 
             <div class="form-group">
                 <label class="col-sm-3 control-label no-padding-right" for="form-field-1">Addition attachments  </label>
                 <div class="col-sm-9">
                     <input multiple="" type="file" id="myFile" />
-
                 </div>
             </div>
 
-
             <div class="form-group">
-                <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Rewards<span style="color:red;">*</span></label>
-
+                <label class="col-sm-3 control-label no-padding-right required" for="form-field-1"> Rewards</label>
 
                 <div class="col-sm-9">
                     <div class="hidden-sm hidden-xs btn-group">
+                        <button type="button" class="btn btn-minier btn-purple bigger-110" data-toggle="modal" data-target="#myModal" title="Choose a voucher and amount">Reward Options</button>
 
-                        <button type="button" class="btn btn-minier btn-purple bigger-110" data-toggle="modal" data-target="#myModal">Reward Options</button>
-
-
+                        <span id="AmountError" class="text-danger"></span>
 
                         <div class="container">
-
                             <div class="modal" id="myModal" role="dialog">
                                 <div class="modal-dialog modal-lg">
-
                                     <!-- Modal content-->
                                     <div class="modal-content">
                                         <div class="modal-header">
@@ -119,7 +124,6 @@
                                                         <input name="formfieldradio" type="radio" class="" value="McDonald's" id="2" />
                                                         <span class="lbl"><img src="~/img/McDonald's_Golden_Arches.svg.png" class="imgpopup"></span>
                                                     </td>
-
                                                     <td>
                                                         <input name="formfieldradio" type="radio" class="" value="PayTM" id="3" />
                                                         <span class="lbl"><img src="~/img/VFsaWo_G.jpeg" class="imgpopup" /></span>
@@ -135,12 +139,10 @@
                                                         <span class="lbl"> <img src="~/img/Paypal_2014_logo.png" class="imgpopup" /></span>
                                                     </td>
 
-
                                                     <td>
                                                         <input name="formfieldradio" type="radio" class="" value="American Express" id="6" />
                                                         <span class="lbl"><img src="~/img/americanexpress.jpg" class="imgpopup" /></span>
                                                     </td>
-
                                                     <td>
                                                         <input name="formfieldradio" type="radio" class="" value="Western Union" id="7" />
                                                         <span class="lbl"><img src="~/img/Western-Union-logo-old.jpg" class="imgpopup" /></span>
@@ -155,12 +157,10 @@
                                                         <input name="formfieldradio" type="radio" class="" value="Bitcoin" id="9" />
                                                         <span class="lbl"><img src="~/img/bitcoin.jpg" class="imgpopup" /></span>
                                                     </td>
-
                                                     <td>
                                                         <input name="formfieldradio" type="radio" class="" value="Amazon" id="10" />
                                                         <span class="lbl"><img src="~/img/amazon-dgmag.png" class="imgpopup" /></span>
                                                     </td>
-
                                                     <td>
                                                         <input name="formfieldradio" type="radio" class="" value="Dominos" id="11" />
                                                         <span class="lbl"><img src="~/img/2000px-Dominos_pizza_logo.svg.png" class="imgpopup" /></span>
@@ -171,15 +171,12 @@
                                                     </td>
                                                 </tr>
                                             </table>
-
-                                            <label for="form-field-1"> Amount <span style="color:red;">*</span></label>
+                                            <label class="required" for="form-field-1"> Amount </label>
                                             <label>
-                                                <input type="text" id="amount" placeholder="" />
+                                                <input type="text" id="amount" placeholder="" onkeypress="return isNumberKey(event)" maxlength="10" />
                                             </label>
-
-                                            <input type="button" class="btn btn-info btn-xs ace-icon fa fa-check bigger-110" id="btn" value="Save" />
-                                            <input type="reset" class="btn btn-xs ace-icon fa fa-undo bigger-110" value="Reset" />
-
+                                            <input type="button" class="btn btn-info btn-xs ace-icon fa fa-check bigger-110" id="btn" value="Save" data_toggle="tooltip" , title="Submit data" />
+                                            <input type="reset" class="btn btn-xs ace-icon fa fa-undo bigger-110" value="Reset" data_toggle="tooltip" , title="Reset data" />
                                         </div>
                                     </div>
                                 </div>
@@ -191,98 +188,25 @@
 
             <div id="result"></div>
 
-
             <div class="form-group">
-
                 <label class="col-sm-3 control-label no-padding-right" for="form-field-1"></label>
                 <div class="col-sm-9">
                     <div class="clearfix">
-                        <input type="hidden" id="Userid" value="@Session["UserID"]" />
+                       
                         <button class="btn btn-info" type="submit" onclick="AddWorkitem(); return false;">
                             <i class="ace-icon fa fa-check bigger-110"></i>
                             Submit
                         </button>
-
-                        <button class="btn btn-info" type="button">
-                            <i class="ace-icon fa fa-file bigger-110"></i>
-                            Save
-                        </button>
-
-
                         <button class="btn" type="reset">
                             <i class="ace-icon fa fa-undo bigger-110"></i>
                             Reset
                         </button>
-
                     </div>
                 </div>
             </div>
         </form>
     </div>
 </div>
-
-
-
-
-
-
-<script type="text/javascript">
-    var radioValue;
-    var amount;
-    var filepath;
-
-    $(document).ready(function () {
-
-        $("#btn").click(function () {
-
-            var radioValue = $("input[name='formfieldradio']:checked").val();
-            var amount = $("#amount").val();
-            sessionStorage.setItem('key1', radioValue);
-            sessionStorage.setItem('key2', amount);
-            $("#myModal").fadeOut();
-        });
-    });
-
-
-
-    function AddWorkitem() {
-
-        var d = new Date();
-        var item = {
-            "Title": $("#Title").val(),
-            "Summary": $("#Summary").val(),
-            "StartDate": $("#StartDate").val(),
-            "DueDate": $("#DueDate").val(),
-            "PublishedTo": $("#TeamName1").val(),
-            "DocumentFilePath": document.getElementById("myFile").value,
-            "ProposedReward": sessionStorage.getItem('key1'),
-            "Amount": sessionStorage.getItem('key2'),
-            "CreatedBy": document.getElementById("Userid").value,
-            "CreatedDateTime": d.toDateString(),
-            "ModifyBy": document.getElementById("Userid").value,
-            "ModifyDateTime": d.toDateString(),
-            "Status": true,
-            "Remarks": "Good",
-            "IsOpenForGroup": true
-        };
-       
-        $.ajax({
-            type: "POST",
-            url: '/api/AddWorkitem/',
-            data: JSON.stringify(item),
-            contentType: "application/json;charset=utf-8",
-            processData: true,
-            success: function (data, status, xhr) {
-                alert("The result is : " + status);
-            },
-            error: function (xhr) {
-                alert(xhr.responseText);
-            }
-        });
-    }
-</script>
-
-
 
 
 

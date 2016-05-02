@@ -1,0 +1,926 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="WorkBountyDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="Team">
+          <Key>
+            <PropertyRef Name="TeamID" />
+          </Key>
+          <Property Name="TeamID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TeamName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="UserID" Type="int" Nullable="false" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="TeamUserInfoID" Type="int" />
+        </EntityType>
+        <EntityType Name="UserInfo">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Password" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="DateOfBirth" Type="date" Nullable="false" />
+          <Property Name="PhoneNumber" Type="nvarchar" MaxLength="25" Nullable="false" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="InterestedKeywords" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Workitem">
+          <Key>
+            <PropertyRef Name="WorkitemID" />
+          </Key>
+          <Property Name="WorkitemID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Summary" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="StartDate" Type="date" Nullable="false" />
+          <Property Name="DueDate" Type="date" Nullable="false" />
+          <Property Name="PublishedTo" Type="int" Nullable="false" />
+          <Property Name="DocumentFilePath" Type="nvarchar" MaxLength="250" Nullable="false" />
+          <Property Name="ProposedReward" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Amount" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="CreatedBy" Type="int" Nullable="false" />
+          <Property Name="CreatedDateTime" Type="datetime" Nullable="false" />
+          <Property Name="ModifyBy" Type="int" Nullable="false" />
+          <Property Name="ModifyDateTime" Type="datetime" Nullable="false" />
+          <Property Name="Status" Type="bit" Nullable="false" />
+          <Property Name="Remarks" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="IsOpenForGroup" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="WorkItemAssignment">
+          <Key>
+            <PropertyRef Name="WorkItemAssignmentID" />
+          </Key>
+          <Property Name="WorkItemAssignmentID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="WorkItemID" Type="int" Nullable="false" />
+          <Property Name="UserID" Type="int" Nullable="false" />
+          <Property Name="SubmissionPath" Type="nvarchar" MaxLength="250" Nullable="false" />
+          <Property Name="IsRewarded" Type="bit" Nullable="false" />
+          <Property Name="SubmissionDateTime" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="WorkitemDistribution">
+          <Key>
+            <PropertyRef Name="WorkitemDistributionID" />
+          </Key>
+          <Property Name="WorkitemID" Type="int" Nullable="false" />
+          <Property Name="TeamID" Type="int" Nullable="false" />
+          <Property Name="UserID" Type="int" Nullable="false" />
+          <Property Name="WorkitemDistributionID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <EntityType Name="WorkitemHistory">
+          <Key>
+            <PropertyRef Name="WorkitemHistoryID" />
+          </Key>
+          <Property Name="WorkitemID" Type="int" Nullable="false" />
+          <Property Name="WorkitemStatusID" Type="int" Nullable="false" />
+          <Property Name="UpdatedBy" Type="int" Nullable="false" />
+          <Property Name="UpdatedDateTIme" Type="datetime" Nullable="false" />
+          <Property Name="WorkitemHistoryID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <EntityType Name="WorkitemRegistration">
+          <Key>
+            <PropertyRef Name="WorkitemRegistrationID" />
+          </Key>
+          <Property Name="WorkitemID" Type="int" Nullable="false" />
+          <Property Name="UserID" Type="int" Nullable="false" />
+          <Property Name="IsExclusive" Type="bit" Nullable="false" />
+          <Property Name="IsFavourite" Type="bit" Nullable="false" />
+          <Property Name="IsRegistered" Type="bit" Nullable="false" />
+          <Property Name="WorkitemRegistrationID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <EntityType Name="WorkitemStatus">
+          <Key>
+            <PropertyRef Name="WorkitemStatusID" />
+          </Key>
+          <Property Name="WorkitemStatusID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="StatusDescription" Type="nvarchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Team_Team">
+          <End Role="Team" Type="Self.Team" Multiplicity="1" />
+          <End Role="Team1" Type="Self.Team" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Team">
+              <PropertyRef Name="TeamID" />
+            </Principal>
+            <Dependent Role="Team1">
+              <PropertyRef Name="TeamID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Team_UserInfo">
+          <End Role="UserInfo" Type="Self.UserInfo" Multiplicity="1" />
+          <End Role="Team" Type="Self.Team" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserInfo">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="Team">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserInfo_UserInfo">
+          <End Role="UserInfo" Type="Self.UserInfo" Multiplicity="1" />
+          <End Role="UserInfo1" Type="Self.UserInfo" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="UserInfo">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="UserInfo1">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Workitem_UserInfo1">
+          <End Role="UserInfo" Type="Self.UserInfo" Multiplicity="1" />
+          <End Role="Workitem" Type="Self.Workitem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserInfo">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="Workitem">
+              <PropertyRef Name="CreatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Workitem_UserInfo2">
+          <End Role="UserInfo" Type="Self.UserInfo" Multiplicity="1" />
+          <End Role="Workitem" Type="Self.Workitem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserInfo">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="Workitem">
+              <PropertyRef Name="ModifyBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Workitem_Workitem">
+          <End Role="Workitem" Type="Self.Workitem" Multiplicity="1" />
+          <End Role="Workitem1" Type="Self.Workitem" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Workitem">
+              <PropertyRef Name="WorkitemID" />
+            </Principal>
+            <Dependent Role="Workitem1">
+              <PropertyRef Name="WorkitemID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Workitem_Workitem1">
+          <End Role="Workitem" Type="Self.Workitem" Multiplicity="1" />
+          <End Role="Workitem1" Type="Self.Workitem" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Workitem">
+              <PropertyRef Name="WorkitemID" />
+            </Principal>
+            <Dependent Role="Workitem1">
+              <PropertyRef Name="WorkitemID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WorkItemAssignment_UserInfo">
+          <End Role="UserInfo" Type="Self.UserInfo" Multiplicity="1" />
+          <End Role="WorkItemAssignment" Type="Self.WorkItemAssignment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserInfo">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="WorkItemAssignment">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WorkItemAssignment_Workitem">
+          <End Role="Workitem" Type="Self.Workitem" Multiplicity="1" />
+          <End Role="WorkItemAssignment" Type="Self.WorkItemAssignment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Workitem">
+              <PropertyRef Name="WorkitemID" />
+            </Principal>
+            <Dependent Role="WorkItemAssignment">
+              <PropertyRef Name="WorkItemID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WorkitemDistribution_UserInfo">
+          <End Role="UserInfo" Type="Self.UserInfo" Multiplicity="1" />
+          <End Role="WorkitemDistribution" Type="Self.WorkitemDistribution" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserInfo">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="WorkitemDistribution">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WorkitemDistribution_Workitem">
+          <End Role="Workitem" Type="Self.Workitem" Multiplicity="1" />
+          <End Role="WorkitemDistribution" Type="Self.WorkitemDistribution" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Workitem">
+              <PropertyRef Name="WorkitemID" />
+            </Principal>
+            <Dependent Role="WorkitemDistribution">
+              <PropertyRef Name="WorkitemID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WorkitemHistory_UserInfo">
+          <End Role="UserInfo" Type="Self.UserInfo" Multiplicity="1" />
+          <End Role="WorkitemHistory" Type="Self.WorkitemHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserInfo">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="WorkitemHistory">
+              <PropertyRef Name="UpdatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WorkitemHistory_Workitem">
+          <End Role="Workitem" Type="Self.Workitem" Multiplicity="1" />
+          <End Role="WorkitemHistory" Type="Self.WorkitemHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Workitem">
+              <PropertyRef Name="WorkitemID" />
+            </Principal>
+            <Dependent Role="WorkitemHistory">
+              <PropertyRef Name="WorkitemID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WorkitemHistory_WorkitemStatus">
+          <End Role="WorkitemStatus" Type="Self.WorkitemStatus" Multiplicity="1" />
+          <End Role="WorkitemHistory" Type="Self.WorkitemHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WorkitemStatus">
+              <PropertyRef Name="WorkitemStatusID" />
+            </Principal>
+            <Dependent Role="WorkitemHistory">
+              <PropertyRef Name="WorkitemStatusID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WorkitemRegistration_UserInfo">
+          <End Role="UserInfo" Type="Self.UserInfo" Multiplicity="1" />
+          <End Role="WorkitemRegistration" Type="Self.WorkitemRegistration" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserInfo">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="WorkitemRegistration">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WorkitemRegistration_Workitem">
+          <End Role="Workitem" Type="Self.Workitem" Multiplicity="1" />
+          <End Role="WorkitemRegistration" Type="Self.WorkitemRegistration" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Workitem">
+              <PropertyRef Name="WorkitemID" />
+            </Principal>
+            <Dependent Role="WorkitemRegistration">
+              <PropertyRef Name="WorkitemID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="WorkBountyDBModelStoreContainer">
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Team" EntityType="Self.Team" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserInfo" EntityType="Self.UserInfo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Workitem" EntityType="Self.Workitem" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="WorkItemAssignment" EntityType="Self.WorkItemAssignment" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="WorkitemDistribution" EntityType="Self.WorkitemDistribution" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="WorkitemHistory" EntityType="Self.WorkitemHistory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="WorkitemRegistration" EntityType="Self.WorkitemRegistration" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="WorkitemStatus" EntityType="Self.WorkitemStatus" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Team_Team" Association="Self.FK_Team_Team">
+            <End Role="Team" EntitySet="Team" />
+            <End Role="Team1" EntitySet="Team" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Team_UserInfo" Association="Self.FK_Team_UserInfo">
+            <End Role="UserInfo" EntitySet="UserInfo" />
+            <End Role="Team" EntitySet="Team" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserInfo_UserInfo" Association="Self.FK_UserInfo_UserInfo">
+            <End Role="UserInfo" EntitySet="UserInfo" />
+            <End Role="UserInfo1" EntitySet="UserInfo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Workitem_UserInfo1" Association="Self.FK_Workitem_UserInfo1">
+            <End Role="UserInfo" EntitySet="UserInfo" />
+            <End Role="Workitem" EntitySet="Workitem" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Workitem_UserInfo2" Association="Self.FK_Workitem_UserInfo2">
+            <End Role="UserInfo" EntitySet="UserInfo" />
+            <End Role="Workitem" EntitySet="Workitem" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Workitem_Workitem" Association="Self.FK_Workitem_Workitem">
+            <End Role="Workitem" EntitySet="Workitem" />
+            <End Role="Workitem1" EntitySet="Workitem" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Workitem_Workitem1" Association="Self.FK_Workitem_Workitem1">
+            <End Role="Workitem" EntitySet="Workitem" />
+            <End Role="Workitem1" EntitySet="Workitem" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WorkItemAssignment_UserInfo" Association="Self.FK_WorkItemAssignment_UserInfo">
+            <End Role="UserInfo" EntitySet="UserInfo" />
+            <End Role="WorkItemAssignment" EntitySet="WorkItemAssignment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WorkItemAssignment_Workitem" Association="Self.FK_WorkItemAssignment_Workitem">
+            <End Role="Workitem" EntitySet="Workitem" />
+            <End Role="WorkItemAssignment" EntitySet="WorkItemAssignment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WorkitemDistribution_UserInfo" Association="Self.FK_WorkitemDistribution_UserInfo">
+            <End Role="UserInfo" EntitySet="UserInfo" />
+            <End Role="WorkitemDistribution" EntitySet="WorkitemDistribution" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WorkitemDistribution_Workitem" Association="Self.FK_WorkitemDistribution_Workitem">
+            <End Role="Workitem" EntitySet="Workitem" />
+            <End Role="WorkitemDistribution" EntitySet="WorkitemDistribution" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WorkitemHistory_UserInfo" Association="Self.FK_WorkitemHistory_UserInfo">
+            <End Role="UserInfo" EntitySet="UserInfo" />
+            <End Role="WorkitemHistory" EntitySet="WorkitemHistory" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WorkitemHistory_Workitem" Association="Self.FK_WorkitemHistory_Workitem">
+            <End Role="Workitem" EntitySet="Workitem" />
+            <End Role="WorkitemHistory" EntitySet="WorkitemHistory" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WorkitemHistory_WorkitemStatus" Association="Self.FK_WorkitemHistory_WorkitemStatus">
+            <End Role="WorkitemStatus" EntitySet="WorkitemStatus" />
+            <End Role="WorkitemHistory" EntitySet="WorkitemHistory" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WorkitemRegistration_UserInfo" Association="Self.FK_WorkitemRegistration_UserInfo">
+            <End Role="UserInfo" EntitySet="UserInfo" />
+            <End Role="WorkitemRegistration" EntitySet="WorkitemRegistration" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WorkitemRegistration_Workitem" Association="Self.FK_WorkitemRegistration_Workitem">
+            <End Role="Workitem" EntitySet="Workitem" />
+            <End Role="WorkitemRegistration" EntitySet="WorkitemRegistration" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="WorkBountyDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Team">
+          <Key>
+            <PropertyRef Name="TeamID" />
+          </Key>
+          <Property Name="TeamID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TeamName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="UserID" Type="Int32" Nullable="false" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="TeamUserInfoID" Type="Int32" />
+          <NavigationProperty Name="Team1" Relationship="Self.FK_Team_Team" FromRole="Team" ToRole="Team1" />
+          <NavigationProperty Name="Team2" Relationship="Self.FK_Team_Team" FromRole="Team1" ToRole="Team" />
+          <NavigationProperty Name="UserInfo" Relationship="Self.FK_Team_UserInfo" FromRole="Team" ToRole="UserInfo" />
+        </EntityType>
+        <EntityType Name="UserInfo">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="FirstName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="LastName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="DateOfBirth" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="25" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="InterestedKeywords" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Teams" Relationship="Self.FK_Team_UserInfo" FromRole="UserInfo" ToRole="Team" />
+          <NavigationProperty Name="UserInfo1" Relationship="Self.FK_UserInfo_UserInfo" FromRole="UserInfo" ToRole="UserInfo1" />
+          <NavigationProperty Name="UserInfo2" Relationship="Self.FK_UserInfo_UserInfo" FromRole="UserInfo1" ToRole="UserInfo" />
+          <NavigationProperty Name="Workitems" Relationship="Self.FK_Workitem_UserInfo1" FromRole="UserInfo" ToRole="Workitem" />
+          <NavigationProperty Name="Workitems1" Relationship="Self.FK_Workitem_UserInfo2" FromRole="UserInfo" ToRole="Workitem" />
+          <NavigationProperty Name="WorkItemAssignments" Relationship="Self.FK_WorkItemAssignment_UserInfo" FromRole="UserInfo" ToRole="WorkItemAssignment" />
+          <NavigationProperty Name="WorkitemDistributions" Relationship="Self.FK_WorkitemDistribution_UserInfo" FromRole="UserInfo" ToRole="WorkitemDistribution" />
+          <NavigationProperty Name="WorkitemHistories" Relationship="Self.FK_WorkitemHistory_UserInfo" FromRole="UserInfo" ToRole="WorkitemHistory" />
+          <NavigationProperty Name="WorkitemRegistrations" Relationship="Self.FK_WorkitemRegistration_UserInfo" FromRole="UserInfo" ToRole="WorkitemRegistration" />
+        </EntityType>
+        <EntityType Name="Workitem">
+          <Key>
+            <PropertyRef Name="WorkitemID" />
+          </Key>
+          <Property Name="WorkitemID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Summary" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="StartDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="DueDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="PublishedTo" Type="Int32" Nullable="false" />
+          <Property Name="DocumentFilePath" Type="String" MaxLength="250" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ProposedReward" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Amount" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+          <Property Name="CreatedDateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ModifyBy" Type="Int32" Nullable="false" />
+          <Property Name="ModifyDateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Status" Type="Boolean" Nullable="false" />
+          <Property Name="Remarks" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="IsOpenForGroup" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="UserInfo" Relationship="Self.FK_Workitem_UserInfo1" FromRole="Workitem" ToRole="UserInfo" />
+          <NavigationProperty Name="UserInfo1" Relationship="Self.FK_Workitem_UserInfo2" FromRole="Workitem" ToRole="UserInfo" />
+          <NavigationProperty Name="Workitem1" Relationship="Self.FK_Workitem_Workitem" FromRole="Workitem" ToRole="Workitem1" />
+          <NavigationProperty Name="Workitem2" Relationship="Self.FK_Workitem_Workitem" FromRole="Workitem1" ToRole="Workitem" />
+          <NavigationProperty Name="Workitem11" Relationship="Self.FK_Workitem_Workitem1" FromRole="Workitem" ToRole="Workitem1" />
+          <NavigationProperty Name="Workitem3" Relationship="Self.FK_Workitem_Workitem1" FromRole="Workitem1" ToRole="Workitem" />
+          <NavigationProperty Name="WorkItemAssignments" Relationship="Self.FK_WorkItemAssignment_Workitem" FromRole="Workitem" ToRole="WorkItemAssignment" />
+          <NavigationProperty Name="WorkitemDistributions" Relationship="Self.FK_WorkitemDistribution_Workitem" FromRole="Workitem" ToRole="WorkitemDistribution" />
+          <NavigationProperty Name="WorkitemHistories" Relationship="Self.FK_WorkitemHistory_Workitem" FromRole="Workitem" ToRole="WorkitemHistory" />
+          <NavigationProperty Name="WorkitemRegistrations" Relationship="Self.FK_WorkitemRegistration_Workitem" FromRole="Workitem" ToRole="WorkitemRegistration" />
+        </EntityType>
+        <EntityType Name="WorkItemAssignment">
+          <Key>
+            <PropertyRef Name="WorkItemAssignmentID" />
+          </Key>
+          <Property Name="WorkItemAssignmentID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="WorkItemID" Type="Int32" Nullable="false" />
+          <Property Name="UserID" Type="Int32" Nullable="false" />
+          <Property Name="SubmissionPath" Type="String" MaxLength="250" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="IsRewarded" Type="Boolean" Nullable="false" />
+          <Property Name="SubmissionDateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="UserInfo" Relationship="Self.FK_WorkItemAssignment_UserInfo" FromRole="WorkItemAssignment" ToRole="UserInfo" />
+          <NavigationProperty Name="Workitem" Relationship="Self.FK_WorkItemAssignment_Workitem" FromRole="WorkItemAssignment" ToRole="Workitem" />
+        </EntityType>
+        <EntityType Name="WorkitemDistribution">
+          <Key>
+            <PropertyRef Name="WorkitemDistributionID" />
+          </Key>
+          <Property Name="WorkitemID" Type="Int32" Nullable="false" />
+          <Property Name="TeamID" Type="Int32" Nullable="false" />
+          <Property Name="UserID" Type="Int32" Nullable="false" />
+          <Property Name="WorkitemDistributionID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="UserInfo" Relationship="Self.FK_WorkitemDistribution_UserInfo" FromRole="WorkitemDistribution" ToRole="UserInfo" />
+          <NavigationProperty Name="Workitem" Relationship="Self.FK_WorkitemDistribution_Workitem" FromRole="WorkitemDistribution" ToRole="Workitem" />
+        </EntityType>
+        <EntityType Name="WorkitemHistory">
+          <Key>
+            <PropertyRef Name="WorkitemHistoryID" />
+          </Key>
+          <Property Name="WorkitemID" Type="Int32" Nullable="false" />
+          <Property Name="WorkitemStatusID" Type="Int32" Nullable="false" />
+          <Property Name="UpdatedBy" Type="Int32" Nullable="false" />
+          <Property Name="UpdatedDateTIme" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="WorkitemHistoryID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="UserInfo" Relationship="Self.FK_WorkitemHistory_UserInfo" FromRole="WorkitemHistory" ToRole="UserInfo" />
+          <NavigationProperty Name="Workitem" Relationship="Self.FK_WorkitemHistory_Workitem" FromRole="WorkitemHistory" ToRole="Workitem" />
+          <NavigationProperty Name="WorkitemStatu" Relationship="Self.FK_WorkitemHistory_WorkitemStatus" FromRole="WorkitemHistory" ToRole="WorkitemStatus" />
+        </EntityType>
+        <EntityType Name="WorkitemRegistration">
+          <Key>
+            <PropertyRef Name="WorkitemRegistrationID" />
+          </Key>
+          <Property Name="WorkitemID" Type="Int32" Nullable="false" />
+          <Property Name="UserID" Type="Int32" Nullable="false" />
+          <Property Name="IsExclusive" Type="Boolean" Nullable="false" />
+          <Property Name="IsFavourite" Type="Boolean" Nullable="false" />
+          <Property Name="IsRegistered" Type="Boolean" Nullable="false" />
+          <Property Name="WorkitemRegistrationID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="UserInfo" Relationship="Self.FK_WorkitemRegistration_UserInfo" FromRole="WorkitemRegistration" ToRole="UserInfo" />
+          <NavigationProperty Name="Workitem" Relationship="Self.FK_WorkitemRegistration_Workitem" FromRole="WorkitemRegistration" ToRole="Workitem" />
+        </EntityType>
+        <EntityType Name="WorkitemStatu">
+          <Key>
+            <PropertyRef Name="WorkitemStatusID" />
+          </Key>
+          <Property Name="WorkitemStatusID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="StatusDescription" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="WorkitemHistories" Relationship="Self.FK_WorkitemHistory_WorkitemStatus" FromRole="WorkitemStatus" ToRole="WorkitemHistory" />
+        </EntityType>
+        <Association Name="FK_Team_Team">
+          <End Role="Team" Type="Self.Team" Multiplicity="1" />
+          <End Role="Team1" Type="Self.Team" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Team">
+              <PropertyRef Name="TeamID" />
+            </Principal>
+            <Dependent Role="Team1">
+              <PropertyRef Name="TeamID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Team_UserInfo">
+          <End Role="UserInfo" Type="Self.UserInfo" Multiplicity="1" />
+          <End Role="Team" Type="Self.Team" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserInfo">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="Team">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserInfo_UserInfo">
+          <End Role="UserInfo" Type="Self.UserInfo" Multiplicity="1" />
+          <End Role="UserInfo1" Type="Self.UserInfo" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="UserInfo">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="UserInfo1">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Workitem_UserInfo1">
+          <End Role="UserInfo" Type="Self.UserInfo" Multiplicity="1" />
+          <End Role="Workitem" Type="Self.Workitem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserInfo">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="Workitem">
+              <PropertyRef Name="CreatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Workitem_UserInfo2">
+          <End Role="UserInfo" Type="Self.UserInfo" Multiplicity="1" />
+          <End Role="Workitem" Type="Self.Workitem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserInfo">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="Workitem">
+              <PropertyRef Name="ModifyBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WorkItemAssignment_UserInfo">
+          <End Role="UserInfo" Type="Self.UserInfo" Multiplicity="1" />
+          <End Role="WorkItemAssignment" Type="Self.WorkItemAssignment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserInfo">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="WorkItemAssignment">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WorkitemDistribution_UserInfo">
+          <End Role="UserInfo" Type="Self.UserInfo" Multiplicity="1" />
+          <End Role="WorkitemDistribution" Type="Self.WorkitemDistribution" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserInfo">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="WorkitemDistribution">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WorkitemHistory_UserInfo">
+          <End Role="UserInfo" Type="Self.UserInfo" Multiplicity="1" />
+          <End Role="WorkitemHistory" Type="Self.WorkitemHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserInfo">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="WorkitemHistory">
+              <PropertyRef Name="UpdatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WorkitemRegistration_UserInfo">
+          <End Role="UserInfo" Type="Self.UserInfo" Multiplicity="1" />
+          <End Role="WorkitemRegistration" Type="Self.WorkitemRegistration" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserInfo">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="WorkitemRegistration">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Workitem_Workitem">
+          <End Role="Workitem" Type="Self.Workitem" Multiplicity="1" />
+          <End Role="Workitem1" Type="Self.Workitem" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Workitem">
+              <PropertyRef Name="WorkitemID" />
+            </Principal>
+            <Dependent Role="Workitem1">
+              <PropertyRef Name="WorkitemID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Workitem_Workitem1">
+          <End Role="Workitem" Type="Self.Workitem" Multiplicity="1" />
+          <End Role="Workitem1" Type="Self.Workitem" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Workitem">
+              <PropertyRef Name="WorkitemID" />
+            </Principal>
+            <Dependent Role="Workitem1">
+              <PropertyRef Name="WorkitemID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WorkItemAssignment_Workitem">
+          <End Role="Workitem" Type="Self.Workitem" Multiplicity="1" />
+          <End Role="WorkItemAssignment" Type="Self.WorkItemAssignment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Workitem">
+              <PropertyRef Name="WorkitemID" />
+            </Principal>
+            <Dependent Role="WorkItemAssignment">
+              <PropertyRef Name="WorkItemID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WorkitemDistribution_Workitem">
+          <End Role="Workitem" Type="Self.Workitem" Multiplicity="1" />
+          <End Role="WorkitemDistribution" Type="Self.WorkitemDistribution" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Workitem">
+              <PropertyRef Name="WorkitemID" />
+            </Principal>
+            <Dependent Role="WorkitemDistribution">
+              <PropertyRef Name="WorkitemID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WorkitemHistory_Workitem">
+          <End Role="Workitem" Type="Self.Workitem" Multiplicity="1" />
+          <End Role="WorkitemHistory" Type="Self.WorkitemHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Workitem">
+              <PropertyRef Name="WorkitemID" />
+            </Principal>
+            <Dependent Role="WorkitemHistory">
+              <PropertyRef Name="WorkitemID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WorkitemRegistration_Workitem">
+          <End Role="Workitem" Type="Self.Workitem" Multiplicity="1" />
+          <End Role="WorkitemRegistration" Type="Self.WorkitemRegistration" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Workitem">
+              <PropertyRef Name="WorkitemID" />
+            </Principal>
+            <Dependent Role="WorkitemRegistration">
+              <PropertyRef Name="WorkitemID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WorkitemHistory_WorkitemStatus">
+          <End Role="WorkitemStatus" Type="Self.WorkitemStatu" Multiplicity="1" />
+          <End Role="WorkitemHistory" Type="Self.WorkitemHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WorkitemStatus">
+              <PropertyRef Name="WorkitemStatusID" />
+            </Principal>
+            <Dependent Role="WorkitemHistory">
+              <PropertyRef Name="WorkitemStatusID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="WorkBountyDBEntities6" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+          <EntitySet Name="Teams" EntityType="Self.Team" />
+          <EntitySet Name="UserInfoes" EntityType="Self.UserInfo" />
+          <EntitySet Name="Workitems" EntityType="Self.Workitem" />
+          <EntitySet Name="WorkItemAssignments" EntityType="Self.WorkItemAssignment" />
+          <EntitySet Name="WorkitemDistributions" EntityType="Self.WorkitemDistribution" />
+          <EntitySet Name="WorkitemHistories" EntityType="Self.WorkitemHistory" />
+          <EntitySet Name="WorkitemRegistrations" EntityType="Self.WorkitemRegistration" />
+          <EntitySet Name="WorkitemStatus" EntityType="Self.WorkitemStatu" />
+          <AssociationSet Name="FK_Team_Team" Association="Self.FK_Team_Team">
+            <End Role="Team" EntitySet="Teams" />
+            <End Role="Team1" EntitySet="Teams" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Team_UserInfo" Association="Self.FK_Team_UserInfo">
+            <End Role="UserInfo" EntitySet="UserInfoes" />
+            <End Role="Team" EntitySet="Teams" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserInfo_UserInfo" Association="Self.FK_UserInfo_UserInfo">
+            <End Role="UserInfo" EntitySet="UserInfoes" />
+            <End Role="UserInfo1" EntitySet="UserInfoes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Workitem_UserInfo1" Association="Self.FK_Workitem_UserInfo1">
+            <End Role="UserInfo" EntitySet="UserInfoes" />
+            <End Role="Workitem" EntitySet="Workitems" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Workitem_UserInfo2" Association="Self.FK_Workitem_UserInfo2">
+            <End Role="UserInfo" EntitySet="UserInfoes" />
+            <End Role="Workitem" EntitySet="Workitems" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WorkItemAssignment_UserInfo" Association="Self.FK_WorkItemAssignment_UserInfo">
+            <End Role="UserInfo" EntitySet="UserInfoes" />
+            <End Role="WorkItemAssignment" EntitySet="WorkItemAssignments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WorkitemDistribution_UserInfo" Association="Self.FK_WorkitemDistribution_UserInfo">
+            <End Role="UserInfo" EntitySet="UserInfoes" />
+            <End Role="WorkitemDistribution" EntitySet="WorkitemDistributions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WorkitemHistory_UserInfo" Association="Self.FK_WorkitemHistory_UserInfo">
+            <End Role="UserInfo" EntitySet="UserInfoes" />
+            <End Role="WorkitemHistory" EntitySet="WorkitemHistories" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WorkitemRegistration_UserInfo" Association="Self.FK_WorkitemRegistration_UserInfo">
+            <End Role="UserInfo" EntitySet="UserInfoes" />
+            <End Role="WorkitemRegistration" EntitySet="WorkitemRegistrations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Workitem_Workitem" Association="Self.FK_Workitem_Workitem">
+            <End Role="Workitem" EntitySet="Workitems" />
+            <End Role="Workitem1" EntitySet="Workitems" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Workitem_Workitem1" Association="Self.FK_Workitem_Workitem1">
+            <End Role="Workitem" EntitySet="Workitems" />
+            <End Role="Workitem1" EntitySet="Workitems" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WorkItemAssignment_Workitem" Association="Self.FK_WorkItemAssignment_Workitem">
+            <End Role="Workitem" EntitySet="Workitems" />
+            <End Role="WorkItemAssignment" EntitySet="WorkItemAssignments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WorkitemDistribution_Workitem" Association="Self.FK_WorkitemDistribution_Workitem">
+            <End Role="Workitem" EntitySet="Workitems" />
+            <End Role="WorkitemDistribution" EntitySet="WorkitemDistributions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WorkitemHistory_Workitem" Association="Self.FK_WorkitemHistory_Workitem">
+            <End Role="Workitem" EntitySet="Workitems" />
+            <End Role="WorkitemHistory" EntitySet="WorkitemHistories" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WorkitemRegistration_Workitem" Association="Self.FK_WorkitemRegistration_Workitem">
+            <End Role="Workitem" EntitySet="Workitems" />
+            <End Role="WorkitemRegistration" EntitySet="WorkitemRegistrations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WorkitemHistory_WorkitemStatus" Association="Self.FK_WorkitemHistory_WorkitemStatus">
+            <End Role="WorkitemStatus" EntitySet="WorkitemStatus" />
+            <End Role="WorkitemHistory" EntitySet="WorkitemHistories" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="WorkBountyDBModelStoreContainer" CdmEntityContainer="WorkBountyDBEntities6">
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="WorkBountyDBModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Teams">
+            <EntityTypeMapping TypeName="WorkBountyDBModel.Team">
+              <MappingFragment StoreEntitySet="Team">
+                <ScalarProperty Name="TeamID" ColumnName="TeamID" />
+                <ScalarProperty Name="TeamName" ColumnName="TeamName" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="TeamUserInfoID" ColumnName="TeamUserInfoID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserInfoes">
+            <EntityTypeMapping TypeName="WorkBountyDBModel.UserInfo">
+              <MappingFragment StoreEntitySet="UserInfo">
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="DateOfBirth" ColumnName="DateOfBirth" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="InterestedKeywords" ColumnName="InterestedKeywords" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Workitems">
+            <EntityTypeMapping TypeName="WorkBountyDBModel.Workitem">
+              <MappingFragment StoreEntitySet="Workitem">
+                <ScalarProperty Name="WorkitemID" ColumnName="WorkitemID" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Summary" ColumnName="Summary" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="DueDate" ColumnName="DueDate" />
+                <ScalarProperty Name="PublishedTo" ColumnName="PublishedTo" />
+                <ScalarProperty Name="DocumentFilePath" ColumnName="DocumentFilePath" />
+                <ScalarProperty Name="ProposedReward" ColumnName="ProposedReward" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedDateTime" ColumnName="CreatedDateTime" />
+                <ScalarProperty Name="ModifyBy" ColumnName="ModifyBy" />
+                <ScalarProperty Name="ModifyDateTime" ColumnName="ModifyDateTime" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+                <ScalarProperty Name="IsOpenForGroup" ColumnName="IsOpenForGroup" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WorkItemAssignments">
+            <EntityTypeMapping TypeName="WorkBountyDBModel.WorkItemAssignment">
+              <MappingFragment StoreEntitySet="WorkItemAssignment">
+                <ScalarProperty Name="WorkItemAssignmentID" ColumnName="WorkItemAssignmentID" />
+                <ScalarProperty Name="WorkItemID" ColumnName="WorkItemID" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="SubmissionPath" ColumnName="SubmissionPath" />
+                <ScalarProperty Name="IsRewarded" ColumnName="IsRewarded" />
+                <ScalarProperty Name="SubmissionDateTime" ColumnName="SubmissionDateTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WorkitemDistributions">
+            <EntityTypeMapping TypeName="WorkBountyDBModel.WorkitemDistribution">
+              <MappingFragment StoreEntitySet="WorkitemDistribution">
+                <ScalarProperty Name="WorkitemID" ColumnName="WorkitemID" />
+                <ScalarProperty Name="TeamID" ColumnName="TeamID" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="WorkitemDistributionID" ColumnName="WorkitemDistributionID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WorkitemHistories">
+            <EntityTypeMapping TypeName="WorkBountyDBModel.WorkitemHistory">
+              <MappingFragment StoreEntitySet="WorkitemHistory">
+                <ScalarProperty Name="WorkitemID" ColumnName="WorkitemID" />
+                <ScalarProperty Name="WorkitemStatusID" ColumnName="WorkitemStatusID" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="UpdatedDateTIme" ColumnName="UpdatedDateTIme" />
+                <ScalarProperty Name="WorkitemHistoryID" ColumnName="WorkitemHistoryID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WorkitemRegistrations">
+            <EntityTypeMapping TypeName="WorkBountyDBModel.WorkitemRegistration">
+              <MappingFragment StoreEntitySet="WorkitemRegistration">
+                <ScalarProperty Name="WorkitemID" ColumnName="WorkitemID" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="IsExclusive" ColumnName="IsExclusive" />
+                <ScalarProperty Name="IsFavourite" ColumnName="IsFavourite" />
+                <ScalarProperty Name="IsRegistered" ColumnName="IsRegistered" />
+                <ScalarProperty Name="WorkitemRegistrationID" ColumnName="WorkitemRegistrationID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WorkitemStatus">
+            <EntityTypeMapping TypeName="WorkBountyDBModel.WorkitemStatu">
+              <MappingFragment StoreEntitySet="WorkitemStatus">
+                <ScalarProperty Name="WorkitemStatusID" ColumnName="WorkitemStatusID" />
+                <ScalarProperty Name="StatusDescription" ColumnName="StatusDescription" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

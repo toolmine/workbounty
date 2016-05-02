@@ -125,87 +125,73 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
-    <Compile Include="App_Start\MyHttpControllerHandler.cs" />
-    <Compile Include="App_Start\MyHttpControllerRouteHandler.cs" />
-    <Compile Include="Controllers\AddTeamMemberController.cs" />
-    <Compile Include="Controllers\AddWorkitemController.cs" />
-    <Compile Include="Controllers\assigntomeController.cs" />
-    <Compile Include="Controllers\DemoShowController.cs" />
-    <Compile Include="Controllers\DisplayRewardController.cs" />
-    <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\LoginController.cs" />
-    <Compile Include="Controllers\MyWorkitemController.cs" />
-    <Compile Include="Controllers\OpenWorkController.cs" />
-    <Compile Include="Controllers\OpenWorkitemController.cs" />
-    <Compile Include="Controllers\ShowitemController.cs" />
-    <Compile Include="Controllers\TeamController.cs" />
-    <Compile Include="Controllers\workController.cs" />
-    <Compile Include="Global.asax.cs">
-      <DependentUpon>Global.asax</DependentUpon>
-    </Compile>
-    <Compile Include="Models\AddReward.cs" />
-    <Compile Include="Models\GetReward.cs" />
-    <Compile Include="Models\MyWorkitem.cs" />
-    <Compile Include="Models\MyWorkitemAssignment.cs" />
-    <Compile Include="Models\UpdateWorkitem.cs" />
-    <Compile Include="Models\ViewDocuments.cs" />
-    <Compile Include="Models\ViewMyTeam.cs" />
-    <Compile Include="Models\Workitems.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Repository\AddTeamMemberRepo.cs" />
-    <Compile Include="Repository\AddWorkitemRepo.cs" />
-    <Compile Include="Repository\DetailItemRepo.cs" />
-    <Compile Include="Repository\DetailWorkitemRepo.cs" />
-    <Compile Include="Repository\DetailWorkitemRepos.cs" />
-    <Compile Include="Repository\LoginRepo.cs" />
-    <Compile Include="Repository\MyTeamRepo.cs" />
-    <Compile Include="Repository\ShowRewardRepo.cs" />
-    <Compile Include="Repository\WorkbountyRepo.cs" />
-    <Compile Include="Team.cs">
-      <DependentUpon>workbounty.tt</DependentUpon>
-    </Compile>
-    <Compile Include="UserInfo.cs">
-      <DependentUpon>workbounty.tt</DependentUpon>
-    </Compile>
-    <Compile Include="workbounty.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>workbounty.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="workbounty.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>workbounty.tt</DependentUpon>
-    </Compile>
-    <Compile Include="workbounty.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>workbounty.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="Workitem.cs">
-      <DependentUpon>workbounty.tt</DependentUpon>
-    </Compile>
-    <Compile Include="WorkItemAssignment.cs">
-      <DependentUpon>workbounty.tt</DependentUpon>
-    </Compile>
-    <Compile Include="WorkitemDistribution.cs">
-      <DependentUpon>workbounty.tt</DependentUpon>
-    </Compile>
-    <Compile Include="WorkitemHistory.cs">
-      <DependentUpon>workbounty.tt</DependentUpon>
-    </Compile>
-    <Compile Include="WorkitemRegistration.cs">
-      <DependentUpon>workbounty.tt</DependentUpon>
-    </Compile>
-    <Compile Include="WorkitemStatu.cs">
-      <DependentUpon>workbounty.tt</DependentUpon>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
-    <Content Include="assets\js\addworkdatepicker.js" />
+    <Compile Include="Controllers\FindMemberController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\RewardController.cs" />
+    <Compile Include="Controllers\TeamController.cs" />
+    <Compile Include="Controllers\WorkitemController.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Model1.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Model1.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model1.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Model1.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AddWorkitems.cs" />
+    <Compile Include="Models\AssignWorkitems.cs" />
+    <Compile Include="Models\OpenWorkitems.cs" />
+    <Compile Include="Models\Rewards.cs" />
+    <Compile Include="Models\TeamInformation.cs" />
+    <Compile Include="Models\UpdateWorkitems.cs" />
+    <Compile Include="Models\WorkitemDocuments.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repository\RewardRepository.cs" />
+    <Compile Include="Repository\TeamRepository.cs" />
+    <Compile Include="Repository\UserRepository.cs" />
+    <Compile Include="Repository\WorkitemRepository.cs" />
+    <Compile Include="sysdiagram.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Team.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UserInfo.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Workitem.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="WorkItemAssignment.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="WorkitemDistribution.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="WorkitemHistory.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="WorkitemRegistration.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="WorkitemStatu.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
     <Content Include="assets\avatars\avatar.png" />
     <Content Include="assets\avatars\avatar1.png" />
     <Content Include="assets\avatars\avatar2.png" />
@@ -292,6 +278,8 @@
     <Content Include="assets\js\ace-extra.min.js" />
     <Content Include="assets\js\ace.min.js" />
     <Content Include="assets\js\additional-methods.min.js" />
+    <Content Include="assets\js\AddMember.js" />
+    <Content Include="assets\js\addworkdatepicker.js" />
     <Content Include="assets\js\bootbox.min.js" />
     <Content Include="assets\js\bootstrap-colorpicker.min.js" />
     <Content Include="assets\js\bootstrap-datepicker.min.js" />
@@ -302,11 +290,11 @@
     <Content Include="assets\js\bootstrap-tag.min.js" />
     <Content Include="assets\js\bootstrap-timepicker.min.js" />
     <Content Include="assets\js\bootstrap-wysiwyg.min.js" />
+    <Content Include="assets\js\bootstrap.js" />
     <Content Include="assets\js\bootstrap.min.js" />
     <Content Include="assets\js\chosen.jquery.min.js" />
     <Content Include="assets\js\dataTables.colVis.min.js" />
     <Content Include="assets\js\dataTables.tableTools.min.js" />
-    <Content Include="assets\js\datepicker.js" />
     <Content Include="assets\js\daterangepicker.min.js" />
     <Content Include="assets\js\drawpiechart.js" />
     <Content Include="assets\js\dropzone.min.js" />
@@ -315,14 +303,22 @@
     <Content Include="assets\js\fuelux.tree.min.js" />
     <Content Include="assets\js\fuelux.wizard.min.js" />
     <Content Include="assets\js\fullcalendar.min.js" />
+    <Content Include="assets\js\getTeamDetail.js" />
     <Content Include="assets\js\grid.locale-en.js" />
     <Content Include="assets\js\html5shiv.min.js" />
-    <Content Include="assets\js\jquery-login.js" />
+    <Content Include="assets\js\jquery-.js" />
+    <Content Include="assets\js\jquery-AddTeam.js" />
+    <Content Include="assets\js\jquery-addworkitem.js" />
+    <Content Include="assets\js\jquery-ApplyWorkitem.js" />
+    <Content Include="assets\js\jquery-Dashboard.js" />
+    <Content Include="assets\js\jquery-dfavourite.js" />
     <Content Include="assets\js\jquery-search.js" />
-    <Content Include="assets\js\jquery-showreward.js" />
     <Content Include="assets\js\jquery-signup.js" />
     <Content Include="assets\js\jquery-ui.custom.min.js" />
     <Content Include="assets\js\jquery-ui.min.js" />
+    <Content Include="assets\js\jquery-vfavourite.js" />
+    <Content Include="assets\js\jquery-ViewAssignedWorkitem.js" />
+    <Content Include="assets\js\jquery-ViewUpdatedWorkitem.js" />
     <Content Include="assets\js\jquery.1.11.1.min.js" />
     <Content Include="assets\js\jquery.2.1.1.min.js" />
     <Content Include="assets\js\jquery.autosize.min.js" />
@@ -351,18 +347,23 @@
     <Content Include="assets\js\jquery.ui.touch-punch.min.js" />
     <Content Include="assets\js\jquery.validate.min.js" />
     <Content Include="assets\js\jquery1x.min.js" />
-    <Content Include="assets\js\jquery_addTeam.js" />
-    <Content Include="assets\js\jquery_logindata.js" />
+    <Content Include="assets\js\jquery_Bootstrap.js" />
+    <Content Include="assets\js\jquery_DetailItem.js" />
     <Content Include="assets\js\jquery_mobile_custom_start.js" />
+    <Content Include="assets\js\jquery_modernizer_datepicker.js" />
+    <Content Include="assets\js\jquery_myitems.js" />
     <Content Include="assets\js\jquery_onclick_success.js" />
     <Content Include="assets\js\jquery_Openworkitems.js" />
+    <Content Include="assets\js\jquery_UserLogin.js" />
     <Content Include="assets\js\jq_script_src.js" />
     <Content Include="assets\js\main-fix.js" />
     <Content Include="assets\js\markdown.min.js" />
     <Content Include="assets\js\moment.min.js" />
     <Content Include="assets\js\naavbar-fixed.js" />
+    <Content Include="assets\js\npm.js" />
     <Content Include="assets\js\prettify.min.js" />
     <Content Include="assets\js\respond.min.js" />
+    <Content Include="assets\js\Search.js" />
     <Content Include="assets\js\select2.min.js" />
     <Content Include="assets\js\sidebar-col.js" />
     <Content Include="assets\js\sidebar-collapse.js" />
@@ -431,6 +432,7 @@
     <Content Include="Content\themes\base\tabs.css" />
     <Content Include="Content\themes\base\theme.css" />
     <Content Include="Content\themes\base\tooltip.css" />
+    <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="img\2000px-Dominos_pizza_logo.svg.png" />
     <Content Include="img\amazon-dgmag.png" />
@@ -456,27 +458,40 @@
     <Content Include="img\vu-43d6535-400x400-imaeefz3ncz5agex.jpeg" />
     <Content Include="img\Wepay_Logo_.png" />
     <Content Include="img\Western-Union-logo-old.jpg" />
+    <EntityDeploy Include="Model1.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>Model1.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Model1.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Model1.edmx</DependentUpon>
+      <LastGenOutput>Model1.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Model1.edmx.diagram">
+      <DependentUpon>Model1.edmx</DependentUpon>
+    </Content>
+    <Content Include="Model1.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Model1.edmx</DependentUpon>
+      <LastGenOutput>Model1.cs</LastGenOutput>
+    </Content>
     <None Include="Scripts\jquery-1.8.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.8.2.js" />
     <Content Include="Scripts\jquery-1.8.2.min.js" />
-    <Content Include="Scripts\jquery-2.2.1.js" />
-    <Content Include="Scripts\jquery-2.2.1.min.js" />
-    <Content Include="Scripts\jquery-ui-1.11.4.js" />
-    <Content Include="Scripts\jquery-ui-1.11.4.min.js" />
-    <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery-ui-1.8.24.js" />
     <Content Include="Scripts\jquery-ui-1.8.24.min.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
+    <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
-    <Content Include="Scripts\jquery_UserSignup.js" />
     <Content Include="Scripts\knockout-2.2.0.debug.js" />
     <Content Include="Scripts\knockout-2.2.0.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <None Include="Scripts\_references.js" />
+    <Content Include="SQLScripts\WorkBountyDB.sql" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -484,34 +499,38 @@
     <Content Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
-    <Content Include="Views\Web.config" />
-    <Content Include="Scripts\jquery-2.2.1.min.map" />
-    <Content Include="Views\Team\addteam.cshtml" />
-    <Content Include="Views\work\detailWorkitem.cshtml" />
-    <EntityDeploy Include="workbounty.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>workbounty.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="workbounty.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>workbounty.edmx</DependentUpon>
-      <LastGenOutput>workbounty.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="workbounty.edmx.diagram">
-      <DependentUpon>workbounty.edmx</DependentUpon>
-    </Content>
-    <Content Include="workbounty.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>workbounty.edmx</DependentUpon>
-      <LastGenOutput>workbounty.cs</LastGenOutput>
-    </Content>
-    <Content Include="Views\work\AddDocument.cshtml" />
-    <Content Include="Views\work\ViewDocument.cshtml" />
-    <Content Include="Views\Home\ItemsIWantDone.cshtml" />
+    <Content Include="Views\Home\AddWorkitem.cshtml" />
+    <Content Include="Views\Home\AssignedWorkitem.cshtml" />
+    <Content Include="Views\Home\Dashboard.cshtml" />
+    <Content Include="Views\Home\ForgotPassword.cshtml" />
+    <Content Include="Views\Home\GetAssignedWorkitem.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Home\Login.cshtml" />
     <Content Include="Views\Home\SearchWorkitem.cshtml" />
+    <Content Include="Views\Home\Signup.cshtml" />
+    <Content Include="Views\Home\Viewitemsimworkingon.cshtml" />
+    <Content Include="Views\Home\Viewitemsinterestedin.cshtml" />
+    <Content Include="Views\Home\Viewitemsiwantdone.cshtml" />
+    <Content Include="Views\Home\ViewRewards.cshtml" />
+    <Content Include="Views\Home\ViewTeams.cshtml" />
+    <Content Include="Views\Home\ViewUserData.cshtml" />
+    <Content Include="Views\Reward\ShowRewards.cshtml" />
+    <Content Include="Views\Team\AddMember.cshtml" />
+    <Content Include="Views\Team\AddTeam.cshtml" />
+    <Content Include="Views\Workitem\ApplyWorkitem.cshtml" />
+    <Content Include="Views\Workitem\UpdateWorkitem.cshtml" />
+    <Content Include="Views\Workitem\ViewAssignedWorkitem.cshtml" />
+    <Content Include="Views\Workitem\ViewUpdatedWorkitem.cshtml" />
+    <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Web.config" />
+    <Content Include="Views\_DashboardLayout.cshtml" />
+    <Content Include="Views\_IndexLayout.cshtml" />
+    <Content Include="Views\_ViewStart.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="work1\Download\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
@@ -526,171 +545,6 @@
     <Content Include="assets\fonts\glyphicons-halflings-regular.eot" />
     <Content Include="assets\fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="assets\fonts\glyphicons-halflings-regular.woff" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\_LayoutPage1.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\Home\Index.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\_LayoutPage2.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\Home\Login.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\Home\Signup.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\Home\ForgotPassword.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\Home\AfterLogin.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\Home\mywork.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\Home\mybid.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\Home\profile.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\Home\rewards.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\Home\addworkitem.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\Team\addMember.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\Home\myteam.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\work\updateTask.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\Home\slackapi.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\Home\payment.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\Home\assigntome.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\Home\openworkitem.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\work\Index.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\work\tourist.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\work\gPlugin.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\work\AppletServ.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\work\BusinessPortal.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\work\Payroll.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\work\webpage.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\work\machine.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\work\bet.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\work\Transection.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\work\javaApp.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\OpenWork\Irctc.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\OpenWork\makemytrip.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\OpenWork\Epay.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\OpenWork\message.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\OpenWork\phpweb.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\OpenWork\mongodb.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\OpenWork\cloud.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\OpenWork\crossplatform.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\OpenWork\dotnet.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\OpenWork\mysql.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\work\embeddedsystem.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\work\desktopaccount.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\work\ios.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\work\databasedevelopment.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\assigntome\airline.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\assigntome\javaplugin.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\assigntome\androidapplication.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\assigntome\websitedevelopment.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\assigntome\webapi.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\assigntome\c.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\assigntome\cplus.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\assigntome\androiddevelopment.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\assigntome\ecom.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\assigntome\system.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\Team\Search.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

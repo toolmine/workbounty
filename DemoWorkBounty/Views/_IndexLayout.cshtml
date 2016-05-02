@@ -1,0 +1,83 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    @Styles.Render("~/assets/css")
+    @Scripts.Render("~/layout/js")
+</head>
+<body>
+    <div id="navbar" class="navbar navbar-default">
+
+
+        <div class="navbar-container" id="navbar-container">
+            <button type="button" class="navbar-toggle menu-toggler pull-left" id="menu-toggler" data-target="#sidebar">
+                <span class="sr-only">Toggle sidebar</span>
+
+                <span class="icon-bar"></span>
+
+                <span class="icon-bar"></span>
+
+                <span class="icon-bar"></span>
+            </button>
+
+            <div class="navbar-header pull-left">
+
+                <small>
+
+                    <a href="~/home/login" class="navbar-brand">
+                        <small>
+                            <img src="~/img/header-logo.png" />
+                        </small>
+                    </a>
+
+                    <a href="~/home/login" class="navbar-brand padding15pxtop">
+                        <small>
+                            <img src="~/img/WB.png" />
+                        </small>
+                    </a>
+
+                </small>
+
+            </div>
+
+
+        </div>
+    </div>
+    <div>
+        @RenderBody()
+
+        <div class="main-container" id="main-container">
+            <div class="main-content">
+
+
+            </div>
+
+            <div class="footer">
+                <div class="footer-inner">
+                    <div class="footer-content">
+                        <span class="bigger-120">
+                            <span class="blue bolder"></span>
+
+                        </span>
+
+                  
+
+                    </div>
+                </div>
+            </div>
+
+            <a href="#" id="btn-scroll-up" class="btn-scroll-up btn btn-sm btn-inverse">
+                <i class="ace-icon fa fa-angle-double-up icon-only bigger-110"></i>
+            </a>
+        </div>
+    </div>
+
+
+
+
+
+</body>
+</html>
+
