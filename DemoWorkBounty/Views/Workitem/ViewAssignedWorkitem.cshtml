@@ -15,7 +15,7 @@
 
 <h2>Items i want done</h2>
 <div class="col-sm-10">
-    @foreach(Workbounty.Workitem i in ViewBag.items)
+    @foreach(DemoWorkBounty.Workitem i in ViewBag.items)
     {
         <input type="hidden" id="Workid" value="@i.WorkitemID" />
         <input type="hidden" id="Teamid" value="@i.PublishedTo">
@@ -95,7 +95,7 @@
         </thead>
         @if (ViewBag.apply != null)
         {
-            foreach (Workbounty.WorkitemRegistration i in ViewBag.apply)
+            foreach (DemoWorkBounty.WorkitemRegistration i in ViewBag.apply)
             {
                 <tbody>
                     <tr>

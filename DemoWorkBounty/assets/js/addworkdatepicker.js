@@ -1,11 +1,11 @@
-﻿jQuery(function($) {
-			
-    $( "#datepicker" ).datepicker({
+﻿jQuery(function ($) {
+
+    $("#datepicker").datepicker({
         showOtherMonths: true,
         selectOtherMonths: false,
         //isRTL:true,
-			
-					
+
+
         /*
         changeMonth: true,
         changeYear: true,
@@ -24,4 +24,5 @@
         }
 */
     });
+});
 			

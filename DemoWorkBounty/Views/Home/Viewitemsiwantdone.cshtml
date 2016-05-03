@@ -1,5 +1,6 @@
 ﻿@model PagedList.IPagedList<DemoWorkBounty.Models.AddWorkitems>
 @using PagedList.Mvc;
+
 <link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
 @{
     ViewBag.Title = "My workitems";
@@ -37,7 +38,8 @@
                         </thead>
 
                         @{int i=1;}
-                        @foreach (Workbounty.Models.AddWorkitems item in Model)
+
+                        @foreach (DemoWorkBounty.Models.AddWorkitems item in Model)
                         {
                            <tbody>
                                 <tr>

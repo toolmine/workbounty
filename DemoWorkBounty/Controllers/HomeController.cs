@@ -5,7 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using DemoWorkBounty.Repository;
 using DemoWorkBounty.Models;
-//using PagedList;
+using PagedList;
 using System.Web.Security;
 using System.Data;
 using System.IO;
@@ -220,35 +220,35 @@ namespace DemoWorkBounty.Controllers
             return View();
         }
 
-        //public ActionResult Viewitemsiwantdone(int? page)
-        //{
-        //    int currentUserID = Convert.ToInt32(Session["UserID"]);
-        //    var getItemsIWantDoneData = workbountyRepo.ItemsIWantDone(currentUserID);
+        public ActionResult Viewitemsiwantdone(int? page)
+        {
+            int currentUserID = Convert.ToInt32(Session["UserID"]);
+            var getItemsIWantDoneData = workbountyRepo.ItemsIWantDone(currentUserID);
 
-        //    int pageSize = 10;
-        //    int pageNumber = (page ?? 1);
-        //    return View(getItemsIWantDoneData.ToPagedList(pageNumber, pageSize));
-        //}
+            int pageSize = 10;
+            int pageNumber = (page ?? 1);
+            return View(getItemsIWantDoneData.ToPagedList(pageNumber, pageSize));
+        }
 
-        //public ActionResult Viewitemsimworkingon(int? page)
-        //{
-        //    int currentUserID = Convert.ToInt32(Session["UserID"]);
-        //    var getWorkitemAssigntoMeData = workbountyRepo.GetCurrentWorkitem(currentUserID);
+        public ActionResult Viewitemsimworkingon(int? page)
+        {
+            int currentUserID = Convert.ToInt32(Session["UserID"]);
+            var getWorkitemAssigntoMeData = workbountyRepo.GetCurrentWorkitem(currentUserID);
 
-        //    int pageSize = 10;
-        //    int pageNumber = (page ?? 1);
-        //    return View(getWorkitemAssigntoMeData.ToPagedList(pageNumber, pageSize));
-        //}
+            int pageSize = 10;
+            int pageNumber = (page ?? 1);
+            return View(getWorkitemAssigntoMeData.ToPagedList(pageNumber, pageSize));
+        }
 
-        //public ActionResult Viewitemsinterestedin(int? page)
-        //{
-        //    int currentUserID = Convert.ToInt32(Session["UserID"]);
-        //    var getAllWorkitemData = workbountyRepo.GetAllWorkitems(currentUserID);
+        public ActionResult Viewitemsinterestedin(int? page)
+        {
+            int currentUserID = Convert.ToInt32(Session["UserID"]);
+            var getAllWorkitemData = workbountyRepo.GetAllWorkitems(currentUserID);
 
-        //    int pageSize = 10;
-        //    int pageNumber = (page ?? 1);
-        //    return View(getAllWorkitemData.ToPagedList(pageNumber, pageSize));
-        //}
+            int pageSize = 10;
+            int pageNumber = (page ?? 1);
+            return View(getAllWorkitemData.ToPagedList(pageNumber, pageSize));
+        }
 
         public ActionResult ViewUserData()
         {

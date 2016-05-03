@@ -41,8 +41,7 @@
                             </tr>
                         </thead>
                    
-
-                        @foreach (Workbounty.Models.AddWorkitems item in ViewBag.itemsForIWantDone)
+                        @foreach (DemoWorkBounty.Models.AddWorkitems item in ViewBag.itemsForIWantDone)
                         {
                             
                             <tbody>
@@ -96,7 +95,7 @@
                         </thead>
                         <tbody></tbody>
 
-                       @foreach (Workbounty.Models.AssignWorkitems myWorkitem in ViewBag.itemsForAssigntoMe)
+                       @foreach (DemoWorkBounty.Models.AssignWorkitems myWorkitem in ViewBag.itemsForAssigntoMe)
                         { 
                             <tr>
                                 <td>@(ViewBag.itemsForAssigntoMe.IndexOf(myWorkitem) + 1)</td>
@@ -148,7 +147,7 @@
                             </tr>
                         </thead>
               
-                        @foreach (Workbounty.Models.OpenWorkitems i in ViewBag.itemsForAllWorkitem)
+                        @foreach (DemoWorkBounty.Models.OpenWorkitems i in ViewBag.itemsForAllWorkitem)
                         {
                             <tbody>
                                 <tr>
