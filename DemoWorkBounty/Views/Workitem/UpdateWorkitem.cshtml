@@ -10,8 +10,10 @@
     </li>
     <li class="active" data_toggle="tooltip" , title="">Update Workitem</li>
 </ul>
+
 @if (ViewBag.displayMessage != null)
 {
+    
     <div class="alert alert-danger" id="alertMessage">
         <button type="button" class="close" data-dismiss="alert">
             <i class="ace-icon fa fa-times"></i>
@@ -31,6 +33,7 @@ else
 <h2>Add Document</h2>
 <div class="row">
     <div class="col-xs-12">
+      
            @foreach (DemoWorkBounty.Models.UpdateWorkitems i in ViewBag.dataForWorkitem)
             {
 
@@ -70,7 +73,8 @@ else
                     </div>
                 </form>
             }
-        
+  
+      
     </div>
 </div>
 }

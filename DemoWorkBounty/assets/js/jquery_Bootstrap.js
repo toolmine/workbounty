@@ -7,7 +7,7 @@
         $(this).datepicker('hide');
     });
 
-    $("#DueDate").prop('disabled', true);
+    $("#DueDate").prop('enabled', true);
 
     $("#StartDate").datepicker({
         startDate: new Date(),

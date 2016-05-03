@@ -317,7 +317,6 @@
     <Content Include="assets\js\fuelux.tree.min.js" />
     <Content Include="assets\js\fuelux.wizard.min.js" />
     <Content Include="assets\js\fullcalendar.min.js" />
-    <Content Include="assets\js\getTeamDetail.js" />
     <Content Include="assets\js\grid.locale-en.js" />
     <Content Include="assets\js\html5shiv.min.js" />
     <Content Include="assets\js\jquery-.js" />
@@ -519,7 +518,6 @@
       <DependentUpon>Web.config</DependentUpon>
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="Views\Home\AddWorkitem.cshtml" />
     <Content Include="Views\Home\AssignedWorkitem.cshtml" />
     <Content Include="Views\Home\Dashboard.cshtml" />
     <Content Include="Views\Home\ForgotPassword.cshtml" />
@@ -547,6 +545,7 @@
     <Content Include="Views\_DashboardLayout.cshtml" />
     <Content Include="Views\_IndexLayout.cshtml" />
     <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Home\AddWorkitem.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
