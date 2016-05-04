@@ -6,9 +6,7 @@ using System.Net.Http;
 using System.Web.Http;
 using DemoWorkBounty.Models;
 using System.IO;
-using DemoWorkBounty;
 namespace DemoWorkBounty.Repository
-
 {
     public class WorkitemRepository : ApiController
     {
@@ -163,9 +161,8 @@ namespace DemoWorkBounty.Repository
 
         public List<AssignWorkitems> GetCurrentWorkitem(int currentUserID)
         {
-            DateTime currentDate = DateTime.Now;
             List<WorkitemDistribution> items = new List<WorkitemDistribution>();
-            var WorkitemRegisteredUserID = entity.WorkitemRegistrations.Where(s => s.UserID == currentUserID && s.IsRegistered==true);
+            var WorkitemRegisteredUserID = entity.WorkitemRegistrations.Where(s => s.UserID == currentUserID);
             var exclusiveitems = WorkitemRegisteredUserID.Where(s => s.IsExclusive == true).ToList();
             var checkWorkitem = new List<int>();
             var getCurrentWorkitemData = new List<AssignWorkitems>();
@@ -174,18 +171,14 @@ namespace DemoWorkBounty.Repository
                 var innerList = entity.WorkitemDistributions.Where(s => s.WorkitemID == item.WorkitemID && s.UserID == item.UserID).Select(s => s.WorkitemID).Distinct().ToList();
                 innerList.ForEach(a => checkWorkitem.Add(a));
             }
-            var nonExclusiveitems = WorkitemRegisteredUserID.Where(s => s.IsExclusive == false && s.Workitem.DueDate<=currentDate).Select(s => s.WorkitemID).Distinct().ToList();
+            var nonExclusiveitems = WorkitemRegisteredUserID.Where(s => s.IsExclusive == false).Select(s => s.WorkitemID).Distinct().ToList();
             nonExclusiveitems.ForEach(a => checkWorkitem.Add(a));
             foreach (var workItemID in checkWorkitem)
             {
-                var checkDueDateValidation = entity.WorkitemRegistrations.Where(s => s.Workitem.DueDate <= currentDate).FirstOrDefault();
-               if(checkDueDateValidation!=null)
-               { 
+
                 var item = entity.WorkitemRegistrations.Where(s => s.UserID == currentUserID && s.WorkitemID == workItemID).Select(s => new AssignWorkitems { WorkitemID = s.WorkitemID, Title = s.Workitem.Title, StartDate = s.Workitem.StartDate, EndDate = s.Workitem.DueDate, FirstName = s.Workitem.UserInfo.FirstName, ProposedReward = s.Workitem.ProposedReward, Amount = s.Workitem.Amount, CreatedDateTime = s.Workitem.CreatedDateTime }).FirstOrDefault();
                 getCurrentWorkitemData.Add(item);
-               }
             }
-            getCurrentWorkitemData.OrderByDescending(s => s.CreatedDateTime).ToList();
             return getCurrentWorkitemData;
         }
 
@@ -223,8 +216,8 @@ namespace DemoWorkBounty.Repository
                 var getWorkitemStatusList = getWorkitemStatus.ToList();
                 getListofAssignUserList.RemoveAll(x => status.Any(y => y.WorkItemID == x.WorkitemID));
                 itemlist = getListofAssignUserList.Union(getWorkitemStatusList).ToList();
+                itemlist = itemlist.OrderByDescending(s => s.CreatedDateTime).ToList();
                 var getWorkitemData = itemlist.ToList();
-                getWorkitemData = getWorkitemData.OrderByDescending(s => s.CreatedDateTime).ToList();
                 return getWorkitemData;
             }
             else
@@ -254,7 +247,6 @@ namespace DemoWorkBounty.Repository
             if (getDataForIsRewarded == false)
             {
                 var getListofUserAppliedForWorkitem = entity.WorkItemAssignments.Where(s => s.WorkItemID == id).Select(s => new WorkitemDocuments { WorkItemID = s.WorkItemID, UserID = s.UserID, Title = s.Workitem.Title, Summary = s.Workitem.Summary, FirstName = s.UserInfo.FirstName, SubmissionDateTime = s.SubmissionDateTime, SubmissionPath = s.SubmissionPath }).ToList();
-                getListofUserAppliedForWorkitem.OrderByDescending(a => a.SubmissionDateTime).ToList();
                 return getListofUserAppliedForWorkitem;
             }
             else
@@ -327,8 +319,9 @@ namespace DemoWorkBounty.Repository
 
         public List<Workitem> SearchWorkitems(string searchValue)
         {
-            //var getSearchWorkitemResults = entity.Workitems.Where(s => s.Title.StartsWith(searchValue)).ToList();
-            var getSearchWorkitemResults = entity.Workitems.Where(s => s.Title.Contains(searchValue) || s.Summary.Contains(searchValue)).ToList();
+            var getSearchWorkitemResults = entity.Workitems.Where(s => s.Title.StartsWith(searchValue)).ToList();
+
+
             return getSearchWorkitemResults;
 
         }

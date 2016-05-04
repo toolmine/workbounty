@@ -48,6 +48,7 @@ namespace DemoWorkBounty
                       "~/assets/js/jquery-ui.min.js",
                       "~/assets/js/jquery.ui.touch-punch.min.js",
                       "~/assets/js/jquery.easypiechart.min.js",
+                      "~/assets/js/jquery-vfavourite.js",
                        "~/assets/js/jquery.sparkline.min.js",
                        "~/assets/js/jquery.flot.min.js",
                         "~/assets/js/ace-extra.min.js",
@@ -60,7 +61,6 @@ namespace DemoWorkBounty
                        "~/assets/js/jquery_onclick_success.js",
                          "~/assets/js/bootstrap-datepicker.min.js",
                          "~/assets/js/jquery-dfavourite.js",
-                          "~/assets/js/jquery-vfavourite.js",
                          "~/assets/js/jquery_Bootstrap.js"
 
                 ));
@@ -79,7 +79,8 @@ namespace DemoWorkBounty
 
 
             bundles.Add(new ScriptBundle("~/layout/js").Include(
-                "~/assets/js/jquery.min.js",
+                  "~/assets/js/jquery.min.js",
+
                 "~/assets/js/ace-extra.min.js",
                 "~/assets/js/jquery_mobile_custom_start.js",
                 "~/assets/js/jq_script_src.js",

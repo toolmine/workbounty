@@ -8,8 +8,6 @@ using DemoWorkBounty.Models;
 using PagedList;
 using System.Web.Security;
 using System.Data;
-using System.IO;
-using DemoWorkBounty;
 
 namespace DemoWorkBounty.Controllers
 {
@@ -50,17 +48,17 @@ namespace DemoWorkBounty.Controllers
             var redirectURL = "";
             try
             {
-                  var loginData = userRepo.UserLogin(userLoginData);
-                    if (loginData != null)
-                    {
-                        Session["UserID"] = loginData.UserID;
-                        Session["FirstName"] = loginData.FirstName;
-                        FormsAuthentication.SetAuthCookie(loginData.FirstName, false);
-                        success = true;
-                        message = "login successfully!";
-                        redirectURL = Url.Action("Dashboard", "Home");
-                    }
-                   else
+                var loginData = userRepo.UserLogin(userLoginData);
+                if (loginData != null)
+                {
+                    Session["UserID"] = loginData.UserID;
+                    Session["FirstName"] = loginData.FirstName;
+                    FormsAuthentication.SetAuthCookie(loginData.FirstName, false);
+                    success = true;
+                    message = "login successfully!";
+                    redirectURL = Url.Action("Dashboard", "Home");
+                }
+                else
                 {
                     message = "Error in Input";
                 }
@@ -88,13 +86,13 @@ namespace DemoWorkBounty.Controllers
                     var userSignupInfo = userRepo.AddUserDetails(userSignupData);
                     Session["UserID"] = userSignupInfo.UserID;
                     Session["FirstName"] = userSignupInfo.FirstName;
-                    FormsAuthentication.SetAuthCookie(userSignupInfo.FirstName, false);
                     return Json("Success");
                 }
 
-                else { 
-                    return Json("false"); 
-                    }
+                else
+                {
+                    return Json("false");
+                }
 
             }
             catch (Exception)
@@ -154,9 +152,6 @@ namespace DemoWorkBounty.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    var fileName = Path.GetFileName(addWorkitemData.DocumentFilePath);
-                    var path = Path.Combine(Server.MapPath("~/work/Download/"), fileName);
-                    addWorkitemData.DocumentFilePath = path;
                     var getResultsOfWorkitemData = workbountyRepo.AddWorkitem(addWorkitemData);
                     IsSuccess = true;
                     successAddWorkitemMessage = "Workitem Added successfully!";
@@ -263,7 +258,7 @@ namespace DemoWorkBounty.Controllers
             return View();
         }
 
-     
+
 
     }
 }
