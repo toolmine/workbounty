@@ -42,7 +42,8 @@ function show() {
     $("#teamAlertMessage").hide();
     $("#simple-table tr").remove();
     var id = $('#itId').val();
-    $.getJSON("/api/FindMember/" + id,
+    $.getJSON("/Team/FindTeamMember/" + id,
+
 
             function (Data) {
                 if (Data == null) {
@@ -55,19 +56,61 @@ function show() {
                         $("#simple-table").append('<tr><td>' + Data[i].FirstName + '</td><td>' + Data[i].Email + '</td><td><input type="button" id=' + Data[i].UserID + ' value="Add Member" onclick="add(this); return false;" class="btn btn-minier btn-purple" /></td></tr>');
                     }
                 }
-
             })
-
         .fail(
-
             function (jqXHR, textStatus, err) {
-
                 alert('Error: ' + err);
-
             });
-
 }
 
+
+
+
+//function show() 
+//{
+//    $("#teamAlertMessage").hide();
+//    $("#simple-table tr").remove();
+//    var id = $('#itId').val();
+
+//    if (id == "")
+//    {
+//        $("#teamAlertMessage").show();
+//    }
+//    else
+//    {
+   
+//        $.ajax({
+//            url: "/Team/FindTeamMember/",
+//            type: "POST",
+//            contentType: "application/json;charset=utf-8",
+//            data: JSON.stringify(id),
+//            dataType: "json",
+//            success: function (response) 
+//            {
+//                if (response != 0) 
+//                {
+//                    $("#simple-table").append('<tr><th>Member Name</th><th>Email</th><th>Action</th></tr>');
+//                    var arrayLength = Data.length;
+//                    for (var i = 0; i < arrayLength; i++) {
+//                        $("#simple-table").append('<tr><td>' + Data[i].FirstName + '</td><td>' + Data[i].Email + '</td><td><input type="button" id=' + Data[i].UserID + ' value="Add Member" onclick="add(this); return false;" class="btn btn-minier btn-purple" /></td></tr>');              
+//                }
+//                else
+//                {
+//                    $("#teamAlertMessage").show();
+//                }
+//            },
+//            error: function (x, e)
+//            {
+//                $("#noDateFoundMessage").show();
+//            }
+//        });
+    
+//    }
+
+
+
+
+    
 function submit() {
     var teamName = $("#txtTeamName").val();
 

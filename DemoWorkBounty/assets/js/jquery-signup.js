@@ -78,15 +78,11 @@
 
 });
 
-
-
-
-    function isNumberKey(evt) {
+function isNumberKey(evt) {
         var charCode = (evt.which) ? evt.which : event.keyCode;
         if (charCode != 43 && charCode > 31
           && (charCode < 48 || charCode > 57))
             return false;
-
         return true;
     }
 
@@ -95,7 +91,6 @@
         if (charCode > 31 && charCode < 65
           && (charCode < 97 || charCode > 122))
             return false;
-
         return true;
     }
 
@@ -103,6 +98,5 @@
         var charcode = (evt.which) ? evt.which : event.keyCode;
         if (charcode > 0 && charcode < 127)
             return false;
-
         return true;
     }

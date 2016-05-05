@@ -258,7 +258,5 @@ namespace DemoWorkBounty.Controllers
             return View();
         }
 
-
-
     }
 }

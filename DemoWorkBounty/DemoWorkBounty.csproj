@@ -285,8 +285,33 @@
     <Content Include="assets\images\gallery\thumb-6.jpg" />
     <Content Include="assets\images\spritemap%402x.png" />
     <Content Include="assets\images\spritemap.png" />
+    <Content Include="assets\img\2000px-Dominos_pizza_logo.svg.png" />
+    <Content Include="assets\img\amazon-dgmag.png" />
+    <Content Include="assets\img\americanexpress.jpg" />
+    <Content Include="assets\img\angry-face.png" />
+    <Content Include="assets\img\banner-bg.jpg" />
+    <Content Include="assets\img\bitcoin.jpg" />
+    <Content Include="assets\img\cb06cfc39ac3d3c2774433694f47660e.png" />
     <Content Include="assets\img\clear.png" />
+    <Content Include="assets\img\dog.png" />
+    <Content Include="assets\img\dominos-pizza-logo.png" />
+    <Content Include="assets\img\GoogleWallet.png" />
+    <Content Include="assets\img\header-logo.png" />
+    <Content Include="assets\img\intro-bg.jpg" />
+    <Content Include="assets\img\ipad.png" />
     <Content Include="assets\img\loading.gif" />
+    <Content Include="assets\img\McDonald%27s_Golden_Arches.svg.png" />
+    <Content Include="assets\img\pantaloons.jpg" />
+    <Content Include="assets\img\Paypal_2014_logo.png" />
+    <Content Include="assets\img\phones.png" />
+    <Content Include="assets\img\relieved-face.png" />
+    <Content Include="assets\img\shoppersshop.jpg" />
+    <Content Include="assets\img\VFsaWo_G.jpeg" />
+    <Content Include="assets\img\VISA_Logo.png" />
+    <Content Include="assets\img\vu-43d6535-400x400-imaeefz3ncz5agex.jpeg" />
+    <Content Include="assets\img\WB.png" />
+    <Content Include="assets\img\Wepay_Logo_.png" />
+    <Content Include="assets\img\Western-Union-logo-old.jpg" />
     <Content Include="assets\js\ace-editable.min.js" />
     <Content Include="assets\js\ace-elements.min.js" />
     <Content Include="assets\js\ace-extra.min.js" />
@@ -448,31 +473,6 @@
     <Content Include="Content\themes\base\tooltip.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
-    <Content Include="img\2000px-Dominos_pizza_logo.svg.png" />
-    <Content Include="img\amazon-dgmag.png" />
-    <Content Include="img\americanexpress.jpg" />
-    <Content Include="img\angry-face.png" />
-    <Content Include="img\banner-bg.jpg" />
-    <Content Include="img\bitcoin.jpg" />
-    <Content Include="img\cb06cfc39ac3d3c2774433694f47660e.png" />
-    <Content Include="img\dog.png" />
-    <Content Include="img\dominos-pizza-logo.png" />
-    <Content Include="img\GoogleWallet.png" />
-    <Content Include="img\header-logo.png" />
-    <Content Include="img\intro-bg.jpg" />
-    <Content Include="img\ipad.png" />
-    <Content Include="img\McDonald%27s_Golden_Arches.svg.png" />
-    <Content Include="img\pantaloons.jpg" />
-    <Content Include="img\Paypal_2014_logo.png" />
-    <Content Include="img\phones.png" />
-    <Content Include="img\relieved-face.png" />
-    <Content Include="img\shoppersshop.jpg" />
-    <Content Include="img\VFsaWo_G.jpeg" />
-    <Content Include="img\VISA_Logo.png" />
-    <Content Include="img\vu-43d6535-400x400-imaeefz3ncz5agex.jpeg" />
-    <Content Include="img\WB.png" />
-    <Content Include="img\Wepay_Logo_.png" />
-    <Content Include="img\Western-Union-logo-old.jpg" />
     <EntityDeploy Include="Model1.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>Model1.Designer.cs</LastGenOutput>
@@ -546,6 +546,7 @@
     <Content Include="Views\_IndexLayout.cshtml" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Home\AddWorkitem.cshtml" />
+    <Content Include="Views\Home\ViewPage1.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -584,9 +585,9 @@
         <WebProjectProperties>
           <UseIIS>True</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>56502</DevelopmentServerPort>
+          <DevelopmentServerPort>0</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:56502/</IISUrl>
+          <IISUrl>http://localhost:51726/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>
