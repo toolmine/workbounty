@@ -59,9 +59,9 @@
                 data: JSON.stringify(userSignupData),
                 dataType: "json",
                 success: function (getResponseOfSignupData) {
-                    if (getResponseOfSignupData == "Success") {
-                        var url = "/home/dashboard/"
-                        document.location.href = url;
+                    console.log(getResponseOfSignupData);
+                    if (getResponseOfSignupData.success) {
+                        location.href = getResponseOfSignupData.redirectURL;
                     }
                     else {
                         $("#alertMessage").show();
