@@ -82,7 +82,7 @@ namespace DemoWorkBounty.Controllers
                     WorkItemAssignment assignData = new WorkItemAssignment();
                     int Workid = Convert.ToInt32(data["Workid"].ToString());
                     var fileName = Path.GetFileName(myFile.FileName);
-                    var path = Path.Combine(Server.MapPath("~/work/Download/"), fileName);
+                    var path = Path.Combine(Server.MapPath("~/work1/Download/"), fileName);
                     myFile.SaveAs(path);
                     assignData.WorkItemID = Workid;
                     assignData.UserID = Convert.ToInt32(Session["UserID"]);
@@ -146,10 +146,10 @@ namespace DemoWorkBounty.Controllers
             return View(getDetailWorkitemData);
         }
 
-        public FileResult Download(int currentUserID)
+        public FileResult Download(int currentUserID,int workitemID)
         {
-            var files = entity.WorkItemAssignments.Where(s => s.UserID == currentUserID).Select(s => s.SubmissionPath).FirstOrDefault();
-            string fileName = entity.WorkItemAssignments.Where(s => s.UserID == currentUserID).Select(s => s.SubmissionPath).FirstOrDefault();
+            var files = entity.WorkItemAssignments.Where(s => s.UserID == currentUserID && s.WorkItemAssignmentID == workitemID).Select(s => s.SubmissionPath).FirstOrDefault();
+            string fileName = entity.WorkItemAssignments.Where(s => s.UserID == currentUserID && s.WorkItemAssignmentID == workitemID).Select(s => s.SubmissionPath).FirstOrDefault();
             return File(files, System.Net.Mime.MediaTypeNames.Application.Octet, fileName);
         }
 

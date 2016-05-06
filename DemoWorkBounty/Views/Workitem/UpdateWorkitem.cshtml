@@ -72,23 +72,15 @@ else
                                 <table><tr><td class="padding10px">Attach Documents: </td><td><input type="file" id="myFile" name="myFile" /></td></tr></table>
                             </p>
                             <hr />
-                        </div>
-                    </div>
-                    @*<div class="widget-main">
-
-                        <div class="col-sm-9">
-
-                        </div>
-                    </div>*@
-                            <div class="col-sm-9">
-                        <div class="clearfix">
                             <button class="btn btn-info" type="submit" data-toggle="tooltip" title="Upload a document">
                                 <i class="ace-icon fa fa-check bigger-110"></i>
                                 Submit
                             </button>
                         </div>
                     </div>
-
+                
+                         
+                
                 </form>
             }
 
@@ -119,7 +111,7 @@ else
                         <td>@(ViewBag.dateOfSubmittedWork.IndexOf(i) + 1)</td>
                         <td>@Html.DisplayFor(a=>i.Title)</td>
                         <td>@Html.DisplayFor(a => i.SubmissionDateTime)
-                        <td>@Html.ActionLink("Show document", "Download", "workitem", new { currentUserID = i.UserID }, new { @class = "btn btn-minier btn-purple", data_toggle = "tooltip", title = "Download documents" }) </td>
+                        <td>@Html.ActionLink("Show document", "Download", "workitem", new { currentUserID = i.UserID, workitemID=i.WorkItemAssignmentID }, new { @class = "btn btn-minier btn-purple", data_toggle = "tooltip", title = "Download documents" }) </td>
                     </tr>
                 </tbody>
             }

@@ -264,7 +264,7 @@ namespace DemoWorkBounty.Repository
 
         public List<WorkitemDocuments> UserUploadDocument(int currentWorkitemID,int currentUserID)
         {
-            var getListofUploadDocuments = entity.WorkItemAssignments.Where(s => s.WorkItemID == currentWorkitemID && s.UserID == currentUserID).Select(s => new WorkitemDocuments { WorkItemID = s.WorkItemID, UserID = s.UserID, Title = s.Workitem.Title, Summary = s.Workitem.Summary, SubmissionDateTime = s.SubmissionDateTime, SubmissionPath = s.SubmissionPath }).ToList();
+            var getListofUploadDocuments = entity.WorkItemAssignments.Where(s => s.WorkItemID == currentWorkitemID && s.UserID == currentUserID).Select(s => new WorkitemDocuments { WorkItemID = s.WorkItemID, UserID = s.UserID, Title = s.Workitem.Title, Summary = s.Workitem.Summary, SubmissionDateTime = s.SubmissionDateTime, SubmissionPath = s.SubmissionPath,WorkItemAssignmentID=s.WorkItemAssignmentID }).ToList();
             return getListofUploadDocuments;
         }
 

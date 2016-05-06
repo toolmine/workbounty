@@ -8,6 +8,7 @@ namespace DemoWorkBounty.Models
 {
     public class WorkitemDocuments
     {
+        public int WorkItemAssignmentID { get; set; }
         public string FirstName { get; set; }
         public string Title { get; set; }
         public string Summary { get; set; }
