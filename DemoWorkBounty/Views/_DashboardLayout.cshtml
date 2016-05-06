@@ -48,10 +48,17 @@
 
                     <li>
                         <a data-toggle="dropdown" href="#" class="dropdown-toggle">
+                           @if (Session["FirstName"] == null)
+                           {
+                               Response.Redirect("~/home/login");
+                           }
+                           else
+                           {
                             <span class="user-info">
                                 Welcome,
                                 @Session["FirstName"].ToString()
                             </span>
+                           }
                         </a>
 
                         <ul class="user-menu dropdown-menu-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
