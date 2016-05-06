@@ -74,7 +74,7 @@
 
                                             <label class="block clearfix" style="padding-top:5px;">
                                                 <span class="block input-icon input-icon-right">
-                                                    @Html.PasswordFor(a => a.Password, new { @id = "Password", @maxlength = "20", @class = "form-control", @placeholder = "Password" })
+                                                    @Html.PasswordFor(a => a.Password, new { @id = "Password", @onkeypress = "return disableclick(event)", @maxlength = "20", @class = "form-control", @placeholder = "Password" })
                                                     <span id="PasswordError" class="text-danger"></span>
                                                 </span>
 
@@ -82,7 +82,7 @@
 
                                             <label class="block clearfix">
                                                 <span class="block input-icon input-icon-right">
-                                                    @Html.PasswordFor(a => a.Password, new { @id = "ConfirmPassword", @maxlength = "20", @class = "form-control", @placeholder = "Confirm Password" })
+                                                    @Html.PasswordFor(a => a.Password, new { @id = "ConfirmPassword", @onkeypress = "return disableclick(event)", @maxlength = "20", @class = "form-control", @placeholder = "Confirm Password" })
                                                     <span id="ConfirmPasswordError" class="text-danger"></span>
                                                 </span>
 
