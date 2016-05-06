@@ -25,7 +25,6 @@ namespace DemoWorkBounty
             throw new UnintentionalCodeFirstException();
         }
     
-        public DbSet<sysdiagram> sysdiagrams { get; set; }
         public DbSet<Team> Teams { get; set; }
         public DbSet<UserInfo> UserInfoes { get; set; }
         public DbSet<Workitem> Workitems { get; set; }
@@ -34,5 +33,6 @@ namespace DemoWorkBounty
         public DbSet<WorkitemHistory> WorkitemHistories { get; set; }
         public DbSet<WorkitemRegistration> WorkitemRegistrations { get; set; }
         public DbSet<WorkitemStatu> WorkitemStatus { get; set; }
+        public DbSet<ExceptionLog> ExceptionLogs { get; set; }
     }
 }

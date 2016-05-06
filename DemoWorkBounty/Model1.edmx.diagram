@@ -5,7 +5,6 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="b46aa7736ec64bf78f299f47b510ab90" Name="Diagram1">
-        <EntityTypeShape EntityType="WorkBountyDBModel.sysdiagram" Width="1.5" PointX="5.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="WorkBountyDBModel.Team" Width="1.5" PointX="3" PointY="4.625" IsExpanded="true" />
         <EntityTypeShape EntityType="WorkBountyDBModel.UserInfo" Width="1.5" PointX="0.75" PointY="7" IsExpanded="true" />
         <EntityTypeShape EntityType="WorkBountyDBModel.Workitem" Width="1.5" PointX="3" PointY="8" IsExpanded="true" />
@@ -30,6 +29,7 @@
         <AssociationConnector Association="WorkBountyDBModel.FK_WorkitemHistory_Workitem" ManuallyRouted="false" />
         <AssociationConnector Association="WorkBountyDBModel.FK_WorkitemRegistration_Workitem" ManuallyRouted="false" />
         <AssociationConnector Association="WorkBountyDBModel.FK_WorkitemHistory_WorkitemStatus" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="WorkBountyDBModel.ExceptionLog" Width="1.5" PointX="5.375" PointY="0.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
