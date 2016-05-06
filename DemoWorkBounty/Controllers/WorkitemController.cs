@@ -15,7 +15,7 @@ namespace DemoWorkBounty.Controllers
         WorkitemRepository workbountyRepo = new WorkitemRepository();
         TeamRepository teamRepo = new TeamRepository();
         WorkBountyDBEntities6 entity = new WorkBountyDBEntities6();
-       
+
         public ActionResult ViewAssignedWorkitem(int currentWorkitemID)
         {
 
@@ -39,23 +39,31 @@ namespace DemoWorkBounty.Controllers
 
         public ActionResult UpdateWorkitem(int currentWorkitemID)
         {
+            int currentUserID = Convert.ToInt32(Session["UserID"]);
             var getDataofCurrentWorkitem = workbountyRepo.ShowCurrentWorkitems(currentWorkitemID);
+            var getDataofUploadDocument = workbountyRepo.UserUploadDocument(currentWorkitemID, currentUserID);
+            ViewBag.dateOfSubmittedWork = getDataofUploadDocument;
+
             var currentDate = DateTime.Now;
             var workitemInfo = entity.Workitems.Where(s => s.WorkitemID == currentWorkitemID).FirstOrDefault();
-            if (currentDate < workitemInfo.DueDate)
+            if (getDataofCurrentWorkitem.Count != 0)
             {
-                if (getDataofCurrentWorkitem != null)
+                if (currentDate < workitemInfo.DueDate)
                 {
-                    ViewBag.dataForWorkitem = getDataofCurrentWorkitem;
+                    if (getDataofCurrentWorkitem != null)
+                    {
+                        ViewBag.dataForWorkitem = getDataofCurrentWorkitem;
+                    }
+
                 }
                 else
                 {
-                    ViewBag.displayMessage = "Already Submitted a Document";
+                    ViewBag.displayMessage = "Due date is reached. Cannot upload document";
                 }
             }
-            else 
+            else
             {
-                ViewBag.displayMessage = "Due date is reached. Cannot upload document";
+                ViewBag.displayAlert = "This workitem is already rewarded";
             }
             return View();
         }
@@ -82,7 +90,7 @@ namespace DemoWorkBounty.Controllers
                     assignData.SubmissionDateTime = DateTime.Now;
                     assignData.SubmissionPath = path;
                     var putAssignData = workbountyRepo.UpdateWorkitems(assignData);
-                    return RedirectToAction("dashboard","home");
+                    return RedirectToAction("dashboard", "home");
                 }
             }
             catch (Exception)
@@ -100,9 +108,9 @@ namespace DemoWorkBounty.Controllers
         [HttpPost]
         public JsonResult ApplyWorkitem(WorkitemRegistration dataForWorkitemRegistration)
         {
-          var applyDataForWorkitem = workbountyRepo.UserRegisterForWorkitem(dataForWorkitemRegistration);
-          return Json(applyDataForWorkitem);
-                 
+            var applyDataForWorkitem = workbountyRepo.UserRegisterForWorkitem(dataForWorkitemRegistration);
+            return Json(applyDataForWorkitem);
+
         }
 
         [HttpPost]
@@ -112,11 +120,11 @@ namespace DemoWorkBounty.Controllers
             return Json(applyDataForWorkitem);
 
         }
-        
+
         public ActionResult ViewUpdatedWorkitem(int currentWorkitemID)
         {
             var getDataofUploadDocument = workbountyRepo.ShowDocument(currentWorkitemID);
-            if (getDataofUploadDocument!=null)
+            if (getDataofUploadDocument != null)
             {
                 ViewBag.dataofOpenDocument = getDataofUploadDocument;
             }
@@ -159,7 +167,7 @@ namespace DemoWorkBounty.Controllers
             }
         }
 
-      
-      
+
+
     }
 }
