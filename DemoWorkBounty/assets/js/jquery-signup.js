@@ -100,3 +100,22 @@ function isNumberKey(evt) {
             return false;
         return true;
     }
+
+    document.onmousedown = disableclick;
+    status = "Right Click Disabled";
+    function disableclick(event) {
+        if (event.button == 2) {
+            alert(status);
+            return false;
+        }
+    }
+    $(document).ready(function () {
+        $('#Password').bind("cut copy paste", function (e) {
+            e.preventDefault();
+        });
+    });
+    $(document).ready(function () {
+        $('#ConfirmPassword').bind("cut copy paste", function (e) {
+            e.preventDefault();
+        });
+    });

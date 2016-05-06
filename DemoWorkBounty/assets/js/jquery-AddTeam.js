@@ -112,6 +112,7 @@ function show() {
 
     
 function submit() {
+     $("#teamWarningMessage").hide();
     var teamName = $("#txtTeamName").val();
 
     var teamData = {

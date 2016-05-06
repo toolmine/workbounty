@@ -34,5 +34,6 @@ namespace DemoWorkBounty
         public DbSet<WorkitemRegistration> WorkitemRegistrations { get; set; }
         public DbSet<WorkitemStatu> WorkitemStatus { get; set; }
         public DbSet<ExceptionLog> ExceptionLogs { get; set; }
+        public DbSet<sysdiagram> sysdiagrams { get; set; }
     }
 }
