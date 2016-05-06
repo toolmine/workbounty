@@ -79,24 +79,42 @@ namespace DemoWorkBounty.Controllers
         [HttpPost]
         public JsonResult Signup(UserInfo userSignupData)
         {
+            var success = false;
+            var message = "";
+            var redirectURL = "";
             try
             {
                 if (ModelState.IsValid)
                 {
                     var userSignupInfo = userRepo.AddUserDetails(userSignupData);
-                    Session["UserID"] = userSignupInfo.UserID;
-                    Session["FirstName"] = userSignupInfo.FirstName;
-                    return Json("Success");
+                    if (userSignupInfo != null)
+                    {
+                        Session["UserID"] = userSignupInfo.UserID;
+                        Session["FirstName"] = userSignupInfo.FirstName;
+                        FormsAuthentication.SetAuthCookie(userSignupInfo.FirstName, false);
+                        success = true;
+                        message = "signup successfully!";
+                        redirectURL = Url.Action("Dashboard", "Home");
+                    }
+                    else
+                    {
+                        success = false;
+                        message = "signup fail!";
+                    }
                 }
 
                 else
                 {
-                    return Json("false");
+                    message = "Error in Input";
                 }
 
             }
             catch (Exception)
-            { return Json("false"); }
+            {
+                message = "Error";
+                return Json("Error");
+            }
+            return Json(new { success = success, message = message, redirectURL = redirectURL});
         }
 
         public ActionResult ForgotPassword()

@@ -6,7 +6,13 @@
 @foreach (DemoWorkBounty.Models.UserProfileInfo item in ViewBag.getUserData)
                         {
 <div class="col-xs-12 col-sm-9">
-
+    <ul class="breadcrumb">
+        <li>
+            <i class="ace-icon fa fa-home home-icon"></i>
+            <a href="~/home/dashboard" data_toggle="tooltip" , title="Dashboard">Dashboard</a>
+        </li>
+        <li class="active">Profile</li>
+    </ul>
     <h4 class="blue">
         <span class="middle">Profile</span>
     </h4>
