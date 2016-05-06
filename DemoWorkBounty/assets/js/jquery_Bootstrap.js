@@ -2,13 +2,12 @@
     var dateToday = new Date();
     $('.datepicker').datepicker({
         format: 'mm-dd-yyyy',
-        startDate: '-120y',
-        endDate: '-18y',
+        endDate: new Date(),
     }).on('changeDate', function (e) {
         $(this).datepicker('hide');
     });
 
-    $("#DueDate").prop('enabled', true);
+    $("#DueDate").prop('disabled', true);
 
     $("#StartDate").datepicker({
         startDate: new Date(),

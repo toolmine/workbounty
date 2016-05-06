@@ -12,12 +12,12 @@ namespace DemoWorkBounty
     using System;
     using System.Collections.Generic;
     
-    public partial class sysdiagram
+    public partial class ExceptionLog
     {
-        public string name { get; set; }
-        public int principal_id { get; set; }
-        public int diagram_id { get; set; }
-        public Nullable<int> version { get; set; }
-        public byte[] definition { get; set; }
+        public int ExceptionID { get; set; }
+        public int ClientID { get; set; }
+        public string ErrorDetails { get; set; }
+        public string InnerException { get; set; }
+        public System.DateTime EventDateTime { get; set; }
     }
 }
