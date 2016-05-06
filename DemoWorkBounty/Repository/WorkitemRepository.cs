@@ -99,9 +99,14 @@ namespace DemoWorkBounty.Repository
 
         public List<UpdateWorkitems> ShowCurrentWorkitems(int currentWorkitemID)
         {
+            var IsRewardedWorkitemData = entity.WorkItemAssignments.Where(s => s.WorkItemID == currentWorkitemID).Select(s => s.IsRewarded == true).FirstOrDefault();
             List<UpdateWorkitems> updateWorkitemData = new List<UpdateWorkitems>();
-            updateWorkitemData.Add(entity.WorkitemRegistrations.Where(s => s.WorkitemID == currentWorkitemID).Select(s => new UpdateWorkitems { Title = s.Workitem.Title, Summary = s.Workitem.Summary, WorkItemID = s.WorkitemID }).FirstOrDefault());
+            if (IsRewardedWorkitemData == null)
+            {
+                updateWorkitemData.Add(entity.WorkitemRegistrations.Where(s => s.WorkitemID == currentWorkitemID).Select(s => new UpdateWorkitems { Title = s.Workitem.Title, Summary = s.Workitem.Summary, WorkItemID = s.WorkitemID }).FirstOrDefault());
+            }
             return updateWorkitemData;
+            
         }
 
         public string UpdateWorkitems(WorkItemAssignment data)
@@ -185,7 +190,7 @@ namespace DemoWorkBounty.Repository
                 var checkDueDateValidation = entity.WorkitemRegistrations.Where(s => s.Workitem.DueDate <= currentDate).FirstOrDefault();
                 if (checkDueDateValidation != null)
                 {
-                    var isRewardedWorkitem = entity.WorkItemAssignments.Where(s => s.WorkItemID ==workItemID && s.IsRewarded == true).FirstOrDefault();
+                    var isRewardedWorkitem = entity.WorkItemAssignments.Where(s => s.WorkItemID == workItemID && s.IsRewarded == true).FirstOrDefault();
                     if (isRewardedWorkitem != null)
                     {
                         var item = entity.WorkitemRegistrations.Where(s => s.UserID == currentUserID && s.WorkitemID == workItemID).Select(s => new AssignWorkitems { WorkitemID = s.WorkitemID, Title = s.Workitem.Title, StartDate = s.Workitem.StartDate, EndDate = s.Workitem.DueDate, FirstName = s.Workitem.UserInfo.FirstName, ProposedReward = s.Workitem.ProposedReward, Amount = s.Workitem.Amount, CreatedDateTime = s.Workitem.CreatedDateTime }).FirstOrDefault();
@@ -256,6 +261,16 @@ namespace DemoWorkBounty.Repository
                 return null;
             }
         }
+
+        public List<WorkitemDocuments> UserUploadDocument(int currentWorkitemID,int currentUserID)
+        {
+            var getListofUploadDocuments = entity.WorkItemAssignments.Where(s => s.WorkItemID == currentWorkitemID && s.UserID == currentUserID).Select(s => new WorkitemDocuments { WorkItemID = s.WorkItemID, UserID = s.UserID, Title = s.Workitem.Title, Summary = s.Workitem.Summary, SubmissionDateTime = s.SubmissionDateTime, SubmissionPath = s.SubmissionPath }).ToList();
+            return getListofUploadDocuments;
+        }
+
+
+
+
         public List<WorkitemDocuments> ShowDocument(int id)
         {
             var getDataForIsRewarded = entity.WorkItemAssignments.Where(s => s.WorkItemID == id).Select(s => s.IsRewarded == true).FirstOrDefault();

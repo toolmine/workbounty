@@ -24,11 +24,11 @@ namespace DemoWorkBounty.Controllers
         [HttpPost]
         public JsonResult AddTeam(Team teamData)
         {
-            if(ModelState.IsValid)
-            { 
-            var getTeamList = teamRepo.AddTeamData(teamData);
-            Session["TeamID"] = getTeamList;
-            return Json(getTeamList);
+            if (ModelState.IsValid)
+            {
+                var getTeamList = teamRepo.AddTeamData(teamData);
+                Session["TeamID"] = getTeamList;
+                return Json(getTeamList);
             }
             else
             {
@@ -42,36 +42,54 @@ namespace DemoWorkBounty.Controllers
             return View(getTeamDetail);
         }
 
-        
+
         [HttpPost]
         public JsonResult AddMember(Team memberData)
         {
-            memberData.TeamUserInfoID =Convert.ToInt32(Session["TeamID"]);
+            memberData.TeamUserInfoID = Convert.ToInt32(Session["TeamID"]);
             var getMemberData = teamRepo.AddMemberData(memberData);
             return Json(getMemberData);
 
         }
 
         [HttpPost]
-        public ActionResult UpdateMember(Team updateMemberData)
+        public JsonResult UpdateMember(Team updateMemberData)
         {
-            var getMemberDetails = teamRepo.UpdateMemberData(updateMemberData);
-            return View(getMemberDetails);
+            var success = false;
+            var message = "";
+            try
+            {
+                var getMemberDetails = teamRepo.UpdateMemberData(updateMemberData);
+                if (getMemberDetails != null)
+                {
+                    success = true;
+                    message = "member delete  successfully!";
+                }
+                else
+                {
+                    message = "Failed to remove member";
+                }
+            }
+            catch (Exception)
+            {
+                message = "Error";
+                return Json("Error");
+            }
+            return Json(new { success = success, message = message });
         }
 
-   
-      public JsonResult FindTeamMember(string id)
+        public JsonResult FindTeamMember(string id)
         {
             var getSearchMemberData = teamRepo.GetMemberResult(id);
-            return Json(getSearchMemberData, JsonRequestBehavior.AllowGet);
+            return Json(getSearchMemberData);
         }
-      
+
         [HttpPost]
         public JsonResult UpdateNewMember(Team updateMemberData)
-      {
-          var getMemberResults = teamRepo.AddUpdateMemberData(updateMemberData);
-          return Json(getMemberResults);
-      }
+        {
+            var getMemberResults = teamRepo.AddUpdateMemberData(updateMemberData);
+            return Json(getMemberResults);
+        }
 
 
 

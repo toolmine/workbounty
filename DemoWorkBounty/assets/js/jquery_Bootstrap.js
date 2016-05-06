@@ -2,7 +2,8 @@
     var dateToday = new Date();
     $('.datepicker').datepicker({
         format: 'mm-dd-yyyy',
-        endDate: new Date(),
+        startDate: '-100y',
+        endDate: '-18y'
     }).on('changeDate', function (e) {
         $(this).datepicker('hide');
     });
