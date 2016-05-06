@@ -49,9 +49,9 @@
           <Property Name="StartDate" Type="date" Nullable="false" />
           <Property Name="DueDate" Type="date" Nullable="false" />
           <Property Name="PublishedTo" Type="int" Nullable="false" />
-          <Property Name="DocumentFilePath" Type="nvarchar" MaxLength="250" Nullable="false" />
-          <Property Name="ProposedReward" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="Amount" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="DocumentFilePath" Type="nvarchar" MaxLength="250" />
+          <Property Name="ProposedReward" Type="nvarchar" MaxLength="50" />
+          <Property Name="Amount" Type="nvarchar" MaxLength="50" />
           <Property Name="CreatedBy" Type="int" Nullable="false" />
           <Property Name="CreatedDateTime" Type="datetime" Nullable="false" />
           <Property Name="ModifyBy" Type="int" Nullable="false" />
@@ -409,9 +409,9 @@
           <Property Name="StartDate" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="DueDate" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="PublishedTo" Type="Int32" Nullable="false" />
-          <Property Name="DocumentFilePath" Type="String" MaxLength="250" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="ProposedReward" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Amount" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="DocumentFilePath" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="ProposedReward" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Amount" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="CreatedBy" Type="Int32" Nullable="false" />
           <Property Name="CreatedDateTime" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="ModifyBy" Type="Int32" Nullable="false" />

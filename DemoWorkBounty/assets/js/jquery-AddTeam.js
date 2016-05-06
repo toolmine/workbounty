@@ -42,7 +42,7 @@ function show() {
     $("#teamAlertMessage").hide();
     $("#simple-table tr").remove();
     var id = $('#itId').val();
-    $.getJSON("/Team/FindTeamMember/" + id,
+    $.getJSON("/api/FindMember/" + id,
 
 
             function (Data) {

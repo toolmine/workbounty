@@ -22,12 +22,12 @@ function removeMember(item) {
         data: JSON.stringify(updateMemberData),
         dataType: "json",
         success: function (response) {
-            if (response == "Success") {
+            console.log(response);
+            if (response.success) {
                 item.remove()
             }
-            else
-            {
-                alert("Error");
+            else {
+                $("#alertMessage").show();
             }
         },
         error: function (x, e) {
