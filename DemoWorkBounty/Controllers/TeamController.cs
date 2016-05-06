@@ -59,12 +59,13 @@ namespace DemoWorkBounty.Controllers
             return View(getMemberDetails);
         }
 
+   
       public JsonResult FindTeamMember(string id)
         {
             var getSearchMemberData = teamRepo.GetMemberResult(id);
-            return Json(getSearchMemberData);
+            return Json(getSearchMemberData, JsonRequestBehavior.AllowGet);
         }
-
+      
         [HttpPost]
         public JsonResult UpdateNewMember(Team updateMemberData)
       {

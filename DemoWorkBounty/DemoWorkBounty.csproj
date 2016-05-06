@@ -180,6 +180,9 @@
     <Compile Include="Repository\TeamRepository.cs" />
     <Compile Include="Repository\UserRepository.cs" />
     <Compile Include="Repository\WorkitemRepository.cs" />
+    <Compile Include="sysdiagram.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Team.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>

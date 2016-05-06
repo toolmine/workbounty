@@ -30,6 +30,7 @@
         <AssociationConnector Association="WorkBountyDBModel.FK_WorkitemRegistration_Workitem" ManuallyRouted="false" />
         <AssociationConnector Association="WorkBountyDBModel.FK_WorkitemHistory_WorkitemStatus" ManuallyRouted="false" />
         <EntityTypeShape EntityType="WorkBountyDBModel.ExceptionLog" Width="1.5" PointX="5.375" PointY="0.75" />
+        <EntityTypeShape EntityType="WorkBountyDBModel.sysdiagram" Width="1.5" PointX="7.375" PointY="0.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

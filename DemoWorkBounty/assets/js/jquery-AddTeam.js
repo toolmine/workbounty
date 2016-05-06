@@ -5,7 +5,7 @@
     $("#alertMessage").hide();
     $("#teamWarningMessage").hide();
     $("#memberAlreadyExist").hide();
-    
+
 });
 
 
@@ -27,8 +27,7 @@ function add(item) {
             if (response == "Success") {
                 item.remove()
             }
-            else
-            {
+            else {
                 $("#memberAlreadyExist").show();
             }
         },
@@ -42,21 +41,19 @@ function show() {
     $("#teamAlertMessage").hide();
     $("#simple-table tr").remove();
     var id = $('#itId').val();
-    $.getJSON("/Team/FindTeamMember/" + id,
-
-
-            function (Data) {
-                if (Data == null) {
-                    $("#noDateFoundMessage").show();
-                }
-                else {
-                    $("#simple-table").append('<tr><th>Member Name</th><th>Email</th><th>Action</th></tr>');
-                    var arrayLength = Data.length;
-                    for (var i = 0; i < arrayLength; i++) {
-                        $("#simple-table").append('<tr><td>' + Data[i].FirstName + '</td><td>' + Data[i].Email + '</td><td><input type="button" id=' + Data[i].UserID + ' value="Add Member" onclick="add(this); return false;" class="btn btn-minier btn-purple" /></td></tr>');
-                    }
-                }
-            })
+    $.getJSON("/api/FindMember/" + id,
+           function (Data) {
+               if (Data == null) {
+                   $("#noDateFoundMessage").show();
+               }
+               else {
+                   $("#simple-table").append('<tr><th>Member Name</th><th>Email</th><th>Action</th></tr>');
+                   var arrayLength = Data.length;
+                   for (var i = 0; i < arrayLength; i++) {
+                       $("#simple-table").append('<tr><td>' + Data[i].FirstName + '</td><td>' + Data[i].Email + '</td><td><input type="button" id=' + Data[i].UserID + ' value="Add Member" onclick="add(this); return false;" class="btn btn-minier btn-purple" /></td></tr>');
+                   }
+               }
+           })
         .fail(
             function (jqXHR, textStatus, err) {
                 alert('Error: ' + err);
@@ -78,7 +75,7 @@ function show() {
 //    }
 //    else
 //    {
-   
+
 //        $.ajax({
 //            url: "/Team/FindTeamMember/",
 //            type: "POST",
@@ -104,13 +101,13 @@ function show() {
 //                $("#noDateFoundMessage").show();
 //            }
 //        });
-    
+
 //    }
 
 
 
 
-    
+
 function submit() {
     var teamName = $("#txtTeamName").val();
 
@@ -138,8 +135,7 @@ function submit() {
                     $("#AddTeamButton").hide();
                     $("#recent-box1").show();
                 }
-                else
-                {
+                else {
                     $("#teamWarningMessage").show();
                 }
             },
