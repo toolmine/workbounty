@@ -4,16 +4,15 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <script src="~/assets/js/sidebar-fixed.js"></script>
+    <script src="~/assets/css/loading.css"></script>
     <title>@ViewBag.Title</title>
     @Styles.Render("~/assets/css")
     @Scripts.Render("~/assets/js")
 
 
 </head>
-<body class="no-skin">
-
+<body class="no-skin">    
     <div id="navbar" class="navbar navbar-default">
-
         <div class="navbar-container" id="navbar-container">
             <button type="button" class="navbar-toggle menu-toggler pull-left" id="menu-toggler" data-target="#sidebar">
                 <span class="sr-only">Toggle sidebar</span>
@@ -31,7 +30,6 @@
                         <img src="~/assets/img/WB.png" />
                     </small>
                 </a>
-
             </div>
 
             <div class="nav-search" id="nav-search">
@@ -45,8 +43,7 @@
 
             <div class="navbar-buttons navbar-header pull-right" role="navigation">
                 <ul>
-
-                    <li>
+                  <li>
                         @try
                         {
                             <a data-toggle="dropdown" href="#" class="dropdown-toggle">
@@ -69,7 +66,6 @@
                             </li>
 
                             <li class="divider"></li>
-
                             <li>
                                 <a href="~/Home/Logout">
                                     <i class="ace-icon fa fa-power-off"></i>
@@ -89,7 +85,6 @@
 
         <div id="sidebar" class="sidebar responsive" data-sidebar-scroll="true" data-sidebar-hover="true">
             <script src="~/assets/js/sidebar-fixed.js"></script>
-
             <ul class="nav nav-list">
 
 
@@ -118,46 +113,34 @@
                         <span class="menu-text padding20px"> My Rewards </span>
                     </button>
                 </a>
-
-
-
             </ul>
 
             <div class="sidebar-toggle sidebar-collapse" id="sidebar-collapse">
                 <i class="ace-icon fa fa-angle-double-left" data_toggle="tooltip" , title="Hide/Show" data-icon1="ace-icon fa fa-angle-double-left" data-icon2="ace-icon fa fa-angle-double-right"></i>
             </div>
-
-
         </div>
 
         <div class="main-content">
             <div class="main-content-inner">
             </div>
 
-            <div class="page-content">
-                
+            <div class="page-content">  
                 <div>
                     @RenderBody()
                 </div>
 
                 <div class="row">
                     <div class="col-xs-12">
-
-
-
                         <div class="row">
                             <div class="space-6"></div>
                             <div class="vspace-12-sm"></div>
-
                         </div><!-- /.row -->
                     </div><!-- /.col -->
                 </div>
 
 
                 <div class="row">
-
                 </div>
-
             </div>
         </div>
     </div>
@@ -167,13 +150,8 @@
         <div class="footer-inner">
             <div class="footer-content">
                 <span class="bigger-120 padding15pxtop">
-
                     <span class="blue bolder"></span>
-
                 </span>
-
-        
-
             </div>
         </div>
     </div>
@@ -181,9 +159,6 @@
     <a href="#" id="btn-scroll-up" class="btn-scroll-up btn btn-sm btn-inverse">
         <i class="ace-icon fa fa-angle-double-up icon-only bigger-110"></i>
     </a>
-
-
-
 
 </body>
 </html>

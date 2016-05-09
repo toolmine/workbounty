@@ -5,84 +5,92 @@
 }
 
 <script src="~/assets/js/jquery_UserLogin.js"></script>
+<script src="~/assets/css/loading.css"></script>
 
 
-@using (Html.BeginForm())
-{
-    @Html.AntiForgeryToken()
-    @Html.ValidationSummary(true)
-    <div class="main-content">
-        <div class="row">
-            <div class="col-sm-10 col-sm-offset-1">
-                <div class="login-container">
-                    <div class="center">
 
-                    </div>
-                    <div class="space-6"></div>
-                    <div class="position-relative">
-                        <div id="login-box" class="login-box visible widget-box no-border">
-                            <div class="widget-body">
-                                <div class="widget-main">
-                                    <h4 class="header blue lighter bigger">
-                                        <i class="ace-icon fa fa-coffee green"></i>
-                                        Please Enter Your Information
-                                    </h4>
-                                    <div class="space-6">
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
+        <div class="main-content">
+
+            <div class="row">
+                <div class="col-sm-10 col-sm-offset-1">
+                    <div class="login-container">
+                        <div class="center">
+                            <div style="display:none" id="loading" background #fff;><img src="~/Content/abc.gif"  /></div>
+                        </div>
+
+                        <div class="space-6"></div>
+                        <div class="position-relative">
+                            <div id="login-box" class="login-box visible widget-box no-border">
+                                <div class="widget-body">
+                                    <div class="widget-main">
+                                        <h4 class="header blue lighter bigger">
+                                            <i class="ace-icon fa fa-coffee green"></i>
+                                            Please Enter Your Information
+                                        </h4>
+                                        <div class="space-6">
+
+                                        </div>
+                                        <form>
+                                            <fieldset>
+                                                <p class="ui-icon-alert alert-danger" id="alertMessage">Login failed due to invalid data.</p>
+                                                <p class="ui-icon-alert alert-danger" id="loginWarningMessage">Invalid Email id or password</p>
+                                                <label class="block clearfix">
+
+                                                    <span class="block input-icon input-icon-right">
+                                                        @Html.TextBoxFor(a => a.Email, new { @id = "Email", @class = "form-control", @placeholder = "E mail" })
+                                                    </span>
+                                                    @Html.ValidationMessageFor(a => a.Email)
+                                                </label>
+                                                <label class="block clearfix">
+                                                    <span class="block input-icon input-icon-right">
+                                                        @Html.PasswordFor(a => a.Password, new { @id = "Password", @class = "form-control", @placeholder = "Password" })
+                                                    </span>
+                                                    @Html.ValidationMessageFor(a => a.Password)
+                                                </label>
+
+                                                <div class="space"></div>
+                                                <div class="clearfix">
+
+                                                    <input id="loginButton" type="submit" class="btn btn-primary pull-right" value="Login" data-toggle="tooltip" title="Login to workbounty">
+
+                                                </div>
+                                                <div class="space-4"></div>
+                                            </fieldset>
+                                        </form>
+                                       
+                                    </div>
+                                    <div class="toolbar clearfix">
+                                        <div>
+                                            <a href="~/Home/ForgotPassword" class="forgot-password-link" data-toggle="tooltip" title="Forgot password">
+                                                <i class="ace-icon fa fa-arrow-left"></i>
+                                                I forgot my password
+                                            </a>
+
+                                        </div>
                                         
-                                    </div>
-                                    <form>
-                                        <fieldset>
-                                            <p class="ui-icon-alert alert-danger" id="alertMessage">Login failed due to invalid data.</p>
-                                            <p class="ui-icon-alert alert-danger" id="loginWarningMessage">Invalid Email id or password</p>
-                                            <label class="block clearfix">
-                                               
-                                                <span class="block input-icon input-icon-right">
-                                                    @Html.TextBoxFor(a => a.Email, new { @id = "Email", @class = "form-control", @placeholder = "E mail" })
-                                                </span>
-                                                @Html.ValidationMessageFor(a => a.Email)
-                                            </label>
-                                            <label class="block clearfix">
-                                                <span class="block input-icon input-icon-right">
-                                                    @Html.PasswordFor(a => a.Password, new { @id = "Password", @class = "form-control", @placeholder = "Password" })
-                                                </span>
-                                                @Html.ValidationMessageFor(a => a.Password)
-                                            </label>
+                                        <div>
 
-                                            <div class="space"></div>
-                                            <div class="clearfix">
-                                                 
-                                                <input id="loginButton" type="submit" class="btn btn-primary pull-right" value="Login" data-toggle="tooltip" title="Login to workbounty">
-                                            
-                                            </div>
-                                            <div class="space-4"></div>
-                                        </fieldset>
-                                    </form>
+                                            <a href="~/Home/Signup" class="user-signup-link" data-toggle="tooltip" title="Registration on workbounty">
+                                                I want to Register
+                                                <i class="ace-icon fa fa-arrow-right"></i>
+                                            </a>
 
-                                </div>
-                                <div class="toolbar clearfix">
-                                    <div>
-                                        <a href="~/Home/ForgotPassword" class="forgot-password-link" data-toggle="tooltip" title="Forgot password">
-                                            <i class="ace-icon fa fa-arrow-left"></i>
-                                            I forgot my password
-                                        </a>
-                                    </div>
-                                    <div>
-
-                                        <a href="~/Home/Signup" class="user-signup-link" data-toggle="tooltip" title="Registration on workbounty">
-                                            I want to Register
-                                            <i class="ace-icon fa fa-arrow-right"></i>
-                                        </a>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
+
                         </div>
 
                     </div>
-
                 </div>
             </div>
         </div>
-    </div>
 
 
-}
+    }

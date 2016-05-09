@@ -257,6 +257,7 @@
     <Content Include="assets\css\jquery-ui.min.css" />
     <Content Include="assets\css\jquery.gritter.min.css" />
     <Content Include="assets\css\landing-page.css" />
+    <Content Include="assets\css\loading.css" />
     <Content Include="assets\css\prettify.min.css" />
     <Content Include="assets\css\select2-spinner.gif" />
     <Content Include="assets\css\select2.min.css" />
@@ -413,6 +414,7 @@
     <Content Include="assets\js\spin.min.js" />
     <Content Include="assets\js\typeahead.jquery.min.js" />
     <Content Include="assets\swf\copy_csv_xls_pdf.swf" />
+    <Content Include="Content\abc.gif" />
     <Content Include="Content\PagedList.css" />
     <Content Include="Content\themes\base\accordion.css" />
     <Content Include="Content\themes\base\all.css" />

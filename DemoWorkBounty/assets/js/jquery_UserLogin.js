@@ -5,10 +5,11 @@
 });
 $(function () {
     $("#loginButton").click(function (e) {
-       
+        $("#loading").show();
+        $("#login-box").fadeOut(4000);  
+
         e.preventDefault();
         var id = {
-
             "Email": $("#Email").val(),
             "Password": $("#Password").val()
         };
@@ -33,12 +34,11 @@ $(function () {
                 else {
                     $("#alertMessage").show();
                 }
+                $("#loading").hide();
             },
 
             error: function (x, e) {
                 $("#loginWarningMessage").show();
-             
-
             }
         });
         }
