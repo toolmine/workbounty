@@ -106,7 +106,7 @@ namespace DemoWorkBounty.Repository
                 updateWorkitemData.Add(entity.WorkitemRegistrations.Where(s => s.WorkitemID == currentWorkitemID).Select(s => new UpdateWorkitems { Title = s.Workitem.Title, Summary = s.Workitem.Summary, WorkItemID = s.WorkitemID }).FirstOrDefault());
             }
             return updateWorkitemData;
-            
+
         }
 
         public string UpdateWorkitems(WorkItemAssignment data)
@@ -262,9 +262,9 @@ namespace DemoWorkBounty.Repository
             }
         }
 
-        public List<WorkitemDocuments> UserUploadDocument(int currentWorkitemID,int currentUserID)
+        public List<WorkitemDocuments> UserUploadDocument(int currentWorkitemID, int currentUserID)
         {
-            var getListofUploadDocuments = entity.WorkItemAssignments.Where(s => s.WorkItemID == currentWorkitemID && s.UserID == currentUserID).Select(s => new WorkitemDocuments { WorkItemID = s.WorkItemID, UserID = s.UserID, Title = s.Workitem.Title, Summary = s.Workitem.Summary, SubmissionDateTime = s.SubmissionDateTime, SubmissionPath = s.SubmissionPath,WorkItemAssignmentID=s.WorkItemAssignmentID }).ToList();
+            var getListofUploadDocuments = entity.WorkItemAssignments.Where(s => s.WorkItemID == currentWorkitemID && s.UserID == currentUserID).Select(s => new WorkitemDocuments { WorkItemID = s.WorkItemID, UserID = s.UserID, Title = s.Workitem.Title, Summary = s.Workitem.Summary, SubmissionDateTime = s.SubmissionDateTime, SubmissionPath = s.SubmissionPath, WorkItemAssignmentID = s.WorkItemAssignmentID }).ToList();
             return getListofUploadDocuments;
         }
 
@@ -273,6 +273,8 @@ namespace DemoWorkBounty.Repository
 
         public List<WorkitemDocuments> ShowDocument(int id)
         {
+
+            var getDataForSubmitData = entity.WorkItemAssignments.Where(s => s.WorkItemID == id).Select(s => s.SubmissionPath == null).FirstOrDefault();
             var getDataForIsRewarded = entity.WorkItemAssignments.Where(s => s.WorkItemID == id).Select(s => s.IsRewarded == true).FirstOrDefault();
             if (getDataForIsRewarded == false)
             {
@@ -283,7 +285,27 @@ namespace DemoWorkBounty.Repository
             {
                 return null;
             }
+
         }
+
+        public List<WorkitemDocuments> CheckDocument(int id)
+        {
+
+            var getDataForSubmitData = entity.WorkItemAssignments.Where(s => s.WorkItemID == id).Select(s => s.SubmissionPath).FirstOrDefault();
+
+            if (getDataForSubmitData!=null)
+            {
+                var getListofUserAppliedForWorkitem = entity.WorkItemAssignments.Where(s => s.WorkItemID == id).Select(s => new WorkitemDocuments { WorkItemID = s.WorkItemID, UserID = s.UserID, Title = s.Workitem.Title, Summary = s.Workitem.Summary, FirstName = s.UserInfo.FirstName, SubmissionDateTime = s.SubmissionDateTime, SubmissionPath = s.SubmissionPath }).ToList();
+                return getListofUserAppliedForWorkitem;
+            }
+            else
+            {
+                return null;
+            }
+
+        }
+
+
 
         public List<Workitem> GetAllitemsDone(int currentWorkitemID)
         {

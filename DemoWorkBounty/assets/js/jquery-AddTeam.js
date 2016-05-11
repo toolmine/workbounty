@@ -30,10 +30,13 @@ function add(item) {
             else
             {
                 $("#memberAlreadyExist").show();
+                $('#memberAlreadyExist').delay(5000).fadeOut();
             }
         },
         error: function (x, e) {
-            alert("Error");
+            $("#noDateFoundMessage").show();
+            $('#noDateFoundMessage').delay(5000).fadeOut();
+         
         }
     });
 }
@@ -48,6 +51,7 @@ function show() {
             function (Data) {
                 if (Data == null) {
                     $("#noDateFoundMessage").show();
+                    $('#noDateFoundMessage').delay(5000).fadeOut();
                 }
                 else {
                     $("#simple-table").append('<tr><th>Member Name</th><th>Email</th><th>Action</th></tr>');
@@ -59,7 +63,8 @@ function show() {
             })
         .fail(
             function (jqXHR, textStatus, err) {
-                alert('Error: ' + err);
+                $("#noDateFoundMessage").show();
+                $('#noDateFoundMessage').delay(5000).fadeOut();
             });
 }
 
@@ -76,6 +81,7 @@ function submit() {
 
     if (teamName == "") {
         $("#alertMessage").show();
+        $('#alertMessage').delay(5000).fadeOut();
         document.getElementById("txtTeamName").value = "";
     }
     else {
@@ -94,10 +100,12 @@ function submit() {
                 else
                 {
                     $("#teamWarningMessage").show();
+                    $('#teamWarningMessage').delay(5000).fadeOut();
                 }
             },
             error: function (x, e) {
                 $("#noDateFoundMessage").show();
+                $('#noDateFoundMessage').delay(5000).fadeOut();
             }
         });
     }

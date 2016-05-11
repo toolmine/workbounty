@@ -19,7 +19,8 @@
                 <i class="menu-icon fa fa-users"></i>  Team |
                 @Html.ActionLink("Add team", "addteam", "Team")
             </h4>
-
+        </div>
+        <div class="col-xs-10">
             @foreach (var item in Model)
             {
                 foreach (var user in item.TeamUserList)
@@ -52,8 +53,6 @@
                 </table>
             }
         </div>
-        <div class="col-xs-10">
-            
-        </div>
+       
     </div>
 </div>

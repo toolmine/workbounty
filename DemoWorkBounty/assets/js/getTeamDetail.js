@@ -4,6 +4,7 @@
     $("#noDateFoundMessage").hide();
     $("#alertMessage").hide();
     $("#memberAlreadyExist").hide();
+    $("#addMemberFailError").hide();
 });
 
 
@@ -27,7 +28,7 @@ function removeMember(item) {
                 item.remove()
             }
             else {
-                $("#alertMessage").show();
+                $("#addMemberFailError").show();
             }
         },
         error: function (x, e) {
@@ -47,6 +48,7 @@ function show() {
             function (Data) {
                 if (Data == null) {
                     $("#noDateFoundMessage").show();
+                    $('#noDateFoundMessage').delay(5000).fadeOut();
                 }
                 else {
                     $("#simple-table").append('<tr><th>Member Name</th><th>Email</th><th>Action</th></tr>');
@@ -62,7 +64,8 @@ function show() {
 
             function (jqXHR, textStatus, err) {
 
-                alert('Error: ' + err);
+                $("#noDateFoundMessage").show();
+                $('#noDateFoundMessage').delay(5000).fadeOut();
 
             });
 
@@ -89,10 +92,12 @@ function add(item) {
             else
             {
                 $("#memberAlreadyExist").show();
+                $("#memberAlreadyExist").delay(5000).fadeOut();
             }
         },
         error: function (x, e) {
-            alert("Error");
+            $("#addMemberFailError").show();
+            $('#addMemberFailError').delay(5000).fadeOut();
         }
     });
 }

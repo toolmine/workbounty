@@ -123,15 +123,25 @@ namespace DemoWorkBounty.Controllers
 
         public ActionResult ViewUpdatedWorkitem(int currentWorkitemID)
         {
-            var getDataofUploadDocument = workbountyRepo.ShowDocument(currentWorkitemID);
-            if (getDataofUploadDocument != null)
+            var getCheckDocument = workbountyRepo.CheckDocument(currentWorkitemID);
+            if(getCheckDocument!=null)
             {
-                ViewBag.dataofOpenDocument = getDataofUploadDocument;
+                var getDataofUploadDocument = workbountyRepo.ShowDocument(currentWorkitemID);
+                if (getDataofUploadDocument!=null)
+                {
+                    ViewBag.dataofOpenDocument = getDataofUploadDocument;
+                }
+                else
+                {
+                    ViewBag.displayMessage = "Already send a reward";
+                }
+
             }
-            else
+           else
             {
-                ViewBag.displayMessage = "Already send a reward";
+                ViewBag.errorMessage = 0;
             }
+
             return View();
         }
 

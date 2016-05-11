@@ -41,7 +41,15 @@
                                 <td>@Html.DisplayFor(a => item.Title)</td>
                                 <td>@Html.DisplayFor(a => item.FirstName)</td>
                                 <td>@Html.DisplayFor(a => item.ProposedReward)</td>
-                                <td>@Html.DisplayFor(a => item.Amount)</td>
+                                @if (item.Amount != null)
+                                {
+                                    <td>$@Html.DisplayFor(a => item.Amount)</td>
+                                }
+                                else
+                                {
+                                    <td>@Html.DisplayFor(a => item.Amount)</td>
+                                }
+                               
                                
                             </tr>
                         </tbody>

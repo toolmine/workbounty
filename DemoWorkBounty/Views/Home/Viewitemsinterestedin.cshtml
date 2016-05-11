@@ -25,14 +25,14 @@
                     <table id="OpenWorkitem" class="table table-striped table-bordered table-hover">
                         <thead>
                             <tr>
-                                <th width="5%">Sr No</th>
-                                <th width="21%">Title</th>
-                                <th width="5%">Created By</th>
-                                <th width="8%">Summary</th>
-                                <th width="5%">Rewards</th>
-                                <th width="5%">Amount</th>
-                                <th width="5%">Action</th>
-                                <th width="10%">Add to Favourites</th>
+                                <th width="3%">Sr No</th>
+                                <th width="15%">Title</th>
+                                <th width="3%">Created By</th>
+                                <th width="15%">Summary</th>
+                                <th width="7%">Rewards</th>
+                                <th width="4%">Amount</th>
+                                <th width="3%">Action</th>
+                                <th width="3%">Add to Favourites</th>
                             </tr>
                         </thead>
 
@@ -47,8 +47,15 @@
                                     <td>@Html.DisplayFor(a => i.FirstName)</td>
                                     <td>@Html.DisplayFor(a => i.Summary)</td>
                                     <td>@Html.DisplayFor(a => i.ProposedReward)</td>
-                                    <td>@Html.DisplayFor(a => i.Amount)</td>
-                                    <td>@Html.ActionLink("Apply", "ApplyWorkitem", "workitem", new { currentWorkitemID = i.WorkitemID }, new { @class = "btn btn-minier btn-purple",data_toggle="tooltip",title="Apply for workitem" }) </td>
+                                    @if (i.Amount != null)
+                                    {
+                                        <td>$@Html.DisplayFor(a => i.Amount)</td>
+                                    }
+                                    else
+                                    {
+                                        <td>@Html.DisplayFor(a => i.Amount)</td>
+                                    }
+                                    <td>@Html.ActionLink("Apply", "ApplyWorkitem", "workitem", new { currentWorkitemID = i.WorkitemID }, new { @class = "btn btn-minier btn-purple", data_toggle = "tooltip", title = "Apply for workitem" }) </td>
                                     <td>
                                         @if (i.IsFavourite == true)
                                         {

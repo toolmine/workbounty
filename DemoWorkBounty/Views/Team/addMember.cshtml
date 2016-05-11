@@ -12,7 +12,7 @@
                 <div class="widget-header">
                     <div class="col-xs-8">
                         <h4 class="widget-title lighter smaller">
-                            Add Member
+                            Team detail
                         </h4>
                     </div>
                     <div class="row">
@@ -31,10 +31,11 @@
                      
                             <input type="hidden" id="Searchid" value="@Session["UserID"]" />
                             <input type="text" id="itId" size="5" class="col-xs-10 col-sm-5" />
-                            <input type="button" value="Search" onclick="show();" class="btn btn-minier btn-purple layoutcss" />
+                            <input type="button" value="Search" onclick="show();" class="btn btn-minier btn-purple layoutcss TeamLayoutButton" data-toggle="tooltip" title="Find a member"/>
                         </div>
                         <div class=".col-xs-4.col-sm-2 no-padding-right">
                             <div class="col-xs-4">
+                                <p class="alert alert-danger" id="addMemberFailError">Failed! Member not removed</p>
                                 <p class="alert alert-warning" id="memberAlreadyExist">Member Already exist</p>
                                 <p class="alert alert-warning" id="noDateFoundMessage"> No member name found!</p>
                                 <table id="simple-table" class="table table-striped table-bordered table-hover">
@@ -67,7 +68,7 @@
                                 <td>@Html.DisplayFor(s => user.FirstName)</td>
                                 <td>@Html.DisplayFor(s => user.Email)</td>
                                 <td>@Html.DisplayFor(s => user.PhoneNumber)</td>
-                                <td><input type="button" id="@user.UserID" value="Delete Member" data-teamuserid="@user.TeamUserInfoID" onclick="removeMember(this);" class="btn btn-minier btn-purple"></td>
+                                <td><input type="button" id="@user.UserID" value="Delete Member" data-teamuserid="@user.TeamUserInfoID" onclick="removeMember(this);" class="btn btn-minier btn-purple" data-toggle="tooltip" title="Remove member from team"></td>
                             </tr>
                         }
 
