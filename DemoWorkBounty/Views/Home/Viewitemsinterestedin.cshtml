@@ -13,73 +13,74 @@
     <li class="active">Items you might be interested in</li>
 </ul>
 
-<h2>Items you might be interested in</h2>
-<div class="col-sm-10">
-    <div class="widget-box transparent" id="recent-box">
-        <div class="widget-header">
-            <div class="col-xs-8">
-            </div>
-            <div class="row">
-                <div class="col-md-1"></div>
-                <div class="col-md-8">
-                    <table id="OpenWorkitem" class="table table-striped table-bordered table-hover">
-                        <thead>
-                            <tr>
-                                <th width="3%">Sr No</th>
-                                <th width="15%">Title</th>
-                                <th width="3%">Created By</th>
-                                <th width="15%">Summary</th>
-                                <th width="7%">Rewards</th>
-                                <th width="4%">Amount</th>
-                                <th width="3%">Action</th>
-                                <th width="3%">Add to Favourites</th>
-                            </tr>
-                        </thead>
+<div class="widget-box transparent" id="recent-box">
+    <div class="widget-header">
+        <div class="col-xs-10">
+            <h4 class="widget-title lighter smaller padding10pxbottom">
+                Items you might be interested in
 
-                        @{int j = 1;}
-                        @foreach (DemoWorkBounty.Models.OpenWorkitems i in Model)
-                        {
-                            
-                            <tbody>
-                                <tr>
-                                    <td>@j</td>
-                                    <td>@Html.DisplayFor(a => i.Title)</td>
-                                    <td>@Html.DisplayFor(a => i.FirstName)</td>
-                                    <td>@Html.DisplayFor(a => i.Summary)</td>
-                                    <td>@Html.DisplayFor(a => i.ProposedReward)</td>
-                                    @if (i.Amount != null)
+            </h4>
+        </div>
+        <div class="col-xs-10 toppadding10px">
+            <table id="OpenWorkitem" class="table table-striped table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th width="3%">Sr No</th>
+                        <th width="15%">Title</th>
+                        <th width="3%">Created By</th>
+                        <th width="15%">Summary</th>
+                        <th width="7%">Rewards</th>
+                        <th width="4%">Amount</th>
+                        <th width="3%">Action</th>
+                        <th width="3%">Add to Favourites</th>
+                    </tr>
+                </thead>
+
+                @{int j = 1;}
+                @foreach (DemoWorkBounty.Models.OpenWorkitems i in Model)
+                    {
+
+                    <tbody>
+                        <tr>
+                            <td>@j</td>
+                            <td>@Html.DisplayFor(a => i.Title)</td>
+                            <td>@Html.DisplayFor(a => i.FirstName)</td>
+                            <td>@Html.DisplayFor(a => i.Summary)</td>
+                            <td>@Html.DisplayFor(a => i.ProposedReward)</td>
+                            @if (i.Amount != null)
+                                {
+                                <td>$@Html.DisplayFor(a => i.Amount)</td>
+                                }
+                                else
+                                {
+                                <td>@Html.DisplayFor(a => i.Amount)</td>
+                                }
+                            <td>@Html.ActionLink("Apply", "ApplyWorkitem", "workitem", new { currentWorkitemID = i.WorkitemID }, new { @class = "btn btn-minier btn-purple", data_toggle = "tooltip", title = "Apply for workitem" }) </td>
+                            <td>
+                                @if (i.IsFavourite == true)
                                     {
-                                        <td>$@Html.DisplayFor(a => i.Amount)</td>
+                                    <input type="checkbox" checked="checked" onclick="RemoveFavourite_v(@i.WorkitemID);" value="@i.WorkitemID" data_toggle="tooltip" , title="Remove as a favourite">
                                     }
                                     else
                                     {
-                                        <td>@Html.DisplayFor(a => i.Amount)</td>
+                                    <input type="checkbox" onclick="AddFavourites_v(@i.WorkitemID);" value="@i.WorkitemID" data_toggle="tooltip" , title="Add as a favourite ">
                                     }
-                                    <td>@Html.ActionLink("Apply", "ApplyWorkitem", "workitem", new { currentWorkitemID = i.WorkitemID }, new { @class = "btn btn-minier btn-purple", data_toggle = "tooltip", title = "Apply for workitem" }) </td>
-                                    <td>
-                                        @if (i.IsFavourite == true)
-                                        {
-                                            <input type="checkbox" checked="checked" onclick="RemoveFavourite_v(@i.WorkitemID);" value="@i.WorkitemID" data_toggle="tooltip" , title="Remove as a favourite">
-                                        }
-                                        else
-                                        {
-                                            <input type="checkbox" onclick="AddFavourites_v(@i.WorkitemID);" value="@i.WorkitemID" data_toggle="tooltip" , title="Add as a favourite ">
-                                        }
-                                    </td>
+                            </td>
 
-                                </tr>
-                            </tbody>
-                            j++;
-                            
-                           
-                }
-                     </table>
-                    <input type="hidden" id="UserId" value="@Convert.ToInt32(Session["UserID"])" />
-                </div>
-            </div>
+                        </tr>
+                    </tbody>
+                                    j++;
+
+
+                    }
+            </table>
+            <input type="hidden" id="UserId" value="@Convert.ToInt32(Session["UserID"])" />
         </div>
+
     </div>
 </div>
+
+
 
 <div class="pagedList col-sm-10">
     @Html.PagedListPager(Model, page => Url.Action("Viewitemsinterestedin", new { page }), PagedListRenderOptions.PageNumbersOnly)
