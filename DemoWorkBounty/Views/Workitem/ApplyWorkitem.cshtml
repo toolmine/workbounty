@@ -23,14 +23,14 @@
         <div class="widget-box transparent" id="recent-box">
             <div class="widget-header">
                 <h4 class="widget-title lighter smaller">
-                    @Html.DisplayFor(a => item.Title)
+                Title:    @Html.DisplayFor(a => item.Title)
                 </h4>
             </div>
             <div>
             </div>
             <div class="widget-header">
                 <h4 class="widget-title lighter smaller">
-                    Details
+                    Details:
                 </h4>
                 <div>
                     @Html.DisplayFor(a => item.Summary)
@@ -59,7 +59,14 @@
                             <td>@Html.DisplayFor(a => item.StartDate)</td>
                             <td>@Html.DisplayFor(a => item.DueDate)</td>
                             <td>@Html.DisplayFor(a => item.ProposedReward)</td>
-                            <td>@Html.DisplayFor(a => item.Amount)</td>
+                            @if (item.Amount != null)
+                            {
+                                <td>$@Html.DisplayFor(a => item.Amount)</td>
+                            }
+                            else
+                            {
+                                <td>@Html.DisplayFor(a => item.Amount)</td>
+                            }
                             <td>
                                 <select id="open">
                                     <option value="false">Open</option>
@@ -67,7 +74,7 @@
 
                                 </select>
                             </td>
-                            <td><input type="submit" value="Submit" onclick="register()" class="btn btn-minier btn-purple" data-toggle="tooltip" title="Apply for current workitem" /></td>
+                            <td><input type="submit" value="Apply" onclick="register()" class="btn btn-minier btn-purple" data-toggle="tooltip" title="Apply for current workitem" /></td>
                         </tr>
                     </tbody>
                 </table>

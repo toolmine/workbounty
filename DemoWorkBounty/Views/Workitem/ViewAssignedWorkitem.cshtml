@@ -1,5 +1,5 @@
 ﻿@model List<DemoWorkBounty.Workitem>
-       @{
+@{
     ViewBag.Title = "View assigned workitem";
     Layout = "~/Views/_DashboardLayout.cshtml";
 }
@@ -15,7 +15,7 @@
 
 <h2>Items i want done</h2>
 <div class="col-sm-10">
-    @foreach(DemoWorkBounty.Workitem i in ViewBag.items)
+    @foreach (DemoWorkBounty.Workitem i in ViewBag.items)
     {
         <input type="hidden" id="Workid" value="@i.WorkitemID" />
         <input type="hidden" id="Teamid" value="@i.PublishedTo">
@@ -23,88 +23,101 @@
             <div class="widget-header">
                 <div class="col-sm-6">
                     <h4 class="widget-title lighter smaller">
-                        @Html.DisplayFor(a => i.Title)
+                        Title:    @Html.DisplayFor(a => i.Title)
                     </h4>
                 </div>
-                @Html.ActionLink("View Assignment", "ViewUpdatedWorkitem", "workitem", new { currentWorkitemID = @i.WorkitemID }, new { @class = "btn btn-minier btn-success",data_toggle="tooltip",title="View documents which user submitted" })
-            </div>
-           
-            <div class="widget-header">
-               
-                <div class="col-sm-6" style="padding-top:10px">
-                    @Html.DisplayFor(a => i.Summary)
-                </div>
-            </div>
-            <div style="padding-top: 20px" >
-            </div>
-            <div>
-                <h4 class="widget-title lighter smaller col-sm-6">
-                    Details
-                </h4>
-                <input type="hidden" id="Userid" value="@Session["UserID"]" />
-                <table id="simple-table" class="table table-striped table-bordered table-hover">
-                    <thead>
-                        <tr>
-                            <th width="10%">Start Date</th>
-                            <th width="10%">Due Date</th>
-                            <th width="10%">Rewards</th>
-                            <th width="10%">Amount</th>
 
-                        </tr>
-                    </thead>
+           
+
+                    @Html.ActionLink("View Assignment", "ViewUpdatedWorkitem", "workitem", new { currentWorkitemID = @i.WorkitemID }, new { @class = "btn btn-minier btn-success",data_toggle="tooltip",title="View documents which user submitted" })
+          
+                </div>
+
+                    <div class="widget-header">
+
+                        <div class="col-sm-6 toppadding10px">
+                            Summary:  @Html.DisplayFor(a => i.Summary)
+                        </div>
+                    </div>
+                    <div style="padding-top: 20px">
+                    </div>
+                    <div class="col-sm-6">
+                        <h4 class="widget-title lighter smaller col-sm-6">
+                            Details
+                        </h4>
+                        <input type="hidden" id="Userid" value="@Session["UserID"]" />
+                        <table id="simple-table" class="table table-striped table-bordered table-hover">
+                            <thead>
+                                <tr>
+                                    <th width="5%">Start Date</th>
+                                    <th width="4%">Due Date</th>
+                                    <th width="5%">Rewards</th>
+                                    <th width="4%">Amount</th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>@Html.DisplayFor(a => i.StartDate)</td>
+                                    <td>@Html.DisplayFor(a => i.DueDate)</td>
+                                    <td>@Html.DisplayFor(a => i.ProposedReward)</td>
+                                    @if (i.Amount != null)
+                            {
+                                        <td>$@Html.DisplayFor(a => i.Amount)</td>
+                            }
+                            else
+                            {
+                                        <td>@Html.DisplayFor(a => i.Amount)</td>
+                            }
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+    }
+            </div>
+            @if (ViewBag.getMessage != null)
+{
+                <div class="col-sm-10">
+                    <p class="ui-icon-alert alert-success">
+                        You have already assign this workitem to exclusive member
+                    </p>
+                </div>
+}
+
+            <div class="col-sm-10">
+                <div class="alert alert-block alert-success" id="labelSuccessMessage">
+                    <button type="button" class="close" data-dismiss="alert">
+                        <i class="ace-icon fa fa-times"></i>
+                    </button>
+                    <p>
+                        <strong>
+                            <i class="ace-icon fa fa-check"></i>
+                            Success!
+                        </strong>
+                        Workitem allocated
+                    </p>
+                </div>
+                <div class="col-sm-6">
+                    <table id="simple-table" class="table table-striped table-bordered table-hover">
+                        <thead>
+                            <tr>
+                                <th width="5%">People who have applied for this item :</th>
+                                <th width="5%">Action</th>
+                            </tr>
+                        </thead>
+                        @if (ViewBag.apply != null)
+            {
+                foreach (DemoWorkBounty.WorkitemRegistration i in ViewBag.apply)
+                {
                     <tbody>
                         <tr>
-                            <td>@Html.DisplayFor(a => i.StartDate)</td>
-                            <td>@Html.DisplayFor(a => i.DueDate)</td>
-                            <td>@Html.DisplayFor(a => i.ProposedReward)</td>
-                            <td>@Html.DisplayFor(a => i.Amount)</td>
+                            <td>@Html.DisplayFor(a => i.UserInfo.FirstName)</td>
+                            <td><input type="submit" class="btn btn-minier btn-purple" value="Allocate workitem" id="@i.UserID" onclick="add(id)" data-toggle="tooltip" title="Apply and allocate work" /></td>
                         </tr>
                     </tbody>
-                </table>
-            </div>
-        </div>
-    }
-</div>
-@if (ViewBag.getMessage != null)
-{
-    <div class="col-sm-10">
-        <p class="ui-icon-alert alert-success">
-            You have already assign this workitem to exclusive member
-        </p>
-    </div>
-}
-<div class="col-sm-6">
-    <div class="alert alert-block alert-success" id="labelSuccessMessage">
-        <button type="button" class="close" data-dismiss="alert">
-            <i class="ace-icon fa fa-times"></i>
-        </button>
-        <p>
-            <strong>
-                <i class="ace-icon fa fa-check"></i>
-                Success!
-            </strong>
-            Workitem allocated 
-        </p>
-    </div>
-    <table id="simple-table" class="table table-striped table-bordered table-hover">
-        <thead>
-            <tr>
-                <th width="10%">People who have applied for this item :</th>
-                <th width="10%">Action</th>
-            </tr>
-        </thead>
-        @if (ViewBag.apply != null)
-        {
-            foreach (DemoWorkBounty.WorkitemRegistration i in ViewBag.apply)
-            {
-                <tbody>
-                    <tr>
-                        <td>@Html.DisplayFor(a => i.UserInfo.FirstName)</td>
-                        <td><input type="submit" class="btn btn-minier btn-purple" value="Allocate workitem" id="@i.UserID" onclick="add(id)" data-toggle="tooltip" title="Apply and allocate work" /></td>
-                    </tr>
-                </tbody>
+                }
             }
-        }
-    </table>
-</div>
-
+                    </table>
+                </div>
+            </div>

@@ -16,72 +16,129 @@
     <li class="active">View updated workitem</li>
 </ul>
 <h2>View document</h2>
-<div class="row">
-    <h4 class="widget-title lighter smaller">
-        Details
-    </h4>
 
-    <div class="alert alert-block alert-success" id="labelSuccessMessage">
-        <button type="button" class="close" data-dismiss="alert">
-            <i class="ace-icon fa fa-times"></i>
-        </button>
-        <p>
-            <strong>
-                <i class="ace-icon fa fa-check"></i>
-                Success!
-            </strong>
-            Reward assigned.
+<div class="col-sm-10">
+
+
+    @if (ViewBag.dataofOpenDocument != null)
+    {
+        foreach (DemoWorkBounty.Models.WorkitemDocuments i in ViewBag.dataofOpenDocument)
+        {
+
+            <div class="widget-box transparent" id="recent-box">
+                <div class="widget-header">
+                    <div class="col-sm-6">
+                        <h4 class="widget-title lighter smaller">
+                            Title:    @Html.DisplayFor(a => i.Title)
+                        </h4>
+                    </div>
+                </div>
+
+                <div class="widget-header">
+
+                    <div class="col-sm-6 toppadding10px">
+                        Summary:  @Html.DisplayFor(a => i.Summary)
+                    </div>
+                </div>
+                <div style="padding-top: 20px">
+                </div>
+
+            </div>
+
+        }
+    }
+</div>
+@if (ViewBag.errorMessage == 0)
+{ 
+    <div class="col-sm-10">
+        <p class="ui-icon-alert alert-success">
+           No documents found in current workitem
         </p>
     </div>
+}
 
-
-    @if (ViewBag.displayMessage != null)
+@if (ViewBag.displayMessage != null)
     {
-        <div class="col-sm-10">
-            <p class="ui-icon-alert alert-success">
-                You have already send a reward for this workitem
-            </p>
-        </div>
+    <div class="col-sm-10">
+        <p class="ui-icon-alert alert-success">
+            You have already send a reward for this workitem
+        </p>
+    </div>
     }
 
+@if (ViewBag.dataofOpenDocument != null)
+{
+    foreach (DemoWorkBounty.Models.WorkitemDocuments i in ViewBag.dataofOpenDocument)
+    {
+        <div class="col-sm-10">
+            <div class="widget-box transparent" id="recent-box">
+                <div class="widget-header">
+                    <div class="col-sm-6">
+                        <h4 class="widget-title lighter smaller col-sm-6">
+                            Details
+                        </h4>
+                        <div class="alert alert-block alert-success" id="labelSuccessMessage">
+                            <button type="button" class="close" data-dismiss="alert">
+                                <i class="ace-icon fa fa-times"></i>
+                            </button>
+                            <p>
+                                <strong>
+                                    <i class="ace-icon fa fa-check"></i>
+                                    Success!
+                                </strong>
+                                Reward assigned.
+                            </p>
+                        </div>
+                        <input type="hidden" id="Userid" value="@Session["UserID"]" />
+                        <table id="simple-table" class="table table-striped table-bordered table-hover">
+                            <thead>
+                                <tr>
+                                    <th width="3%">Sr No</th>
+                                    <th width="6%">Name</th>
+                                    <th width="5%">Update Time</th>
+                                    <th width="5%">View File</th>
+                                    <th width="5%">Feedback</th>
+                                    <th width="5%">Reward</th>
+                                </tr>
+                            </thead>
 
-  
-    <div>
+                            <tbody>
+                                <tr>
+                                    <td>@(ViewBag.dataofOpenDocument.IndexOf(i) + 1)</td>
+                                    <td>@Html.DisplayFor(a => i.FirstName)</td>
+                                    <td>@Html.DisplayFor(a => i.SubmissionDateTime) <input type="hidden" id="Workid" value="@i.WorkItemID" /></td>
+                                    <td>@Html.ActionLink("Download", "Download", "workitem", new { currentUserID = i.UserID, workitemID = i.WorkItemAssignmentID }, new { @class = "btn btn-minier btn-purple", data_toggle = "tooltip", title = "Download documents" }) </td>
+                                    <td>
+                                        <select id="feedback">
+                                            <option value="good">Good</option>
+                                            <option value="average">Average</option>
+                                            <option value="poor">Poor</option>
+                                        </select>
+                                    </td>
+                                    <td><input type="button" id="@i.UserID" class="btn btn-minier btn-purple" value="Assign Reward" onclick="ApplyReward(this);" data-toggle="tooltip" title="Apply reward to this user" /></td>
+                                </tr>
+                            </tbody>
 
-        <table id="simple-table" class="table table-striped table-bordered table-hover">
-            <thead>
-                <tr>
-                    <th width="10%">Sr No</th>
-                    <th width="10%">Name</th>
-                    <th width="10%">Update Time</th>
-                    <th width="10%">View File</th>
-                    <th width="10%">Feedback</th>
-                    <th width="10%">Reward</th>
-                </tr>
-            </thead>
-            @if (ViewBag.dataofOpenDocument != null)
-            {
-                foreach (DemoWorkBounty.Models.WorkitemDocuments i in ViewBag.dataofOpenDocument)
-                {
-                    <tbody>
-                        <tr>
-                            <td>@(ViewBag.dataofOpenDocument.IndexOf(i) + 1)</td>
-                            <td>@Html.DisplayFor(a => i.FirstName)</td>
-                            <td>@Html.DisplayFor(a => i.SubmissionDateTime) <input type="hidden" id="Workid" value="@i.WorkItemID" /></td>
-                            <td>@Html.ActionLink("Download", "Download", "workitem", new { currentUserID = i.UserID, workitemID = i.WorkItemAssignmentID }, new { @class = "btn btn-minier btn-purple", data_toggle = "tooltip", title = "Download documents" }) </td>
-                            <td>
-                                <select id="feedback">
-                                    <option value="good">Good</option>
-                                    <option value="average">Average</option>
-                                    <option value="poor">Poor</option>
-                                </select>
-                            </td>
-                            <td><input type="button" id="@i.UserID" class="btn btn-minier btn-purple" value="Assign Reward" onclick="ApplyReward(this);" data-toggle="tooltip" title="Apply reward to this user" /></td>
-                        </tr>
-                    </tbody>
-                }
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
             }
-        </table>
-    </div>
+            }
 
-</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
