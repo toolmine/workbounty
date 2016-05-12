@@ -36,43 +36,45 @@
                     </tr>
                 </thead>
 
-                @{int j = 1;}
-                @foreach (DemoWorkBounty.Models.OpenWorkitems i in Model)
-                    {
+              @{int j = 0;}
+            @foreach (DemoWorkBounty.Models.OpenWorkitems i in Model)
+            {
 
-                    <tbody>
-                        <tr>
-                            <td>@j</td>
-                            <td>@Html.DisplayFor(a => i.Title)</td>
-                            <td>@Html.DisplayFor(a => i.FirstName)</td>
-                            <td>@Html.DisplayFor(a => i.Summary)</td>
-                            <td>@Html.DisplayFor(a => i.ProposedReward)</td>
-                            @if (i.Amount != null)
-                                {
-                                <td>$@Html.DisplayFor(a => i.Amount)</td>
-                                }
-                                else
-                                {
-                                <td>@Html.DisplayFor(a => i.Amount)</td>
-                                }
-                            <td>@Html.ActionLink("Apply", "ApplyWorkitem", "workitem", new { currentWorkitemID = i.WorkitemID }, new { @class = "btn btn-minier btn-purple", data_toggle = "tooltip", title = "Apply for workitem" }) </td>
-                            <td>
-                                @if (i.IsFavourite == true)
-                                    {
-                                    <input type="checkbox" checked="checked" onclick="RemoveFavourite_v(@i.WorkitemID);" value="@i.WorkitemID" data_toggle="tooltip" , title="Remove as a favourite">
-                                    }
-                                    else
-                                    {
-                                    <input type="checkbox" onclick="AddFavourites_v(@i.WorkitemID);" value="@i.WorkitemID" data_toggle="tooltip" , title="Add as a favourite ">
-                                    }
-                            </td>
+                <tbody>
+                    <tr>
+                        <td>@(j + ((Model.PageNumber - 1) * Model.PageSize) + 1)</td>
+                        <td>@Html.DisplayFor(a => i.Title)</td>
+                        <td>@Html.DisplayFor(a => i.FirstName)</td>
+                        <td>@Html.DisplayFor(a => i.Summary)</td>
+                        <td>@Html.DisplayFor(a => i.ProposedReward)</td>
+                        @if (i.Amount != null)
+                        {
+                            <td>$@Html.DisplayFor(a => i.Amount)</td>
+                        }
+                        else
+                        {
+                            <td>@Html.DisplayFor(a => i.Amount)</td>
+                        }
+                        <td>@Html.ActionLink("Apply", "ApplyWorkitem", "workitem", new { currentWorkitemID = i.WorkitemID }, new { @class = "btn btn-minier btn-purple", data_toggle = "tooltip", title = "Apply for workitem" }) </td>
+                        <td>
+                            @if (i.IsFavourite == true)
+                            {
+                                <input type="checkbox" checked="checked" onclick="RemoveFavourite_v(@i.WorkitemID);" value="@i.WorkitemID" data_toggle="tooltip" , title="Remove as a favourite">
+                            }
+                            else
+                            {
+                                <input type="checkbox" onclick="AddFavourites_v(@i.WorkitemID);" value="@i.WorkitemID" data_toggle="tooltip" , title="Add as a favourite ">
+                            }
+                        </td>
 
-                        </tr>
-                    </tbody>
-                                    j++;
+                    </tr>
+                </tbody>
+                            j++;
 
 
-                    }
+            }
+
+
             </table>
             <input type="hidden" id="UserId" value="@Convert.ToInt32(Session["UserID"])" />
         </div>

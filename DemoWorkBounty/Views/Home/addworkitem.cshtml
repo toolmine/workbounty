@@ -24,156 +24,159 @@
 </ul>
 
 <h2></h2>
-<div class="col-xs-8">
-    <h4 class="widget-title lighter smaller">
-        <i class="ace-icon"></i> Add workitem
-    </h4>
+<div class="widget-box transparent padding50pxbottom" id="recent-box">
+    <div class="col-xs-8 widget-header">
+        <h4 class="widget-title lighter smaller" data_toggle="tooltip" , title="Add Workitem">
+            <i class="menu-icon fa fa-plus-circle"></i>  Add Workitem
+        </h4>
+    </div>
 </div>
-<div class="row">
-    <div class="col-xs-12">
-        <div class="alert alert-danger" id="alertMessage">
-            <button type="button" class="close" data-dismiss="alert">
-                <i class="ace-icon fa fa-times"></i>
-            </button>
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="alert alert-danger" id="alertMessage">
+                <button type="button" class="close" data-dismiss="alert">
+                    <i class="ace-icon fa fa-times"></i>
+                </button>
 
-            <strong>
-                <i class="ace-icon fa fa-times"></i>
-                Failed!
-            </strong>
-                   Workitem could not saved.
-            <br>
-        </div>
-        <form class="form-horizontal" role="form" data-toggle="validator" name="Workitemform">
-            <div class="form-group">
-                <label class="col-sm-3 control-label no-padding-right required" for="form-field-1"> Title </label>
-                <div class="col-sm-9">
-                    <input type="hidden" id="Userid" value="@Session["UserID"]" />
-                    <input type="text" id="Title" placeholder="" maxlength="50"  class="col-xs-10 col-sm-5" required="required" />
-                    <span id="TitleError" class="text-danger"></span>
-                </div>
+                <strong>
+                    <i class="ace-icon fa fa-times"></i>
+                    Failed!
+                </strong>
+                Workitem could not saved.
+                <br>
             </div>
-
-            <div class="form-group">
-                <label class="col-sm-3 control-label no-padding-right required" for="form-field-1"> Summary </label>
-                <div class="col-sm-9">
-                    <textarea rows="4" id="Summary" maxlength="200" class="col-xs-10 col-sm-5"></textarea>
-                    <span id="SummaryError" class="text-danger"></span>
+            <form class="form-horizontal" role="form" data-toggle="validator" name="Workitemform">
+                <div class="form-group">
+                    <label class="col-sm-3 control-label no-padding-right required" for="form-field-1"> Title </label>
+                    <div class="col-sm-9">
+                        <input type="hidden" id="Userid" value="@Session["UserID"]" />
+                        <input type="text" id="Title" placeholder="" maxlength="50" class="col-xs-10 col-sm-5" required="required" />
+                        <span id="TitleError" class="text-danger"></span>
+                    </div>
                 </div>
-            </div>
 
-            <div class="form-group">
-                <label class="col-sm-3 control-label no-padding-right required" for=" form-field-1"> Start date </label>
-                <div class="col-sm-9">
-                    @Html.TextBoxFor(a => a.StartDate, new { @class = "col-xs-10 col-sm-5 datepickers", @maxlength = "25", onkeypress = "return noDataKey(event)", @id = "StartDate", @placeholder = "Start Date" })
-                    <span id="StartdateError" class="text-danger"></span>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label no-padding-right required" for="form-field-1"> Summary </label>
+                    <div class="col-sm-9">
+                        <textarea rows="4" id="Summary" maxlength="200" class="col-xs-10 col-sm-5"></textarea>
+                        <span id="SummaryError" class="text-danger"></span>
+                    </div>
                 </div>
-            </div>
 
-            <div class="form-group">
-                <label class="col-sm-3 control-label no-padding-right required" for=" form-field-1"> Due date </label>
-                <div class="col-sm-9">
-                    @Html.TextBoxFor(a => a.DueDate, new { @class = "col-xs-10 col-sm-5 datepickers", @maxlength = "25", onkeypress = "return noDataKey(event)", @id = "DueDate", @placeholder = "End of completion Date" })
-                    <span id="StartdateError" class="text-danger"></span>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label no-padding-right required" for=" form-field-1"> Start date </label>
+                    <div class="col-sm-9">
+                        @Html.TextBoxFor(a => a.StartDate, new { @class = "col-xs-10 col-sm-5 datepickers", @maxlength = "25", onkeypress = "return noDataKey(event)", @id = "StartDate", @placeholder = "Start Date" })
+                        <span id="StartdateError" class="text-danger"></span>
+                    </div>
                 </div>
-            </div>
 
-            <div class="form-group">
-                <label for="form-field-select-3" class="col-sm-3 control-label no-padding-right">Published to</label>
-
-                <div class="col-sm-9">
-                    @Html.DropDownList("TeamList")
+                <div class="form-group">
+                    <label class="col-sm-3 control-label no-padding-right required" for=" form-field-1"> Due date </label>
+                    <div class="col-sm-9">
+                        @Html.TextBoxFor(a => a.DueDate, new { @class = "col-xs-10 col-sm-5 datepickers", @maxlength = "25", onkeypress = "return noDataKey(event)", @id = "DueDate", @placeholder = "End of completion Date" })
+                        <span id="StartdateError" class="text-danger"></span>
+                    </div>
                 </div>
-            </div>
 
-            <div class="form-group">
-                <label class="col-sm-3 control-label no-padding-right" for="form-field-1">Addition attachments  </label>
-                <div class="col-sm-9">
-                    <input multiple="" type="file" id="myFile" />
+                <div class="form-group">
+                    <label for="form-field-select-3" class="col-sm-3 control-label no-padding-right">Published to</label>
+
+                    <div class="col-sm-9">
+                        @Html.DropDownList("TeamList")
+                    </div>
                 </div>
-            </div>
 
-            <div class="form-group">
-                <label class="col-sm-3 control-label no-padding-right required" for="form-field-1"> Rewards</label>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label no-padding-right" for="form-field-1">Addition attachments  </label>
+                    <div class="col-sm-9">
+                        <input multiple="" type="file" id="myFile" />
+                    </div>
+                </div>
 
-                <div class="col-sm-9">
-                    <div class="hidden-sm hidden-xs btn-group">
-                        <button type="button" class="btn btn-minier btn-purple bigger-110" data-toggle="modal" data-target="#myModal" title="Choose a voucher and amount">Reward Options</button>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label no-padding-right required" for="form-field-1"> Rewards</label>
 
-                        <span id="AmountError" class="text-danger"></span>
+                    <div class="col-sm-9">
+                        <div class="hidden-sm hidden-xs btn-group">
+                            <button type="button" class="btn btn-minier btn-purple bigger-110" data-toggle="modal" data-target="#myModal" title="Choose a voucher and amount">Reward Options</button>
 
-                        <div class="container">
-                            <div class="modal" id="myModal" role="dialog">
-                                <div class="modal-dialog modal-lg">
-                                    <!-- Modal content-->
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                            <h4 class="modal-title">Reward Options</h4>
-                                        </div>
-                                        <div class="modal-body">
-                                            <table>
-                                                <tr>
-                                                    <td>
-                                                        <input name="formfieldradio" type="radio" class="" value="Visa" id="1" />
-                                                        <span class="lbl"><img src="~/assets/img/VISA_Logo.png" class="imgpopup"></span>
-                                                    </td>
-                                                    <td>
-                                                        <input name="formfieldradio" type="radio" class="" value="McDonald's" id="2" />
-                                                        <span class="lbl"><img src="~/assets/img/McDonald's_Golden_Arches.svg.png" class="imgpopup"></span>
-                                                    </td>
-                                                    <td>
-                                                        <input name="formfieldradio" type="radio" class="" value="PayTM" id="3" />
-                                                        <span class="lbl"><img src="~/assets/img/VFsaWo_G.jpeg" class="imgpopup" /></span>
-                                                    </td>
-                                                    <td>
-                                                        <input name="formfieldradio" type="radio" class="" value="Google Wallet" id="4" />
-                                                        <span class="lbl"><img src="~/assets/img/GoogleWallet.png" class="imgpopup" /></span>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <input name="formfieldradio" type="radio" class="" value="PayPal" id="5" />
-                                                        <span class="lbl"> <img src="~/assets/img/Paypal_2014_logo.png" class="imgpopup" /></span>
-                                                    </td>
+                            <span id="AmountError" class="text-danger"></span>
 
-                                                    <td>
-                                                        <input name="formfieldradio" type="radio" class="" value="American Express" id="6" />
-                                                        <span class="lbl"><img src="~/assets/img/americanexpress.jpg" class="imgpopup" /></span>
-                                                    </td>
-                                                    <td>
-                                                        <input name="formfieldradio" type="radio" class="" value="Western Union" id="7" />
-                                                        <span class="lbl"><img src="~/assets/img/Western-Union-logo-old.jpg" class="imgpopup" /></span>
-                                                    </td>
-                                                    <td>
-                                                        <input name="formfieldradio" type="radio" class="" value="WePay" id="8" />
-                                                        <span class="lbl"><img src="~/assets/img/Wepay_Logo_.png" class="imgpopup" /></span>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <input name="formfieldradio" type="radio" class="" value="Bitcoin" id="9" />
-                                                        <span class="lbl"><img src="~/assets/img/bitcoin.jpg" class="imgpopup" /></span>
-                                                    </td>
-                                                    <td>
-                                                        <input name="formfieldradio" type="radio" class="" value="Amazon" id="10" />
-                                                        <span class="lbl"><img src="~/assets/img/amazon-dgmag.png" class="imgpopup" /></span>
-                                                    </td>
-                                                    <td>
-                                                        <input name="formfieldradio" type="radio" class="" value="Dominos" id="11" />
-                                                        <span class="lbl"><img src="~/assets/img/2000px-Dominos_pizza_logo.svg.png" class="imgpopup" /></span>
-                                                    </td>
-                                                    <td>
-                                                        <input name="formfieldradio" type="radio" class="" value="ShoppersShop" id="12" />
-                                                        <span class="lbl"><img src="~/assets/img/shoppersshop.jpg" class="imgpopup" /></span>
-                                                    </td>
-                                                </tr>
-                                            </table>
-                                            <label class="required" for="form-field-1"> Amount </label>
-                                            <label>
-                                                <input type="text" id="amount" placeholder="" onkeypress="return isNumberKey(event)" maxlength="10" />
-                                            </label>
-                                            <input type="button" class="btn btn-info btn-xs ace-icon fa fa-check bigger-110" id="btn" value="Save" data_toggle="tooltip" , title="Submit data" />
-                                            <input type="reset" class="btn btn-xs ace-icon fa fa-undo bigger-110" value="Reset" data_toggle="tooltip" , title="Reset data" />
+                            <div class="container">
+                                <div class="modal" id="myModal" role="dialog">
+                                    <div class="modal-dialog modal-lg">
+                                        <!-- Modal content-->
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                <h4 class="modal-title">Reward Options</h4>
+                                            </div>
+                                            <div class="modal-body">
+                                                <table>
+                                                    <tr>
+                                                        <td>
+                                                            <input name="formfieldradio" type="radio" class="" value="Visa" id="1" />
+                                                            <span class="lbl"><img src="~/assets/img/VISA_Logo.png" class="imgpopup"></span>
+                                                        </td>
+                                                        <td>
+                                                            <input name="formfieldradio" type="radio" class="" value="McDonald's" id="2" />
+                                                            <span class="lbl"><img src="~/assets/img/McDonald's_Golden_Arches.svg.png" class="imgpopup"></span>
+                                                        </td>
+                                                        <td>
+                                                            <input name="formfieldradio" type="radio" class="" value="PayTM" id="3" />
+                                                            <span class="lbl"><img src="~/assets/img/VFsaWo_G.jpeg" class="imgpopup" /></span>
+                                                        </td>
+                                                        <td>
+                                                            <input name="formfieldradio" type="radio" class="" value="Google Wallet" id="4" />
+                                                            <span class="lbl"><img src="~/assets/img/GoogleWallet.png" class="imgpopup" /></span>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <input name="formfieldradio" type="radio" class="" value="PayPal" id="5" />
+                                                            <span class="lbl"> <img src="~/assets/img/Paypal_2014_logo.png" class="imgpopup" /></span>
+                                                        </td>
+
+                                                        <td>
+                                                            <input name="formfieldradio" type="radio" class="" value="American Express" id="6" />
+                                                            <span class="lbl"><img src="~/assets/img/americanexpress.jpg" class="imgpopup" /></span>
+                                                        </td>
+                                                        <td>
+                                                            <input name="formfieldradio" type="radio" class="" value="Western Union" id="7" />
+                                                            <span class="lbl"><img src="~/assets/img/Western-Union-logo-old.jpg" class="imgpopup" /></span>
+                                                        </td>
+                                                        <td>
+                                                            <input name="formfieldradio" type="radio" class="" value="WePay" id="8" />
+                                                            <span class="lbl"><img src="~/assets/img/Wepay_Logo_.png" class="imgpopup" /></span>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <input name="formfieldradio" type="radio" class="" value="Bitcoin" id="9" />
+                                                            <span class="lbl"><img src="~/assets/img/bitcoin.jpg" class="imgpopup" /></span>
+                                                        </td>
+                                                        <td>
+                                                            <input name="formfieldradio" type="radio" class="" value="Amazon" id="10" />
+                                                            <span class="lbl"><img src="~/assets/img/amazon-dgmag.png" class="imgpopup" /></span>
+                                                        </td>
+                                                        <td>
+                                                            <input name="formfieldradio" type="radio" class="" value="Dominos" id="11" />
+                                                            <span class="lbl"><img src="~/assets/img/2000px-Dominos_pizza_logo.svg.png" class="imgpopup" /></span>
+                                                        </td>
+                                                        <td>
+                                                            <input name="formfieldradio" type="radio" class="" value="ShoppersShop" id="12" />
+                                                            <span class="lbl"><img src="~/assets/img/shoppersshop.jpg" class="imgpopup" /></span>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                                <label class="required" for="form-field-1"> Amount </label>
+                                                <label>
+                                                    <input type="text" id="amount" placeholder="" onkeypress="return isNumberKey(event)" maxlength="10" />
+                                                </label>
+                                                <input type="button" class="btn btn-info btn-xs ace-icon fa fa-check bigger-110" id="btn" value="Save" data_toggle="tooltip" , title="Submit data" />
+                                                <input type="reset" class="btn btn-xs ace-icon fa fa-undo bigger-110" value="Reset" data_toggle="tooltip" , title="Reset data" />
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -181,29 +184,28 @@
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <div id="result"></div>
+                <div id="result"></div>
 
-            <div class="form-group">
-                <label class="col-sm-3 control-label no-padding-right" for="form-field-1"></label>
-                <div class="col-sm-9">
-                    <div class="clearfix">
-                       
-                        <button class="btn btn-info" type="submit" onclick="AddWorkitem(); return false;">
-                            <i class="ace-icon fa fa-check bigger-110"></i>
-                            Submit
-                        </button>
-                        <button class="btn" type="reset">
-                            <i class="ace-icon fa fa-undo bigger-110"></i>
-                            Reset
-                        </button>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label no-padding-right" for="form-field-1"></label>
+                    <div class="col-sm-9">
+                        <div class="clearfix">
+
+                            <button class="btn btn-info" type="submit" onclick="AddWorkitem(); return false;">
+                                <i class="ace-icon fa fa-check bigger-110"></i>
+                                Submit
+                            </button>
+                            <button class="btn" type="reset">
+                                <i class="ace-icon fa fa-undo bigger-110"></i>
+                                Reset
+                            </button>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </form>
+            </form>
+        </div>
     </div>
-</div>
 
 
 

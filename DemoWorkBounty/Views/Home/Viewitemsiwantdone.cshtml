@@ -43,7 +43,7 @@
                     {
                         <tbody>
                             <tr>
-                                <td>@i</td>
+                                <td>@(i + ((Model.PageNumber - 1) * Model.PageSize) + 1)</td>
                                 <td>@Html.ActionLink(item.Title, "ViewAssignedworkitem", "Workitem", new { currentWorkitemID = item.WorkitemID, data_toggle = "tooltip", title = "Display the user who applied for workitem" }, null) </td>
                                 <td>@Html.DisplayFor(a => item.StartDate)</td>
                                 <td>@Html.DisplayFor(a => item.EndDate)</td>
@@ -51,6 +51,7 @@
                                 <td>@Html.DisplayFor(a => item.ProposedReward)</td>
                                 <td>@Html.DisplayFor(a => item.Status)</td>
                                 <td></td>
+
                             </tr>
                         </tbody>
                         i++;

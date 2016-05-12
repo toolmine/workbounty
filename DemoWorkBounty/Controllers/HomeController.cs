@@ -230,7 +230,7 @@ namespace DemoWorkBounty.Controllers
             {
                 ViewBag.displayMessage = "No Result found";
             }
-
+            
             return View();
         }
 
