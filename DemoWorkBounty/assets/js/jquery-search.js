@@ -1,9 +1,4 @@
-﻿
-
-function SearchResult() {
-   
-                
-
+﻿function SearchResult() {
         var id = $("#SearchItem").val();
         if (id == null) {
             alert("Please enter Workitem Name");
@@ -11,8 +6,5 @@ function SearchResult() {
         else {
             var url = "/home/SearchWorkitem?searchWorkitemValue=" + encodeURIComponent(id);
             document.location.href = url;
-        }
-   
-
-   
+        }  
 };

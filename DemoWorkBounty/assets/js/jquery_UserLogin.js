@@ -5,8 +5,6 @@
 });
 $(function () {
     $("#loginButton").click(function (e) {
-        $("#loading").show();
-        $("#login-box").fadeOut(4000);  
 
         e.preventDefault();
         var id = {
@@ -34,7 +32,6 @@ $(function () {
                 else {
                     $("#alertMessage").show();
                 }
-                $("#loading").hide();
             },
 
             error: function (x, e) {

@@ -4,20 +4,30 @@
     Layout = "~/Views/_DashboardLayout.cshtml";
 }
 <script src="~/assets/js/getTeamDetail.js"></script>
+
+<ul class="breadcrumb">
+    <li>
+        <i class="ace-icon fa fa-home home-icon"></i>
+        <a href="~/home/dashboard" data_toggle="tooltip" , title="Dashboard">Dashboard</a>
+    </li>
+    <li class="active">Add member</li>
+</ul>
+
 <div class="widget-box transparent" id="recent-box">
-    <div class="widget-header">
+    <div class="col-sm-10">
 
         <div class="col-sm-10">
             <div class="widget-box transparent">
                 <div class="widget-header">
                     <div class="col-xs-8">
                         <h4 class="widget-title lighter smaller">
+
                             Team detail
                         </h4>
                     </div>
                     <div class="row">
                         <div class="col-md-1"></div>
-                        <div class="col-sm-9">
+                        <div class="col-sm-10">
 
                             @foreach (var item in Model)
                             {
@@ -28,19 +38,21 @@
 
                                 }
                             }
-                     
+
                             <input type="hidden" id="Searchid" value="@Session["UserID"]" />
                             <input type="text" id="itId" size="5" class="col-xs-10 col-sm-5" />
-                            <input type="button" value="Search" onclick="show();" class="btn btn-minier btn-purple layoutcss TeamLayoutButton" data-toggle="tooltip" title="Find a member"/>
+                            <input type="button" value="Search" onclick="show();" class="btn btn-minier btn-purple layoutcss TeamLayoutButton" data-toggle="tooltip" title="Find a member" />
                         </div>
                         <div class=".col-xs-4.col-sm-2 no-padding-right">
                             <div class="col-xs-4">
                                 <p class="alert alert-danger" id="addMemberFailError">Failed! Member not removed</p>
                                 <p class="alert alert-warning" id="memberAlreadyExist">Member Already exist</p>
                                 <p class="alert alert-warning" id="noDateFoundMessage"> No member name found!</p>
-                                <table id="simple-table" class="table table-striped table-bordered table-hover">
+                                <p>
+                                <table id="simple-table" class="table table-striped table-bordered table-hover" cellspacing="100">
                                     <tbody id="items"></tbody>
                                 </table>
+                                </p>
                             </div>
                         </div>
                     </div>
