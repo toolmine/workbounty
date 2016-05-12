@@ -124,7 +124,7 @@ namespace DemoWorkBounty.Controllers
         public ActionResult ViewUpdatedWorkitem(int currentWorkitemID)
         {
             var getDataofUploadDocument = workbountyRepo.ShowDocument(currentWorkitemID);
-            if (getDataofUploadDocument != null)
+            if (getDataofUploadDocument.Count > 0)
             {
                 ViewBag.dataofOpenDocument = getDataofUploadDocument;
             }

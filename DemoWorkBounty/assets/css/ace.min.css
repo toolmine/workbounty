@@ -21734,3 +21734,11 @@ input.typeahead.scrollable ~ .tt-dropdown-menu {
 .padding15px{
     padding-right:15px !important;
 }
+
+.padding10pxbottom{
+    padding-bottom:10px !important;
+}
+
+.padding50pxbottom{
+    padding-bottom:50px !important;
+}

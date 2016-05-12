@@ -129,6 +129,7 @@ namespace DemoWorkBounty.Repository
                 var getTeamID = entity.Teams.Where(s => s.UserID == currentUserID).Select(s => s.TeamUserInfoID);
                 var getWorkitemData = entity.Workitems.Where(s => s.CreatedBy != currentUserID).Select(s => new OpenWorkitems { WorkitemID = s.WorkitemID, FirstName = s.UserInfo.FirstName, PublishedTo = s.PublishedTo, Title = s.Title, Summary = s.Summary, ProposedReward = s.ProposedReward, Amount = s.Amount }).ToList();
                 List<OpenWorkitems> workitemlist = new List<OpenWorkitems>();
+                List<OpenWorkitems> workitemlist2 = new List<OpenWorkitems>();
 
                 var favourites = entity.WorkitemRegistrations.Where(s => s.UserID == currentUserID && s.IsFavourite == true).Select(s => new OpenWorkitems { WorkitemID = s.WorkitemID }).ToList();
                 var registereditems = entity.WorkitemRegistrations.Where(s => s.UserID == currentUserID && s.IsFavourite == false).Select(s => new OpenWorkitems { WorkitemID = s.WorkitemID }).ToList();
@@ -136,7 +137,7 @@ namespace DemoWorkBounty.Repository
                 {
                     if (getUserData.PublishedTo == 0)
                     {
-                        workitemlist.Add(entity.Workitems.Where(s => s.WorkitemID == getUserData.WorkitemID).Select(s => new OpenWorkitems { WorkitemID = s.WorkitemID, FirstName = s.UserInfo.FirstName, Title = s.Title, Summary = s.Summary, ProposedReward = s.ProposedReward, Amount = s.Amount }).FirstOrDefault());
+                        workitemlist.Add(entity.Workitems.Where(s => s.WorkitemID == getUserData.WorkitemID).Select(s => new OpenWorkitems { WorkitemID = s.WorkitemID, FirstName = s.UserInfo.FirstName, Title = s.Title, Summary = s.Summary, ProposedReward = s.ProposedReward, Amount = s.Amount, EndDate = s.DueDate }).FirstOrDefault());
                     }
                     else
                     {
@@ -144,7 +145,7 @@ namespace DemoWorkBounty.Repository
                         {
                             if (getUserData.PublishedTo == getUserTeamID)
                             {
-                                workitemlist.Add(entity.Workitems.Where(s => s.WorkitemID == getUserData.WorkitemID).Select(s => new OpenWorkitems { WorkitemID = s.WorkitemID, FirstName = s.UserInfo.FirstName, Title = s.Title, Summary = s.Summary, ProposedReward = s.ProposedReward, Amount = s.Amount, CreatedDateTime = s.CreatedDateTime }).FirstOrDefault());
+                                workitemlist.Add(entity.Workitems.Where(s => s.WorkitemID == getUserData.WorkitemID).Select(s => new OpenWorkitems { WorkitemID = s.WorkitemID, FirstName = s.UserInfo.FirstName, Title = s.Title, Summary = s.Summary, ProposedReward = s.ProposedReward, Amount = s.Amount, CreatedDateTime = s.CreatedDateTime, EndDate = s.DueDate }).FirstOrDefault());
                             }
                         }
                     }
@@ -156,7 +157,16 @@ namespace DemoWorkBounty.Repository
                     workitemlist.Where(a => a.WorkitemID == favo.WorkitemID).Select(q => q.IsFavourite = true).FirstOrDefault();
                 }
                 workitemlist = workitemlist.OrderByDescending(s => s.CreatedDateTime).ToList();
-                return workitemlist;
+
+
+                foreach (var item in workitemlist)
+                {
+                    if (item.EndDate > DateTime.Today)
+                    {
+                        workitemlist2.Add(item);
+                    }
+                }
+                return workitemlist2;
             }
             catch (Exception)
             {
@@ -276,7 +286,7 @@ namespace DemoWorkBounty.Repository
             var getDataForIsRewarded = entity.WorkItemAssignments.Where(s => s.WorkItemID == id).Select(s => s.IsRewarded == true).FirstOrDefault();
             if (getDataForIsRewarded == false)
             {
-                var getListofUserAppliedForWorkitem = entity.WorkItemAssignments.Where(s => s.WorkItemID == id).Select(s => new WorkitemDocuments { WorkItemID = s.WorkItemID, UserID = s.UserID, Title = s.Workitem.Title, Summary = s.Workitem.Summary, FirstName = s.UserInfo.FirstName, SubmissionDateTime = s.SubmissionDateTime, SubmissionPath = s.SubmissionPath }).ToList();
+                var getListofUserAppliedForWorkitem = entity.WorkItemAssignments.Where(s => s.WorkItemID == id).Select(s => new WorkitemDocuments { WorkItemAssignmentID = s.WorkItemAssignmentID, WorkItemID = s.WorkItemID, UserID = s.UserID, Title = s.Workitem.Title, Summary = s.Workitem.Summary, FirstName = s.UserInfo.FirstName, SubmissionDateTime = s.SubmissionDateTime, SubmissionPath = s.SubmissionPath }).ToList();
                 return getListofUserAppliedForWorkitem;
             }
             else
