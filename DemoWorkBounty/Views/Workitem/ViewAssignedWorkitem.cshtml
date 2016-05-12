@@ -13,33 +13,36 @@
     <li class="active">Assign workitems</li>
 </ul>
 
-<h2>Items i want done</h2>
-<div class="col-sm-10">
-    @foreach (DemoWorkBounty.Workitem i in ViewBag.items)
-    {
-        <input type="hidden" id="Workid" value="@i.WorkitemID" />
-        <input type="hidden" id="Teamid" value="@i.PublishedTo">
-        <div class="widget-box transparent" id="recent-box">
-            <div class="widget-header">
-                <div class="col-sm-6">
-                    <h4 class="widget-title lighter smaller">
-                        Title:    @Html.DisplayFor(a => i.Title)
-                    </h4>
-                </div>
+<div class="widget-box transparent" id="recent-box">
+    <div class="widget-header">
+        <div class="col-xs-10">
+            <h4 class="widget-title lighter smaller padding10pxbottom">
+                Assign workitems
 
-           
-
-                    @Html.ActionLink("View Assignment", "ViewUpdatedWorkitem", "workitem", new { currentWorkitemID = @i.WorkitemID }, new { @class = "btn btn-minier btn-success",data_toggle="tooltip",title="View documents which user submitted" })
-          
-                </div>
-
-                    <div class="widget-header">
-
-                        <div class="col-sm-6 toppadding50px">
-                            Summary:  @Html.DisplayFor(a => i.Summary)
+            </h4>
+        </div>
+        <div class="col-sm-10">
+            <div class="col-sm-10">
+                @foreach (DemoWorkBounty.Workitem i in ViewBag.items)
+                {
+                    <input type="hidden" id="Workid" value="@i.WorkitemID" />
+                    <input type="hidden" id="Teamid" value="@i.PublishedTo">
+                    <div class="col-xs-10  toppadding10px">
+                        <div class="col-sm-10">
+                            Title:    @Html.DisplayFor(a => i.Title)
                         </div>
-                    </div>
-                    <div style="padding-top: 20px">
+
+                        @Html.ActionLink("View Assignment", "ViewUpdatedWorkitem", "workitem", new { currentWorkitemID = @i.WorkitemID }, new { @class = "btn btn-minier btn-success", data_toggle = "tooltip", title = "View documents which user submitted" })
+
+
+                        <div class="widget-box transparent" id="recent-box">
+                            <div class="widget-header">
+
+                                <div class="col-sm-10 toppadding50px">
+                                    Summary:  @Html.DisplayFor(a => i.Summary)
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <div class="col-sm-6">
                         <h4 class="widget-title lighter smaller col-sm-6">
@@ -62,28 +65,28 @@
                                     <td>@Html.DisplayFor(a => i.DueDate)</td>
                                     <td>@Html.DisplayFor(a => i.ProposedReward)</td>
                                     @if (i.Amount != null)
-                            {
+                                    {
                                         <td>$@Html.DisplayFor(a => i.Amount)</td>
-                            }
-                            else
-                            {
+                                    }
+                                    else
+                                    {
                                         <td>@Html.DisplayFor(a => i.Amount)</td>
-                            }
+                                    }
                                 </tr>
                             </tbody>
                         </table>
                     </div>
-                </div>
-    }
+
+                }
             </div>
             @if (ViewBag.getMessage != null)
-{
+            {
                 <div class="col-sm-10">
                     <p class="ui-icon-alert alert-success">
                         You have already assign this workitem to exclusive member
                     </p>
                 </div>
-}
+            }
 
             <div class="col-sm-10">
                 <div class="alert alert-block alert-success" id="labelSuccessMessage">
@@ -107,17 +110,21 @@
                             </tr>
                         </thead>
                         @if (ViewBag.apply != null)
-            {
-                foreach (DemoWorkBounty.WorkitemRegistration i in ViewBag.apply)
-                {
-                    <tbody>
-                        <tr>
-                            <td>@Html.DisplayFor(a => i.UserInfo.FirstName)</td>
-                            <td><input type="submit" class="btn btn-minier btn-purple" value="Allocate workitem" id="@i.UserID" onclick="add(id)" data-toggle="tooltip" title="Apply and allocate work" /></td>
-                        </tr>
-                    </tbody>
-                }
-            }
+                        {
+                            foreach (DemoWorkBounty.WorkitemRegistration i in ViewBag.apply)
+                            {
+                                <tbody>
+                                    <tr>
+                                        <td>@Html.DisplayFor(a => i.UserInfo.FirstName)</td>
+                                        <td><input type="submit" class="btn btn-minier btn-purple" value="Allocate workitem" id="@i.UserID" onclick="add(id)" data-toggle="tooltip" title="Apply and allocate work" /></td>
+                                    </tr>
+                                </tbody>
+                            }
+                        }
                     </table>
                 </div>
             </div>
+
+        </div>
+    </div>
+</div>

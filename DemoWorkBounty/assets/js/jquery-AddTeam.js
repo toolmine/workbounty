@@ -94,6 +94,7 @@ function submit() {
             success: function (response) {
                 if (response != 0) {
                     $("#teamAlertMessage").show();
+                    $('#teamAlertMessage').delay(5000).fadeOut();
                     $("#AddTeamButton").hide();
                     $("#recent-box1").show();
                 }
