@@ -178,13 +178,13 @@ namespace DemoWorkBounty.Repository
         {
             DateTime currentDate = DateTime.Now;
             List<WorkitemDistribution> items = new List<WorkitemDistribution>();
-            var WorkitemRegisteredUserID = entity.WorkitemRegistrations.Where(s => s.UserID == currentUserID && s.IsRegistered == true);
+            var WorkitemRegisteredUserID = entity.WorkitemRegistrations.Where(s => s.UserID == currentUserID);
             var exclusiveitems = WorkitemRegisteredUserID.Where(s => s.IsExclusive == true).ToList();
             var checkWorkitem = new List<int>();
             var getCurrentWorkitemData = new List<AssignWorkitems>();
             foreach (var item in exclusiveitems)
             {
-                var isRewardedWorkitem = entity.WorkItemAssignments.Where(s => s.WorkItemID == item.WorkitemID && s.IsRewarded == true).FirstOrDefault();
+                var isRewardedWorkitem = entity.WorkItemAssignments.Where(s => s.WorkItemID == item.WorkitemID).FirstOrDefault();
                 if (isRewardedWorkitem == null)
                 {
                     var innerList = entity.WorkitemDistributions.Where(s => s.WorkitemID == item.WorkitemID && s.UserID == item.UserID).Select(s => s.WorkitemID).Distinct().ToList();
@@ -303,7 +303,7 @@ namespace DemoWorkBounty.Repository
 
             var getDataForSubmitData = entity.WorkItemAssignments.Where(s => s.WorkItemID == id).Select(s => s.SubmissionPath).FirstOrDefault();
 
-            if (getDataForSubmitData!=null)
+            if (getDataForSubmitData != null)
             {
                 var getListofUserAppliedForWorkitem = entity.WorkItemAssignments.Where(s => s.WorkItemID == id).Select(s => new WorkitemDocuments { WorkItemID = s.WorkItemID, UserID = s.UserID, Title = s.Workitem.Title, Summary = s.Workitem.Summary, FirstName = s.UserInfo.FirstName, SubmissionDateTime = s.SubmissionDateTime, SubmissionPath = s.SubmissionPath }).ToList();
                 return getListofUserAppliedForWorkitem;

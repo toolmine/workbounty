@@ -29,7 +29,7 @@
     </div>
 }
 
-<div class="col-sm-10">
+<div class="col-sm-8 toppadding10px">
     <div class="widget-box transparent" id="recent-box">
 
 
@@ -56,11 +56,25 @@
                                 <td>@Html.DisplayFor(a => item.StartDate)</td>
                                 <td>@Html.DisplayFor(a => item.DueDate)</td>
                                 <td>@Html.DisplayFor(a => item.ProposedReward)</td>
-                                <td>@Html.DisplayFor(a => item.Amount)</td>
+                                @if (item.Amount != null)
+                                {
+                                    <td>$@Html.DisplayFor(a => item.Amount)</td>
+                                }
+                                else
+                                {
+                                    <td>@Html.DisplayFor(a => item.Amount)</td>
+                                }
                             </tr>
                         </tbody>
                     }
                 }
+                else
+                {
+                    ViewBag.displayMessage("No record exists");
+                }
+                
+                
+                               
             </table>
         </div>
     </div>

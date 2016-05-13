@@ -124,10 +124,10 @@ namespace DemoWorkBounty.Controllers
         public ActionResult ViewUpdatedWorkitem(int currentWorkitemID)
         {
             var getCheckDocument = workbountyRepo.CheckDocument(currentWorkitemID);
-            if(getCheckDocument!=null)
+            if (getCheckDocument != null)
             {
                 var getDataofUploadDocument = workbountyRepo.ShowDocument(currentWorkitemID);
-                if (getDataofUploadDocument!=null)
+                if (getDataofUploadDocument != null)
                 {
                     ViewBag.dataofOpenDocument = getDataofUploadDocument;
                 }
@@ -137,7 +137,7 @@ namespace DemoWorkBounty.Controllers
                 }
 
             }
-           else
+            else
             {
                 ViewBag.errorMessage = 0;
             }
@@ -156,7 +156,7 @@ namespace DemoWorkBounty.Controllers
             return View(getDetailWorkitemData);
         }
 
-        public FileResult Download(int currentUserID,int workitemID)
+        public FileResult Download(int currentUserID, int workitemID)
         {
             var files = entity.WorkItemAssignments.Where(s => s.UserID == currentUserID && s.WorkItemAssignmentID == workitemID).Select(s => s.SubmissionPath).FirstOrDefault();
             string fileName = entity.WorkItemAssignments.Where(s => s.UserID == currentUserID && s.WorkItemAssignmentID == workitemID).Select(s => s.SubmissionPath).FirstOrDefault();
