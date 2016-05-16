@@ -16,7 +16,6 @@ namespace DemoWorkBounty.Repository
         {
             try
             {
-
                 if (ModelState.IsValid)
                 {
                     var fileName = Path.GetFileName(addWorkitemData.DocumentFilePath);
@@ -35,11 +34,8 @@ namespace DemoWorkBounty.Repository
                 return "error";
             }
         }
-
         public List<Workitem> GetWorkDetails(int currentWorkitemID)
         {
-
-
             var assignWorkitemData = entity.Workitems.Where(a => a.WorkitemID.Equals(currentWorkitemID)).ToList();
 
             if (assignWorkitemData == null)
@@ -178,21 +174,19 @@ namespace DemoWorkBounty.Repository
         {
             DateTime currentDate = DateTime.Now;
             List<WorkitemDistribution> items = new List<WorkitemDistribution>();
-            var WorkitemRegisteredUserID = entity.WorkitemRegistrations.Where(s => s.UserID == currentUserID);
+            var WorkitemRegisteredUserID = entity.WorkitemRegistrations.Where(s => s.UserID == currentUserID && s.IsRegistered == true);
             var exclusiveitems = WorkitemRegisteredUserID.Where(s => s.IsExclusive == true).ToList();
             var checkWorkitem = new List<int>();
             var getCurrentWorkitemData = new List<AssignWorkitems>();
             foreach (var item in exclusiveitems)
             {
-                var isRewardedWorkitem = entity.WorkItemAssignments.Where(s => s.WorkItemID == item.WorkitemID).FirstOrDefault();
+                var isRewardedWorkitem = entity.WorkItemAssignments.Where(s => s.WorkItemID == item.WorkitemID && s.IsRewarded == true).FirstOrDefault();
                 if (isRewardedWorkitem == null)
                 {
                     var innerList = entity.WorkitemDistributions.Where(s => s.WorkitemID == item.WorkitemID && s.UserID == item.UserID).Select(s => s.WorkitemID).Distinct().ToList();
                     innerList.ForEach(a => checkWorkitem.Add(a));
                 }
             }
-
-
             var nonExclusiveitems = WorkitemRegisteredUserID.Where(s => s.IsExclusive == false && s.Workitem.DueDate >= currentDate).Select(s => s.WorkitemID).Distinct().ToList();
             nonExclusiveitems.ForEach(a => checkWorkitem.Add(a));
             foreach (var workItemID in checkWorkitem)
@@ -278,9 +272,6 @@ namespace DemoWorkBounty.Repository
             return getListofUploadDocuments;
         }
 
-
-
-
         public List<WorkitemDocuments> ShowDocument(int id)
         {
 
@@ -295,7 +286,6 @@ namespace DemoWorkBounty.Repository
             {
                 return null;
             }
-
         }
 
         public List<WorkitemDocuments> CheckDocument(int id)
@@ -312,10 +302,7 @@ namespace DemoWorkBounty.Repository
             {
                 return null;
             }
-
         }
-
-
 
         public List<Workitem> GetAllitemsDone(int currentWorkitemID)
         {
@@ -348,7 +335,6 @@ namespace DemoWorkBounty.Repository
             }
         }
 
-
         public string AddAssignData(int id)
         {
             if (ModelState.IsValid)
@@ -358,7 +344,6 @@ namespace DemoWorkBounty.Repository
             }
             return "Error";
         }
-
 
         public string WorkitemDistribution(WorkitemDistribution getWorkitemData)
         {
@@ -378,14 +363,10 @@ namespace DemoWorkBounty.Repository
             return showExclusiveData;
         }
 
-
         public List<Workitem> SearchWorkitems(string searchValue)
         {
             var getSearchWorkitemResults = entity.Workitems.Where(s => s.Title.StartsWith(searchValue)).ToList();
-
-
             return getSearchWorkitemResults;
-
         }
 
         public List<Team> SelectTeam(int currentUserID)
@@ -400,12 +381,6 @@ namespace DemoWorkBounty.Repository
                 }
             }
             return selectedteamData;
-
         }
-
-
-
-
     }
-
 }

@@ -23,11 +23,10 @@
         <div class="col-xs-10">
             @foreach (var item in Model)
             {
-                foreach (var user in item.TeamUserList)
+                 foreach (var user in item.TeamUserList)
                 {
                     if (TeamName != user.TeamName)
                     {
-
                         <h4 id="Teamname" class="widget-title lighter smaller"><i class="menu-icon fa fa-user padding10px"></i>@Html.ActionLink(user.TeamName, "AddMember", "Team", new { TeamName = user.TeamName, data_toggle = "tooltip", title = "Get Team details" }, null)  </h4>
                         TeamName = user.TeamName;
                     }
