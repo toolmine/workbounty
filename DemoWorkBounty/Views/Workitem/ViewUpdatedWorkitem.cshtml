@@ -21,7 +21,7 @@
 <div class="widget-box transparent" id="recent-box">
     <div class="widget-header">
         <div class="col-xs-10">
-            <h4 class="widget-title lighter smaller padding10pxbottom">
+            <h4 class="widget-title lighter smaller">
                 View Document
 
             </h4>
@@ -33,7 +33,7 @@
                     foreach (DemoWorkBounty.Models.WorkitemDocuments i in ViewBag.dataofOpenDocument)
                     {
 
-                        <div class="col-xs-20  toppadding8px">
+                        <div class="col-xs-20">
                             <div class="col-sm-10">
                                 <h5>
                                     Title:    @Html.DisplayFor(a => i.Title)
@@ -41,7 +41,7 @@
                             </div>
 
                             <div class="widget-box transparent toppadding10px" id="recent-box">
-                                <div class="header">
+                                <div>
 
                                     <div class="col-sm-10 toppadding50px">
                                         Summary:  @Html.DisplayFor(a => i.Summary)
@@ -71,49 +71,58 @@
                         </p>
                     </div>
                 }
-                <table id="simple-table" class="table table-striped table-bordered table-hover">
-                    <thead>
-                        <tr>
-                            <th>Sr No</th>
-                            <th>Name</th>
-                            <th>Update Time</th>
-                            <th>View File</th>
-                            <th>Feedback</th>
-                            <th>Reward</th>
-                        </tr>
-                    </thead>
-                    @if (ViewBag.dataofOpenDocument != null)
-                    {
-                        foreach (DemoWorkBounty.Models.WorkitemDocuments i in ViewBag.dataofOpenDocument)
+                <div class="col-sm-10">
+                    <h4>
+                        Details
+                    </h4>
+                </div>
+
+                <div class="col-sm-10">
+                    <table id="simple-table" class="table table-striped table-bordered table-hover">
+                        <thead>
+                            <tr>
+                                <th>Sr No</th>
+                                <th>Name</th>
+                                <th>Update Time</th>
+                                <th>View File</th>
+                                <th>Feedback</th>
+                                <th>Reward</th>
+                            </tr>
+                        </thead>
+                        @if (ViewBag.dataofOpenDocument != null)
                         {
+                            foreach (DemoWorkBounty.Models.WorkitemDocuments i in ViewBag.dataofOpenDocument)
+                            {
 
-                            <tbody>
-                                <tr>
-                                    <td>@(ViewBag.dataofOpenDocument.IndexOf(i) + 1)</td>
-                                    <td>@Html.DisplayFor(a => i.FirstName)</td>
-                                    <td>@Html.DisplayFor(a => i.SubmissionDateTime) <input type="hidden" id="Workid" value="@i.WorkItemID" /></td>
-                                    <td>@Html.ActionLink("Download", "Download", "workitem", new { currentUserID = i.UserID, workitemID = i.WorkItemAssignmentID }, new { @class = "btn btn-minier btn-purple", data_toggle = "tooltip", title = "Download documents" }) </td>
-                                    <td>
-                                        <select id="@(ViewBag.dataofOpenDocument.IndexOf(i) + 1)">
-                                            <option value="good">Good</option>
-                                            <option value="average">Average</option>
-                                            <option value="poor">Poor</option>
-                                        </select>
+                                <tbody>
+                                    <tr>
+                                        <td>@(ViewBag.dataofOpenDocument.IndexOf(i) + 1)</td>
+                                        <td>@Html.DisplayFor(a => i.FirstName)</td>
+                                        <td>@Html.DisplayFor(a => i.SubmissionDateTime) <input type="hidden" id="Workid" value="@i.WorkItemID" /></td>
+                                        <td>@Html.ActionLink("Download", "Download", "workitem", new { currentUserID = i.UserID, workitemID = i.WorkItemAssignmentID }, new { @class = "btn btn-minier btn-purple", data_toggle = "tooltip", title = "Download documents" }) </td>
+                                        <td>
+                                            <select id="@(ViewBag.dataofOpenDocument.IndexOf(i) + 1)">
+                                                <option value="good">Good</option>
+                                                <option value="average">Average</option>
+                                                <option value="poor">Poor</option>
+                                            </select>
                                         </td>
-                                     
+
                                         <td><input type="button" id="@i.UserID" class="btn btn-minier btn-purple" value="Assign Reward" onclick="ApplyReward(this,@(ViewBag.dataofOpenDocument.IndexOf(i) + 1));" data-toggle="tooltip" title="Apply reward to this user" /></td>
-                                </tr>
-                            </tbody>
+                                    </tr>
+                                </tbody>
 
 
 
+                            }
                         }
-                    }
-                </table>
+                    </table>
+                </div>
+
+                </div>
+
+
             </div>
 
-
         </div>
-
     </div>
-</div>

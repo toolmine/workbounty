@@ -16,7 +16,7 @@
 <div class="widget-box transparent" id="recent-box">
     <div class="widget-header">
         <div class="col-xs-10">
-            <h4 class="widget-title lighter smaller padding10pxbottom">
+            <h4 class="widget-title lighter smaller">
                 Assign workitems
 
             </h4>
@@ -27,16 +27,17 @@
                 {
                     <input type="hidden" id="Workid" value="@i.WorkitemID" />
                     <input type="hidden" id="Teamid" value="@i.PublishedTo">
-                    <div class="widget  toppadding10px">
+                    <div class="widget  toppadding8px">
                         <div class="col-sm-10">
-                            Title:    @Html.DisplayFor(a => i.Title)
+                            <h5> Title: @Html.DisplayFor(a => i.Title)</h5>
                         </div>
+                        <div class="padding10pxbottom"> </div>
+                            @Html.ActionLink("View Assignment", "ViewUpdatedWorkitem", "workitem", new { currentWorkitemID = @i.WorkitemID }, new { @class = "btn btn-minier btn-success", data_toggle = "tooltip", title = "View documents which user submitted" })
 
-                        @Html.ActionLink("View Assignment", "ViewUpdatedWorkitem", "workitem", new { currentWorkitemID = @i.WorkitemID }, new { @class = "btn btn-minier btn-success", data_toggle = "tooltip", title = "View documents which user submitted" })
-
+                       
 
                         <div class="widget-box transparent" id="recent-box">
-                            <div class="widget-header">
+                            <div>
 
                                 <div class="col-sm-10 toppadding50px">
                                     Summary:  @Html.DisplayFor(a => i.Summary)
@@ -44,38 +45,42 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-sm-6">
-                        <h4 class="widget-title lighter smaller col-sm-6">
-                            Details
-                        </h4>
+                    <div class="">
+                      
+                            <h4 class="widget-title lighter smaller col-sm-6">
+                                Details
+                            </h4>
+                
                         <input type="hidden" id="Userid" value="@Session["UserID"]" />
-                        <table id="simple-table" class="table table-striped table-bordered table-hover">
-                            <thead>
-                                <tr>
-                                    <th width="5%">Start Date</th>
-                                    <th width="4%">Due Date</th>
-                                    <th width="5%">Rewards</th>
-                                    <th width="4%">Amount</th>
+                        <div class="col-sm-10">
+                            <table id="simple-table" class="table table-striped table-bordered table-hover">
+                                <thead>
+                                    <tr>
+                                        <th width="5%">Start Date</th>
+                                        <th width="4%">Due Date</th>
+                                        <th width="5%">Rewards</th>
+                                        <th width="4%">Amount</th>
 
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>@Html.DisplayFor(a => i.StartDate)</td>
-                                    <td>@Html.DisplayFor(a => i.DueDate)</td>
-                                    <td>@Html.DisplayFor(a => i.ProposedReward)</td>
-                                    @if (i.Amount != null)
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>@Html.DisplayFor(a => i.StartDate)</td>
+                                        <td>@Html.DisplayFor(a => i.DueDate)</td>
+                                        <td>@Html.DisplayFor(a => i.ProposedReward)</td>
+                                        @if (i.Amount != null)
                                     {
-                                        <td>$@Html.DisplayFor(a => i.Amount)</td>
+                                            <td>$@Html.DisplayFor(a => i.Amount)</td>
                                     }
                                     else
                                     {
-                                        <td>@Html.DisplayFor(a => i.Amount)</td>
+                                            <td>@Html.DisplayFor(a => i.Amount)</td>
                                     }
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        </div>
 
                 }
             </div>
