@@ -342,6 +342,7 @@
     <Content Include="assets\js\drawpiechart.js" />
     <Content Include="assets\js\dropzone.min.js" />
     <Content Include="assets\js\excanvas.min.js" />
+    <Content Include="assets\js\forgotPassword.js" />
     <Content Include="assets\js\fuelux.spinner.min.js" />
     <Content Include="assets\js\fuelux.tree.min.js" />
     <Content Include="assets\js\fuelux.wizard.min.js" />

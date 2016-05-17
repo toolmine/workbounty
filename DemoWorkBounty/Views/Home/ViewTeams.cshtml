@@ -23,7 +23,7 @@
         <div class="col-xs-10">
             @foreach (var item in Model)
             {
-                 foreach (var user in item.TeamUserList)
+                foreach (var user in item.TeamUserList)
                 {
                     if (TeamName != user.TeamName)
                     {
@@ -32,26 +32,28 @@
                     }
                 }
                 <table id="simple-table" class="table table-striped table-bordered table-hover">
-                    <tbody>
+                    <thead>
                         <tr>
                             <th>Member</th>
                             <th>Email</th>
                             <th>Contact No</th>
                         </tr>
-                        @foreach (var user in item.TeamUserList)
-                        {
+                    </thead>
+                    @foreach (var user in item.TeamUserList)
+                    {
+                        <tbody>
                             <tr>
                                 <td>@Html.DisplayFor(s => user.FirstName)</td>
                                 <td>@Html.DisplayFor(s => user.Email)</td>
                                 <td>@Html.DisplayFor(s => user.PhoneNumber)</td>
                             </tr>
-                        }
+                        </tbody>
+                    }
 
-                    </tbody>
 
                 </table>
             }
         </div>
-       
+
     </div>
 </div>
