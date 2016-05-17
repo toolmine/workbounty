@@ -120,8 +120,37 @@ namespace DemoWorkBounty.Controllers
 
         public ActionResult ForgotPassword()
         {
-            return View();
+           return View();
         }
+
+        [HttpPost]
+        public JsonResult ForgotPassword(UserInfo id)
+        {
+            var success = false;
+            var message = "";
+            var redirectURL = "";
+            try
+            {
+                var emailData = userRepo.ForgotPasswordValidation(id);
+                if (emailData != null)
+                {
+                    success = true;
+                    message = "Password link sent successfully!";
+                    redirectURL = Url.Action("Login", "Home");
+                }
+                else
+                {
+                    message = "Error in Input";
+                }
+            }
+            catch (Exception)
+            {
+                message = "Error";
+                return Json("Error");
+            }
+            return Json(new { success = success, message = message, redirectURL = redirectURL });
+        }
+
 
         [Authorize]
         public ActionResult Dashboard()
