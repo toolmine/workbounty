@@ -38,6 +38,7 @@ namespace DemoWorkBounty.Controllers
 
         public ActionResult AddMember(string TeamName)
         {
+            ViewBag.TeamName = TeamName;
             var getTeamDetail = teamRepo.GetTeamDetail(TeamName);
             return View(getTeamDetail);
         }

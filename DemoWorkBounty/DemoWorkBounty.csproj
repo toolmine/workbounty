@@ -258,6 +258,7 @@
     <Content Include="assets\css\jquery.gritter.min.css" />
     <Content Include="assets\css\landing-page.css" />
     <Content Include="assets\css\loading.css" />
+    <Content Include="assets\css\mandatory.css" />
     <Content Include="assets\css\prettify.min.css" />
     <Content Include="assets\css\select2-spinner.gif" />
     <Content Include="assets\css\select2.min.css" />

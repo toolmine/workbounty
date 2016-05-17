@@ -1,0 +1,4 @@
+﻿body {
+}
+
+.required:after { content:" *"; color: #f00; } 

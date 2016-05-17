@@ -3,12 +3,25 @@
 });
 
 
+<<<<<<< HEAD
+
+
+function ApplyReward(item) {
+    var feedbackValue= $(this).find('select.feedback').val();
+=======
 function ApplyReward(item,item1) {
     var feedback = document.getElementById(item1).value;
+>>>>>>> c9221a9a045fe2f2385b379a2258b7623eab7684
     var id = {
-        "UserID": $(item).attr("id"),
+       "ButtonID":$(item).attr("id"),
+        "UserID": $("#userID").val(),
         "WorkitemID": $("#Workid").val(),
+<<<<<<< HEAD
+        "FeedbackID": $("#tableID").val(),
+        "Remark":$("")
+=======
        "Remarks": feedback
+>>>>>>> c9221a9a045fe2f2385b379a2258b7623eab7684
     };
 
     $.ajax({
