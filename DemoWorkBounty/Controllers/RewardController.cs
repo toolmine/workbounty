@@ -15,7 +15,7 @@ namespace DemoWorkBounty.Controllers
     {
         RewardRepository rewardRepo = new RewardRepository();
         TeamRepository teamRepo = new TeamRepository();
-        WorkBountyDBEntities6 entity = new WorkBountyDBEntities6();
+        WorkBountyDBEntities entity = new WorkBountyDBEntities();
 
         public ActionResult ShowRewards()
         {

@@ -10,7 +10,7 @@ namespace DemoWorkBounty.Repository
 {
     public class WorkitemRepository : ApiController
     {
-        private WorkBountyDBEntities6 entity = new WorkBountyDBEntities6();
+        private WorkBountyDBEntities entity = new WorkBountyDBEntities();
 
         public string AddWorkitem(Workitem addWorkitemData)
         {
@@ -315,7 +315,7 @@ namespace DemoWorkBounty.Repository
         {
             try
             {
-                using (WorkBountyDBEntities6 entities = new WorkBountyDBEntities6())
+                using (WorkBountyDBEntities entities = new WorkBountyDBEntities())
                 {
                     entities.Configuration.ValidateOnSaveEnabled = false;
                     string remarks = id.Remarks.ToString();

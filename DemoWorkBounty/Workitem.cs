@@ -26,9 +26,9 @@ namespace DemoWorkBounty
         public int WorkitemID { get; set; }
         public string Title { get; set; }
         public string Summary { get; set; }
-         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd-MM-yyyy}")]
+          [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd-MM-yyyy}")]
         public System.DateTime StartDate { get; set; }
-         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd-MM-yyyy}")]
+          [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd-MM-yyyy}")]
         public System.DateTime DueDate { get; set; }
         public int PublishedTo { get; set; }
         public string DocumentFilePath { get; set; }
