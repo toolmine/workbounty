@@ -324,9 +324,13 @@ namespace DemoWorkBounty.Repository
                     entities.Entry(remark).Property(u => u.Remarks).IsModified = true;
                     entities.SaveChanges();
                 }
-                WorkItemAssignment item = entity.WorkItemAssignments.Where(s => s.WorkItemID == id.WorkItemID && s.UserID == id.UserID).First();
+                List<WorkItemAssignment> checkUploadedWorkitem = entity.WorkItemAssignments.Where(s => s.WorkItemID == id.WorkItemID && s.UserID == id.UserID).ToList();
+                foreach(var data in checkUploadedWorkitem)
+                { 
+                WorkItemAssignment item = entity.WorkItemAssignments.Where(s => s.WorkItemID == id.WorkItemID && s.UserID == id.UserID).FirstOrDefault();
                 item.IsRewarded = true;
                 entity.SaveChanges();
+                }
                 return "Success";
             }
             catch (Exception)

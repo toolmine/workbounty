@@ -3,11 +3,16 @@
 });
 
 
+
+
 function ApplyReward(item) {
+    var feedbackValue= $(this).find('select.feedback').val();
     var id = {
-        "UserID": $(item).attr("id"),
+       "ButtonID":$(item).attr("id"),
+        "UserID": $("#userID").val(),
         "WorkitemID": $("#Workid").val(),
-        "Remarks": $("#feedback").val()
+        "FeedbackID": $("#tableID").val(),
+        "Remark":$("")
     };
 
     $.ajax({

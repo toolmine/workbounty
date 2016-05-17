@@ -50,7 +50,7 @@ else
     {
         <div class="blue">
 
-            <h2>Add document</h2>
+            <h2 class="widget-title lighter smaller col-sm-6">Add document</h2>
 
             <div class="row">
                 <div class="col-xs-12">
@@ -60,13 +60,13 @@ else
 
                         <form class="form-horizontal" role="form" data-toggle="validator" name="Workitemform" id="Workitemform" method="post" enctype="multipart/form-data">
                             <input type="hidden" id="Workid" name="Workid" value="@i.WorkItemID" />
-                            <div class="widget-header">
-                                <h4 class="smaller">
-                                    Title: @Html.DisplayFor(s => i.Title)
-                                </h4>
-                            </div>
+                         
                             <div class="widget-body">
                                 <div class="widget-main">
+                                    <p class="muted">
+                                        Title: @Html.DisplayFor(s => i.Title)
+                                    </p>
+                                    <hr />
                                     <p class="muted">
                                         Summary: @Html.DisplayFor(s => i.Summary)
                                     </p>
