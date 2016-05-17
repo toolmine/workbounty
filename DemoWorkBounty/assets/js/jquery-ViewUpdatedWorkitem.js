@@ -3,11 +3,12 @@
 });
 
 
-function ApplyReward(item) {
+function ApplyReward(item,item1) {
+    var feedback = document.getElementById(item1).value;
     var id = {
         "UserID": $(item).attr("id"),
         "WorkitemID": $("#Workid").val(),
-        "Remarks": $("#feedback").val()
+       "Remarks": feedback
     };
 
     $.ajax({

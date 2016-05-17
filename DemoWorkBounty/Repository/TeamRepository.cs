@@ -173,12 +173,13 @@ namespace DemoWorkBounty.Repository
 
         public List<TeamInformation> GetTeamDetail(string TeamName)
         {
+            
             List<TeamInformation> team = new List<TeamInformation>();
             var GetDetails = entity.Teams.Where(s => s.TeamName == TeamName).ToList();
             TeamInformation teamInfo = new TeamInformation();
             foreach (var data in GetDetails)
             {
-                TeamUserInfo _team = new TeamUserInfo { FirstName = data.UserInfo.FirstName, Email = data.UserInfo.Email, PhoneNumber = data.UserInfo.PhoneNumber,UserID=data.UserID,TeamUserInfoID=data.TeamUserInfoID };
+                TeamUserInfo _team = new TeamUserInfo { TeamName = data.TeamName, FirstName = data.UserInfo.FirstName, Email = data.UserInfo.Email, PhoneNumber = data.UserInfo.PhoneNumber,UserID=data.UserID,TeamUserInfoID=data.TeamUserInfoID };
                 teamInfo.TeamUserList.Add(_team);
             }
             team.Add(teamInfo);
