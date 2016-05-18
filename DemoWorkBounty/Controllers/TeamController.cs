@@ -90,11 +90,9 @@ namespace DemoWorkBounty.Controllers
 
         public JsonResult FindTeamMember(string id)
         {
-            try
-            {
-                var getSearchMemberData = teamRepo.GetMemberResult(id);
+           var getSearchMemberData = teamRepo.GetMemberResult(id);
                 return Json(getSearchMemberData);
-            }
+      
             
         }
 
