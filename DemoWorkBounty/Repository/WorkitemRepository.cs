@@ -10,7 +10,7 @@ namespace DemoWorkBounty.Repository
 {
     public class WorkitemRepository : ApiController
     {
-        private WorkBountyDBEntities6 entity = new WorkBountyDBEntities6();
+        private WorkBountyDBEntities entity = new WorkBountyDBEntities();
 
         public string AddWorkitem(Workitem addWorkitemData)
         {
@@ -240,7 +240,7 @@ namespace DemoWorkBounty.Repository
                                         join o in getListofAssignUserList on u.WorkItemID equals o.WorkitemID
                                         into completeditems
                                         from ci in completeditems.DefaultIfEmpty()
-                                        select new AddWorkitems { WorkitemID = ci.WorkitemID, Title = ci.Title, FirstName = ci.FirstName, ProposedReward = ci.ProposedReward, StartDate = ci.StartDate, EndDate = ci.EndDate, CreatedDateTime = ci.CreatedDateTime, Status = "Completed", Remarks = entity.Workitems.Where(q => q.WorkitemID == ci.WorkitemID).Select(b => b.Remarks).FirstOrDefault() };
+                                        select new AddWorkitems { WorkitemID = ci.WorkitemID, Title = ci.Title, FirstName = ci.FirstName, ProposedReward = ci.ProposedReward, StartDate = ci.StartDate, EndDate =ci.EndDate , CreatedDateTime = ci.CreatedDateTime, Status = "Completed", Remarks = entity.Workitems.Where(q => q.WorkitemID == ci.WorkitemID).Select(b => b.Remarks).FirstOrDefault() };
                 var getWorkitemStatusList = getWorkitemStatus.ToList();
                 getListofAssignUserList.RemoveAll(x => status.Any(y => y.WorkItemID == x.WorkitemID));
                 itemlist = getListofAssignUserList.Union(getWorkitemStatusList).ToList();
@@ -319,7 +319,7 @@ namespace DemoWorkBounty.Repository
         {
             try
             {
-                using (WorkBountyDBEntities6 entities = new WorkBountyDBEntities6())
+                using (WorkBountyDBEntities entities = new WorkBountyDBEntities())
                 {
                     entities.Configuration.ValidateOnSaveEnabled = false;
                     string remarks = id.Remarks.ToString();
@@ -328,9 +328,13 @@ namespace DemoWorkBounty.Repository
                     entities.Entry(remark).Property(u => u.Remarks).IsModified = true;
                     entities.SaveChanges();
                 }
-                WorkItemAssignment item = entity.WorkItemAssignments.Where(s => s.WorkItemID == id.WorkItemID && s.UserID == id.UserID).First();
+                List<WorkItemAssignment> checkUploadedWorkitem = entity.WorkItemAssignments.Where(s => s.WorkItemID == id.WorkItemID && s.UserID == id.UserID).ToList();
+                foreach(var data in checkUploadedWorkitem)
+                { 
+                WorkItemAssignment item = entity.WorkItemAssignments.Where(s => s.WorkItemID == id.WorkItemID && s.UserID == id.UserID).FirstOrDefault();
                 item.IsRewarded = true;
                 entity.SaveChanges();
+                }
                 return "Success";
             }
             catch (Exception)

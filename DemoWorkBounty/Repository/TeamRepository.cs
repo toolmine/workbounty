@@ -11,7 +11,7 @@ namespace DemoWorkBounty.Repository
 {
     public class TeamRepository : ApiController
     {
-        WorkBountyDBEntities6 entity = new WorkBountyDBEntities6();
+        WorkBountyDBEntities entity = new WorkBountyDBEntities();
         public List<TeamInformation> GetTeamList(int id)
         {
             List<TeamInformation> team = new List<TeamInformation>();

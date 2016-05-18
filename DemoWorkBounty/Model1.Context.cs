@@ -13,10 +13,10 @@ namespace DemoWorkBounty
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class WorkBountyDBEntities6 : DbContext
+    public partial class WorkBountyDBEntities : DbContext
     {
-        public WorkBountyDBEntities6()
-            : base("name=WorkBountyDBEntities6")
+        public WorkBountyDBEntities()
+            : base("name=WorkBountyDBEntities")
         {
         }
     

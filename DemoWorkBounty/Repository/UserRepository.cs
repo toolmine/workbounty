@@ -12,7 +12,7 @@ namespace DemoWorkBounty.Repository
 {
     public class UserRepository : ApiController
     {
-        private WorkBountyDBEntities6 entity = new WorkBountyDBEntities6();
+        private WorkBountyDBEntities entity = new WorkBountyDBEntities();
 
         public UserInfo UserLogin(UserInfo userLoginData)
         {

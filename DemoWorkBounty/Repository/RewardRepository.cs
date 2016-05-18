@@ -11,7 +11,7 @@ namespace DemoWorkBounty.Repository
 {
     public class RewardRepository : ApiController
     {
-        private WorkBountyDBEntities6 entity = new WorkBountyDBEntities6();
+        private WorkBountyDBEntities entity = new WorkBountyDBEntities();
         public List<Rewards> GetAllRewards(int currentUserID)
         {
         
