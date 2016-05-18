@@ -18,14 +18,21 @@ namespace DemoWorkBounty.Controllers
 
         public ActionResult ViewAssignedWorkitem(int currentWorkitemID)
         {
+            try
+            {
+                var getDataofItemsIWantDone = workbountyRepo.GetAllitemsDone(currentWorkitemID);
+                ViewBag.items = getDataofItemsIWantDone;
 
-            var getDataofItemsIWantDone = workbountyRepo.GetAllitemsDone(currentWorkitemID);
-            ViewBag.items = getDataofItemsIWantDone;
+                var getDataofAppliedWorkitem = workbountyRepo.AppliedWorkitems(currentWorkitemID);
+                ViewBag.apply = getDataofAppliedWorkitem;
 
-            var getDataofAppliedWorkitem = workbountyRepo.AppliedWorkitems(currentWorkitemID);
-            ViewBag.apply = getDataofAppliedWorkitem;
-
-            return View();
+                return View();
+            
+            }
+          catch (Exception)
+            {
+                return RedirectToAction("Dashboard", "Home");
+            }
         }
 
         [HttpPost]
@@ -36,10 +43,12 @@ namespace DemoWorkBounty.Controllers
 
         }
 
-
         public ActionResult UpdateWorkitem(int currentWorkitemID)
         {
+            try
+            {
             int currentUserID = Convert.ToInt32(Session["UserID"]);
+            Session["UploadWorkitemID"] = currentWorkitemID;
             var getDataofCurrentWorkitem = workbountyRepo.ShowCurrentWorkitems(currentWorkitemID);
             var getDataofUploadDocument = workbountyRepo.UserUploadDocument(currentWorkitemID, currentUserID);
             ViewBag.dateOfSubmittedWork = getDataofUploadDocument;
@@ -70,6 +79,11 @@ namespace DemoWorkBounty.Controllers
                 ViewBag.displayAlert = "This workitem is already rewarded";
             }
             return View();
+            }
+            catch (Exception)
+            {
+                return RedirectToAction("Dashboard", "Home");
+            }
         }
 
         [HttpPost]
@@ -83,6 +97,11 @@ namespace DemoWorkBounty.Controllers
                 }
                 else
                 {
+                    int currentUserID = Convert.ToInt32(Session["UserID"]);
+                    int currentWorkitemID = Convert.ToInt32(Session["UploadWorkitemID"]);
+                    var getDataofUploadDocument = workbountyRepo.UserUploadDocument(currentWorkitemID, currentUserID);
+                    ViewBag.dateOfSubmittedWork = getDataofUploadDocument;
+
                     WorkItemAssignment assignData = new WorkItemAssignment();
                     int Workid = Convert.ToInt32(data["Workid"].ToString());
                     var fileName = Path.GetFileName(myFile.FileName);
@@ -106,8 +125,15 @@ namespace DemoWorkBounty.Controllers
 
         public ActionResult ApplyWorkitem(int currentWorkitemID)
         {
-            var applyForWorkitemResult = workbountyRepo.GetWorkDetails(currentWorkitemID);
-            return View(applyForWorkitemResult);
+            try
+            {
+                var applyForWorkitemResult = workbountyRepo.GetWorkDetails(currentWorkitemID);
+                return View(applyForWorkitemResult);
+            }
+            catch (Exception)
+            {
+                return RedirectToAction("Dashboard", "Home");
+            }
         }
 
         [HttpPost]
@@ -128,26 +154,31 @@ namespace DemoWorkBounty.Controllers
 
         public ActionResult ViewUpdatedWorkitem(int currentWorkitemID)
         {
-            var getCheckDocument = workbountyRepo.CheckDocument(currentWorkitemID);
-            if (getCheckDocument != null)
+            try
             {
-                var getDataofUploadDocument = workbountyRepo.ShowDocument(currentWorkitemID);
-                if (getDataofUploadDocument != null)
+                var getCheckDocument = workbountyRepo.CheckDocument(currentWorkitemID);
+                if (getCheckDocument != null)
                 {
-                    ViewBag.dataofOpenDocument = getDataofUploadDocument;
+                    var getDataofUploadDocument = workbountyRepo.ShowDocument(currentWorkitemID);
+                    if (getDataofUploadDocument != null)
+                    {
+                        ViewBag.dataofOpenDocument = getDataofUploadDocument;
+                    }
+                    else
+                    {
+                        ViewBag.displayMessage = "Already send a reward";
+                    }
                 }
                 else
                 {
-                    ViewBag.displayMessage = "Already send a reward";
+                    ViewBag.errorMessage = 0;
                 }
-
+                return View();
             }
-            else
+            catch (Exception)
             {
-                ViewBag.errorMessage = 0;
+                return RedirectToAction("Dashboard", "Home");
             }
-
-            return View();
         }
 
         public ActionResult updateTask()
@@ -157,20 +188,32 @@ namespace DemoWorkBounty.Controllers
 
         public ActionResult detailWorkitem(int currentWorkitemID)
         {
-            var getDetailWorkitemData = workbountyRepo.GetWorkDetails(currentWorkitemID);
-            return View(getDetailWorkitemData);
+            try
+            {
+                var getDetailWorkitemData = workbountyRepo.GetWorkDetails(currentWorkitemID);
+                return View(getDetailWorkitemData);
+            }
+            catch (Exception)
+            {
+                return RedirectToAction("Dashboard", "Home");
+            }
         }
 
         public FileResult Download(int currentUserID, int workitemID)
         {
-            var files = entity.WorkItemAssignments.Where(s => s.UserID == currentUserID && s.WorkItemAssignmentID == workitemID).Select(s => s.SubmissionPath).FirstOrDefault();
-            string fileName = entity.WorkItemAssignments.Where(s => s.UserID == currentUserID && s.WorkItemAssignmentID == workitemID).Select(s => s.SubmissionPath).FirstOrDefault();
-            return File(files, System.Net.Mime.MediaTypeNames.Application.Octet, fileName);
+          
+                var files = entity.WorkItemAssignments.Where(s => s.UserID == currentUserID && s.WorkItemAssignmentID == workitemID).Select(s => s.SubmissionPath).FirstOrDefault();
+                string fileName = entity.WorkItemAssignments.Where(s => s.UserID == currentUserID && s.WorkItemAssignmentID == workitemID).Select(s => s.SubmissionPath).FirstOrDefault();
+                return File(files, System.Net.Mime.MediaTypeNames.Application.Octet, fileName);
+        
+           
         }
 
         [HttpPost]
         public JsonResult PayReward(Rewards currentUserID)
         {
+          
+           
             var getRewardData = workbountyRepo.ApplyReward(currentUserID);
             if (getRewardData != null)
             {
@@ -180,6 +223,7 @@ namespace DemoWorkBounty.Controllers
             {
                 return Json("Error");
             }
+
         }
 
 

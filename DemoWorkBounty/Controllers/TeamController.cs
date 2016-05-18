@@ -24,23 +24,32 @@ namespace DemoWorkBounty.Controllers
         [HttpPost]
         public JsonResult AddTeam(Team teamData)
         {
-            if (ModelState.IsValid)
-            {
-                var getTeamList = teamRepo.AddTeamData(teamData);
-                Session["TeamID"] = getTeamList;
-                return Json(getTeamList);
+               if (ModelState.IsValid)
+                {
+                    var getTeamList = teamRepo.AddTeamData(teamData);
+                    Session["TeamID"] = getTeamList;
+                    return Json(getTeamList);
+                }
+                else
+                {
+                    return null;
+                }
             }
-            else
-            {
-                return null;
-            }
-        }
+        
+        
 
         public ActionResult AddMember(string TeamName)
         {
-            ViewBag.TeamName = TeamName;
-            var getTeamDetail = teamRepo.GetTeamDetail(TeamName);
-            return View(getTeamDetail);
+            try
+            {
+                ViewBag.TeamName = TeamName;
+                var getTeamDetail = teamRepo.GetTeamDetail(TeamName);
+                return View(getTeamDetail);
+            }
+            catch (Exception)
+            {
+                return RedirectToAction("Dashboard", "Home");
+            }
         }
 
 
@@ -81,8 +90,12 @@ namespace DemoWorkBounty.Controllers
 
         public JsonResult FindTeamMember(string id)
         {
-            var getSearchMemberData = teamRepo.GetMemberResult(id);
-            return Json(getSearchMemberData);
+            try
+            {
+                var getSearchMemberData = teamRepo.GetMemberResult(id);
+                return Json(getSearchMemberData);
+            }
+            
         }
 
         [HttpPost]

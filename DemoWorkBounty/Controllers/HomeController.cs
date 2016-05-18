@@ -115,12 +115,12 @@ namespace DemoWorkBounty.Controllers
                 message = "Error";
                 return Json("Error");
             }
-            return Json(new { success = success, message = message, redirectURL = redirectURL});
+            return Json(new { success = success, message = message, redirectURL = redirectURL });
         }
 
         public ActionResult ForgotPassword()
         {
-           return View();
+            return View();
         }
 
         [HttpPost]
@@ -228,13 +228,20 @@ namespace DemoWorkBounty.Controllers
 
         public ActionResult AssignedWorkitem(int currentWorkitemID)
         {
-            var getAssignWorkitemData = workbountyRepo.GetAllitemsDone(currentWorkitemID);
-            ViewBag.items = getAssignWorkitemData;
+            try
+            {
+                var getAssignWorkitemData = workbountyRepo.GetAllitemsDone(currentWorkitemID);
+                ViewBag.items = getAssignWorkitemData;
 
-            var getListofUserApplied = workbountyRepo.AppliedWorkitems(currentWorkitemID);
-            ViewBag.apply = getListofUserApplied;
+                var getListofUserApplied = workbountyRepo.AppliedWorkitems(currentWorkitemID);
+                ViewBag.apply = getListofUserApplied;
 
-            return View();
+                return View();
+            }
+            catch (Exception)
+            {
+                return RedirectToAction("Dashboard", "Home");
+            }
         }
         [HttpPost]
         public JsonResult AssignedWorkitem(WorkitemDistribution setAssignedWorkitem)
@@ -259,7 +266,7 @@ namespace DemoWorkBounty.Controllers
             {
                 ViewBag.displayMessage = "No Result found";
             }
-            
+
             return View();
         }
 
