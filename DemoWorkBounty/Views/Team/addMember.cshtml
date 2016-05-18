@@ -1,6 +1,6 @@
 ﻿@model List<DemoWorkBounty.Models.TeamInformation>
 @{
-    ViewBag.Title = "TeamDetail";
+    ViewBag.Title = "Team detail";
     Layout = "~/Views/_DashboardLayout.cshtml";
   
 }
@@ -22,7 +22,7 @@
                 <div class="widget-header">
                     <div class="col-xs-8">
                         <h4 class="widget-title lighter smaller">
-                           
+                           Team detail
                         </h4>
                     </div>
                     <div class="row">
@@ -38,11 +38,13 @@
 
                                 }
                             }
-
-                            <input type="hidden" id="Searchid" value="@Session["UserID"]" />
-                            <input type="text" id="itId" size="5" class="col-xs-10 col-sm-5" />
-                            <input type="button" value="Search" onclick="show();" class="btn btn-minier btn-purple layoutcss TeamLayoutButton" data-toggle="tooltip" title="Find a member" />
-                        </div>
+                            <div class=".col-xs-4.col-sm-2">
+                                <label class="col-sm-3" for="form-field-1"> Add member </label>
+                                <input type="hidden" id="Searchid" value="@Session["UserID"]" />
+                                <input type="text" id="itId" size="5" class="col-xs-10 col-sm-5" />
+                                <input type="button" value="Search" onclick="show();" class="btn btn-minier btn-purple layoutcss TeamLayoutButton" data-toggle="tooltip" title="Find a member" />
+                            </div>
+                            </div>
                         <div class=".col-xs-4.col-sm-2 no-padding-right">
                             <div class="col-xs-4">
                                 <p class="alert alert-danger" id="addMemberFailError">Failed! Member not removed</p>

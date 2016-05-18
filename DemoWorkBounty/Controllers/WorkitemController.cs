@@ -54,6 +54,10 @@ namespace DemoWorkBounty.Controllers
                     {
                         ViewBag.dataForWorkitem = getDataofCurrentWorkitem;
                     }
+                    else
+                    {
+                        ViewBag.blankDataMessage = "Blank data Error";
+                    }
 
                 }
                 else
@@ -95,6 +99,7 @@ namespace DemoWorkBounty.Controllers
             }
             catch (Exception)
             {
+                ViewBag.blankDataMessage = "Blank data";
                 return View();
             }
         }
