@@ -228,9 +228,13 @@ namespace DemoWorkBounty.Repository
             List<WorkItemAssignment> assignData = new List<WorkItemAssignment>();
             foreach (var z in getListofAssignUserList)
             {
-                assignData = entity.WorkItemAssignments.Where(a => a.WorkItemID == z.WorkitemID && a.IsRewarded == true).ToList();
+                var temp = entity.WorkItemAssignments.Where(a => a.WorkItemID == z.WorkitemID && a.IsRewarded == true).FirstOrDefault();
+                if (temp != null)
+                {
+                    assignData.Add(temp);
+                }
             }
-            if (assignData.Count() != 0)
+            if (assignData.Any())
             {
                 var getWorkitemStatus = from u in assignData
                                         join o in getListofAssignUserList on u.WorkItemID equals o.WorkitemID
