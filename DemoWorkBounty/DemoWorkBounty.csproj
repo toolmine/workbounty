@@ -554,6 +554,7 @@
     <Content Include="Views\_IndexLayout.cshtml" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Home\AddWorkitem.cshtml" />
+    <Content Include="Views\Shared\Authorize.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
