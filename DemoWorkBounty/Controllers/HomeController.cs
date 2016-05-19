@@ -313,5 +313,10 @@ namespace DemoWorkBounty.Controllers
             return View();
         }
 
+        public ActionResult Authorize()
+        {
+            return View();
+        }
+
     }
 }

@@ -18,22 +18,33 @@ namespace DemoWorkBounty.Controllers
 
         public ActionResult ViewAssignedWorkitem(int currentWorkitemID)
         {
+            int currentUserID = Convert.ToInt32(Session["UserID"]);
+            var valid = entity.Workitems.Where(x => x.CreatedBy == currentUserID).Select(x => x.WorkitemID).ToList();
             try
             {
-                var getDataofItemsIWantDone = workbountyRepo.GetAllitemsDone(currentWorkitemID);
-                ViewBag.items = getDataofItemsIWantDone;
+                if (valid.Contains(currentWorkitemID))
+                {
+                    var getDataofItemsIWantDone = workbountyRepo.GetAllitemsDone(currentWorkitemID);
+                    ViewBag.items = getDataofItemsIWantDone;
 
-                var getDataofAppliedWorkitem = workbountyRepo.AppliedWorkitems(currentWorkitemID);
-                ViewBag.apply = getDataofAppliedWorkitem;
+                    var getDataofAppliedWorkitem = workbountyRepo.AppliedWorkitems(currentWorkitemID);
+                    ViewBag.apply = getDataofAppliedWorkitem;
 
-                return View();
-            
+                    return View();
+                }
+                else
+                {
+                    Response.Redirect("/Home/Authorize");
+                    return null;
+                }
             }
-          catch (Exception)
+            catch (Exception)
             {
                 return RedirectToAction("Dashboard", "Home");
             }
         }
+
+
 
         [HttpPost]
         public JsonResult ViewAssignedWorkitem(WorkitemDistribution getWorkitemData)
@@ -45,40 +56,52 @@ namespace DemoWorkBounty.Controllers
 
         public ActionResult UpdateWorkitem(int currentWorkitemID)
         {
+            int currentUserID = Convert.ToInt32(Session["UserID"]);
+            var valid = entity.WorkitemRegistrations.Where(x => x.UserID == currentUserID && x.IsExclusive == false).Select(x => x.WorkitemID).ToList();
+            var exclusiveValid = entity.WorkitemDistributions.Where(x => x.UserID == currentUserID && x.WorkitemID == currentWorkitemID).Select(x => x.WorkitemID).ToList();
             try
             {
-            int currentUserID = Convert.ToInt32(Session["UserID"]);
-            Session["UploadWorkitemID"] = currentWorkitemID;
-            var getDataofCurrentWorkitem = workbountyRepo.ShowCurrentWorkitems(currentWorkitemID);
-            var getDataofUploadDocument = workbountyRepo.UserUploadDocument(currentWorkitemID, currentUserID);
-            ViewBag.dateOfSubmittedWork = getDataofUploadDocument;
-
-            var currentDate = DateTime.Now;
-            var workitemInfo = entity.Workitems.Where(s => s.WorkitemID == currentWorkitemID).FirstOrDefault();
-            if (getDataofCurrentWorkitem.Count != 0)
-            {
-                if (currentDate < workitemInfo.DueDate)
+                if (valid.Contains(currentWorkitemID) || exclusiveValid.Contains(currentWorkitemID))
                 {
-                    if (getDataofCurrentWorkitem != null)
+
+                    //int currentUserID = Convert.ToInt32(Session["UserID"]);
+                    Session["UploadWorkitemID"] = currentWorkitemID;
+                    var getDataofCurrentWorkitem = workbountyRepo.ShowCurrentWorkitems(currentWorkitemID);
+                    var getDataofUploadDocument = workbountyRepo.UserUploadDocument(currentWorkitemID, currentUserID);
+                    ViewBag.dateOfSubmittedWork = getDataofUploadDocument;
+
+                    var currentDate = DateTime.Now;
+                    var workitemInfo = entity.Workitems.Where(s => s.WorkitemID == currentWorkitemID).FirstOrDefault();
+                    if (getDataofCurrentWorkitem.Count != 0)
                     {
-                        ViewBag.dataForWorkitem = getDataofCurrentWorkitem;
+                        if (currentDate < workitemInfo.DueDate)
+                        {
+                            if (getDataofCurrentWorkitem != null)
+                            {
+                                ViewBag.dataForWorkitem = getDataofCurrentWorkitem;
+                            }
+                            else
+                            {
+                                ViewBag.blankDataMessage = "Blank data Error";
+                            }
+
+                        }
+                        else
+                        {
+                            ViewBag.displayMessage = "Due date is reached. Cannot upload document";
+                        }
                     }
                     else
                     {
-                        ViewBag.blankDataMessage = "Blank data Error";
+                        ViewBag.displayAlert = "This workitem is already rewarded";
                     }
-
                 }
                 else
                 {
-                    ViewBag.displayMessage = "Due date is reached. Cannot upload document";
+                    Response.Redirect("/Home/Authorize");
+                    return null;
                 }
-            }
-            else
-            {
-                ViewBag.displayAlert = "This workitem is already rewarded";
-            }
-            return View();
+                return View();
             }
             catch (Exception)
             {
@@ -125,10 +148,28 @@ namespace DemoWorkBounty.Controllers
 
         public ActionResult ApplyWorkitem(int currentWorkitemID)
         {
+            int inc = 0;
+            int currentUserID = Convert.ToInt32(Session["UserID"]);
+            var valid = workbountyRepo.GetAllWorkitems(currentUserID);
+            foreach (var item in valid)
+            {
+                if (item.WorkitemID == currentWorkitemID)
+                {
+                    inc++;
+                }
+            }
             try
             {
-                var applyForWorkitemResult = workbountyRepo.GetWorkDetails(currentWorkitemID);
-                return View(applyForWorkitemResult);
+                if (inc > 0)
+                {
+                    var applyForWorkitemResult = workbountyRepo.GetWorkDetails(currentWorkitemID);
+                    return View(applyForWorkitemResult);
+                }
+                else 
+                {
+                    Response.Redirect("/Home/Authorize");
+                    return null;
+                }
             }
             catch (Exception)
             {
@@ -154,24 +195,34 @@ namespace DemoWorkBounty.Controllers
 
         public ActionResult ViewUpdatedWorkitem(int currentWorkitemID)
         {
-            try
-            {
-                var getCheckDocument = workbountyRepo.CheckDocument(currentWorkitemID);
-                if (getCheckDocument != null)
-                {
-                    var getDataofUploadDocument = workbountyRepo.ShowDocument(currentWorkitemID);
-                    if (getDataofUploadDocument != null)
+             int currentUserID = Convert.ToInt32(Session["UserID"]);
+             var valid = entity.Workitems.Where(x => x.CreatedBy == currentUserID).Select(x => x.WorkitemID).ToList();
+             try
+             {
+                 if (valid.Contains(currentWorkitemID))
+                 {
+                    var getCheckDocument = workbountyRepo.CheckDocument(currentWorkitemID);
+                    if (getCheckDocument != null)
                     {
-                        ViewBag.dataofOpenDocument = getDataofUploadDocument;
+                        var getDataofUploadDocument = workbountyRepo.ShowDocument(currentWorkitemID);
+                        if (getDataofUploadDocument != null)
+                        {
+                            ViewBag.dataofOpenDocument = getDataofUploadDocument;
+                        }
+                        else
+                        {
+                            ViewBag.displayMessage = "Already send a reward";
+                        }
                     }
                     else
                     {
-                        ViewBag.displayMessage = "Already send a reward";
+                        ViewBag.errorMessage = 0;
                     }
                 }
-                else
+                else 
                 {
-                    ViewBag.errorMessage = 0;
+                    Response.Redirect("/Home/Authorize");
+                    return null;
                 }
                 return View();
             }
@@ -201,19 +252,19 @@ namespace DemoWorkBounty.Controllers
 
         public FileResult Download(int currentUserID, int workitemID)
         {
-          
-                var files = entity.WorkItemAssignments.Where(s => s.UserID == currentUserID && s.WorkItemAssignmentID == workitemID).Select(s => s.SubmissionPath).FirstOrDefault();
-                string fileName = entity.WorkItemAssignments.Where(s => s.UserID == currentUserID && s.WorkItemAssignmentID == workitemID).Select(s => s.SubmissionPath).FirstOrDefault();
-                return File(files, System.Net.Mime.MediaTypeNames.Application.Octet, fileName);
-        
-           
+
+            var files = entity.WorkItemAssignments.Where(s => s.UserID == currentUserID && s.WorkItemAssignmentID == workitemID).Select(s => s.SubmissionPath).FirstOrDefault();
+            string fileName = entity.WorkItemAssignments.Where(s => s.UserID == currentUserID && s.WorkItemAssignmentID == workitemID).Select(s => s.SubmissionPath).FirstOrDefault();
+            return File(files, System.Net.Mime.MediaTypeNames.Application.Octet, fileName);
+
+
         }
 
         [HttpPost]
         public JsonResult PayReward(Rewards currentUserID)
         {
-          
-           
+
+
             var getRewardData = workbountyRepo.ApplyReward(currentUserID);
             if (getRewardData != null)
             {
