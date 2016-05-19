@@ -58,6 +58,7 @@ namespace DemoWorkBounty.Repository
 
             catch (Exception)
             {
+               
                 return "Error";
             }
         }
@@ -93,17 +94,7 @@ namespace DemoWorkBounty.Repository
             }
         }
 
-        public List<UpdateWorkitems> ShowCurrentWorkitems(int currentWorkitemID)
-        {
-            var IsRewardedWorkitemData = entity.WorkItemAssignments.Where(s => s.WorkItemID == currentWorkitemID && s.IsRewarded == true).FirstOrDefault();
-            List<UpdateWorkitems> updateWorkitemData = new List<UpdateWorkitems>();
-            if (IsRewardedWorkitemData == null)
-            {
-                updateWorkitemData.Add(entity.WorkitemRegistrations.Where(s => s.WorkitemID == currentWorkitemID).Select(s => new UpdateWorkitems { Title = s.Workitem.Title, Summary = s.Workitem.Summary, WorkItemID = s.WorkitemID }).FirstOrDefault());
-            }
-            return updateWorkitemData;
-
-        }
+     
 
         public string UpdateWorkitems(WorkItemAssignment data)
         {
@@ -211,6 +202,18 @@ namespace DemoWorkBounty.Repository
             var status = entity.WorkitemDistributions.Where(s => s.Workitem.Status);
             var getCurrentWorkitemData = entity.WorkitemDistributions.Select(s => new AddWorkitems { Title = s.Workitem.Title, StartDate = s.Workitem.StartDate, EndDate = s.Workitem.DueDate, FirstName = s.UserInfo.FirstName, ProposedReward = s.Workitem.ProposedReward }).ToList();
             return getCurrentWorkitemData;
+        }
+
+        public List<UpdateWorkitems> ShowCurrentWorkitems(int currentWorkitemID)
+        {
+            var IsRewardedWorkitemData = entity.WorkItemAssignments.Where(s => s.WorkItemID == currentWorkitemID && s.IsRewarded == true).FirstOrDefault();
+            List<UpdateWorkitems> updateWorkitemData = new List<UpdateWorkitems>();
+            if (IsRewardedWorkitemData == null)
+            {
+                updateWorkitemData.Add(entity.WorkitemRegistrations.Where(s => s.WorkitemID == currentWorkitemID).Select(s => new UpdateWorkitems { Title = s.Workitem.Title, Summary = s.Workitem.Summary, WorkItemID = s.WorkitemID }).FirstOrDefault());
+            }
+            return updateWorkitemData;
+
         }
 
         public List<AddWorkitems> ItemsIWantDone(int currentWorkitemID)

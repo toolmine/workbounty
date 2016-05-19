@@ -19,11 +19,20 @@ namespace DemoWorkBounty.Controllers
 
         public ActionResult ShowRewards()
         {
-            int currentUserID = Convert.ToInt32(Session["UserID"]);
-            var getListOfUserReward = rewardRepo.GetAllRewards(currentUserID);
-            return View(getListOfUserReward);
+            try
+            {
+                int currentUserID = Convert.ToInt32(Session["UserID"]);
+                var getListOfUserReward = rewardRepo.GetAllRewards(currentUserID);
+                return View(getListOfUserReward);
+            }
+
+            catch (Exception)
+            {
+                return RedirectToAction("login", "Home");
+            }
+
         }
 
-     
-     }
+
+    }
 }
