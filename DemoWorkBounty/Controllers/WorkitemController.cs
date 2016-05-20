@@ -64,7 +64,6 @@ namespace DemoWorkBounty.Controllers
                 if (valid.Contains(currentWorkitemID) || exclusiveValid.Contains(currentWorkitemID))
                 {
 
-                    //int currentUserID = Convert.ToInt32(Session["UserID"]);
                     Session["UploadWorkitemID"] = currentWorkitemID;
                     var getDataofCurrentWorkitem = workbountyRepo.ShowCurrentWorkitems(currentWorkitemID);
                     var getDataofUploadDocument = workbountyRepo.UserUploadDocument(currentWorkitemID, currentUserID);
