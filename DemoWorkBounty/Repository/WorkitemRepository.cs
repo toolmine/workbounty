@@ -153,7 +153,11 @@ namespace DemoWorkBounty.Repository
                         workitemlist2.Add(item);
                     }
                 }
-                return workitemlist2;
+                var favourite = workitemlist2.Where(x => x.IsFavourite == true).ToList();
+                var notfavourite = workitemlist2.Where(x => x.IsFavourite == false).ToList();
+                favourite.AddRange(notfavourite);
+                return favourite;
+                //return workitemlist2;
             }
             catch (Exception)
             {

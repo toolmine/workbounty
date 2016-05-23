@@ -45,7 +45,6 @@ namespace DemoWorkBounty.Controllers
         }
 
 
-
         [HttpPost]
         public JsonResult ViewAssignedWorkitem(WorkitemDistribution getWorkitemData)
         {
@@ -63,7 +62,6 @@ namespace DemoWorkBounty.Controllers
             {
                 if (valid.Contains(currentWorkitemID) || exclusiveValid.Contains(currentWorkitemID))
                 {
-
                     Session["UploadWorkitemID"] = currentWorkitemID;
                     var getDataofCurrentWorkitem = workbountyRepo.ShowCurrentWorkitems(currentWorkitemID);
                     var getDataofUploadDocument = workbountyRepo.UserUploadDocument(currentWorkitemID, currentUserID);

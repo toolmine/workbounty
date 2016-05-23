@@ -32,8 +32,9 @@ namespace DemoWorkBounty
 
         protected void Application_Error(object sender, EventArgs e)
         {
+            //// Get the error details
             Exception CurrentException = Server.GetLastError();
-   
+            //HttpException lastErrorWrapper = Server.GetLastError() as HttpException;
             string error = CurrentException.ToString();
             string innerException = null;
             try

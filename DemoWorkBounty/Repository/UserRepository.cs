@@ -63,10 +63,10 @@ namespace DemoWorkBounty.Repository
         {
             try
             {
-
-                var getUserDetails = entity.UserInfoes.Where(s => s.UserID == currentUserData).Select(s => new UserProfileInfo { Email = s.Email, FirstName = s.FirstName, LastName = s.LastName, DateOfBirth = s.DateOfBirth, InterestedKeywords = s.InterestedKeywords, PhoneNumber = s.PhoneNumber }).ToList();
-                return getUserDetails;
-
+                  
+                    var getUserDetails = entity.UserInfoes.Where(s => s.UserID == currentUserData).Select(s => new UserProfileInfo { Email = s.Email, FirstName = s.FirstName, LastName = s.LastName, DateOfBirth = s.DateOfBirth, InterestedKeywords = s.InterestedKeywords, PhoneNumber = s.PhoneNumber }).ToList();
+                    return getUserDetails;
+               
             }
             catch (Exception)
             {
@@ -76,39 +76,37 @@ namespace DemoWorkBounty.Repository
         }
 
 
-       public UserInfo ForgotPasswordValidation(UserInfo userLoginData)
-       {
-                var checkLoginData = entity.UserInfoes.Where(a => a.Email.Equals(userLoginData.Email)).FirstOrDefault();
+        public UserInfo ForgotPasswordValidation(UserInfo userLoginData)
+        {
+            var checkLoginData = entity.UserInfoes.Where(a => a.Email.Equals(userLoginData.Email)).FirstOrDefault();
 
-                if (checkLoginData == null)
-                {
-                    return checkLoginData;
-                }
-                else
-                {
-                    var getPasswordDetail = entity.UserInfoes.Where(a => a.Email.Equals(userLoginData.Email)).Select(a => a.Password).FirstOrDefault();
-                    MailMessage mm = new MailMessage("help.workbounty@gmail.com", userLoginData.Email);
-                    mm.Subject = "Workbounty Password Recovery";
-                    mm.Body = string.Format("Hi {0},<br /><br />Your password is {1}.<br /><br />Thank You.", checkLoginData.Email, getPasswordDetail);
-                    mm.IsBodyHtml = true;
-                    SmtpClient smtp = new SmtpClient();
-                    smtp.Host = "smtp.gmail.com";
-                    smtp.EnableSsl = true;
-                    NetworkCredential NetworkCred = new NetworkCredential();
-                    NetworkCred.UserName = "help.workbounty@gmail.com";
-                    NetworkCred.Password = "workbountyproject1234";
-                    smtp.UseDefaultCredentials = true;
-                    smtp.Credentials = NetworkCred;
-                    smtp.Port = 587;
-                    smtp.Send(mm);
+            if (checkLoginData == null)
+            {
+                return checkLoginData;
+            }
+            else
+            {
+                var getPasswordDetail = entity.UserInfoes.Where(a => a.Email.Equals(userLoginData.Email)).Select(a => a.Password).FirstOrDefault();
+                MailMessage mm = new MailMessage("help.workbounty@gmail.com", userLoginData.Email);
+                mm.Subject = "Workbounty Password Recovery";
+                mm.Body = string.Format("Hi {0},<br /><br />Your password is {1}.<br /><br />Thank You.", checkLoginData.Email, getPasswordDetail);
+                mm.IsBodyHtml = true;
+                SmtpClient smtp = new SmtpClient();
+                smtp.Host = "smtp.gmail.com";
+                smtp.EnableSsl = true;
+                NetworkCredential NetworkCred = new NetworkCredential();
+                NetworkCred.UserName = "help.workbounty@gmail.com";
+                NetworkCred.Password = "workbountyproject1234";
+                smtp.UseDefaultCredentials = true;
+                smtp.Credentials = NetworkCred;
+                smtp.Port = 587;
+                smtp.Send(mm);
 
-                    return checkLoginData;
-                }
-       }
-            
-
+                return checkLoginData;
+            }
         }
 
 
 
+    }
 }
