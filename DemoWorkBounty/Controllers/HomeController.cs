@@ -256,17 +256,30 @@ namespace DemoWorkBounty.Controllers
         [HttpPost]
         public ActionResult SearchWorkitem(FormCollection searchWorkitemValue)
         {
-            string searchText = searchWorkitemValue["SearchItem"].ToString();
-            var getWorkitemData = workbountyRepo.SearchWorkitems(searchText);
-            if (getWorkitemData != null)
+            try
             {
-                ViewBag.dataForSearchItem = getWorkitemData;
+                string searchText = searchWorkitemValue["SearchItem"].ToString();
+                if (searchText != "")
+                {
+                    var getWorkitemData = workbountyRepo.SearchWorkitems(searchText);
+                    if (getWorkitemData != null)
+                    {
+                        ViewBag.dataForSearchItem = getWorkitemData;
+                    }
+                    else
+                    {
+                        ViewBag.displayMessage = "No Result found";
+                    }
+                }
+                else
+                {
+                    ViewBag.displayMessage = "No Result found";
+                }
             }
-            else
+            catch (Exception)
             {
                 ViewBag.displayMessage = "No Result found";
             }
-
             return View();
         }
 
