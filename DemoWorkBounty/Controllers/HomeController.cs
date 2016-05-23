@@ -54,7 +54,6 @@ namespace DemoWorkBounty.Controllers
                     Session["UserID"] = loginData.UserID;
                     Session["FirstName"] = loginData.FirstName;
                     FormsAuthentication.SetAuthCookie(loginData.FirstName, false);
-                    System.Threading.Thread.Sleep(3000);
                     success = true;
                     message = "login successfully!";
                     redirectURL = Url.Action("Dashboard", "Home");
