@@ -150,7 +150,6 @@ namespace DemoWorkBounty.Controllers
             return Json(new { success = success, message = message, redirectURL = redirectURL });
         }
 
-
         [Authorize]
         public ActionResult Dashboard()
         {
