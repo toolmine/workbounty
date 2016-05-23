@@ -150,7 +150,6 @@ namespace DemoWorkBounty.Controllers
             return Json(new { success = success, message = message, redirectURL = redirectURL });
         }
 
-
         [Authorize]
         public ActionResult Dashboard()
         {
@@ -254,9 +253,11 @@ namespace DemoWorkBounty.Controllers
             return workbountyRepo.GetCurrentWorkitem();
         }
 
-        public ActionResult SearchWorkitem(string searchWorkitemValue)
+        [HttpPost]
+        public ActionResult SearchWorkitem(FormCollection searchWorkitemValue)
         {
-            var getWorkitemData = workbountyRepo.SearchWorkitems(searchWorkitemValue);
+            string searchText = searchWorkitemValue["SearchItem"].ToString();
+            var getWorkitemData = workbountyRepo.SearchWorkitems(searchText);
             if (getWorkitemData != null)
             {
                 ViewBag.dataForSearchItem = getWorkitemData;
