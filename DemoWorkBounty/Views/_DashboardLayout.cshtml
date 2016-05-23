@@ -33,11 +33,12 @@
                 </a>
             </div>
 
+
             <div class="nav-search" id="nav-search">
-                <form class="form-search">
+                <form class="form-search" name="SearchWorkitem" id="SearchWorkitem" method="post" action="/home/SearchWorkitem?searchWorkitemValue=">
                     <span class="input-icon" data_toggle="tooltip" , title="Search workitem">
-                        <input type="text" placeholder="Search for workitems" maxlength="50" class="nav-search-input" id="SearchItem" autocomplete="off" onkeypress="handleEnter(this, event)" />
-                        <i class="ace-icon fa fa-search nav-search-icon" onclick="SearchResult();"></i>
+                        <input type="text" placeholder="Search for workitems" maxlength="50" class="nav-search-input" id="SearchItem" name="SearchItem" autocomplete="off" />
+                        <button type="submit"><span><i class="ace-icon fa fa-search nav-search-icon"></i></span></button>
                     </span>
                 </form>
             </div>

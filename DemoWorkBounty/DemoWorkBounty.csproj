@@ -527,7 +527,7 @@
       <DependentUpon>Web.config</DependentUpon>
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="Views\Home\AssignedWorkitem.cshtml" />
+    <Content Include="Views\AssignedWorkitem.cshtml" />
     <Content Include="Views\Home\Dashboard.cshtml" />
     <Content Include="Views\Home\ForgotPassword.cshtml" />
     <Content Include="Views\Home\GetAssignedWorkitem.cshtml" />
