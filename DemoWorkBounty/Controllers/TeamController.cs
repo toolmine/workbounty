@@ -24,31 +24,47 @@ namespace DemoWorkBounty.Controllers
         [HttpPost]
         public JsonResult AddTeam(Team teamData)
         {
-               if (ModelState.IsValid)
-                {
-                    var getTeamList = teamRepo.AddTeamData(teamData);
-                    Session["TeamID"] = getTeamList;
-                    return Json(getTeamList);
-                }
-                else
-                {
-                    return null;
-                }
+            if (ModelState.IsValid)
+            {
+                var getTeamList = teamRepo.AddTeamData(teamData);
+                Session["TeamID"] = getTeamList;
+                return Json(getTeamList);
             }
-        
-        
+            else
+            {
+                return null;
+            }
+        }
+
+
 
         public ActionResult AddMember(string TeamName)
         {
-            try
+            int currentUserID = Convert.ToInt32(Session["UserID"]);
+            var teams = entity.Teams.Where(s => s.TeamName == TeamName).ToList();
+            int i = 0;
+            foreach (var team in teams)
             {
-                ViewBag.TeamName = TeamName;
-                var getTeamDetail = teamRepo.GetTeamDetail(TeamName);
-                return View(getTeamDetail);
+                if (team.UserID == currentUserID)
+                { i++; }
             }
-            catch (Exception)
+            if (i > 0)
             {
-                return RedirectToAction("Dashboard", "Home");
+                try
+                {
+                    ViewBag.TeamName = TeamName;
+                    var getTeamDetail = teamRepo.GetTeamDetail(TeamName);
+                    return View(getTeamDetail);
+                }
+                catch (Exception)
+                {
+                    return RedirectToAction("Dashboard", "Home");
+                }
+            }
+            else
+            {
+                Response.Redirect("/Home/Authorize");
+                return null;
             }
         }
 
@@ -90,10 +106,10 @@ namespace DemoWorkBounty.Controllers
 
         public JsonResult FindTeamMember(string id)
         {
-           var getSearchMemberData = teamRepo.GetMemberResult(id);
-                return Json(getSearchMemberData);
-      
-            
+            var getSearchMemberData = teamRepo.GetMemberResult(id);
+            return Json(getSearchMemberData);
+
+
         }
 
         [HttpPost]
