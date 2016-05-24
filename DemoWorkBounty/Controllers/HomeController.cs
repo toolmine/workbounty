@@ -262,7 +262,7 @@ namespace DemoWorkBounty.Controllers
                 if (searchText != "")
                 {
                     var getWorkitemData = workbountyRepo.SearchWorkitems(searchText);
-                    if (getWorkitemData != null)
+                    if (getWorkitemData.Count>0)
                     {
                         ViewBag.dataForSearchItem = getWorkitemData;
                     }
