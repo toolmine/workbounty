@@ -1,0 +1,32 @@
+﻿@model List<DemoWorkBounty.Models.TeamInformation>
+<div class="col-xs-10">
+    <div class="widget-header">
+        <h4 class="widget-title lighter smaller">@ViewBag.TeamName</h4>
+    </div>
+    @foreach (var item in Model)
+    {
+
+        <table id="simple-table1" class="table table-striped table-bordered table-hover">
+            <tbody>
+                <tr>
+                    <th>Member</th>
+                    <th>Email</th>
+                    <th>Contact No</th>
+                    <th>Action</th>
+                </tr>
+                @foreach (var user in item.TeamUserList)
+                {
+                    <tr>
+                        <td>@Html.DisplayFor(s => user.FirstName)</td>
+                        <td>@Html.DisplayFor(s => user.Email)</td>
+                        <td>@Html.DisplayFor(s => user.PhoneNumber)</td>
+                        <td><input type="button" id="@user.UserID" value="Delete Member" data-teamuserid="@user.TeamUserInfoID" onclick="removeMember(this);" class="btn btn-minier btn-purple" data-toggle="tooltip" title="Remove member from team"></td>
+                    </tr>
+                }
+
+            </tbody>
+
+        </table>
+    }
+</div>
+

@@ -48,7 +48,7 @@ namespace DemoWorkBounty.Controllers
                 if (team.UserID == currentUserID)
                 { i++; }
             }
-            if (i > 0)
+            if (teams.Any(a=>a.UserID==currentUserID))
             {
                 try
                 {
@@ -119,7 +119,12 @@ namespace DemoWorkBounty.Controllers
             return Json(getMemberResults);
         }
 
-
+        public ActionResult GetTeamMemberList(string teamName)
+        {
+            ViewBag.TeamName = teamName;
+            var getTeamDetail = teamRepo.GetTeamDetail(teamName);
+            return PartialView("_TeamMemberList", getTeamDetail);
+        }
 
     }
 }

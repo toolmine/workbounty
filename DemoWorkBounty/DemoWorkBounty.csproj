@@ -555,6 +555,7 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Home\AddWorkitem.cshtml" />
     <Content Include="Views\Shared\Authorize.cshtml" />
+    <Content Include="Views\Team\_TeamMemberList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
