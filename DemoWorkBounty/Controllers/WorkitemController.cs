@@ -50,7 +50,6 @@ namespace DemoWorkBounty.Controllers
         {
             var showAssignedWorkitemDetail = workbountyRepo.WorkitemDistribution(getWorkitemData);
             return Json(showAssignedWorkitemDetail);
-
         }
 
         public ActionResult UpdateWorkitem(int currentWorkitemID)

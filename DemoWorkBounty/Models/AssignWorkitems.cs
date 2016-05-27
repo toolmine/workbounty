@@ -11,9 +11,9 @@ namespace DemoWorkBounty.Models
     {
         public int UserID { get; set; }
         public int WorkitemID { get; set; }
-    [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd-MM-yyyy}")]
+         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd-MM-yyyy}")]
         public System.DateTime StartDate { get; set; }
-   [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd-MM-yyyy}")]
+         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd-MM-yyyy}")]
         public System.DateTime EndDate { get; set; }
         public string FirstName { get; set; }
         public int CreatedBy { get; set; }
