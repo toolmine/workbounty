@@ -39,7 +39,7 @@ namespace DemoWorkBounty
 
 
             bundles.Add(new ScriptBundle("~/assets/js").Include(
-                     "~/assets/js/jquery.2.1.1.min.js",
+                     "~/assets/js/jquery-2.2.3.min.js",
                      "~/assets/js/jquery-search.js",
                      "~/assets/js/jq_script_src.js",
                       "~/assets/js/jquery_mobile_custom_start.js",
@@ -85,7 +85,7 @@ namespace DemoWorkBounty
                 "~/assets/js/ace-extra.min.js",
                 "~/assets/js/jquery_mobile_custom_start.js",
                 "~/assets/js/jq_script_src.js",
-                "~/assets/js/jquery.2.1.1.min.js",
+                "~/assets/js/jquery-2.2.3.min.js",
                 "~/assets/js/jquery-ui.custom.min.js",
                 "~/assets/js/jquery.ui.touch-punch.min.js",
                 "~/assets/js/bootstrap.min.js",

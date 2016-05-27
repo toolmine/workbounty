@@ -353,6 +353,9 @@
     <Content Include="assets\js\grid.locale-en.js" />
     <Content Include="assets\js\html5shiv.min.js" />
     <Content Include="assets\js\jquery-.js" />
+    <None Include="assets\js\jquery-2.2.3.intellisense.js" />
+    <Content Include="assets\js\jquery-2.2.3.js" />
+    <Content Include="assets\js\jquery-2.2.3.min.js" />
     <Content Include="assets\js\jquery-AddTeam.js" />
     <Content Include="assets\js\jquery-addworkitem.js" />
     <Content Include="assets\js\jquery-ApplyWorkitem.js" />
@@ -499,13 +502,18 @@
       <DependentUpon>Model1.edmx</DependentUpon>
       <LastGenOutput>Model1.cs</LastGenOutput>
     </Content>
+    <Content Include="assets\js\jquery-2.2.3.min.map" />
     <None Include="Scripts\jquery-1.8.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.8.2.js" />
     <Content Include="Scripts\jquery-1.8.2.min.js" />
+    <None Include="Scripts\jquery-2.2.3.intellisense.js" />
+    <Content Include="Scripts\jquery-2.2.3.js" />
+    <Content Include="Scripts\jquery-2.2.3.min.js" />
     <Content Include="Scripts\jquery-ui-1.8.24.js" />
     <Content Include="Scripts\jquery-ui-1.8.24.min.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
+    <Content Include="Scripts\jquery-2.2.3.min.map" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
