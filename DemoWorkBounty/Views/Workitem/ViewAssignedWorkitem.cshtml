@@ -60,7 +60,7 @@
                                         <th width="4%">Due Date</th>
                                         <th width="5%">Rewards</th>
                                         <th width="4%">Amount</th>
-
+                                        <th width="5%">Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -76,6 +76,7 @@
                                     {
                                             <td>@Html.DisplayFor(a => i.Amount)</td>
                                     }
+                                        <td>@Html.ActionLink("Modify", "EditWorkitem", "workitem", new { currentWorkitemID = @i.WorkitemID }, new { @class = "btn btn-minier btn-success", data_toggle = "tooltip", title = "Modify Workitem" })</td>
                                     </tr>
                                 </tbody>
                             </table>

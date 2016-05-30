@@ -58,7 +58,7 @@ namespace DemoWorkBounty.Repository
 
             catch (Exception)
             {
-               
+
                 return "Error";
             }
         }
@@ -94,7 +94,7 @@ namespace DemoWorkBounty.Repository
             }
         }
 
-     
+
 
         public string UpdateWorkitems(WorkItemAssignment data)
         {
@@ -139,12 +139,11 @@ namespace DemoWorkBounty.Repository
                 }
                 workitemlist.RemoveAll(x => registereditems.Any(y => y.WorkitemID == x.WorkitemID));
 
-                foreach (var favo in favourites)
+                foreach (var favoriteData in favourites)
                 {
-                    workitemlist.Where(a => a.WorkitemID == favo.WorkitemID).Select(q => q.IsFavourite = true).FirstOrDefault();
+                    workitemlist.Where(a => a.WorkitemID == favoriteData.WorkitemID).Select(q => q.IsFavourite = true).FirstOrDefault();
                 }
                 workitemlist = workitemlist.OrderByDescending(s => s.CreatedDateTime).ToList();
-
 
                 foreach (var item in workitemlist)
                 {
@@ -157,7 +156,6 @@ namespace DemoWorkBounty.Repository
                 var notfavourite = workitemlist2.Where(x => x.IsFavourite == false).ToList();
                 favourite.AddRange(notfavourite);
                 return favourite;
-                //return workitemlist2;
             }
             catch (Exception)
             {
@@ -247,7 +245,7 @@ namespace DemoWorkBounty.Repository
                                         join o in getListofAssignUserList on u.WorkItemID equals o.WorkitemID
                                         into completeditems
                                         from ci in completeditems.DefaultIfEmpty()
-                                        select new AddWorkitems { WorkitemID = ci.WorkitemID, Title = ci.Title, FirstName = ci.FirstName, ProposedReward = ci.ProposedReward, StartDate = ci.StartDate, EndDate =ci.EndDate , CreatedDateTime = ci.CreatedDateTime, Status = "Completed", Remarks = entity.Workitems.Where(q => q.WorkitemID == ci.WorkitemID).Select(b => b.Remarks).FirstOrDefault() };
+                                        select new AddWorkitems { WorkitemID = ci.WorkitemID, Title = ci.Title, FirstName = ci.FirstName, ProposedReward = ci.ProposedReward, StartDate = ci.StartDate, EndDate = ci.EndDate, CreatedDateTime = ci.CreatedDateTime, Status = "Completed", Remarks = entity.Workitems.Where(q => q.WorkitemID == ci.WorkitemID).Select(b => b.Remarks).FirstOrDefault() };
                 var getWorkitemStatusList = getWorkitemStatus.ToList();
                 getListofAssignUserList.RemoveAll(x => status.Any(y => y.WorkItemID == x.WorkitemID));
                 itemlist = getListofAssignUserList.Union(getWorkitemStatusList).ToList();
@@ -336,11 +334,11 @@ namespace DemoWorkBounty.Repository
                     entities.SaveChanges();
                 }
                 List<WorkItemAssignment> checkUploadedWorkitem = entity.WorkItemAssignments.Where(s => s.WorkItemID == id.WorkItemID && s.UserID == id.UserID).ToList();
-                foreach(var data in checkUploadedWorkitem)
-                { 
-                WorkItemAssignment item = entity.WorkItemAssignments.Where(s => s.WorkItemID == id.WorkItemID && s.UserID == id.UserID).FirstOrDefault();
-                item.IsRewarded = true;
-                entity.SaveChanges();
+                foreach (var data in checkUploadedWorkitem)
+                {
+                    WorkItemAssignment item = entity.WorkItemAssignments.Where(s => s.WorkItemID == id.WorkItemID && s.UserID == id.UserID).FirstOrDefault();
+                    item.IsRewarded = true;
+                    entity.SaveChanges();
                 }
                 return "Success";
             }
@@ -367,7 +365,6 @@ namespace DemoWorkBounty.Repository
                 entity.WorkitemDistributions.Add(getWorkitemData);
                 entity.SaveChanges();
                 return "Success";
-
             }
             return "Error";
         }
@@ -397,5 +394,44 @@ namespace DemoWorkBounty.Repository
             }
             return selectedteamData;
         }
+
+        public string EditWorkitem(Workitem id)
+        {
+            try
+            {
+                using (var entities = new WorkBountyDBEntities())
+                {
+                    var getWorkitemData = entities.Workitems.Where(x => x.WorkitemID==id.WorkitemID).ToList();
+                    getWorkitemData.ForEach(a =>
+                    {
+                        a.Amount = id.Amount;
+                        a.ModifyBy = id.ModifyBy;
+                        a.ModifyDateTime = id.ModifyDateTime;
+                        a.PublishedTo = id.PublishedTo;
+                        a.Summary = id.Summary;
+                        a.Title = id.Title;
+                    }
+               );
+                    //WorkitemHistory setPreviousInfo = new WorkitemHistory { UpdatedBy=id.ModifyBy,UpdatedDateTIme=id.ModifyDateTime,WorkitemID=id.WorkitemID,WorkitemStatusID=id.WorkitemID};
+                    //entities.WorkitemHistories.Add(setPreviousInfo);
+                    
+                    entity.SaveChanges();
+
+                    //entities.Configuration.ValidateOnSaveEnabled = false;
+                    //Workitem updateWorkitem = new Workitem() { WorkitemID = id.WorkitemID, Title = id.Title, Summary = id.Summary, Amount = id.Amount, ModifyBy = id.ModifyBy, ModifyDateTime = id.ModifyDateTime, PublishedTo = id.PublishedTo };
+                    //entities.Workitems.Attach(updateWorkitem);
+                    //entities.Entry(updateWorkitem).Property(u => u.Remarks).IsModified = true;
+                    //entities.SaveChanges();
+                }
+               
+                return "Success";
+            }
+            catch (Exception)
+            {
+                return "Error";
+            }
+        }
+
+
     }
 }

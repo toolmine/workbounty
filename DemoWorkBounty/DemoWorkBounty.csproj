@@ -170,6 +170,7 @@
     </Compile>
     <Compile Include="Models\AddWorkitems.cs" />
     <Compile Include="Models\AssignWorkitems.cs" />
+    <Compile Include="Models\EditWorkitem.cs" />
     <Compile Include="Models\OpenWorkitems.cs" />
     <Compile Include="Models\Rewards.cs" />
     <Compile Include="Models\TeamInformation.cs" />
@@ -342,6 +343,7 @@
     <Content Include="assets\js\daterangepicker.min.js" />
     <Content Include="assets\js\drawpiechart.js" />
     <Content Include="assets\js\dropzone.min.js" />
+    <Content Include="assets\js\EditWorkitem.js" />
     <Content Include="assets\js\Error_Redirect.js" />
     <Content Include="assets\js\excanvas.min.js" />
     <Content Include="assets\js\forgotPassword.js" />
@@ -564,6 +566,7 @@
     <Content Include="Views\Home\AddWorkitem.cshtml" />
     <Content Include="Views\Shared\Authorize.cshtml" />
     <Content Include="Views\Team\_TeamMemberList.cshtml" />
+    <Content Include="Views\Workitem\EditWorkitem.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

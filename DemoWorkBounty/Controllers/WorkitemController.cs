@@ -273,6 +273,63 @@ namespace DemoWorkBounty.Controllers
 
         }
 
+        public ActionResult EditWorkitem(int currentWorkitemID)
+        {
+            int currentUserID = Convert.ToInt32(Session["UserID"]);
+            var valid = entity.Workitems.Where(x => x.CreatedBy == currentUserID).Select(x => x.WorkitemID).ToList();
+            try
+            {
+                if (valid.Contains(currentWorkitemID))
+                {
+                    var getCurrentUserTeamInfo = workbountyRepo.SelectTeam(currentUserID);
+
+                    ViewBag.TeamList = new SelectList(getCurrentUserTeamInfo, "TeamUserInfoID", "TeamName");
+                    var getDataofItemsIWantDone = workbountyRepo.GetAllitemsDone(currentWorkitemID);
+                    ViewBag.items = getDataofItemsIWantDone;
+
+                    return View();
+                }
+                else
+                {
+                    Response.Redirect("/Home/Authorize");
+                    return null;
+                }
+            }
+            catch (Exception)
+            {
+                return RedirectToAction("Dashboard", "Home");
+            }
+        }
+
+        [HttpPost]
+        public JsonResult EditWorkitem(Workitem addWorkitemData)
+        {
+            var redirectURL = "";
+            var IsSuccess = false;
+            var successAddWorkitemMessage = "";
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    var getResultsOfWorkitemData = workbountyRepo.EditWorkitem(addWorkitemData);
+                    IsSuccess = true;
+                    successAddWorkitemMessage = "Workitem Updated successfully!";
+                    redirectURL = Url.Action("Dashboard", "Home");
+
+                }
+                else
+                {
+                    successAddWorkitemMessage = "Error while entering in Data";
+                }
+            }
+            catch (Exception)
+            {
+                successAddWorkitemMessage = "Error";
+                return Json("Error");
+            }
+            return Json(new { IsSuccess = IsSuccess, successAddWorkitemMessage = successAddWorkitemMessage, redirectURL = redirectURL });
+
+        }
 
 
     }

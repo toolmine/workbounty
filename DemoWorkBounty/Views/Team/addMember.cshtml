@@ -2,7 +2,7 @@
 @{
     ViewBag.Title = "Team detail";
     Layout = "~/Views/_DashboardLayout.cshtml";
-  
+
 }
 <script src="~/assets/js/getTeamDetail.js"></script>
 
@@ -22,7 +22,7 @@
                 <div class="widget-header">
                     <div class="col-xs-8">
                         <h4 class="widget-title lighter smaller">
-                           Team detail
+                            Team detail
                         </h4>
                     </div>
                     <div class="row">
@@ -44,7 +44,7 @@
                                 <input type="text" id="itId" size="5" class="col-xs-10 col-sm-5" />
                                 <input type="button" value="Search" onclick="show();" class="btn btn-minier btn-purple layoutcss TeamLayoutButton" data-toggle="tooltip" title="Find a member" />
                             </div>
-                            </div>
+                        </div>
                         <div class=".col-xs-4.col-sm-2 no-padding-right">
                             <div class="col-xs-4">
                                 <p class="alert alert-danger" id="addMemberFailError">Failed! Member not removed</p>
@@ -52,9 +52,9 @@
                                 <p class="alert alert-warning" id="memberNotFoundError">Member does not exist</p>
                                 <p class="alert alert-warning" id="noDateFoundMessage"> Please enter member name!</p>
                                 <p>
-                                <table id="simple-table" class="table table-striped table-bordered table-hover" cellspacing="100">
-                                    <tbody id="items"></tbody>
-                                </table>
+                                    <table id="simple-table" class="table table-striped table-bordered table-hover" cellspacing="100">
+                                        <tbody id="items"></tbody>
+                                    </table>
                                 </p>
                             </div>
                         </div>
