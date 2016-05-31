@@ -18,7 +18,6 @@ namespace DemoWorkBounty.Repository
             {
                 if (ModelState.IsValid)
                 {
-                    var fileName = Path.GetFileName(addWorkitemData.DocumentFilePath);
                     entity.Workitems.Add(addWorkitemData);
                     entity.SaveChanges();
                     return "Data Successfully saved";
@@ -124,7 +123,7 @@ namespace DemoWorkBounty.Repository
                 {
                     if (getUserData.PublishedTo == 0)
                     {
-                        workitemlist.Add(entity.Workitems.Where(s => s.WorkitemID == getUserData.WorkitemID).Select(s => new OpenWorkitems { WorkitemID = s.WorkitemID, FirstName = s.UserInfo.FirstName, Title = s.Title, Summary = s.Summary, ProposedReward = s.ProposedReward, Amount = s.Amount, EndDate = s.DueDate }).FirstOrDefault());
+                        workitemlist.Add(entity.Workitems.Where(s => s.WorkitemID == getUserData.WorkitemID).Select(s => new OpenWorkitems { WorkitemID = s.WorkitemID, FirstName = s.UserInfo.FirstName, Title = s.Title, Summary = s.Summary, ProposedReward = s.ProposedReward, Amount = s.Amount, EndDate = s.DueDate, CreatedDateTime = s.CreatedDateTime, DocumentFilePath = s.DocumentFilePath }).FirstOrDefault());
                     }
                     else
                     {
@@ -132,7 +131,7 @@ namespace DemoWorkBounty.Repository
                         {
                             if (getUserData.PublishedTo == getUserTeamID)
                             {
-                                workitemlist.Add(entity.Workitems.Where(s => s.WorkitemID == getUserData.WorkitemID).Select(s => new OpenWorkitems { WorkitemID = s.WorkitemID, FirstName = s.UserInfo.FirstName, Title = s.Title, Summary = s.Summary, ProposedReward = s.ProposedReward, Amount = s.Amount, CreatedDateTime = s.CreatedDateTime, EndDate = s.DueDate }).FirstOrDefault());
+                                workitemlist.Add(entity.Workitems.Where(s => s.WorkitemID == getUserData.WorkitemID).Select(s => new OpenWorkitems { WorkitemID = s.WorkitemID, FirstName = s.UserInfo.FirstName, Title = s.Title, Summary = s.Summary, ProposedReward = s.ProposedReward, Amount = s.Amount, CreatedDateTime = s.CreatedDateTime, EndDate = s.DueDate, DocumentFilePath = s.DocumentFilePath }).FirstOrDefault());
                             }
                         }
                     }

@@ -8,6 +8,7 @@ using DemoWorkBounty.Models;
 using PagedList;
 using System.Web.Security;
 using System.Data;
+using System.IO;
 
 namespace DemoWorkBounty.Controllers
 {
@@ -198,6 +199,31 @@ namespace DemoWorkBounty.Controllers
             {
                 if (ModelState.IsValid)
                 {
+
+                    string result = System.Text.Encoding.UTF8.GetString(addWorkitemData.Content);
+                   
+
+                    HttpFileCollectionBase files = Request.Files;
+                    HttpFileCollection my = addWorkitemData.Content;
+                     
+                    var myFile = addWorkitemData.Content;
+                    for (int i = 0; i < files.Count; i++)
+                    {
+                        HttpPostedFileBase myFile = files[i];
+                        var path = Path.Combine(Server.MapPath("~/work1/Download/"), addWorkitemData.DocumentFilePath);
+                        addWorkitemData.DocumentFilePath = path;
+                        addWorkitemData.DocumentFilePath.SaveAs(path);
+                        myFile.SaveAs(path);
+                        //myFile.SaveAs(path);
+                    }
+
+
+                    //var path = Path.Combine(Server.MapPath("~/work1/Download/"), addWorkitemData.DocumentFilePath);
+                    //addWorkitemData.DocumentFilePath = path;
+                    //addWorkitemData.DocumentFilePath.SaveAs(path);
+                    //myFile.SaveAs(path);
+                    //myFile.SaveAs(path);
+                    
                     var getResultsOfWorkitemData = workbountyRepo.AddWorkitem(addWorkitemData);
                     IsSuccess = true;
                     successAddWorkitemMessage = "Workitem Added successfully!";

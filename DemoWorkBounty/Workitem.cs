@@ -41,6 +41,8 @@ namespace DemoWorkBounty
         public bool Status { get; set; }
         public string Remarks { get; set; }
         public bool IsOpenForGroup { get; set; }
+        public byte[] Content { get; set; }
+        
     
         public virtual UserInfo UserInfo { get; set; }
         public virtual UserInfo UserInfo1 { get; set; }

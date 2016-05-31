@@ -274,6 +274,15 @@ namespace DemoWorkBounty.Controllers
 
         }
 
+        public FileResult ViewAttachedDocument(int workitemID)
+        {
+
+            string fileName = entity.Workitems.Where(s => s.WorkitemID == workitemID).Select(s => s.DocumentFilePath).FirstOrDefault();
+            return File(fileName, System.Net.Mime.MediaTypeNames.Application.Octet, fileName);
+
+
+        }
+
 
 
     }

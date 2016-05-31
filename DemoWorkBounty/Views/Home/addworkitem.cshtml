@@ -45,10 +45,10 @@
                 Workitem could not saved.
                 <br>
             </div>
-            <form class="form-horizontal" role="form" data-toggle="validator" name="Workitemform">
+            <form class="form-horizontal" role="form" id="form" method="post" data-toggle="validator" name="Workitemform" enctype="multipart/form-data">
                 <div class="form-group">
-                   <div class="col-sm-2"></div>
-                     <label class="col-sm-1 required" for="form-field-1"> Title </label>
+                    <div class="col-sm-2"></div>
+                    <label class="col-sm-1 required" for="form-field-1"> Title </label>
                     <div class="col-sm-9">
                         <input type="hidden" id="Userid" value="@Session["UserID"]" />
                         <input type="text" id="Title" placeholder="" maxlength="50" class="col-xs-10 col-sm-5" required="required" />
@@ -96,7 +96,7 @@
                     <div class="col-sm-2"></div>
                     <label class="col-sm-1 no-padding-right" for="form-field-1">Additional attachments  </label>
                     <div class="col-sm-9">
-                        <input multiple="" type="file" id="myFile" />
+                        <input multiple="" type="file" id="myFile" name="myFile" />
                     </div>
                 </div>
 
@@ -213,7 +213,6 @@
             </form>
         </div>
     </div>
-
 
 
 

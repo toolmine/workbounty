@@ -1,0 +1,174 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <script src="~/assets/js/sidebar-fixed.js"></script>
+    <script src="~/assets/css/loading.css"></script>
+
+    <title>@ViewBag.Title</title>
+    @Styles.Render("~/assets/css")
+    @Scripts.Render("~/assets/js")
+
+</head>
+
+<body class="no-skin">
+    <div id="navbar" class="navbar navbar-default">
+        <div class="navbar-container" id="navbar-container">
+            <button type="button" class="navbar-toggle menu-toggler pull-left" id="menu-toggler" data-target="#sidebar">
+                <span class="sr-only">Toggle sidebar</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+
+            <div class="navbar-header pull-left">
+                <a href="~/home/dashboard" class="navbar-brand">
+                    <img src="~/assets/img/header-logo.png" />
+                </a>
+                <a href="~/home/dashboard" class="navbar-brand padding15pxtop">
+                    <small>
+                        <img src="~/assets/img/WB.png" />
+                    </small>
+                </a>
+            </div>
+
+
+            <div class="nav-search" id="nav-search">
+<<<<<<< HEAD
+
+                <form class="form-search">
+                    <span class="input-icon" data_toggle="tooltip" , title="Search workitem">
+                        <input type="text" placeholder="Search for workitems" maxlength="50" class="nav-search-input" id="SearchItem" autocomplete="off" />
+                        <i class="ace-icon fa fa-search nav-search-icon" onclick="SearchResult();"></i>
+=======
+                <form class="form-search" name="SearchWorkitem" id="SearchWorkitem" method="post" action="/home/SearchWorkitem?searchWorkitemValue=">
+                    <span class="input-icon" data_toggle="tooltip" , title="Search workitem">
+                        <input type="text" placeholder="Search for workitems" maxlength="50" class="nav-search-input" id="SearchItem" name="SearchItem" autocomplete="off" />
+                        <button type="submit"><span><i class="ace-icon fa fa-search nav-search-icon"></i></span></button>
+>>>>>>> dacc2334ccbb028a520db5872b5f92f295368ee2
+                    </span>
+                </form>
+            </div>
+
+            <div class="navbar-buttons navbar-header pull-right" role="navigation">
+                <ul>
+                    <li>
+                        @try
+                        {
+                            <a data-toggle="dropdown" href="#" class="dropdown-toggle">
+                                <span class="user-info">
+                                    Welcome,
+                                    @Session["FirstName"].ToString()
+                                </span>
+                            </a>
+                        }
+                        catch
+                        {
+                            Response.Redirect("~/home/login");
+                        }
+                        <ul class="user-menu dropdown-menu-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
+                            <li>
+                                <a href="~/home/ViewUserData">
+                                    <i class="ace-icon fa fa-user"></i>
+                                    Profile
+                                </a>
+                            </li>
+
+                            <li class="divider"></li>
+                            <li>
+                                <a href="~/Home/Logout">
+                                    <i class="ace-icon fa fa-power-off"></i>
+                                    Logout
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="main-container" id="main-container">
+        <script src="~/assets/js/main-fix.js"></script>
+
+        <div id="sidebar" class="sidebar responsive" data-sidebar-scroll="true" data-sidebar-hover="true">
+            <script src="~/assets/js/sidebar-fixed.js"></script>
+            <ul class="nav nav-list">
+
+
+                <a href="~/home/Dashboard" class="nav nav-list" data-toggle="tooltip" title="Dashboard">
+                    <button class="btn btn-block btn-success btn-sidebaricon">
+                        <i class="menu-icon fa fa-tachometer"></i>
+                        <span class="menu-text padding20px"> Dashboard </span>
+                    </button>
+                </a>
+
+                <a href="~/Home/addworkitem" class="nav nav-list" data-toggle="tooltip" title="Add and upload workitem">
+                    <button class="btn btn-block btn-danger btn-sidebaricon">
+                        <i class="menu-icon fa fa-plus-circle"></i>
+                        <span class="menu-text padding20px"> Add Work Item </span>
+                    </button>
+                </a>
+                <a href="~/Home/viewteams" class="nav nav-list" data-toggle="tooltip" title="Display team and members">
+                    <button class="btn btn-block btn-grey btn-sidebaricon">
+                        <i class="menu-icon fa fa-list"></i>
+                        <span class="menu-text padding20px"> My Teams </span>
+                    </button>
+                </a>
+                <a href="~/Home/viewrewards" class="nav nav-list" data-toggle="tooltip" title="Display Rewards given by client">
+                    <button class="btn btn-block btn-purple btn-sidebaricon">
+                        <i class="menu-icon fa fa-trophy"></i>
+                        <span class="menu-text padding20px"> My Rewards </span>
+                    </button>
+                </a>
+            </ul>
+
+            <div class="sidebar-toggle sidebar-collapse" id="sidebar-collapse">
+                <i class="ace-icon fa fa-angle-double-left" data_toggle="tooltip" , title="Hide/Show" data-icon1="ace-icon fa fa-angle-double-left" data-icon2="ace-icon fa fa-angle-double-right"></i>
+            </div>
+        </div>
+
+        <div class="main-content">
+            <div class="main-content-inner">
+            </div>
+
+            <div class="page-content">
+                <div>
+                    @RenderBody()
+                </div>
+
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="row">
+                            <div class="space-6"></div>
+                            <div class="vspace-12-sm"></div>
+                        </div><!-- /.row -->
+                    </div><!-- /.col -->
+                </div>
+
+
+                <div class="row">
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="footer">
+        <div class="footer-inner">
+            <div class="footer-content">
+                <span class="bigger-120 padding15pxtop">
+                    <span class="blue bolder"></span>
+                </span>
+            </div>
+        </div>
+    </div>
+
+    <a href="#" id="btn-scroll-up" class="btn-scroll-up btn btn-sm btn-inverse">
+        <i class="ace-icon fa fa-angle-double-up icon-only bigger-110"></i>
+    </a>
+
+</body>
+</html>

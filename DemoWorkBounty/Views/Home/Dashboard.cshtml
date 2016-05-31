@@ -149,6 +149,7 @@
                                 <th width="15%">Summary</th>
                                 <th width="7%">Rewards</th>
                                 <th width="4%">Amount</th>
+                                <th width="3%">Attached File</th>
                                 <th width="3%">Action</th>
                                 <th width="3%">Add to Favourites</th>
                             </tr>
@@ -172,6 +173,10 @@
                                     {
                                         <td>@Html.DisplayFor(a => i.Amount)</td>
                                     }
+                                    <td>@if(i.DocumentFilePath != null)
+                                        { 
+                                        @Html.ActionLink("View", "ViewAttachedDocument", "workitem", new { workitemID = i.WorkitemID }, new { @class = "btn btn-minier btn-purple", data_toggle = "tooltip", title = "Download document" }) }</td>
+
                                     <td>@Html.ActionLink("Apply", "ApplyWorkitem", "workitem", new { currentWorkitemID = i.WorkitemID }, new { @class = "btn btn-minier btn-purple", data_toggle = "tooltip", title = "Apply for workitem" }) </td>
                                     <td>
                                         @if (i.IsFavourite == true)

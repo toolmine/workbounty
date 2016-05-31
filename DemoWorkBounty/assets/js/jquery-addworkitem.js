@@ -18,31 +18,53 @@ $(document).ready(function () {
     });
 });
 
+
+
 function AddWorkitem() {
 
-    var d = new Date();
-    var dueDate = $("#DueDate").val();
-    var startDate = $("#StartDate").val();
-    var startDateObject = new Date(startDate);
-    var dueDateObject = new Date(dueDate);
-
-    var newitem = {};
-    newitem.Title = $("#Title").val();
-    newitem.Summary = $("#Summary").val();
-    newitem.StartDate = startDateObject;
-    newitem.DueDate = dueDateObject;
-    newitem.PublishedTo = $("#TeamList").val();
-    newitem.DocumentFilePath = $("#myFile").val();
-    newitem.ProposedReward = sessionStorage.getItem('key1');
-    newitem.Amount = sessionStorage.getItem('key2');
-    newitem.CreatedBy = $("#Userid").val();
-    newitem.CreatedDateTime = d;
-    newitem.ModifyBy = $("#Userid").val();
-    newitem.ModifyDateTime = d;
-    newitem.Status = true;
-    newitem.Remarks = "Good";
-    newitem.IsOpenForGroup = true;
-
+    //$('#myFile').on('change', function (e) {
+    //    var files = e.target.files;
+    //    //var myID = 3; //uncomment this to make sure the ajax URL works
+    //    if (files.length > 0) {
+    //        if (window.FormData !== undefined) {
+    //            var data = new FormData();
+    //            for (var x = 0; x < files.length; x++) {
+    //                data.append("file" + x, files[x]);
+                    
+    //            }
+               
+    //        }
+    //    }
+    //});
+        
+    
+                var d = new Date();
+                var dueDate = $("#DueDate").val();
+                var startDate = $("#StartDate").val();
+                var startDateObject = new Date(startDate);
+                var dueDateObject = new Date(dueDate);
+                var fileInput = document.getElementById('myFile');
+                var fileName = fileInput.value.split(/(\\|\/)/g).pop();
+    
+                var newitem = {};
+                newitem.Title = $("#Title").val();
+                newitem.Summary = $("#Summary").val();
+                newitem.StartDate = startDateObject;
+                newitem.DueDate = dueDateObject;
+                newitem.PublishedTo = $("#TeamList").val();
+                newitem.DocumentFilePath = $("#myFile").val();
+                newitem.ProposedReward = sessionStorage.getItem('key1');
+                newitem.Amount = sessionStorage.getItem('key2');
+                newitem.CreatedBy = $("#Userid").val();
+                newitem.CreatedDateTime = d;
+                newitem.ModifyBy = $("#Userid").val();
+                newitem.ModifyDateTime = d;
+                newitem.Status = true;
+                newitem.Remarks = "Good";
+                newitem.IsOpenForGroup = true;
+                newitem.Content = data;
+  
+           
 
     if ($("#Title").val() == "") {
         $("#TitleError").text("Title is Required");
@@ -56,6 +78,7 @@ function AddWorkitem() {
     }
     else if ($("#DueDate").val() == "") {
         $("#DuedateError").text("Due Date is Required");
+       
     }
     else {
         $.ajax({
@@ -67,7 +90,6 @@ function AddWorkitem() {
             success: function (response) {
                 console.log(response);
                 if (response.IsSuccess) {
-
                     location.href = response.redirectURL;
                 }
                 else {
@@ -125,3 +147,4 @@ function limitText(field, maxChar) {
         });
     }
 }
+
