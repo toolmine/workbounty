@@ -61,8 +61,8 @@ namespace DemoWorkBounty
                        "~/assets/js/jquery_onclick_success.js",
                          "~/assets/js/bootstrap-datepicker.min.js",
                          "~/assets/js/jquery-dfavourite.js",
-                         "~/assets/js/jquery_Bootstrap.js",
-                         "~/assets/js/UpdateTeamName.js"
+                         "~/assets/js/jquery_Bootstrap.js"
+                         
 
                 ));
 

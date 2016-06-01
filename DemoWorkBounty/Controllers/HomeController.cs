@@ -207,26 +207,24 @@ namespace DemoWorkBounty.Controllers
                         redirectURL = Url.Action("Dashboard", "Home");
                         IsSuccess = true;
                     }
-
                 }
                 else
                 {
-                    if (addWorkitemData.Title != null)
+                    if (addWorkitemData.Title != null && addWorkitemData.Content < 4194304)
                     {
                         if (ModelState.IsValid)
                         {
-                            if(addWorkitemData.DocumentFilePath != null)
-                            { 
-                            var path = Path.Combine(Server.MapPath("~/work1/Download/"), addWorkitemData.DocumentFilePath);
-                            addWorkitemData.DocumentFilePath = path;
-                            Session["path"] = addWorkitemData.DocumentFilePath;
+                            if (addWorkitemData.DocumentFilePath != null)
+                            {
+                                var path = Path.Combine(Server.MapPath("~/work1/Download/"), addWorkitemData.DocumentFilePath);
+                                addWorkitemData.DocumentFilePath = path;
+                                Session["path"] = addWorkitemData.DocumentFilePath;
                             }
                             var getResultsOfWorkitemData = workbountyRepo.AddWorkitem(addWorkitemData);
                             IsSuccess = true;
                             successAddWorkitemMessage = "Workitem Added successfully!";
                             redirectURL = Url.Action("Dashboard", "Home");
                             return null;
-                            
                         }
                         else
                         {
@@ -289,7 +287,7 @@ namespace DemoWorkBounty.Controllers
                 if (searchText != "")
                 {
                     var getWorkitemData = workbountyRepo.SearchWorkitems(searchText);
-                    if (getWorkitemData.Count>0)
+                    if (getWorkitemData.Count > 0)
                     {
                         ViewBag.dataForSearchItem = getWorkitemData;
                     }
@@ -354,6 +352,11 @@ namespace DemoWorkBounty.Controllers
         }
 
         public ActionResult Authorize()
+        {
+            return View();
+        }
+
+        public ActionResult UploadTooLarge()
         {
             return View();
         }
