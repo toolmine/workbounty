@@ -170,7 +170,6 @@
     </Compile>
     <Compile Include="Models\AddWorkitems.cs" />
     <Compile Include="Models\AssignWorkitems.cs" />
-    <Compile Include="Models\EditWorkitem.cs" />
     <Compile Include="Models\OpenWorkitems.cs" />
     <Compile Include="Models\Rewards.cs" />
     <Compile Include="Models\TeamInformation.cs" />
@@ -355,7 +354,6 @@
     <Content Include="assets\js\grid.locale-en.js" />
     <Content Include="assets\js\html5shiv.min.js" />
     <Content Include="assets\js\jquery-.js" />
-    <None Include="assets\js\jquery-2.2.3.intellisense.js" />
     <Content Include="assets\js\jquery-2.2.3.js" />
     <Content Include="assets\js\jquery-2.2.3.min.js" />
     <Content Include="assets\js\jquery-AddTeam.js" />

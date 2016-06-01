@@ -51,6 +51,37 @@ $(document).ready(function () {
 
 });
 
+
+
+
+
+
+function RemoveTeam() {
+    var id = $("#oldteamname").val();
+ 
+    $.ajax({
+        url: "/Team/RemoveTeam",
+        type: "POST",
+        contentType: "application/json;charset=utf-8",
+        data: JSON.stringify({ currentTeamID: id }),
+       
+        dataType: "json",
+        success: function (response) {
+            console.log(response);
+            if (response.IsSuccess) {
+
+                location.href = response.redirectURL;
+            }
+            else {
+                alert("ERROR");
+            }
+        },
+        error: function (xhr) {
+            alert("ERROR IN CODE");
+        }
+    });
+}
+
     
     
     

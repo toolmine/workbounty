@@ -18,10 +18,10 @@ namespace DemoWorkBounty.Repository
             try
             {
                 int currentUserid = id;
-                var selectTeam = entity.Teams.Where(s => s.UserID == currentUserid).Select(s => s.TeamUserInfoID);
+                var selectTeam = entity.Teams.Where(s => s.UserID == currentUserid && s.IsActive == true).Select(s => s.TeamUserInfoID);
                 foreach (var item in selectTeam)
                 {
-                    var data = entity.Teams.Where(s => s.TeamUserInfoID == item).ToList();
+                    var data = entity.Teams.Where(s => s.TeamUserInfoID == item && s.IsActive==true).ToList();
                     TeamInformation teamInfo = new TeamInformation();
                     teamInfo.TeamUserInfoID = item;
                     foreach (var _user in data)
@@ -175,7 +175,7 @@ namespace DemoWorkBounty.Repository
         {
 
             List<TeamInformation> team = new List<TeamInformation>();
-            var GetDetails = entity.Teams.Where(s => s.TeamName == TeamName).ToList();
+            var GetDetails = entity.Teams.Where(s => s.TeamName == TeamName && s.IsActive==true).ToList();
             TeamInformation teamInfo = new TeamInformation();
             foreach (var data in GetDetails)
             {
@@ -208,5 +208,36 @@ namespace DemoWorkBounty.Repository
                 return "Error";
             }
         }
+
+        public string RemoveTeam(int teamID)
+        {
+            try
+            {
+                List<Team> teamData = new List<Team>();
+                 teamData = entity.Teams.Where(s => s.TeamUserInfoID == teamID).ToList();
+                if (teamData != null)
+                {
+                   foreach(var item in teamData)
+                   { 
+                    entity.Teams.Remove(item);
+                   }
+                    entity.SaveChanges();
+                    return "Success";
+                  
+                }
+                else
+                {
+                    return "error";
+                }
+            }
+            catch (Exception)
+            {
+                return "Error";
+
+            }
+        }
+
+
+
     }
 }

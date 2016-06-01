@@ -158,5 +158,33 @@ namespace DemoWorkBounty.Controllers
             return Json(new { IsSuccess = IsSuccess, successAddWorkitemMessage = successAddWorkitemMessage, redirectURL = redirectURL });
         }
 
+        [HttpPost]
+        public JsonResult RemoveTeam(int currentTeamID)
+        {
+           
+                var redirectURL = "";
+                var IsSuccess = false;
+                var successTeamRemoveMessage = "";
+                try
+                {
+                var getTeamDetail = teamRepo.RemoveTeam(currentTeamID);
+                if (getTeamDetail != null)
+                {
+                    redirectURL = Url.Action("viewteams", "Home");
+                    IsSuccess = true;
+                    successTeamRemoveMessage = "Team name changed successfully!";
+                }
+                else
+                {
+                    successTeamRemoveMessage = "Error while entering in Data";
+                }
+               
+            }
+           catch(Exception)
+            {
+
+            }
+                return Json(new { IsSuccess = IsSuccess, successAddWorkitemMessage = successTeamRemoveMessage, redirectURL = redirectURL });
+        }
     }
 }
