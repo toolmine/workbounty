@@ -403,13 +403,13 @@ namespace DemoWorkBounty.Repository
                     var getWorkitemData = entities.Workitems.Where(x => x.WorkitemID==id.WorkitemID).ToList();
                     getWorkitemData.ForEach(a =>
                     {
-                        a.Amount = id.Amount;
-                        a.ModifyBy = id.ModifyBy;
-                        a.ModifyDateTime = id.ModifyDateTime;
-                        a.PublishedTo = id.PublishedTo;
-                        a.Summary = id.Summary;
-                        a.Title = id.Title;
-                        a.ProposedReward = id.ProposedReward;
+                        if(id.Amount!=null) a.Amount = id.Amount;
+                         a.ModifyBy = id.ModifyBy;
+                        if (id.ModifyDateTime != null) a.ModifyDateTime = id.ModifyDateTime;
+                         a.PublishedTo = id.PublishedTo;
+                        if (id.Summary != null) a.Summary = id.Summary;
+                        if (id.Title != null) a.Title = id.Title;
+                        if (id.ProposedReward != "undefined") a.ProposedReward = id.ProposedReward;
                     }
                );
                     //WorkitemHistory setPreviousInfo = new WorkitemHistory { UpdatedBy=id.ModifyBy,UpdatedDateTIme=id.ModifyDateTime,WorkitemID=id.WorkitemID,WorkitemStatusID=id.WorkitemID};
