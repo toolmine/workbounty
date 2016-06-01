@@ -1,6 +1,8 @@
 ﻿var radioValue;
 var amount;
 var filepath;
+var jqXHRData;
+
 $(document).ready(function () {
 
     $("#alertMessage").hide();
@@ -18,16 +20,47 @@ $(document).ready(function () {
 
     $("#SummaryError").text("Maximum 200 characters");
     $("#filesizeerror").text("Maximum file size is 4MB");
+
 });
+
+
 
 function AddWorkitem() {
 
     var uploadedFileSize = 0;
+    //$("#myFile").on('click', function () {
+    //    if (jqXHRData) {
+    //        jqXHRData.submit();
+    //    }
+    //    return false;
+    //});
+
+    //$('#myFile').on('change', function (e) {
+    //    var files = e.target.files;
+    //    //var myID = 3; //uncomment this to make sure the ajax URL works
+    //    if (files.length > 0) {
+    //        if (window.FormData !== undefined) {
+    //            var data = new FormData();
+    //            for (var x = 0; x < files.length; x++) {
+    //                data.append("file" + x, files[x]);
+
+    //            }
+    //            data.submit();
+    //        }
+    //    }a
+    //});
     var uploadedFile = document.getElementById('myFile');
     if (uploadedFile.value != "")
         {
         uploadedFileSize = uploadedFile.files[0].size;
         }
+
+    if (uploadedFile.files[0].size > 4096000) {
+        $("#filesizeerror").text("File size limited to 4 MB!");
+        window.location.href = '/home/addworkitem';
+        
+    }
+    
     $("#form").submit();
     
                 var d = new Date();
@@ -103,6 +136,13 @@ function AddWorkitem() {
             });
         }
   }
+
+
+        
+    }
+
+   
+
 }
 
 function isTextKey(evt) {

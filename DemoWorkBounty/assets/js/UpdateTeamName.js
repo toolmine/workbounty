@@ -17,7 +17,7 @@ $(document).ready(function () {
             
         sessionStorage.setItem('key1', teamname);
         sessionStorage.setItem('key2', TeamUserInfoID);
-        $("#myModal").fadeOut();
+        
 
             
         var newitem = {};
@@ -33,15 +33,17 @@ $(document).ready(function () {
             success: function (response) {
                 console.log(response);
                 if (response.IsSuccess) {
-
+                    $("#myModal").fadeOut();
                     location.href = response.redirectURL;
                 }
                 else {
                     $("#alertMessage").show();
+                    $("#myModal").show();
                 }
             },
             error: function (xhr) {
                 $("#alertMessage").show();
+                $("#myModal").show();
             }
         });
     });

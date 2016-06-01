@@ -62,7 +62,7 @@ namespace DemoWorkBounty
                          "~/assets/js/bootstrap-datepicker.min.js",
                          "~/assets/js/jquery-dfavourite.js",
                          "~/assets/js/jquery_Bootstrap.js"
-                         
+                       
 
                 ));
 
