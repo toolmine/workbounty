@@ -21,19 +21,13 @@ $(document).ready(function () {
     $("#SummaryError").text("Maximum 200 characters");
     $("#filesizeerror").text("Maximum file size is 4MB");
 
-    
-
-
-
-    
-
-
 });
 
 
 
 function AddWorkitem() {
 
+    var uploadedFileSize = 0;
     //$("#myFile").on('click', function () {
     //    if (jqXHRData) {
     //        jqXHRData.submit();
@@ -55,7 +49,15 @@ function AddWorkitem() {
     //        }
     //    }a
     //});
+<<<<<<< HEAD
     var uploadedFile = document.getElementById('myFile').getAttribute("size");
+=======
+    var uploadedFile = document.getElementById('myFile');
+    if (uploadedFile.value != "")
+        {
+        uploadedFileSize = uploadedFile.files[0].size;
+        }
+>>>>>>> 83fbf9687f68452f879f3a00c883a46a77332b00
 
     if (uploadedFile.files[0].size > 4096000) {
         $("#filesizeerror").text("File size limited to 4 MB!");
@@ -89,7 +91,7 @@ function AddWorkitem() {
                 newitem.Status = true;
                 newitem.Remarks = "Good";
                 newitem.IsOpenForGroup = true;
-                //newitem.Content = data ;
+                newitem.Content = uploadedFileSize ;
                 
     if ($("#Title").val() == "") {
         $("#TitleError").text("Title is Required");
@@ -137,6 +139,7 @@ function AddWorkitem() {
                 }
             });
         }
+  }
 
 
         

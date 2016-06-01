@@ -1,7 +1,6 @@
 ﻿var radioValue;
 var amount;
 var filepath;
-
 $(document).ready(function () {
 
     $("#alertMessage").hide();
@@ -18,29 +17,22 @@ $(document).ready(function () {
     });
 
     $("#SummaryError").text("Maximum 200 characters");
+    $("#filesizeerror").text("Maximum file size is 4MB");
+<<<<<<< Updated upstream
+=======
 
-
+>>>>>>> Stashed changes
 });
-
-
 
 function AddWorkitem() {
 
-    //$('#myFile').on('change', function (e) {
-    //    var files = e.target.files;
-    //    //var myID = 3; //uncomment this to make sure the ajax URL works
-    //    if (files.length > 0) {
-    //        if (window.FormData !== undefined) {
-    //            var data = new FormData();
-    //            for (var x = 0; x < files.length; x++) {
-    //                data.append("file" + x, files[x]);
-                    
-    //            }
-               
-    //        }
-    //    }
-    //});
-        
+    var uploadedFileSize = 0;
+    var uploadedFile = document.getElementById('myFile');
+    if (uploadedFile.value != "")
+        {
+        uploadedFileSize = uploadedFile.files[0].size;
+        }
+    $("#form").submit();
     
                 var d = new Date();
                 var dueDate = $("#DueDate").val();
@@ -56,7 +48,7 @@ function AddWorkitem() {
                 newitem.StartDate = startDateObject;
                 newitem.DueDate = dueDateObject;
                 newitem.PublishedTo = $("#TeamList").val();
-                newitem.DocumentFilePath = $("#myFile").val();
+                newitem.DocumentFilePath = fileName;
                 newitem.ProposedReward = sessionStorage.getItem('key1');
                 newitem.Amount = sessionStorage.getItem('key2');
                 newitem.CreatedBy = $("#Userid").val();
@@ -66,10 +58,8 @@ function AddWorkitem() {
                 newitem.Status = true;
                 newitem.Remarks = "Good";
                 newitem.IsOpenForGroup = true;
-                newitem.Content = data;
-  
-           
-
+                newitem.Content = uploadedFileSize ;
+                
     if ($("#Title").val() == "") {
         $("#TitleError").text("Title is Required");
     }
@@ -86,12 +76,12 @@ function AddWorkitem() {
        
     }
 
-    else
+    else 
     {
         var summaryVal = $("#Summary").val();
         var summaryText = summaryVal.indexOf(' ') >= 2;
 
-        if (summaryText == false) {
+        if (summaryText == true) {
             $("#SummaryError").text("Maximum character limit exists");
         }
         else
@@ -116,13 +106,7 @@ function AddWorkitem() {
                 }
             });
         }
-
-
-        
-    }
-
-   
-
+  }
 }
 
 function isTextKey(evt) {

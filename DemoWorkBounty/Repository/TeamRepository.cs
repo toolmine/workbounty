@@ -21,7 +21,7 @@ namespace DemoWorkBounty.Repository
                 var selectTeam = entity.Teams.Where(s => s.UserID == currentUserid && s.IsActive == true).Select(s => s.TeamUserInfoID);
                 foreach (var item in selectTeam)
                 {
-                    var data = entity.Teams.Where(s => s.TeamUserInfoID == item && s.IsActive==true).ToList();
+                    var data = entity.Teams.Where(s => s.TeamUserInfoID == item && s.IsActive == true).ToList();
                     TeamInformation teamInfo = new TeamInformation();
                     teamInfo.TeamUserInfoID = item;
                     foreach (var _user in data)
@@ -175,7 +175,7 @@ namespace DemoWorkBounty.Repository
         {
 
             List<TeamInformation> team = new List<TeamInformation>();
-            var GetDetails = entity.Teams.Where(s => s.TeamName == TeamName && s.IsActive==true).ToList();
+            var GetDetails = entity.Teams.Where(s => s.TeamName == TeamName && s.IsActive == true).ToList();
             TeamInformation teamInfo = new TeamInformation();
             foreach (var data in GetDetails)
             {
@@ -193,15 +193,25 @@ namespace DemoWorkBounty.Repository
             {
                 using (var entities = new WorkBountyDBEntities())
                 {
-                    var getTeamName = entities.Teams.Where(x => x.TeamUserInfoID == teamName.TeamUserInfoID).ToList();
-                    getTeamName.ForEach(a =>
-                    {
-                        a.TeamName = teamName.TeamName;
+                    var checkTeamName = entities.Teams.Where(x => x.TeamName == teamName.TeamName).FirstOrDefault();
+                  
+                        if(checkTeamName==null)
+                             { 
+                                  var getTeamName = entities.Teams.Where(x => x.TeamUserInfoID == teamName.TeamUserInfoID).ToList();
+                                     getTeamName.ForEach(a =>
+                                            {
+                                                   a.TeamName = teamName.TeamName;
+                                             } );
+                                entities.SaveChanges();
+                               return "Success";
+                                }
+                        else
+                        {
+                            return "Error";
+                        }
                     }
-               );
-                    entities.SaveChanges();
-                }
-                return "Success";
+              
+               
             }
             catch (Exception)
             {
@@ -214,16 +224,16 @@ namespace DemoWorkBounty.Repository
             try
             {
                 List<Team> teamData = new List<Team>();
-                 teamData = entity.Teams.Where(s => s.TeamUserInfoID == teamID).ToList();
+                teamData = entity.Teams.Where(s => s.TeamUserInfoID == teamID).ToList();
                 if (teamData != null)
                 {
-                   foreach(var item in teamData)
-                   { 
-                    entity.Teams.Remove(item);
-                   }
+                    foreach (var item in teamData)
+                    {
+                        entity.Teams.Remove(item);
+                    }
                     entity.SaveChanges();
                     return "Success";
-                  
+
                 }
                 else
                 {

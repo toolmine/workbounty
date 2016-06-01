@@ -34,6 +34,12 @@ namespace DemoWorkBounty
         {
             //// Get the error details
             Exception CurrentException = Server.GetLastError();
+            if (CurrentException.Message == "Maximum request length exceeded.")
+            {
+                Response.Redirect("/Home/UploadTooLarge");
+            }
+            else
+            { 
             //HttpException lastErrorWrapper = Server.GetLastError() as HttpException;
             string error = CurrentException.ToString();
             string innerException = null;
@@ -55,6 +61,7 @@ namespace DemoWorkBounty
             entity.SaveChanges();
             Server.ClearError();
             Response.Redirect("/Home/Error");
+            }
         }
 
     }

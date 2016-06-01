@@ -140,15 +140,18 @@ namespace DemoWorkBounty.Controllers
                 if (ModelState.IsValid)
                 {
                     var getUpdateTeamName = teamRepo.getUpdateTeamName(teamName);
-                    IsSuccess = true;
-                    successAddWorkitemMessage = "Team name changed successfully!";
-                    redirectURL = Url.Action("viewteams", "Home");
-
+                    if (getUpdateTeamName == "Success")
+                    {
+                        IsSuccess = true;
+                        successAddWorkitemMessage = "Team name changed successfully!";
+                        redirectURL = Url.Action("viewteams", "Home");
+                    }
+                    else
+                    {
+                        successAddWorkitemMessage = "Error while entering in Data";
+                    }
                 }
-                else
-                {
-                    successAddWorkitemMessage = "Error while entering in Data";
-                }
+              
             }
             catch (Exception)
             {
