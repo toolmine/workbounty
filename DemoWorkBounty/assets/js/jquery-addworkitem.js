@@ -108,7 +108,7 @@ function AddWorkitem() {
     else 
     {
         var summaryVal = $("#Summary").val();
-        var summaryText = summaryVal.indexOf(' ') >= 2;
+        var summaryText = summaryVal.indexOf(' ') <= 2;
 
         if (summaryText == true) {
             $("#SummaryError").text("Maximum character limit exists");
