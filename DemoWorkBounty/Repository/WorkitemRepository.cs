@@ -176,7 +176,14 @@ namespace DemoWorkBounty.Repository
                 if (isRewardedWorkitem == null)
                 {
                     var innerList = entity.WorkitemDistributions.Where(s => s.WorkitemID == item.WorkitemID && s.UserID == item.UserID).Select(s => s.WorkitemID).Distinct().ToList();
-                    innerList.ForEach(a => checkWorkitem.Add(a));
+                   
+                   foreach(var d in innerList)
+                   {
+                       var getUserID = entity.WorkitemDistributions.Where(s => s.WorkitemID == item.WorkitemID && s.UserID == item.UserID).Select(s => new AssignWorkitems { AssigntoUserID = s.UserID }).Distinct().ToList();
+                      
+                   }
+                   innerList.ForEach(a => checkWorkitem.Add(a));
+
                 }
             }
             var nonExclusiveitems = WorkitemRegisteredUserID.Where(s => s.IsExclusive == false && s.Workitem.DueDate >= currentDate).Select(s => s.WorkitemID).Distinct().ToList();

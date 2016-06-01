@@ -28,66 +28,40 @@ $(document).ready(function () {
 function AddWorkitem() {
 
     var uploadedFileSize = 0;
-    //$("#myFile").on('click', function () {
-    //    if (jqXHRData) {
-    //        jqXHRData.submit();
-    //    }
-    //    return false;
-    //});
-
-    //$('#myFile').on('change', function (e) {
-    //    var files = e.target.files;
-    //    //var myID = 3; //uncomment this to make sure the ajax URL works
-    //    if (files.length > 0) {
-    //        if (window.FormData !== undefined) {
-    //            var data = new FormData();
-    //            for (var x = 0; x < files.length; x++) {
-    //                data.append("file" + x, files[x]);
-
-    //            }
-    //            data.submit();
-    //        }
-    //    }a
-    //});
+   
     var uploadedFile = document.getElementById('myFile');
     if (uploadedFile.value != "")
-        {
+    {
         uploadedFileSize = uploadedFile.files[0].size;
-        }
-
-    if (uploadedFile.files[0].size > 4096000) {
-        $("#filesizeerror").text("File size limited to 4 MB!");
-        window.location.href = '/home/addworkitem';
-        
     }
-    
+
     $("#form").submit();
     
-                var d = new Date();
-                var dueDate = $("#DueDate").val();
-                var startDate = $("#StartDate").val();
-                var startDateObject = new Date(startDate);
-                var dueDateObject = new Date(dueDate);
-                var fileInput = document.getElementById('myFile');
-                var fileName = fileInput.value.split(/(\\|\/)/g).pop();
+    var d = new Date();
+    var dueDate = $("#DueDate").val();
+    var startDate = $("#StartDate").val();
+    var startDateObject = new Date(startDate);
+    var dueDateObject = new Date(dueDate);
+    var fileInput = document.getElementById('myFile');
+    var fileName = fileInput.value.split(/(\\|\/)/g).pop();
     
-                var newitem = {};
-                newitem.Title = $("#Title").val();
-                newitem.Summary = $("#Summary").val();
-                newitem.StartDate = startDateObject;
-                newitem.DueDate = dueDateObject;
-                newitem.PublishedTo = $("#TeamList").val();
-                newitem.DocumentFilePath = fileName;
-                newitem.ProposedReward = sessionStorage.getItem('key1');
-                newitem.Amount = sessionStorage.getItem('key2');
-                newitem.CreatedBy = $("#Userid").val();
-                newitem.CreatedDateTime = d;
-                newitem.ModifyBy = $("#Userid").val();
-                newitem.ModifyDateTime = d;
-                newitem.Status = true;
-                newitem.Remarks = "Good";
-                newitem.IsOpenForGroup = true;
-                newitem.Content = uploadedFileSize ;
+    var newitem = {};
+    newitem.Title = $("#Title").val();
+    newitem.Summary = $("#Summary").val();
+    newitem.StartDate = startDateObject;
+    newitem.DueDate = dueDateObject;
+    newitem.PublishedTo = $("#TeamList").val();
+    newitem.DocumentFilePath = fileName;
+    newitem.ProposedReward = sessionStorage.getItem('key1');
+    newitem.Amount = sessionStorage.getItem('key2');
+    newitem.CreatedBy = $("#Userid").val();
+    newitem.CreatedDateTime = d;
+    newitem.ModifyBy = $("#Userid").val();
+    newitem.ModifyDateTime = d;
+    newitem.Status = true;
+    newitem.Remarks = "Good";
+    newitem.IsOpenForGroup = true;
+    newitem.Content = uploadedFileSize ;
                 
     if ($("#Title").val() == "") {
         $("#TitleError").text("Title is Required");
@@ -110,7 +84,8 @@ function AddWorkitem() {
         var summaryVal = $("#Summary").val();
         var summaryText = summaryVal.indexOf(' ') <= 2;
 
-        if (summaryText == true) {
+        if (summaryText == true)
+        {
             $("#SummaryError").text("Maximum character limit exists");
         }
         else
@@ -135,15 +110,15 @@ function AddWorkitem() {
                 }
             });
         }
-  }
+    }
 
 
         
-    }
+}
 
    
 
-}
+
 
 function isTextKey(evt) {
     var charCode = (evt.which) ? evt.which : event.keyCode;

@@ -23,5 +23,6 @@ namespace DemoWorkBounty.Models
         public string Amount { get; set; }
         public bool IsExclusive { get; set; }
         public System.DateTime CreatedDateTime { get; set; }
+        public int AssigntoUserID { get; set; }
     }
 }
