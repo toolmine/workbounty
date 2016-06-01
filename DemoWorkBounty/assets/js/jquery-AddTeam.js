@@ -75,7 +75,7 @@ function submit() {
     var teamData = {
         "TeamName": $("#txtTeamName").val(),
         "UserID": $("#Userid").val(),
-        "IsActive": false,
+        "IsActive": true,
         "TeamUserInfoID": $("#Userid").val()
     };
 

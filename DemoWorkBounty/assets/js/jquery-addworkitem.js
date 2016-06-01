@@ -55,7 +55,7 @@ function AddWorkitem() {
     //        }
     //    }a
     //});
-    var uploadedFile = document.getElementById('myFile');
+    var uploadedFile = document.getElementById('myFile').getAttribute("size");
 
     if (uploadedFile.files[0].size > 4096000) {
         $("#filesizeerror").text("File size limited to 4 MB!");
@@ -110,7 +110,7 @@ function AddWorkitem() {
     else 
     {
         var summaryVal = $("#Summary").val();
-        var summaryText = summaryVal.indexOf(' ') >= 2;
+        var summaryText = summaryVal.indexOf(' ') <= 2;
 
         if (summaryText == true) {
             $("#SummaryError").text("Maximum character limit exists");
