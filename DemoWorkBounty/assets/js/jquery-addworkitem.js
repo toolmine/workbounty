@@ -59,7 +59,8 @@ function AddWorkitem() {
 
     if (uploadedFile.files[0].size > 4096000) {
         $("#filesizeerror").text("File size limited to 4 MB!");
-        window.location = "~/home/addworkitem";
+        window.location.href = '/home/addworkitem';
+        
     }
     
     $("#form").submit();
