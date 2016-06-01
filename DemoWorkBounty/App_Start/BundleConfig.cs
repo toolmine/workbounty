@@ -39,7 +39,7 @@ namespace DemoWorkBounty
 
 
             bundles.Add(new ScriptBundle("~/assets/js").Include(
-                     "~/assets/js/jquery.2.1.1.min.js",
+                     "~/assets/js/jquery-2.2.3.min.js",
                      "~/assets/js/jquery-search.js",
                      "~/assets/js/jq_script_src.js",
                       "~/assets/js/jquery_mobile_custom_start.js",
@@ -54,14 +54,15 @@ namespace DemoWorkBounty
                         "~/assets/js/ace-extra.min.js",
                         "~/assets/js/jquery.flot.pie.min.js",
                        "~/assets/js/jquery.flot.resize.min.js",
-                         "~/assets/js/ace-elements.min.js",
-                         "~/assets/js/ace.min.js",
+                       "~/assets/js/ace-elements.min.js",
+                       "~/assets/js/ace.min.js",
                       "~/assets/js/jquery_onclick_success.js",
                       "~/assets/js/ace-extra.min.js",
                        "~/assets/js/jquery_onclick_success.js",
                          "~/assets/js/bootstrap-datepicker.min.js",
                          "~/assets/js/jquery-dfavourite.js",
-                         "~/assets/js/jquery_Bootstrap.js"
+                         "~/assets/js/jquery_Bootstrap.js",
+                         "~/assets/js/UpdateTeamName.js"
 
                 ));
 
@@ -70,8 +71,8 @@ namespace DemoWorkBounty
                 "~/assets/css/bootstrap.min.css",
                 "~/assets/css/loading.css",
                 "~/assets/font-awesome/4.2.0/css/font-awesome.min.css",
-                 "~/assets/fonts/fonts.googleapis.com.css",
-                 "~/Content/themes/base/jquery.ui.all.css",
+                "~/assets/fonts/fonts.googleapis.com.css",
+                "~/Content/themes/base/jquery.ui.all.css",
                 "~/assets/css/ace.min.css",
                 "~/assets/css/datepicker.min.css",
                 "~/assets/css/jquery-ui.min.css",
@@ -85,14 +86,14 @@ namespace DemoWorkBounty
                 "~/assets/js/ace-extra.min.js",
                 "~/assets/js/jquery_mobile_custom_start.js",
                 "~/assets/js/jq_script_src.js",
-                 "~/assets/js/jquery.2.1.1.min.js",
+                "~/assets/js/jquery-2.2.3.min.js",
                 "~/assets/js/jquery-ui.custom.min.js",
                 "~/assets/js/jquery.ui.touch-punch.min.js",
                 "~/assets/js/bootstrap.min.js",
                 "~/assets/js/jquery_mobile_custom_start.js",
                 "~/assets/js/jq_script_src.js",
                 "~/assets/js/jquery_mobile_custom_start.js",
-                 "~/assets/js/jquery.easypiechart.min.js",
+                "~/assets/js/jquery.easypiechart.min.js",
                 "~/assets/js/jquery.sparkline.min.js",
                 "~/assets/js/jquery.flot.min.js",
                 "~/assets/js/jquery.flot.resize.min.js",

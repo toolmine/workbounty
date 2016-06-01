@@ -34,7 +34,7 @@ namespace DemoWorkBounty.Repository
             }
             catch (Exception)
             {
-                return null; 
+                return null;
             }
             return team;
         }
@@ -57,35 +57,35 @@ namespace DemoWorkBounty.Repository
         }
 
         public int AddTeamData(Team teamData)
-        {                      
+        {
             try
             {
                 int i = 0;
-                
+
                 do
                 {
                     var checkTeamName = entity.Teams.Where(s => s.TeamName == teamData.TeamName).FirstOrDefault();
                     if (checkTeamName == null)
                     {
-                          var qwe = entity.Teams.Where(s => s.TeamUserInfoID == teamData.TeamUserInfoID).FirstOrDefault();
-                           if (qwe == null)
-                                {
-                                    var getID = Convert.ToInt32(teamData.TeamUserInfoID);
-                                    entity.Teams.Add(teamData);
-                                    entity.SaveChanges();
-                                    i++;
-                                    return getID;
-                                }
-                          else
-                                {
-                                    teamData.TeamUserInfoID = teamData.TeamUserInfoID + 1;
-                                }
+                        var qwe = entity.Teams.Where(s => s.TeamUserInfoID == teamData.TeamUserInfoID).FirstOrDefault();
+                        if (qwe == null)
+                        {
+                            var getID = Convert.ToInt32(teamData.TeamUserInfoID);
+                            entity.Teams.Add(teamData);
+                            entity.SaveChanges();
+                            i++;
+                            return getID;
+                        }
+                        else
+                        {
+                            teamData.TeamUserInfoID = teamData.TeamUserInfoID + 1;
+                        }
                     }
                     else
                     {
                         return 0;
                     }
-                
+
                 }
                 while (i == 0);
                 return 0;
@@ -126,16 +126,16 @@ namespace DemoWorkBounty.Repository
         {
             try
             {
-                var checkExistingUser = entity.Teams.Where(s=>s.TeamUserInfoID==memberData.TeamUserInfoID && s.UserID==memberData.UserID).Any(s => s.UserID == memberData.UserID);
-                    if (checkExistingUser == false)
-                    {
-                        entity.Teams.Add(memberData);
-                        entity.SaveChanges();
-                        return "Success";
-                    
-                    }
-             
-                
+                var checkExistingUser = entity.Teams.Where(s => s.TeamUserInfoID == memberData.TeamUserInfoID && s.UserID == memberData.UserID).Any(s => s.UserID == memberData.UserID);
+                if (checkExistingUser == false)
+                {
+                    entity.Teams.Add(memberData);
+                    entity.SaveChanges();
+                    return "Success";
+
+                }
+
+
                 return "Error";
             }
             catch (Exception)
@@ -151,11 +151,11 @@ namespace DemoWorkBounty.Repository
             {
                 Team teamData = new Team();
                 teamData = entity.Teams.Where(s => s.TeamUserInfoID == memberData.TeamUserInfoID && s.UserID == memberData.UserID).FirstOrDefault();
-                if(teamData!=null)
+                if (teamData != null)
                 {
-                entity.Teams.Remove(teamData);
-                entity.SaveChanges();
-                return "Success";
+                    entity.Teams.Remove(teamData);
+                    entity.SaveChanges();
+                    return "Success";
                 }
                 else
                 {
@@ -173,18 +173,40 @@ namespace DemoWorkBounty.Repository
 
         public List<TeamInformation> GetTeamDetail(string TeamName)
         {
-            
-                List<TeamInformation> team = new List<TeamInformation>();
-                var GetDetails = entity.Teams.Where(s => s.TeamName == TeamName).ToList();
-                TeamInformation teamInfo = new TeamInformation();
-                foreach (var data in GetDetails)
-                {
-                    TeamUserInfo _team = new TeamUserInfo { TeamName = data.TeamName, FirstName = data.UserInfo.FirstName, Email = data.UserInfo.Email, PhoneNumber = data.UserInfo.PhoneNumber, UserID = data.UserID, TeamUserInfoID = data.TeamUserInfoID };
-                    teamInfo.TeamUserList.Add(_team);
-                }
-                team.Add(teamInfo);
-                return team;
-            }
 
+            List<TeamInformation> team = new List<TeamInformation>();
+            var GetDetails = entity.Teams.Where(s => s.TeamName == TeamName).ToList();
+            TeamInformation teamInfo = new TeamInformation();
+            foreach (var data in GetDetails)
+            {
+                TeamUserInfo _team = new TeamUserInfo { TeamName = data.TeamName, FirstName = data.UserInfo.FirstName, Email = data.UserInfo.Email, PhoneNumber = data.UserInfo.PhoneNumber, UserID = data.UserID, TeamUserInfoID = data.TeamUserInfoID };
+                teamInfo.TeamUserList.Add(_team);
+            }
+            team.Add(teamInfo);
+            return team;
+        }
+
+
+        public string getUpdateTeamName(Team teamName)
+        {
+            try
+            {
+                using (var entities = new WorkBountyDBEntities())
+                {
+                    var getTeamName = entities.Teams.Where(x => x.TeamUserInfoID == teamName.TeamUserInfoID).ToList();
+                    getTeamName.ForEach(a =>
+                    {
+                        a.TeamName = teamName.TeamName;
+                    }
+               );
+                    entities.SaveChanges();
+                }
+                return "Success";
+            }
+            catch (Exception)
+            {
+                return "Error";
+            }
+        }
     }
 }

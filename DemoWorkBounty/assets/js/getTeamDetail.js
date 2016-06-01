@@ -5,6 +5,7 @@
     $("#alertMessage").hide();
     $("#memberAlreadyExist").hide();
     $("#addMemberFailError").hide();
+    $("#memberNotFoundError").hide();
 });
 
 
@@ -25,7 +26,7 @@ function removeMember(item) {
         success: function (response) {
             console.log(response);
             if (response.success) {
-                item.remove()
+                $("#getDataList").load("/Team/GetTeamMemberList", { teamName: $("#teamName").val() });
             }
             else {
                 $("#addMemberFailError").show();
@@ -46,9 +47,9 @@ function show() {
     $.getJSON("/api/FindMember/" + id,
 
             function (Data) {
-                if (Data == null) {
-                    $("#noDateFoundMessage").show();
-                    $('#noDateFoundMessage').delay(5000).fadeOut();
+                if (Data.length==0) {
+                    $("#memberNotFoundError").show();
+                    $('#memberNotFoundError').delay(5000).fadeOut();
                 }
                 else {
                     $("#simple-table").append('<tr><th>Member Name</th><th>Email</th><th>Action</th></tr>');
@@ -87,7 +88,9 @@ function add(item) {
         dataType: "json",
         success: function (response) {
             if (response == "Success") {
-                item.remove()
+                item.remove();
+              
+                $("#getDataList").load("/Team/GetTeamMemberList", { teamName: $("#teamName").val() });
             }
             else
             {

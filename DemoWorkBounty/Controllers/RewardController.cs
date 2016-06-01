@@ -30,9 +30,6 @@ namespace DemoWorkBounty.Controllers
             {
                 return RedirectToAction("login", "Home");
             }
-
         }
-
-
     }
 }

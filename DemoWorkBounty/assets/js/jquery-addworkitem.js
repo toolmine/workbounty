@@ -1,6 +1,7 @@
 ﻿var radioValue;
 var amount;
 var filepath;
+var jqXHRData;
 
 $(document).ready(function () {
 
@@ -12,15 +13,33 @@ $(document).ready(function () {
         sessionStorage.setItem('key1', radioValue);
         sessionStorage.setItem('key2', amount);
         $("#myModal").fadeOut();
-        var res ='Voucher:' +radioValue +', Price:$' + amount;
+        var res = 'Voucher:' + radioValue + ', Price:$' + amount;
         $("#AmountError").text(res);
 
     });
+
+    $("#SummaryError").text("Maximum 200 characters");
+    $("#filesizeerror").text("Maximum file size is 4MB");
+
+    
+
+
+
+    
+
+
 });
 
 
 
 function AddWorkitem() {
+
+    //$("#myFile").on('click', function () {
+    //    if (jqXHRData) {
+    //        jqXHRData.submit();
+    //    }
+    //    return false;
+    //});
 
     //$('#myFile').on('change', function (e) {
     //    var files = e.target.files;
@@ -30,13 +49,20 @@ function AddWorkitem() {
     //            var data = new FormData();
     //            for (var x = 0; x < files.length; x++) {
     //                data.append("file" + x, files[x]);
-                    
+
     //            }
-               
+    //            data.submit();
     //        }
-    //    }
+    //    }a
     //});
-        
+    var uploadedFile = document.getElementById('myFile');
+
+    if (uploadedFile.files[0].size > 4096000) {
+        $("#filesizeerror").text("File size limited to 4 MB!");
+        window.location = "~/home/addworkitem";
+    }
+    
+    $("#form").submit();
     
                 var d = new Date();
                 var dueDate = $("#DueDate").val();
@@ -52,7 +78,7 @@ function AddWorkitem() {
                 newitem.StartDate = startDateObject;
                 newitem.DueDate = dueDateObject;
                 newitem.PublishedTo = $("#TeamList").val();
-                newitem.DocumentFilePath = $("#myFile").val();
+                newitem.DocumentFilePath = fileName;
                 newitem.ProposedReward = sessionStorage.getItem('key1');
                 newitem.Amount = sessionStorage.getItem('key2');
                 newitem.CreatedBy = $("#Userid").val();
@@ -62,45 +88,60 @@ function AddWorkitem() {
                 newitem.Status = true;
                 newitem.Remarks = "Good";
                 newitem.IsOpenForGroup = true;
-                newitem.Content = data;
-  
-           
-
+                //newitem.Content = data ;
+                
     if ($("#Title").val() == "") {
         $("#TitleError").text("Title is Required");
     }
     else if ($("#Summary").val() == "") {
         $("#SummaryError").text("Summary is Required");
     }
-   
+
     else if ($("#StartDate").val() == "") {
         $("#StartdateError").text("Start Date is Required");
     }
+
     else if ($("#DueDate").val() == "") {
         $("#DuedateError").text("Due Date is Required");
        
     }
-    else {
-        $.ajax({
-            type: "POST",
-            url: '/Home/AddWorkitem/',
-            data: JSON.stringify({ addWorkitemData: newitem}),
-            contentType: "application/json;charset=utf-8",
-            processData: true,
-            success: function (response) {
-                console.log(response);
-                if (response.IsSuccess) {
-                    location.href = response.redirectURL;
-                }
-                else {
+
+    else 
+    {
+        var summaryVal = $("#Summary").val();
+        var summaryText = summaryVal.indexOf(' ') >= 2;
+
+        if (summaryText == true) {
+            $("#SummaryError").text("Maximum character limit exists");
+        }
+        else
+        {
+            $.ajax({
+                type: "POST",
+                url: '/Home/AddWorkitem/',
+                data: JSON.stringify({ addWorkitemData: newitem }),
+                contentType: "application/json;charset=utf-8",
+                processData: true,
+                success: function (response) {
+                    console.log(response);
+                    if (response.IsSuccess) {
+                        location.href = response.redirectURL;
+                    }
+                    else {
+                        $("#alertMessage").show();
+                    }
+                },
+                error: function (xhr) {
                     $("#alertMessage").show();
                 }
-            },
-            error: function (xhr) {
-                $("#alertMessage").show();
-            }
-        });
+            });
+        }
+
+
+        
     }
+
+   
 
 }
 
@@ -130,12 +171,19 @@ function noDataKey(evt) {
 }
 
 
+function noSpaceKey(evt) {
+    limitText(this, 300);
+    if (evt.keyCode != 32) {
+        $("#SummaryError").text("Space is required");
+    }
+    return true;
 
 
+}
 
-$('#Summary').on('keypress', function () {
-    limitText(this, 300)
-});
+//$('#Summary').on('keypress', function () {
+//    limitText(this, 300)
+//});
 
 function limitText(field, maxChar) {
     var ref = $(field),

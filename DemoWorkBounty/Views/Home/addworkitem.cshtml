@@ -34,10 +34,6 @@
     <div class="row">
         <div class="col-xs-12">
             <div class="alert alert-danger" id="alertMessage">
-                <button type="button" class="close" data-dismiss="alert">
-                    <i class="ace-icon fa fa-times"></i>
-                </button>
-
                 <strong>
                     <i class="ace-icon fa fa-times"></i>
                     Failed!
@@ -60,6 +56,7 @@
                     <div class="col-sm-2"></div>
                     <label class="col-sm-1 no-padding-right required" for="form-field-1"> Summary </label>
                     <div class="col-sm-9">
+                        @*<textarea rows="4" id="Summary" maxlength="200" class="col-xs-10 col-sm-5" onkeyup="return noSpaceKey(event)"></textarea>*@
                         <textarea rows="4" id="Summary" maxlength="200" class="col-xs-10 col-sm-5"></textarea>
                         <span id="SummaryError" class="text-danger"></span>
                     </div>
@@ -96,7 +93,8 @@
                     <div class="col-sm-2"></div>
                     <label class="col-sm-1 no-padding-right" for="form-field-1">Additional attachments  </label>
                     <div class="col-sm-9">
-                        <input multiple="" type="file" id="myFile" name="myFile" />
+                        <input multiple="" type="file" id="myFile" name="myFiles" />
+                        <span id="filesizeerror" class="text-danger"></span>
                     </div>
                 </div>
 
@@ -113,7 +111,7 @@
                             <div class="container">
                                 <div class="modal" id="myModal" role="dialog">
                                     <div class="modal-dialog modal-lg">
-                                        <!-- Modal content-->
+                              
                                         <div class="modal-content">
                                             <div class="modal-header">
                                                 <button type="button" class="close" data-dismiss="modal">&times;</button>

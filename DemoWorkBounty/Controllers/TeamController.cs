@@ -42,13 +42,16 @@ namespace DemoWorkBounty.Controllers
         {
             int currentUserID = Convert.ToInt32(Session["UserID"]);
             var teams = entity.Teams.Where(s => s.TeamName == TeamName).ToList();
+           
             int i = 0;
             foreach (var team in teams)
             {
                 if (team.UserID == currentUserID)
-                { i++; }
+                { i++;
+                ViewBag.TeamUserInfoId = team.TeamUserInfoID;
+                }
             }
-            if (i > 0)
+            if (teams.Any(a => a.UserID == currentUserID))
             {
                 try
                 {
@@ -119,7 +122,41 @@ namespace DemoWorkBounty.Controllers
             return Json(getMemberResults);
         }
 
+        public ActionResult GetTeamMemberList(string teamName)
+        {
+            ViewBag.TeamName = teamName;
+            var getTeamDetail = teamRepo.GetTeamDetail(teamName);
+            return PartialView("_TeamMemberList", getTeamDetail);
+        }
 
+        [HttpPost]
+        public JsonResult UpdateTeamName(Team teamName)
+        {
+            var redirectURL = "";
+            var IsSuccess = false;
+            var successAddWorkitemMessage = "";
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    var getUpdateTeamName = teamRepo.getUpdateTeamName(teamName);
+                    IsSuccess = true;
+                    successAddWorkitemMessage = "Team name changed successfully!";
+                    redirectURL = Url.Action("viewteams", "Home");
+
+                }
+                else
+                {
+                    successAddWorkitemMessage = "Error while entering in Data";
+                }
+            }
+            catch (Exception)
+            {
+                successAddWorkitemMessage = "Error";
+                return Json("Error");
+            }
+            return Json(new { IsSuccess = IsSuccess, successAddWorkitemMessage = successAddWorkitemMessage, redirectURL = redirectURL });
+        }
 
     }
 }

@@ -2,7 +2,7 @@
 @{
     ViewBag.Title = "Team detail";
     Layout = "~/Views/_DashboardLayout.cshtml";
-  
+
 }
 <script src="~/assets/js/getTeamDetail.js"></script>
 
@@ -22,7 +22,7 @@
                 <div class="widget-header">
                     <div class="col-xs-8">
                         <h4 class="widget-title lighter smaller">
-                           Team detail
+                            Team detail
                         </h4>
                     </div>
                     <div class="row">
@@ -44,16 +44,17 @@
                                 <input type="text" id="itId" size="5" class="col-xs-10 col-sm-5" />
                                 <input type="button" value="Search" onclick="show();" class="btn btn-minier btn-purple layoutcss TeamLayoutButton" data-toggle="tooltip" title="Find a member" />
                             </div>
-                            </div>
+                        </div>
                         <div class=".col-xs-4.col-sm-2 no-padding-right">
                             <div class="col-xs-4">
                                 <p class="alert alert-danger" id="addMemberFailError">Failed! Member not removed</p>
                                 <p class="alert alert-warning" id="memberAlreadyExist">Member Already exist</p>
+                                <p class="alert alert-warning" id="memberNotFoundError">Member does not exist</p>
                                 <p class="alert alert-warning" id="noDateFoundMessage"> Please enter member name!</p>
                                 <p>
-                                <table id="simple-table" class="table table-striped table-bordered table-hover" cellspacing="100">
-                                    <tbody id="items"></tbody>
-                                </table>
+                                    <table id="simple-table" class="table table-striped table-bordered table-hover" cellspacing="100">
+                                        <tbody id="items"></tbody>
+                                    </table>
                                 </p>
                             </div>
                         </div>
@@ -63,35 +64,8 @@
             </div>
         </div>
 
-        <div class="col-xs-10">
-            <div class="widget-header">
-                <h4 class="widget-title lighter smaller">@ViewBag.TeamName</h4>
-            </div>
-            @foreach (var item in Model)
-            {
-                    
-                    <table id="simple-table1" class="table table-striped table-bordered table-hover">
-                    <tbody>
-                        <tr>
-                            <th>Member</th>
-                            <th>Email</th>
-                            <th>Contact No</th>
-                            <th>Action</th>
-                        </tr>
-                        @foreach (var user in item.TeamUserList)
-                        {
-                            <tr>
-                                <td>@Html.DisplayFor(s => user.FirstName)</td>
-                                <td>@Html.DisplayFor(s => user.Email)</td>
-                                <td>@Html.DisplayFor(s => user.PhoneNumber)</td>
-                                <td><input type="button" id="@user.UserID" value="Delete Member" data-teamuserid="@user.TeamUserInfoID" onclick="removeMember(this);" class="btn btn-minier btn-purple" data-toggle="tooltip" title="Remove member from team"></td>
-                            </tr>
-                        }
-
-                    </tbody>
-
-                </table>
-            }
+        <div id="getDataList">
+            @Html.Partial("_TeamMemberList", Model)
         </div>
 
         <div class="col-xs-10">

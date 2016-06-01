@@ -190,49 +190,49 @@ namespace DemoWorkBounty.Controllers
         }
 
         [HttpPost]
-        public JsonResult AddWorkitem(Workitem addWorkitemData)
+        public ActionResult AddWorkitem(Workitem addWorkitemData, HttpPostedFileBase myFiles)
         {
             var redirectURL = "";
             var IsSuccess = false;
             var successAddWorkitemMessage = "";
             try
             {
-                if (ModelState.IsValid)
+                if (myFiles != null)
                 {
-
-                    string result = System.Text.Encoding.UTF8.GetString(addWorkitemData.Content);
-                   
-
-                    HttpFileCollectionBase files = Request.Files;
-                    HttpFileCollection my = addWorkitemData.Content;
-                     
-                    var myFile = addWorkitemData.Content;
-                    for (int i = 0; i < files.Count; i++)
+                    if (myFiles.ContentLength < 1024 * 1024 * 4)
                     {
-                        HttpPostedFileBase myFile = files[i];
-                        var path = Path.Combine(Server.MapPath("~/work1/Download/"), addWorkitemData.DocumentFilePath);
-                        addWorkitemData.DocumentFilePath = path;
-                        addWorkitemData.DocumentFilePath.SaveAs(path);
-                        myFile.SaveAs(path);
-                        //myFile.SaveAs(path);
+                        string filename = Convert.ToString(Session["path"]);
+                        myFiles.SaveAs(filename);
+                        successAddWorkitemMessage = "Workitem Added successfully!";
+                        redirectURL = Url.Action("Dashboard", "Home");
+                        IsSuccess = true;
                     }
-
-
-                    //var path = Path.Combine(Server.MapPath("~/work1/Download/"), addWorkitemData.DocumentFilePath);
-                    //addWorkitemData.DocumentFilePath = path;
-                    //addWorkitemData.DocumentFilePath.SaveAs(path);
-                    //myFile.SaveAs(path);
-                    //myFile.SaveAs(path);
-                    
-                    var getResultsOfWorkitemData = workbountyRepo.AddWorkitem(addWorkitemData);
-                    IsSuccess = true;
-                    successAddWorkitemMessage = "Workitem Added successfully!";
-                    redirectURL = Url.Action("Dashboard", "Home");
 
                 }
                 else
                 {
-                    successAddWorkitemMessage = "Error while entering in Data";
+                    if (addWorkitemData.Title != null)
+                    {
+                        if (ModelState.IsValid)
+                        {
+                            if(addWorkitemData.DocumentFilePath != null)
+                            { 
+                            var path = Path.Combine(Server.MapPath("~/work1/Download/"), addWorkitemData.DocumentFilePath);
+                            addWorkitemData.DocumentFilePath = path;
+                            Session["path"] = addWorkitemData.DocumentFilePath;
+                            }
+                            var getResultsOfWorkitemData = workbountyRepo.AddWorkitem(addWorkitemData);
+                            IsSuccess = true;
+                            successAddWorkitemMessage = "Workitem Added successfully!";
+                            redirectURL = Url.Action("Dashboard", "Home");
+                            return null;
+                            
+                        }
+                        else
+                        {
+                            successAddWorkitemMessage = "Error while entering in Data";
+                        }
+                    }
                 }
             }
             catch (Exception)
@@ -240,7 +240,8 @@ namespace DemoWorkBounty.Controllers
                 successAddWorkitemMessage = "Error";
                 return Json("Error");
             }
-            return Json(new { IsSuccess = IsSuccess, successAddWorkitemMessage = successAddWorkitemMessage, redirectURL = redirectURL });
+            //return Json(new { IsSuccess = IsSuccess, successAddWorkitemMessage = successAddWorkitemMessage, redirectURL = redirectURL });
+            return RedirectToAction("Dashboard", "Home");
 
         }
 

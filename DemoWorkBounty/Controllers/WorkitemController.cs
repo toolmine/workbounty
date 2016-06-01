@@ -50,7 +50,6 @@ namespace DemoWorkBounty.Controllers
         {
             var showAssignedWorkitemDetail = workbountyRepo.WorkitemDistribution(getWorkitemData);
             return Json(showAssignedWorkitemDetail);
-
         }
 
         public ActionResult UpdateWorkitem(int currentWorkitemID)
@@ -274,15 +273,67 @@ namespace DemoWorkBounty.Controllers
 
         }
 
-        public FileResult ViewAttachedDocument(int workitemID)
+        public ActionResult EditWorkitem(int currentWorkitemID)
         {
+            int currentUserID = Convert.ToInt32(Session["UserID"]);
+            var valid = entity.Workitems.Where(x => x.CreatedBy == currentUserID).Select(x => x.WorkitemID).ToList();
+            try
+            {
+                if (valid.Contains(currentWorkitemID))
+                {
+                    var getCurrentUserTeamInfo = workbountyRepo.SelectTeam(currentUserID);
 
-            string fileName = entity.Workitems.Where(s => s.WorkitemID == workitemID).Select(s => s.DocumentFilePath).FirstOrDefault();
-            return File(fileName, System.Net.Mime.MediaTypeNames.Application.Octet, fileName);
+                    ViewBag.TeamList = new SelectList(getCurrentUserTeamInfo, "TeamUserInfoID", "TeamName");
+                    var getDataofItemsIWantDone = workbountyRepo.GetAllitemsDone(currentWorkitemID);
+                    ViewBag.items = getDataofItemsIWantDone;
 
-
+                    return View();
+                }
+                else
+                {
+                    Response.Redirect("/Home/Authorize");
+                    return null;
+                }
+            }
+            catch (Exception)
+            {
+                return RedirectToAction("Dashboard", "Home");
+            }
         }
 
+        [HttpPost]
+        public JsonResult EditWorkitem(Workitem addWorkitemData)
+        {
+            var redirectURL = "";
+            var IsSuccess = false;
+            var successAddWorkitemMessage = "";
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    var getResultsOfWorkitemData = workbountyRepo.EditWorkitem(addWorkitemData);
+                    IsSuccess = true;
+                    successAddWorkitemMessage = "Workitem Updated successfully!";
+                    redirectURL = Url.Action("Dashboard", "Home");
+                 }
+                else
+                {
+                    successAddWorkitemMessage = "Error while entering in Data";
+                }
+            }
+            catch (Exception)
+            {
+                successAddWorkitemMessage = "Error";
+                return Json("Error");
+            }
+            return Json(new { IsSuccess = IsSuccess, successAddWorkitemMessage = successAddWorkitemMessage, redirectURL = redirectURL });
+        }
+
+        public FileResult ViewAttachedDocument(int workitemID)
+        {
+            string fileName = entity.Workitems.Where(s => s.WorkitemID == workitemID).Select(s => s.DocumentFilePath).FirstOrDefault();
+            return File(fileName, System.Net.Mime.MediaTypeNames.Application.Octet, fileName);
+        }
 
 
     }
