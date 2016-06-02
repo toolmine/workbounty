@@ -39,7 +39,7 @@
                                             <label class="block clearfix">
                                                 <span class="block input-icon input-icon-right">
 
-                                                    @Html.TextBoxFor(a => a.Email, new { @id = "Email", @maxlength = "30", @class = "form-control", @placeholder = "E mail", @typeof = "email" })
+                                                    @Html.TextBoxFor(a => a.Email, new { @id = "Email", @maxlength = "30", @onkeypress = "return trim(this)",@class = "form-control", @placeholder = "E mail", @typeof = "email" })
                                                     <span id="EmailError" class="text-danger"></span>
                                                 </span>
 
@@ -91,7 +91,7 @@
                                           
                                               <label class="block clearfix">
                                                 <span class="block input-icon input-icon-right">
-                                                    @Html.TextBoxFor(a => a.InterestedKeywords, new { @id = "InterestedKeywords", @maxlength = "10", @class = "form-control", @placeholder = "Interested Keywords" })
+                                                    @Html.TextBoxFor(a => a.InterestedKeywords, new { @id = "InterestedKeywords", @maxlength = "10", @onkeypress="return AvoidSpace(event)", @class = "form-control", @placeholder = "Interested Keywords" })
                                                     <span id="InterestedKeywordsError" class="text-danger"></span>
                                                 </span>
 

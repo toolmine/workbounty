@@ -101,7 +101,21 @@ function isNumberKey(evt) {
         return true;
     }
 
-    
+    function AvoidSpace(event) {
+        var k = event ? event.which : window.event.keyCode;
+        if (k == 32) return false;
+    }
+
+    function trim(el) {
+        el.value = el.value.
+        replace(/(^\s*)|(\s*$)/gi, "").
+        replace(/[ ]{2,}/gi, " ").
+        replace(/\n +/, "\n");
+        return;
+    }
+
+
+
     $(document).ready(function () {
         $('#Password').bind("cut copy paste", function (e) {
             e.preventDefault();

@@ -22,7 +22,6 @@ $(document).ready(function () {
 
     $("#filesizeerror").text("Maximum file size is 4MB");
 
-
     $('#textarea_count').html(text_max + ' characters remaining');
     $('#Summary').keyup(function() {
         var text_length = $('#Summary').val().length;
@@ -137,7 +136,8 @@ function AddWorkitem() {
 
             return true;
         }
-        function noDataKey(evt) {
+        function noDataKey(evt)
+        {
             var charcode = (evt.which) ? evt.which : event.keyCode;
             if (charcode > 0 && charcode < 127)
                 return false;
@@ -145,4 +145,12 @@ function AddWorkitem() {
             return true;
         }
 
-    }
+}
+
+function trim(el) {
+    el.value = el.value.
+    replace(/(^\s*)|(\s*$)/gi, ""). 
+    replace(/[ ]{2,}/gi, " "). 
+    replace(/\n +/, "\n"); 
+    return;
+}
