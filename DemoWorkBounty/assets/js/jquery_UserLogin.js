@@ -11,11 +11,12 @@ $(function () {
             "Email": $("#Email").val(),
             "Password": $("#Password").val()
         };
-
+        
         if (id.Email == "" || id.Password=="")
         {
             $("#loginWarningMessage").show();
         }
+        
         else
             {
         $.ajax({
