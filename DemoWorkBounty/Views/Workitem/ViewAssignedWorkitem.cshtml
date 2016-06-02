@@ -76,7 +76,9 @@
                                     {
                                             <td>@Html.DisplayFor(a => i.Amount)</td>
                                     }
-                                        <td>@Html.ActionLink("Modify", "EditWorkitem", "workitem", new { currentWorkitemID = @i.WorkitemID }, new { @class = "btn btn-minier btn-success", data_toggle = "tooltip", title = "Modify Workitem" })</td>
+                                        <td>@if(i.Status == true)
+                                            { 
+                                        @Html.ActionLink("Modify", "EditWorkitem", "workitem", new { currentWorkitemID = @i.WorkitemID }, new { @class = "btn btn-minier btn-success", data_toggle = "tooltip", title = "Modify Workitem" })}</td>
                                     </tr>
                                 </tbody>
                             </table>

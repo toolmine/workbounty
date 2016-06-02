@@ -28,15 +28,14 @@ $(document).ready(function () {
 function AddWorkitem() {
 
     var uploadedFileSize = 0;
-   
     var uploadedFile = document.getElementById('myFile');
-    if (uploadedFile.value != "")
+    if (uploadedFile.value != "") {
     {
         uploadedFileSize = uploadedFile.files[0].size;
     }
 
     $("#form").submit();
-    
+
     var d = new Date();
     var dueDate = $("#DueDate").val();
     var startDate = $("#StartDate").val();
@@ -44,7 +43,7 @@ function AddWorkitem() {
     var dueDateObject = new Date(dueDate);
     var fileInput = document.getElementById('myFile');
     var fileName = fileInput.value.split(/(\\|\/)/g).pop();
-    
+
     var newitem = {};
     newitem.Title = $("#Title").val();
     newitem.Summary = $("#Summary").val();
@@ -61,8 +60,8 @@ function AddWorkitem() {
     newitem.Status = true;
     newitem.Remarks = "Good";
     newitem.IsOpenForGroup = true;
-    newitem.Content = uploadedFileSize ;
-                
+    newitem.Content = uploadedFileSize;
+
     if ($("#Title").val() == "") {
         $("#TitleError").text("Title is Required");
     }
@@ -76,20 +75,18 @@ function AddWorkitem() {
 
     else if ($("#DueDate").val() == "") {
         $("#DuedateError").text("Due Date is Required");
-       
+
     }
 
-    else 
-    {
+    else {
         var summaryVal = $("#Summary").val();
-        var summaryText = summaryVal.indexOf(' ') <= 2;
+        var summaryText = summaryVal.indexOf(' ') >= 2;
 
         if (summaryText == true)
         {
             $("#SummaryError").text("Maximum character limit exists");
         }
-        else
-        {
+        else {
             $.ajax({
                 type: "POST",
                 url: '/Home/AddWorkitem/',
@@ -111,13 +108,6 @@ function AddWorkitem() {
             });
         }
     }
-
-
-        
-}
-
-   
-
 
 
 function isTextKey(evt) {

@@ -323,6 +323,11 @@ namespace DemoWorkBounty.Repository
         {
             List<WorkitemRegistration> getListofAppliedWorkitem = new List<WorkitemRegistration>();
             var getListofAssignWorkitem = entity.Workitems.Where(s => s.WorkitemID == currentWorkitemID).ToList();
+            var rewarded = entity.WorkItemAssignments.Where(s => s.IsRewarded == true && s.WorkItemID == currentWorkitemID).ToList();
+            if (rewarded.Count != 0)
+            {
+                getListofAssignWorkitem.Any(s => s.Status = false);
+            }
             return getListofAssignWorkitem;
         }
 
