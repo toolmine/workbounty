@@ -69,7 +69,6 @@ namespace DemoWorkBounty
 
             bundles.Add(new StyleBundle("~/assets/css").Include(
                 "~/assets/css/bootstrap.min.css",
-                "~/assets/css/loading.css",
                 "~/assets/font-awesome/4.2.0/css/font-awesome.min.css",
                 "~/assets/fonts/fonts.googleapis.com.css",
                 "~/Content/themes/base/jquery.ui.all.css",

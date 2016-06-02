@@ -2,6 +2,7 @@
 var amount;
 var filepath;
 var jqXHRData;
+var text_max = 200;
 
 $(document).ready(function () {
 
@@ -18,16 +19,27 @@ $(document).ready(function () {
 
     });
 
-    $("#SummaryError").text("Maximum 200 characters");
+
     $("#filesizeerror").text("Maximum file size is 4MB");
 
+
+    $('#textarea_count').html(text_max + ' characters remaining');
+    $('#Summary').keyup(function() {
+        var text_length = $('#Summary').val().length;
+        var text_remaining = text_max - text_length;
+
+        $('#textarea_count').html(text_remaining + ' characters remaining');
+    });
 });
+
+
 
 function AddWorkitem() {
 
     var uploadedFileSize = 0;
     var uploadedFile = document.getElementById('myFile');
-    if (uploadedFile.value != "") {
+    if (uploadedFile.value != "")
+    {
         {
             uploadedFileSize = uploadedFile.files[0].size;
             if (uploadedFileSize > 4194304) {
@@ -80,14 +92,6 @@ function AddWorkitem() {
             $("#DuedateError").text("Due Date is Required");
 
         }
-
-        else {
-            var summaryVal = $("#Summary").val();
-            var summaryText = summaryVal.indexOf(' ') >= 2;
-
-            if (summaryText == true) {
-                $("#SummaryError").text("Maximum character limit exists");
-            }
             else {
                 $.ajax({
                     type: "POST",
@@ -95,21 +99,25 @@ function AddWorkitem() {
                     data: JSON.stringify({ addWorkitemData: newitem }),
                     contentType: "application/json;charset=utf-8",
                     processData: true,
-                    success: function (response) {
+                    success: function (response)
+                    {
                         console.log(response);
-                        if (response.IsSuccess) {
+                        if (response.IsSuccess)
+                        {
                             location.href = response.redirectURL;
                         }
-                        else {
+                        else 
+                        {
                             $("#alertMessage").show();
                         }
                     },
-                    error: function (xhr) {
+                    error: function (xhr)
+                    {
                         $("#alertMessage").show();
                     }
                 });
             }
-        }
+        
 
 
         function isTextKey(evt) {
@@ -136,32 +144,5 @@ function AddWorkitem() {
 
             return true;
         }
-
-
-        function noSpaceKey(evt) {
-            limitText(this, 300);
-            if (evt.keyCode != 32) {
-                $("#SummaryError").text("Space is required");
-            }
-            return true;
-
-
-        }
-
-        //$('#Summary').on('keypress', function () {
-        //    limitText(this, 300)
-        //});
-
-        function limitText(field, maxChar) {
-            var ref = $(field),
-                val = ref.val();
-            if (val.length >= maxChar) {
-                ref.val(function () {
-                    console.log(val.substr(0, maxChar))
-                    $("#SummaryError").text("Summary should not be more than 300 words");
-                });
-            }
-        }
-
 
     }
