@@ -165,41 +165,22 @@ namespace DemoWorkBounty.Repository
         public List<AssignWorkitems> GetCurrentWorkitem(int currentUserID)
         {
             DateTime currentDate = DateTime.Now;
-            List<WorkitemDistribution> items = new List<WorkitemDistribution>();
             var WorkitemRegisteredUserID = entity.WorkitemRegistrations.Where(s => s.UserID == currentUserID && s.IsRegistered == true);
-            var exclusiveitems = WorkitemRegisteredUserID.Where(s => s.IsExclusive == true).ToList();
-            var checkWorkitem = new List<int>();
             var getCurrentWorkitemData = new List<AssignWorkitems>();
-            foreach (var item in exclusiveitems)
+            var items = WorkitemRegisteredUserID.Where(s => s.Workitem.DueDate >= currentDate).Select(s => s.WorkitemID).ToList();
+            foreach (var workItemID in items)
             {
-                var isRewardedWorkitem = entity.WorkItemAssignments.Where(s => s.WorkItemID == item.WorkitemID && s.IsRewarded == true).FirstOrDefault();
-                if (isRewardedWorkitem == null)
-                {
-                    var innerList = entity.WorkitemDistributions.Where(s => s.WorkitemID == item.WorkitemID && s.UserID == item.UserID).Select(s => s.WorkitemID).Distinct().ToList();
-                   
-                   foreach(var d in innerList)
-                   {
-                       var getUserID = entity.WorkitemDistributions.Where(s => s.WorkitemID == item.WorkitemID && s.UserID == item.UserID).Select(s => new AssignWorkitems { AssigntoUserID = s.UserID }).Distinct().ToList();
-                      
-                   }
-                   innerList.ForEach(a => checkWorkitem.Add(a));
-
-                }
-            }
-            var nonExclusiveitems = WorkitemRegisteredUserID.Where(s => s.IsExclusive == false && s.Workitem.DueDate >= currentDate).Select(s => s.WorkitemID).Distinct().ToList();
-            nonExclusiveitems.ForEach(a => checkWorkitem.Add(a));
-            foreach (var workItemID in checkWorkitem)
-            {
-                var checkDueDateValidation = entity.WorkitemRegistrations.Where(s => s.Workitem.DueDate >= currentDate).FirstOrDefault();
-                if (checkDueDateValidation != null)
-                {
-                    var isRewardedWorkitem = entity.WorkItemAssignments.Where(s => s.WorkItemID == workItemID && s.IsRewarded == true).FirstOrDefault();
+                var assign = 0;
+                var isRewardedWorkitem = entity.WorkItemAssignments.Where(s => s.WorkItemID == workItemID && s.IsRewarded == true).FirstOrDefault();
                     if (isRewardedWorkitem == null)
                     {
-                        var item = entity.WorkitemRegistrations.Where(s => s.UserID == currentUserID && s.WorkitemID == workItemID).Select(s => new AssignWorkitems { WorkitemID = s.WorkitemID, Title = s.Workitem.Title, StartDate = s.Workitem.StartDate, EndDate = s.Workitem.DueDate, FirstName = s.Workitem.UserInfo.FirstName, ProposedReward = s.Workitem.ProposedReward, Amount = s.Workitem.Amount, CreatedDateTime = s.Workitem.CreatedDateTime }).FirstOrDefault();
+                        if (entity.WorkitemDistributions.Where(s => s.WorkitemID == workItemID && s.UserID == currentUserID).ToList().Count() != 0 || WorkitemRegisteredUserID.Where(s => s.WorkitemID == workItemID && s.IsExclusive == false).ToList().Count() != 0)
+                        {
+                            assign = 1;
+                        }
+                        var item = entity.WorkitemRegistrations.Where(s => s.UserID == currentUserID && s.WorkitemID == workItemID).Select(s => new AssignWorkitems { WorkitemID = s.WorkitemID, Title = s.Workitem.Title, StartDate = s.Workitem.StartDate, EndDate = s.Workitem.DueDate, FirstName = s.Workitem.UserInfo.FirstName, ProposedReward = s.Workitem.ProposedReward, Amount = s.Workitem.Amount, CreatedDateTime = s.Workitem.CreatedDateTime, AssigntoUserID = assign }).FirstOrDefault();
                         getCurrentWorkitemData.Add(item);
                     }
-                }
             }
             getCurrentWorkitemData.OrderByDescending(s => s.CreatedDateTime).ToList();
             return getCurrentWorkitemData;

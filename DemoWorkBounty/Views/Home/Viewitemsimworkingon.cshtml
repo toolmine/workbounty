@@ -56,7 +56,14 @@
                             {
                             <td>@Html.DisplayFor(a => myWorkitem.Amount)</td>
                             }
-                        <td>@Html.ActionLink("Update", "UpdateWorkitem", "workitem", new { currentWorkitemID = myWorkitem.WorkitemID }, new { @class = "btn btn-minier btn-purple", data_toggle = "tooltip", title = "Submit a document for workitem" }) </td>
+                        @if (myWorkitem.AssigntoUserID == 1)
+                        {
+                            <td>@Html.ActionLink("Update", "UpdateWorkitem", "workitem", new { currentWorkitemID = myWorkitem.WorkitemID }, new { @class = "btn btn-minier btn-purple", data_toggle = "tooltip", title = "Submit assignments " }) </td>
+                        }
+                        else
+                        {
+                            <td>Pending for approve</td>
+                        }
                     </tr>
                             i++;
                     }
