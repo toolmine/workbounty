@@ -419,6 +419,7 @@
     <Content Include="assets\js\spin.min.js" />
     <Content Include="assets\js\typeahead.jquery.min.js" />
     <Content Include="assets\js\UpdateTeamName.js" />
+    <Content Include="assets\js\uploadworkitem.js" />
     <Content Include="assets\swf\copy_csv_xls_pdf.swf" />
     <Content Include="Content\abc.gif" />
     <Content Include="Content\PagedList.css" />

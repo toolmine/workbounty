@@ -3,6 +3,11 @@
     ViewBag.Title = "Update workitem";
     Layout = "~/Views/_DashboardLayout.cshtml";
 }
+<head>
+    <title></title>
+    <script src="~/assets/js/uploadworkitem.js"></script>
+
+</head>
 
 <ul class="breadcrumb">
     <li>
@@ -69,6 +74,7 @@ else
                         </h4>
                    
                     </div>
+                 
 
                     <div class="col-sm-10">
                         <div class="col-sm-10">
@@ -94,13 +100,13 @@ else
                                             <div class="widget-box transparent toppadding10px" id="recent-box">
                                                 <div>
                                                     <div class="col-sm-10 toppadding50px">
-                                                        <table><tr><td class="padding10px"><h5>Attach Documents:  </h5></td><td><input type="file" id="myFile" name="myFile" /></td></tr></table>
+                                                        <table><tr><td class="padding10px"><h5>Attach Documents:  </h5></td><td><input type="file" id="myFile" name="myFile" onclick="upload()" /></td><td><span id="filesizeerror" class="text-danger"></span></td></tr></table>
 
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="col-sm-10 toppadding50px">
-                                                <button class="btn btn-info" type="submit" data-toggle="tooltip" title="Upload a document">
+                                                <button class="btn btn-info" type="submit" data-toggle="tooltip" title="Upload a document" id="ButtonSubmit" onclick="uploadData()">
                                                     <i class="ace-icon fa fa-check bigger-110"></i>
                                                     Submit
                                                 </button>
