@@ -11,6 +11,7 @@ namespace DemoWorkBounty
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
     
     public partial class Workitem
     {
@@ -26,15 +27,19 @@ namespace DemoWorkBounty
         public int WorkitemID { get; set; }
         public string Title { get; set; }
         public string Summary { get; set; }
+         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd-MM-yyyy}")]
         public System.DateTime StartDate { get; set; }
+         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd-MM-yyyy}")]
         public System.DateTime DueDate { get; set; }
         public int PublishedTo { get; set; }
         public string DocumentFilePath { get; set; }
         public string ProposedReward { get; set; }
         public string Amount { get; set; }
         public int CreatedBy { get; set; }
+         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd-MM-yyyy}")]
         public System.DateTime CreatedDateTime { get; set; }
         public int ModifyBy { get; set; }
+         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd-MM-yyyy}")]
         public System.DateTime ModifyDateTime { get; set; }
         public bool Status { get; set; }
         public string Remarks { get; set; }
