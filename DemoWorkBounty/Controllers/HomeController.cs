@@ -236,11 +236,9 @@ namespace DemoWorkBounty.Controllers
             catch (Exception)
             {
                 return RedirectToAction("Error", "Home");
-                //successAddWorkitemMessage = "Error";
-                //return Json("Error");
+               
             }
-            //return Json(new { IsSuccess = IsSuccess, successAddWorkitemMessage = successAddWorkitemMessage, redirectURL = redirectURL });
-            return RedirectToAction("Dashboard", "Home");
+           return RedirectToAction("Dashboard", "Home");
 
         }
 
