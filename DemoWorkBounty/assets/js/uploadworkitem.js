@@ -1,11 +1,11 @@
 ﻿$(document).ready(function () {
-    $("#filealertMessage").hide();
+    $("#warningMessage").hide();
 
 });
 
 function upload() {
     document.getElementById("ButtonSubmit").disabled = false;
-    $("#filesizeerror").text("");
+    $("#warningMessage").hide();
 }
 
 function uploadData() {
@@ -16,7 +16,7 @@ function uploadData() {
         {
             uploadedFileSize = uploadedFile.files[0].size;
             if (uploadedFileSize > 4194304) {
-                $("#filesizeerror").text("File is too big!");
+                $("#warningMessage").show();
                 document.getElementById("ButtonSubmit").disabled = true;
                           };
         }

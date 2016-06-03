@@ -16,6 +16,16 @@
     </li>
     <li class="active" data_toggle="tooltip" , title="">Update Workitem</li>
 </ul>
+<div class="alert alert-warning" id="warningMessage">
+    <strong>
+        <i class="ace-icon fa fa-times"></i>
+        Error!
+    </strong>
+   File should not be more than 4 MB.
+    <br>
+
+</div>
+
 @if (ViewBag.displayAlert != null)
 {
     <div class="alert alert-warning" id="alertMessage">
@@ -28,6 +38,7 @@
         This workitem is already rewarded.
         <br>
     </div>
+    
 
 }
 else
@@ -100,7 +111,7 @@ else
                                             <div class="widget-box transparent toppadding10px" id="recent-box">
                                                 <div>
                                                     <div class="col-sm-10 toppadding50px">
-                                                        <table><tr><td class="padding10px"><h5>Attach Documents:  </h5></td><td><input type="file" id="myFile" name="myFile" onclick="upload()" /></td><td><span id="filesizeerror" class="text-danger"></span></td></tr></table>
+                                                        <table><tr><td class="padding10px"><h5>Attach Documents:  </h5></td><td><input type="file" id="myFile" name="myFile" onclick="upload()" /></td></tr></table>
 
                                                     </div>
                                                 </div>
