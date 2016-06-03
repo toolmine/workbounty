@@ -50,8 +50,6 @@ function AddWorkitem() {
         }
     }
 
-    $("#form").submit();
-
     var d = new Date();
     var dueDate = $("#DueDate").val();
     var startDate = $("#StartDate").val();
@@ -83,6 +81,7 @@ function AddWorkitem() {
     }
     else if ($("#Summary").val() == "") {
         $("#SummaryError").text("Summary is Required");
+           
     }
 
     else if ($("#StartDate").val() == "") {
@@ -93,22 +92,16 @@ function AddWorkitem() {
         $("#DuedateError").text("Due Date is Required");
 
     }
-    else {
+        else {
+            $("#form").submit();
         $.ajax({
             type: "POST",
             url: '/Home/AddWorkitem/',
             data: JSON.stringify({ addWorkitemData: newitem }),
             contentType: "application/json;charset=utf-8",
             processData: true,
-            success: function (response) {
-                console.log(response);
-                if (response.IsSuccess) {
-                    location.href = response.redirectURL;
-                }
-                else {
-                    $("#alertMessage").show();
-                }
-            },
+                    success: $("#alertMessage").hide(),
+                                                                                        
             error: function (xhr) {
                 $("#alertMessage").show();
             }
