@@ -11,7 +11,6 @@ namespace DemoWorkBounty
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
     
     public partial class Workitem
     {
@@ -21,14 +20,13 @@ namespace DemoWorkBounty
             this.WorkitemDistributions = new HashSet<WorkitemDistribution>();
             this.WorkitemHistories = new HashSet<WorkitemHistory>();
             this.WorkitemRegistrations = new HashSet<WorkitemRegistration>();
+            this.WorkitemStatus = new HashSet<WorkitemStatu>();
         }
     
         public int WorkitemID { get; set; }
         public string Title { get; set; }
         public string Summary { get; set; }
-        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd-MM-yyyy}")]
         public System.DateTime StartDate { get; set; }
-        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd-MM-yyyy}")]
         public System.DateTime DueDate { get; set; }
         public int PublishedTo { get; set; }
         public string DocumentFilePath { get; set; }
@@ -41,8 +39,7 @@ namespace DemoWorkBounty
         public bool Status { get; set; }
         public string Remarks { get; set; }
         public bool IsOpenForGroup { get; set; }
-        public int Content { get; set; }
-        
+        public int Content { get; set;}
     
         public virtual UserInfo UserInfo { get; set; }
         public virtual UserInfo UserInfo1 { get; set; }
@@ -54,5 +51,6 @@ namespace DemoWorkBounty
         public virtual ICollection<WorkitemDistribution> WorkitemDistributions { get; set; }
         public virtual ICollection<WorkitemHistory> WorkitemHistories { get; set; }
         public virtual ICollection<WorkitemRegistration> WorkitemRegistrations { get; set; }
+        public virtual ICollection<WorkitemStatu> WorkitemStatus { get; set; }
     }
 }

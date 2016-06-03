@@ -21,7 +21,9 @@ namespace DemoWorkBounty
     
         public int WorkitemStatusID { get; set; }
         public string StatusDescription { get; set; }
+        public int WorkitemID { get; set; }
     
         public virtual ICollection<WorkitemHistory> WorkitemHistories { get; set; }
+        public virtual Workitem Workitem { get; set; }
     }
 }

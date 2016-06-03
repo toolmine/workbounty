@@ -23,5 +23,7 @@ namespace DemoWorkBounty
     
         public virtual UserInfo UserInfo { get; set; }
         public virtual Workitem Workitem { get; set; }
+        public virtual WorkItemAssignment WorkItemAssignment1 { get; set; }
+        public virtual WorkItemAssignment WorkItemAssignment2 { get; set; }
     }
 }

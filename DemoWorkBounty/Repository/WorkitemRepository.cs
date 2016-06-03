@@ -404,19 +404,23 @@ namespace DemoWorkBounty.Repository
                         if (id.Title != null) a.Title = id.Title;
                         if (id.ProposedReward != "undefined") a.ProposedReward = id.ProposedReward;
                     }
+                 
                );
-                    //WorkitemHistory setPreviousInfo = new WorkitemHistory { UpdatedBy=id.ModifyBy,UpdatedDateTIme=id.ModifyDateTime,WorkitemID=id.WorkitemID,WorkitemStatusID=id.WorkitemID};
-                    //entities.WorkitemHistories.Add(setPreviousInfo);
-                    //var context = new WorkBountyDBEntities();
-                    //context.ObjectStateManager.ChangedObjectState(getWorkitemData, EntityState.Modified);
-                    
+                    WorkitemStatu workitemstatusData = new WorkitemStatu();
+                    string statusDescription = "Update";
+                    workitemstatusData.StatusDescription = statusDescription;
+                    workitemstatusData.WorkitemID = id.WorkitemID;
+                    entities.WorkitemStatus.Add(workitemstatusData);
+                    entities.SaveChanges();
+                    WorkitemHistory workitemHistoryData = new WorkitemHistory();
+                    workitemHistoryData.WorkitemID = id.WorkitemID;
+                    workitemHistoryData.UpdatedBy = id.ModifyBy;
+                    workitemHistoryData.UpdatedDateTIme = DateTime.Now;
+                    var getWorkitemStatusID = entities.WorkitemStatus.Where(s => s.WorkitemID == id.WorkitemID).Select(s => s.WorkitemStatusID).FirstOrDefault();
+                    workitemHistoryData.WorkitemStatusID = getWorkitemStatusID;
+                    entities.WorkitemHistories.Add(workitemHistoryData);
                     entities.SaveChanges();
 
-                    //entities.Configuration.ValidateOnSaveEnabled = false;
-                    //Workitem updateWorkitem = new Workitem() { WorkitemID = id.WorkitemID, Title = id.Title, Summary = id.Summary, Amount = id.Amount, ModifyBy = id.ModifyBy, ModifyDateTime = id.ModifyDateTime, PublishedTo = id.PublishedTo };
-                    //entities.Workitems.Attach(updateWorkitem);
-                    //entities.Entry(updateWorkitem).Property(u => u.Remarks).IsModified = true;
-                    //entities.SaveChanges();
                 }
                
                 return "Success";

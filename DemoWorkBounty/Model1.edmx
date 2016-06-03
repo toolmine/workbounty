@@ -15,16 +15,6 @@
           <Property Name="InnerException" Type="varchar" MaxLength="5000" />
           <Property Name="EventDateTime" Type="datetime" Nullable="false" />
         </EntityType>
-        <EntityType Name="sysdiagrams">
-          <Key>
-            <PropertyRef Name="diagram_id" />
-          </Key>
-          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
-          <Property Name="principal_id" Type="int" Nullable="false" />
-          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="version" Type="int" />
-          <Property Name="definition" Type="varbinary(max)" />
-        </EntityType>
         <EntityType Name="Team">
           <Key>
             <PropertyRef Name="TeamID" />
@@ -117,6 +107,7 @@
           </Key>
           <Property Name="WorkitemStatusID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="StatusDescription" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="WorkitemID" Type="int" Nullable="false" />
         </EntityType>
         <Association Name="FK_Team_Team">
           <End Role="Team" Type="Self.Team" Multiplicity="1" />
@@ -214,6 +205,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_WorkItemAssignment_WorkItemAssignment">
+          <End Role="WorkItemAssignment" Type="Self.WorkItemAssignment" Multiplicity="1" />
+          <End Role="WorkItemAssignment1" Type="Self.WorkItemAssignment" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="WorkItemAssignment">
+              <PropertyRef Name="WorkItemAssignmentID" />
+            </Principal>
+            <Dependent Role="WorkItemAssignment1">
+              <PropertyRef Name="WorkItemAssignmentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_WorkitemDistribution_UserInfo">
           <End Role="UserInfo" Type="Self.UserInfo" Multiplicity="1" />
           <End Role="WorkitemDistribution" Type="Self.WorkitemDistribution" Multiplicity="*" />
@@ -263,14 +266,14 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_WorkitemHistory_WorkitemStatus">
-          <End Role="WorkitemStatus" Type="Self.WorkitemStatus" Multiplicity="1" />
+          <End Role="Workitem" Type="Self.Workitem" Multiplicity="1" />
           <End Role="WorkitemHistory" Type="Self.WorkitemHistory" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="WorkitemStatus">
-              <PropertyRef Name="WorkitemStatusID" />
+            <Principal Role="Workitem">
+              <PropertyRef Name="WorkitemID" />
             </Principal>
             <Dependent Role="WorkitemHistory">
-              <PropertyRef Name="WorkitemStatusID" />
+              <PropertyRef Name="WorkitemID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -298,9 +301,20 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_WorkitemStatus_WorkitemStatus">
+          <End Role="Workitem" Type="Self.Workitem" Multiplicity="1" />
+          <End Role="WorkitemStatus" Type="Self.WorkitemStatus" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Workitem">
+              <PropertyRef Name="WorkitemID" />
+            </Principal>
+            <Dependent Role="WorkitemStatus">
+              <PropertyRef Name="WorkitemID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="WorkBountyDBModelStoreContainer">
           <EntitySet Name="ExceptionLog" EntityType="Self.ExceptionLog" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Team" EntityType="Self.Team" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserInfo" EntityType="Self.UserInfo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Workitem" EntityType="Self.Workitem" Schema="dbo" store:Type="Tables" />
@@ -341,6 +355,10 @@
             <End Role="Workitem" EntitySet="Workitem" />
             <End Role="WorkItemAssignment" EntitySet="WorkItemAssignment" />
           </AssociationSet>
+          <AssociationSet Name="FK_WorkItemAssignment_WorkItemAssignment" Association="Self.FK_WorkItemAssignment_WorkItemAssignment">
+            <End Role="WorkItemAssignment" EntitySet="WorkItemAssignment" />
+            <End Role="WorkItemAssignment1" EntitySet="WorkItemAssignment" />
+          </AssociationSet>
           <AssociationSet Name="FK_WorkitemDistribution_UserInfo" Association="Self.FK_WorkitemDistribution_UserInfo">
             <End Role="UserInfo" EntitySet="UserInfo" />
             <End Role="WorkitemDistribution" EntitySet="WorkitemDistribution" />
@@ -358,7 +376,7 @@
             <End Role="WorkitemHistory" EntitySet="WorkitemHistory" />
           </AssociationSet>
           <AssociationSet Name="FK_WorkitemHistory_WorkitemStatus" Association="Self.FK_WorkitemHistory_WorkitemStatus">
-            <End Role="WorkitemStatus" EntitySet="WorkitemStatus" />
+            <End Role="Workitem" EntitySet="Workitem" />
             <End Role="WorkitemHistory" EntitySet="WorkitemHistory" />
           </AssociationSet>
           <AssociationSet Name="FK_WorkitemRegistration_UserInfo" Association="Self.FK_WorkitemRegistration_UserInfo">
@@ -368,6 +386,10 @@
           <AssociationSet Name="FK_WorkitemRegistration_Workitem" Association="Self.FK_WorkitemRegistration_Workitem">
             <End Role="Workitem" EntitySet="Workitem" />
             <End Role="WorkitemRegistration" EntitySet="WorkitemRegistration" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WorkitemStatus_WorkitemStatus" Association="Self.FK_WorkitemStatus_WorkitemStatus">
+            <End Role="Workitem" EntitySet="Workitem" />
+            <End Role="WorkitemStatus" EntitySet="WorkitemStatus" />
           </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -440,6 +462,7 @@
           <NavigationProperty Name="WorkitemDistributions" Relationship="Self.FK_WorkitemDistribution_Workitem" FromRole="Workitem" ToRole="WorkitemDistribution" />
           <NavigationProperty Name="WorkitemHistories" Relationship="Self.FK_WorkitemHistory_Workitem" FromRole="Workitem" ToRole="WorkitemHistory" />
           <NavigationProperty Name="WorkitemRegistrations" Relationship="Self.FK_WorkitemRegistration_Workitem" FromRole="Workitem" ToRole="WorkitemRegistration" />
+          <NavigationProperty Name="WorkitemStatus" Relationship="WorkBountyDBModel.FK_WorkitemStatus_WorkitemStatus" FromRole="Workitem" ToRole="WorkitemStatu" />
         </EntityType>
         <EntityType Name="WorkItemAssignment">
           <Key>
@@ -453,6 +476,8 @@
           <Property Name="SubmissionDateTime" Type="DateTime" Nullable="false" Precision="3" />
           <NavigationProperty Name="UserInfo" Relationship="Self.FK_WorkItemAssignment_UserInfo" FromRole="WorkItemAssignment" ToRole="UserInfo" />
           <NavigationProperty Name="Workitem" Relationship="Self.FK_WorkItemAssignment_Workitem" FromRole="WorkItemAssignment" ToRole="Workitem" />
+          <NavigationProperty Name="WorkItemAssignment1" Relationship="WorkBountyDBModel.FK_WorkItemAssignment_WorkItemAssignment" FromRole="WorkItemAssignment" ToRole="WorkItemAssignment1" />
+          <NavigationProperty Name="WorkItemAssignment2" Relationship="WorkBountyDBModel.FK_WorkItemAssignment_WorkItemAssignment" FromRole="WorkItemAssignment1" ToRole="WorkItemAssignment" />
         </EntityType>
         <EntityType Name="WorkitemDistribution">
           <Key>
@@ -498,6 +523,8 @@
           <Property Name="WorkitemStatusID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="StatusDescription" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="WorkitemHistories" Relationship="Self.FK_WorkitemHistory_WorkitemStatus" FromRole="WorkitemStatus" ToRole="WorkitemHistory" />
+          <Property Name="WorkitemID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Workitem" Relationship="WorkBountyDBModel.FK_WorkitemStatus_WorkitemStatus" FromRole="WorkitemStatu" ToRole="Workitem" />
         </EntityType>
         <Association Name="FK_Team_Team">
           <End Role="Team" Type="Self.Team" Multiplicity="1" />
@@ -765,7 +792,14 @@
             <End Role="WorkitemHistory" EntitySet="WorkitemHistories" />
           </AssociationSet>
           <EntitySet Name="ExceptionLogs" EntityType="WorkBountyDBModel.ExceptionLog" />
-          <EntitySet Name="sysdiagrams" EntityType="WorkBountyDBModel.sysdiagram" />
+          <AssociationSet Name="FK_WorkitemStatus_WorkitemStatus" Association="WorkBountyDBModel.FK_WorkitemStatus_WorkitemStatus">
+            <End Role="Workitem" EntitySet="Workitems" />
+            <End Role="WorkitemStatu" EntitySet="WorkitemStatus" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WorkItemAssignment_WorkItemAssignment" Association="WorkBountyDBModel.FK_WorkItemAssignment_WorkItemAssignment">
+            <End Role="WorkItemAssignment" EntitySet="WorkItemAssignments" />
+            <End Role="WorkItemAssignment1" EntitySet="WorkItemAssignments" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="ExceptionLog">
           <Key>
@@ -777,16 +811,30 @@
           <Property Name="InnerException" Type="String" MaxLength="5000" FixedLength="false" Unicode="false" />
           <Property Name="EventDateTime" Type="DateTime" Nullable="false" Precision="3" />
         </EntityType>
-        <EntityType Name="sysdiagram">
-          <Key>
-            <PropertyRef Name="diagram_id" />
-          </Key>
-          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="principal_id" Type="Int32" Nullable="false" />
-          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="version" Type="Int32" />
-          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
-        </EntityType>
+        <Association Name="FK_WorkitemStatus_WorkitemStatus">
+          <End Type="WorkBountyDBModel.Workitem" Role="Workitem" Multiplicity="1" />
+          <End Type="WorkBountyDBModel.WorkitemStatu" Role="WorkitemStatu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Workitem">
+              <PropertyRef Name="WorkitemID" />
+            </Principal>
+            <Dependent Role="WorkitemStatu">
+              <PropertyRef Name="WorkitemID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WorkItemAssignment_WorkItemAssignment">
+          <End Type="WorkBountyDBModel.WorkItemAssignment" Role="WorkItemAssignment" Multiplicity="1" />
+          <End Type="WorkBountyDBModel.WorkItemAssignment" Role="WorkItemAssignment1" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="WorkItemAssignment">
+              <PropertyRef Name="WorkItemAssignmentID" />
+            </Principal>
+            <Dependent Role="WorkItemAssignment1">
+              <PropertyRef Name="WorkItemAssignmentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -889,6 +937,7 @@
           <EntitySetMapping Name="WorkitemStatus">
             <EntityTypeMapping TypeName="WorkBountyDBModel.WorkitemStatu">
               <MappingFragment StoreEntitySet="WorkitemStatus">
+                <ScalarProperty Name="WorkitemID" ColumnName="WorkitemID" />
                 <ScalarProperty Name="WorkitemStatusID" ColumnName="WorkitemStatusID" />
                 <ScalarProperty Name="StatusDescription" ColumnName="StatusDescription" />
               </MappingFragment>
@@ -902,17 +951,6 @@
                 <ScalarProperty Name="ErrorDetails" ColumnName="ErrorDetails" />
                 <ScalarProperty Name="ClientID" ColumnName="ClientID" />
                 <ScalarProperty Name="ExceptionID" ColumnName="ExceptionID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="sysdiagrams">
-            <EntityTypeMapping TypeName="WorkBountyDBModel.sysdiagram">
-              <MappingFragment StoreEntitySet="sysdiagrams">
-                <ScalarProperty Name="definition" ColumnName="definition" />
-                <ScalarProperty Name="version" ColumnName="version" />
-                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
-                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
-                <ScalarProperty Name="name" ColumnName="name" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
