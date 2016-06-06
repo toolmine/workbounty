@@ -360,5 +360,9 @@ namespace DemoWorkBounty.Controllers
             return View();
         }
 
+        public ActionResult Help()
+        {
+            return View();
+        }
     }
 }
