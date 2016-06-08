@@ -94,34 +94,35 @@
 
         <div id="sidebar" class="sidebar responsive" data-sidebar-scroll="true" data-sidebar-hover="true">
             <script src="~/assets/js/sidebar-fixed.js"></script>
-            <ul class="nav nav-list">
-
-
-                <a href="~/home/Dashboard" class="nav nav-list" data-toggle="tooltip" title="Dashboard">
-                    <button class="btn btn-block btn-success btn-sidebaricon">
+            <ul class="nav nav-list" id="leftul">
+                <li class="btn  btn-success btn-sidebaricon">
+                    <a href="~/home/Dashboard" data-toggle="tooltip" title="Dashboard" class="ahrefsidebar">
                         <i class="menu-icon fa fa-tachometer"></i>
-                        <span class="menu-text padding20px"> Dashboard </span>
-                    </button>
-                </a>
-
-                <a href="~/Home/addworkitem" class="nav nav-list" data-toggle="tooltip" title="Add and upload workitem">
-                    <button class="btn btn-block btn-danger btn-sidebaricon">
+                        <span class="menu-text"> Dashboard </span>
+                    </a>
+                </li>
+                <li class="btn  btn-danger btn-sidebaricon">
+                    <a href="~/home/addworkitem" data-toggle="tooltip" title="Add and upload workitem" class="ahrefsidebar">
                         <i class="menu-icon fa fa-plus-circle"></i>
-                        <span class="menu-text padding20px"> Add Work Item </span>
-                    </button>
-                </a>
-                <a href="~/Home/viewteams" class="nav nav-list" data-toggle="tooltip" title="Display team and members">
-                    <button class="btn btn-block btn-grey btn-sidebaricon">
+                        <span class="menu-text"> Add Workitem </span>
+                    </a>
+                </li>
+
+                <li class="btn btn-grey btn-sidebaricon">
+                    <a href="~/Home/viewteams" data-toggle="tooltip" title="Display team and members" class="ahrefsidebar">
                         <i class="menu-icon fa fa-list"></i>
-                        <span class="menu-text padding20px"> My Teams </span>
-                    </button>
-                </a>
-                <a href="~/Home/viewrewards" class="nav nav-list" data-toggle="tooltip" title="Display Rewards given by client">
-                    <button class="btn btn-block btn-purple btn-sidebaricon">
+                        <span class="menu-text"> My Teams </span>
+                    </a>
+                </li>
+
+                <li class="btn  btn-purple btn-sidebaricon">
+                    <a href="~/Home/viewrewards" data-toggle="tooltip" title="Display Rewards given by client" class="ahrefsidebar">
                         <i class="menu-icon fa fa-trophy"></i>
-                        <span class="menu-text padding20px"> My Rewards </span>
-                    </button>
-                </a>
+                        <span class="menu-text"> My Rewards </span>
+                    </a>
+                </li>
+              
+              
             </ul>
 
             <div class="sidebar-toggle sidebar-collapse" id="sidebar-collapse">

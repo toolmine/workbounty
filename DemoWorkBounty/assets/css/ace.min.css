@@ -20790,16 +20790,16 @@ input.typeahead.scrollable ~ .tt-dropdown-menu {
 }
 
 .no-skin .nav-list firsttab {
-    background-color: ##003399;
+    background-color: #003399;
     color: #585858;
 }
 
 .no-skin .nav-list .open > a, .no-skin .nav-list .open > a:hover, .no-skin .nav-list .open > a:focus {
-    background-color: #fafafa;
+    /*background-color: #fafafa;*/
 }
 
 .no-skin .nav-list > li {
-    border-color: #e5e5e5;
+    
 }
 
     .no-skin .nav-list > li > a:focus {
@@ -21776,3 +21776,12 @@ input.typeahead.scrollable ~ .tt-dropdown-menu {
 .toppadding15px{
     padding-top:15px !important;
 }
+
+.ahrefsidebar
+{
+    color:#ffffff; font-size:14px !important; 
+}
+
+
+
+
