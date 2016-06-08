@@ -146,7 +146,7 @@ namespace DemoWorkBounty.Repository
 
                 foreach (var item in workitemlist)
                 {
-                    if (item.EndDate > DateTime.Today)
+                    if (item.EndDate > DateTime.Today && entity.WorkItemAssignments.Where(q => q.WorkItemID == item.WorkitemID && q.IsRewarded == true).FirstOrDefault() == null)
                     {
                         workitemlist2.Add(item);
                     }
@@ -171,16 +171,19 @@ namespace DemoWorkBounty.Repository
             foreach (var workItemID in items)
             {
                 var assign = 0;
-                var isRewardedWorkitem = entity.WorkItemAssignments.Where(s => s.WorkItemID == workItemID && s.IsRewarded == true).FirstOrDefault();
-                    if (isRewardedWorkitem == null)
+                if (entity.WorkItemAssignments.Where(s => s.WorkItemID == workItemID && s.IsRewarded == true).FirstOrDefault() != null)
+                {
+                    assign = 2;
+                }
+                else
+                {
+                    if (entity.WorkitemDistributions.Where(s => s.WorkitemID == workItemID && s.UserID == currentUserID).ToList().Count() != 0 || WorkitemRegisteredUserID.Where(s => s.WorkitemID == workItemID && s.IsExclusive == false).ToList().Count() != 0)
                     {
-                        if (entity.WorkitemDistributions.Where(s => s.WorkitemID == workItemID && s.UserID == currentUserID).ToList().Count() != 0 || WorkitemRegisteredUserID.Where(s => s.WorkitemID == workItemID && s.IsExclusive == false).ToList().Count() != 0)
-                        {
-                            assign = 1;
-                        }
-                        var item = entity.WorkitemRegistrations.Where(s => s.UserID == currentUserID && s.WorkitemID == workItemID).Select(s => new AssignWorkitems { WorkitemID = s.WorkitemID, Title = s.Workitem.Title, StartDate = s.Workitem.StartDate, EndDate = s.Workitem.DueDate, FirstName = s.Workitem.UserInfo.FirstName, ProposedReward = s.Workitem.ProposedReward, Amount = s.Workitem.Amount, CreatedDateTime = s.Workitem.CreatedDateTime, AssigntoUserID = assign }).FirstOrDefault();
-                        getCurrentWorkitemData.Add(item);
+                        assign = 1;
                     }
+                }
+                var item = entity.WorkitemRegistrations.Where(s => s.UserID == currentUserID && s.WorkitemID == workItemID).Select(s => new AssignWorkitems { WorkitemID = s.WorkitemID, Title = s.Workitem.Title, StartDate = s.Workitem.StartDate, EndDate = s.Workitem.DueDate, FirstName = s.Workitem.UserInfo.FirstName, ProposedReward = s.Workitem.ProposedReward, Amount = s.Workitem.Amount, CreatedDateTime = s.Workitem.CreatedDateTime, AssigntoUserID = assign }).FirstOrDefault();
+                getCurrentWorkitemData.Add(item);
             }
             getCurrentWorkitemData.OrderByDescending(s => s.CreatedDateTime).ToList();
             return getCurrentWorkitemData;

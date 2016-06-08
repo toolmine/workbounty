@@ -119,7 +119,14 @@
                                 }
                                 else
                                 {
-                                    <td>Pending for approve</td>
+                                    if (myWorkitem.AssigntoUserID == 2)
+                                    {
+                                        <td>Workitem is rewarded</td>
+                                    }
+                                    else
+                                    {
+                                        <td>Pending for approve</td>
+                                    }
                                 }
                             </tr>
                                 if ((ViewBag.itemsForAssigntoMe.IndexOf(myWorkitem) + 1) == 5)
