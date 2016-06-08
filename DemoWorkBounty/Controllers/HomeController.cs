@@ -311,7 +311,6 @@ namespace DemoWorkBounty.Controllers
         {
             int currentUserID = Convert.ToInt32(Session["UserID"]);
             var getItemsIWantDoneData = workbountyRepo.ItemsIWantDone(currentUserID);
-
             int pageSize = 10;
             int pageNumber = (page ?? 1);
             return View(getItemsIWantDoneData.ToPagedList(pageNumber, pageSize));

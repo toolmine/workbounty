@@ -161,7 +161,7 @@ namespace DemoWorkBounty.Controllers
                     var applyForWorkitemResult = workbountyRepo.GetWorkDetails(currentWorkitemID);
                     return View(applyForWorkitemResult);
                 }
-                else 
+                else
                 {
                     Response.Redirect("/Home/Authorize");
                     return null;
@@ -191,12 +191,12 @@ namespace DemoWorkBounty.Controllers
 
         public ActionResult ViewUpdatedWorkitem(int currentWorkitemID)
         {
-             int currentUserID = Convert.ToInt32(Session["UserID"]);
-             var valid = entity.Workitems.Where(x => x.CreatedBy == currentUserID).Select(x => x.WorkitemID).ToList();
-             try
-             {
-                 if (valid.Contains(currentWorkitemID))
-                 {
+            int currentUserID = Convert.ToInt32(Session["UserID"]);
+            var valid = entity.Workitems.Where(x => x.CreatedBy == currentUserID).Select(x => x.WorkitemID).ToList();
+            try
+            {
+                if (valid.Contains(currentWorkitemID))
+                {
                     var getCheckDocument = workbountyRepo.CheckDocument(currentWorkitemID);
                     if (getCheckDocument != null)
                     {
@@ -215,7 +215,7 @@ namespace DemoWorkBounty.Controllers
                         ViewBag.errorMessage = 0;
                     }
                 }
-                else 
+                else
                 {
                     Response.Redirect("/Home/Authorize");
                     return null;
@@ -315,7 +315,7 @@ namespace DemoWorkBounty.Controllers
                     IsSuccess = true;
                     successAddWorkitemMessage = "Workitem Updated successfully!";
                     redirectURL = Url.Action("Dashboard", "Home");
-                 }
+                }
                 else
                 {
                     successAddWorkitemMessage = "Error while entering in Data";

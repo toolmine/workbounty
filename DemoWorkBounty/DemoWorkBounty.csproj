@@ -567,6 +567,7 @@
     <Content Include="Views\Team\_TeamMemberList.cshtml" />
     <Content Include="Views\Workitem\EditWorkitem.cshtml" />
     <Content Include="Views\Shared\UploadTooLarge.cshtml" />
+    <Content Include="Views\Home\Help.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -1,8 +1,4 @@
-﻿var radioValue;
-var amount;
-var filepath;
-var jqXHRData;
-var text_max = 200;
+﻿var text_max = 200;
 
 $(document).ready(function () {
 
@@ -40,13 +36,13 @@ function AddWorkitem() {
 
     var uploadedFileSize = 0;
     var uploadedFile = document.getElementById('myFile');
-    if (uploadedFile.value != "") {
+    if (uploadedFile.value !== "") {
         {
             uploadedFileSize = uploadedFile.files[0].size;
             if (uploadedFileSize > 4194304) {
                 $("#filesizebig").text("File is too big!");
                 return null;
-            };
+            }
         }
     }
 
@@ -76,19 +72,19 @@ function AddWorkitem() {
     newitem.IsOpenForGroup = true;
     newitem.Content = uploadedFileSize;
 
-    if ($("#Title").val() == "") {
+    if ($("#Title").val() === "") {
         $("#TitleError").text("Title is Required");
     }
-    else if ($("#Summary").val() == "") {
+    else if ($("#Summary").val() === "") {
         $("#SummaryError").text("Summary is Required");
            
     }
 
-    else if ($("#StartDate").val() == "") {
+    else if ($("#StartDate").val() === "") {
         $("#StartdateError").text("Start Date is Required");
     }
 
-    else if ($("#DueDate").val() == "") {
+    else if ($("#DueDate").val() === "") {
         $("#DuedateError").text("Due Date is Required");
 
     }
@@ -121,7 +117,7 @@ function AddWorkitem() {
 
     function isNumberKey(evt) {
         var charCode = (evt.which) ? evt.which : event.keyCode;
-        if (charCode != 46 && charCode > 31
+        if (charCode !== 46 && charCode > 31
           && (charCode < 48 || charCode > 57))
             return false;
 
