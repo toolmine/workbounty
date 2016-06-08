@@ -193,8 +193,6 @@ namespace DemoWorkBounty.Controllers
         public ActionResult AddWorkitem(Workitem addWorkitemData, HttpPostedFileBase myFiles)
         {
             var redirectURL = "";
-            var IsSuccess = false;
-            var successAddWorkitemMessage = "";
             try
             {
                 if (myFiles != null)
@@ -203,9 +201,7 @@ namespace DemoWorkBounty.Controllers
                     {
                         string filename = Convert.ToString(Session["path"]);
                         myFiles.SaveAs(filename);
-                        successAddWorkitemMessage = "Workitem Added successfully!";
                         redirectURL = Url.Action("Dashboard", "Home");
-                        IsSuccess = true;
                     }
                 }
                 else
@@ -221,14 +217,12 @@ namespace DemoWorkBounty.Controllers
                                 Session["path"] = addWorkitemData.DocumentFilePath;
                             }
                             var getResultsOfWorkitemData = workbountyRepo.AddWorkitem(addWorkitemData);
-                            IsSuccess = true;
-                            successAddWorkitemMessage = "Workitem Added successfully!";
                             redirectURL = Url.Action("Dashboard", "Home");
                             return null;
                         }
                         else
                         {
-                            successAddWorkitemMessage = "Error while entering in Data";
+                            return RedirectToAction("Error", "Home");
                         }
                     }
                 }
