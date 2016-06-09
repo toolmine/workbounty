@@ -5,7 +5,6 @@
 $(document).ready(function () {
     sessionStorage.removeItem('key1');
     sessionStorage.removeItem('key2');
-
     $("#alertMessage").hide();
     $("#btn").click(function ()
     {
@@ -32,7 +31,7 @@ $(document).ready(function () {
         $('#textarea_count').html(text_remaining + ' characters remaining');
 
     });
-
+    
 });
 
 
