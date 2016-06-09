@@ -3,7 +3,7 @@ var amount;
 var filepath;
 
 $(document).ready(function () {
-
+    $("#removeTeamError").hide();
     $("#alertMessage").hide();
     $("#btn").click(function () {
 
@@ -75,11 +75,11 @@ function RemoveTeam() {
                 location.href = response.redirectURL;
             }
             else {
-                alert("ERROR");
+                $("#removeTeamError").show();
             }
         },
         error: function (xhr) {
-            alert("ERROR IN CODE");
+            $("#removeTeamError").show();
         }
     });
 }

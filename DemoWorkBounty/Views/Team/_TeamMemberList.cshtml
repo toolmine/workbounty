@@ -2,6 +2,7 @@
 <script src="~/assets/js/UpdateTeamName.js"></script>
 <div class="col-xs-10">
     <div class="widget-header">
+        <p class="alert alert-danger" id="removeTeamError">Failed! Can not remove team at this moment</p>
         <div class="col-xs-10"> <h4 class="widget-title lighter smaller">@ViewBag.TeamName</h4></div>
         <input type="hidden" id="oldteamname" value="@ViewBag.TeamUserInfoId">
        <h5 class="widget-title lighter smaller" data-toggle="modal" data-target="#myModal" title="Change team name"><a>Change |</a></h5>

@@ -164,7 +164,6 @@ namespace DemoWorkBounty.Controllers
         [HttpPost]
         public JsonResult RemoveTeam(int currentTeamID)
         {
-           
                 var redirectURL = "";
                 var IsSuccess = false;
                 var successTeamRemoveMessage = "";
