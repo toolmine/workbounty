@@ -1,6 +1,10 @@
 ﻿var text_max = 200;
 
+
+
 $(document).ready(function () {
+    sessionStorage.removeItem('key1');
+    sessionStorage.removeItem('key2');
 
     $("#alertMessage").hide();
     $("#btn").click(function ()
@@ -96,7 +100,9 @@ function AddWorkitem() {
             data: JSON.stringify({ addWorkitemData: newitem }),
             contentType: "application/json;charset=utf-8",
             processData: true,
-                    success: $("#alertMessage").hide(),
+            success:
+                $("#alertMessage").hide(),
+                
                                                                                         
             error: function (xhr) {
                 $("#alertMessage").show();

@@ -4,6 +4,14 @@ var filepath;
 
 $(document).ready(function () {
 
+    sessionStorage.removeItem('key1');
+    sessionStorage.removeItem('key2');
+    sessionStorage.removeItem('key3');
+    sessionStorage.removeItem('key4');
+    sessionStorage.removeItem('key5');
+    sessionStorage.removeItem('key6');
+
+
     $("#alertMessage").hide();
     $("#btn").click(function () {
 

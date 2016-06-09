@@ -70,7 +70,7 @@ namespace DemoWorkBounty.Controllers
                 return null;
             }
         }
-
+            
 
         [HttpPost]
         public JsonResult AddMember(Team memberData)
