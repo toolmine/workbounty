@@ -69,17 +69,24 @@
                                         <td>@Html.DisplayFor(a => i.DueDate)</td>
                                         <td>@Html.DisplayFor(a => i.ProposedReward)</td>
                                         @if (i.Amount != null)
-                                    {
+                                        {
                                             <td>$@Html.DisplayFor(a => i.Amount)</td>
-                                    }
-                                    else
-                                    {
+                                        }
+                                        else
+                                        {
                                             <td>@Html.DisplayFor(a => i.Amount)</td>
-                                    }
-                                        <td>@if(i.Status == true)
-                                            { 
-                                        @Html.ActionLink("Modify", "EditWorkitem", "workitem", new { currentWorkitemID = @i.WorkitemID }, new { @class = "btn btn-minier btn-success", data_toggle = "tooltip", title = "Modify Workitem" })}</td>
+                                        }
+                                        @if (i.Status == true)
+                                        {
+                                            <td> @Html.ActionLink("Modify", "EditWorkitem", "workitem", new { currentWorkitemID = @i.WorkitemID }, new { @class = "btn btn-minier btn-success", data_toggle = "tooltip", title = "Modify Workitem" })</td>
+                                        }
+                                        else
+                                        {
+
+                                            <td>Rewarded</td>
+                                        }
                                     </tr>
+
                                 </tbody>
                             </table>
                         </div>
