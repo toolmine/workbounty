@@ -82,20 +82,25 @@
 
 });
 
-function isNumberKey(evt) {
-    var charCode = (evt.which) ? evt.which : event.keyCode;
-    if (charCode != 43 && charCode > 31
-      && (charCode < 48 || charCode > 57))
+function isNumberKey(e) {
+    if (e.which != 8 && e.which != 0 && e.which != 43 && (e.which < 48 || e.which > 57)) {
+        $("#PhoneNumberError").html("Input should be digits only").show().fadeOut(2500);
         return false;
-    return true;
+    }
 }
 
-function isTextKey(evt) {
-    var charCode = (evt.which) ? evt.which : event.keyCode;
-    if (charCode > 31 && charCode < 65
-      && (charCode < 97 || charCode > 122))
+function isTextKey(e) {
+    if (e.which > 31 && e.which < 65 && (e.which < 97 || e.which > 122)) {
+        $("#FirstNameError").html("Input should be alphabets only").show().fadeOut(2500);
         return false;
-    return true;
+    }
+}
+
+function isTextKey1(e) {
+    if (e.which > 31 && e.which < 65 && (e.which < 97 || e.which > 122)) {
+        $("#LastNameError").html("Input should be alphabets only").show().fadeOut(2500);
+        return false;
+    }
 }
 
 function noDataKey(evt) {
