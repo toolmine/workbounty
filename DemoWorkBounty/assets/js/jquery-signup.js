@@ -1,6 +1,14 @@
 ﻿$(document).ready(function () {
-    $("#alertMessage").hide();
-    $("#btnSubmit").click(function (e) {
+$("#alertMessage").hide();
+$('#Password').bind("copy-paste not allowed", function (e) {
+    e.preventDefault();
+});
+
+$('#ConfirmPassword').bind("copy-paste not allowed", function (e) {
+    e.preventDefault();
+});
+
+$("#btnSubmit").click(function (e) {
         e.preventDefault();
         var dateofBirth = $("#DateSelect").val();
         var dateofBirthDateObject = new Date(dateofBirth);
@@ -123,15 +131,3 @@ function trim(el) {
     return;
 }
 
-
-
-$(document).ready(function () {
-    $('#Password').bind("cut copy paste", function (e) {
-        e.preventDefault();
-    });
-});
-$(document).ready(function () {
-    $('#ConfirmPassword').bind("cut copy paste", function (e) {
-        e.preventDefault();
-    });
-});
